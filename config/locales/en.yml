@@ -28,4 +28,15 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  landing:
+    company_name: StateForce
+    nav:
+      about: "About"
+      demo: "Demo"
+      prices: "Prices"
+      login: Log in
+    hero:
+      title: Real-time Emergency Resource Management
+      subtitle: Optimize coordination and response efforts across emergency services with a unified, live dashboard.
+      cta:
+        primary: Sign Up
