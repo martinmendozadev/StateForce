@@ -8,12 +8,18 @@
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
     <div class="bg-gray-800 px-6 py-12 shadow sm:rounded-lg sm:px-12">
+       
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-6" }) do |f| %>
         <div>
           <%= f.label :email, t('devise.registrations.email'), class: "block text-sm/6 font-medium" %>
           <div class="mt-2">
             <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "block w-full rounded-md bg-gray-700 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-gray-500 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
           </div>
+          <% if resource.errors[:email].any? %>
+            <div class="mt-1 text-sm text-red-500">
+              <%= resource.errors.full_messages_for(:email).join(', ') %>
+            </div>
+          <% end %>
         </div>
 
         <div>
@@ -21,6 +27,11 @@
           <div class="mt-2">
             <%= f.password_field :password, autocomplete: "new-password", required: true, class: "block w-full rounded-md bg-gray-700 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-gray-500 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
           </div>
+          <% if resource.errors[:password].any? %>
+            <div class="mt-1 text-sm text-red-500">
+              <%= resource.errors.full_messages_for(:password).join(', ') %>
+            </div>
+          <% end %>
         </div>
 
         <div>
@@ -28,6 +39,11 @@
           <div class="mt-2">
             <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "block w-full rounded-md bg-gray-700 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-gray-500 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
           </div>
+          <% if resource.errors[:password_confirmation].any? %>
+            <div class="mt-1 text-sm text-red-500">
+              <%= resource.errors.full_messages_for(:password_confirmation).join(', ') %>
+            </div>
+          <% end %>
         </div>
 
         <div>
