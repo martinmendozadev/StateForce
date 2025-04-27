@@ -22,5 +22,13 @@ module ActiveSupport
         sign_in(user)
       end
     end
+
+    def log_out(user)
+      if integration_test?
+        logout(:user)
+      else
+        sign_out(user)
+      end
+    end
   end
 end
