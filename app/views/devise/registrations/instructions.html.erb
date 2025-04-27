@@ -1,0 +1,25 @@
+<div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 text-white">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <%= link_to root_path do %>
+      <%= cdn_image :logo, class: "mx-auto h-10 w-auto" %>
+    <% end %>
+    <h2 class="mt-6 text-center text-2xl/9 font-bold tracking-tight">
+      <%= t('instructions.title') %>
+    </h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div class="bg-gray-800 px-6 py-12 shadow sm:rounded-lg sm:px-12">
+
+      <p class="mb-6 text-center text-sm text-gray-300">
+        <%= t('instructions.description') %>
+      </p>
+    </div>
+
+    <p class="mt-10 text-center text-sm/6">
+      <%= link_to new_user_session_path, class: "text-indigo-400 hover:text-indigo-300" do %>
+        <%= t('instructions.back_to_login') %>
+      <% end %>
+    </p>
+  </div>
+</div>

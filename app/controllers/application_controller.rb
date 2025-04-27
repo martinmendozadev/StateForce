@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.respond_to?(:confirmed?) && !resource.confirmed?
-      instructions_path
+      users_instructions_path
     else
       dashboard_path
     end
