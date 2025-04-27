@@ -8,6 +8,22 @@
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
     <div class="bg-gray-800 px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      
+      <% if resource.errors.any? %>
+        <div class="mb-6 rounded-md bg-red-600 p-4 text-white">
+          <h3 class="text-sm font-semibold"><%= t('errors.messages.not_saved', count: resource.errors.count) %></h3>
+          <ul class="mt-2 list-disc pl-5 text-sm">
+            <% resource.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="mb-6 rounded-md bg-red-600 p-4 text-white">
+          <h3 class="text-sm font-semibold"><%= flash[:alert] %></h3>
+        </div>
+      <% end %>
+
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
         <div>
           <%= f.label :email, t('devise.registrations.email'), class: "block text-sm/6 font-medium" %>
