@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "users/instructions"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "pages#landing"
   get "/dashboard", to: "dashboards#index"
@@ -6,6 +7,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
   }
+
+    get "/instructions", to: "users/instructions#new", as: :instructions
+    post "/instructions", to: "users/instructions#create"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

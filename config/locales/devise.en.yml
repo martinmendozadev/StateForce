@@ -57,6 +57,9 @@ en:
       updated: "Your account has been updated successfully."
       updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again."
       forgot_password: "Forgot password?"
+      instructions:
+        title: "Verify your email"
+        sub_title: "Please check your email and click the verification link to confirm your account and complete the setup process."
     sessions:
       sign_in: "Sign in"
       signed_in: "Signed in successfully."

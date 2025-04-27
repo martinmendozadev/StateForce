@@ -38,3 +38,9 @@ en:
       subtitle: Optimize coordination and response efforts across emergency services with a unified, live dashboard.
       cta:
         primary: Sign Up
+  instructions:
+    title: "Confirm your account"
+    description: "We noticed you haven't confirmed your email address yet. Please enter your email below and we'll resend you the confirmation instructions."
+    email_label: "Email address"
+    resend_button: "Resend confirmation instructions"
+    back_to_login: "Already confirmed? Sign in"
