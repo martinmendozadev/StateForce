@@ -4,27 +4,26 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   def setup
-    get user_session_path
     @user = users(:user_one)
     sign_in @user
-    # post user_session_path
   end
 
-  test "should get index" do
+  test "should get dashboard index for confirmed and signed in users" do
     get dashboard_path
     assert_response :success
   end
 
-  test "should not be able to access dashboard without login" do
+  test "should redirect to login if not signed in" do
     sign_out @user
 
     get dashboard_path
+
     assert_redirected_to new_user_session_path
     follow_redirect!
     assert_response :success
   end
 
-  test "should not be accessible to non-verified email users" do
+  test "should redirect to instructions if signed in but not confirmed emails" do
     sign_out @user
 
     @unconfirmed_user = users(:user_three)
