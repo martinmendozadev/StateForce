@@ -11,15 +11,17 @@ class UserSignInTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "user can access the sign-in page" do
+  test "renders the sign-in page" do
     assert_select "h2", I18n.t("devise.sessions.sign_in")
+
+    assert_nil session["warden.user.user.key"]
   end
 
-  test "user can return to index page" do
+  test "has link to return to home page" do
     assert_select "a[href=?]", root_path
   end
 
-  test "user can see the sign-in form elements" do
+  test "renders sign-in form elements" do
     assert_select "form[action=?][method=post]", user_session_path do
       assert_select "input[name=?]", "user[email]"
       assert_select "input[name=?]", "user[password]"
@@ -27,7 +29,7 @@ class UserSignInTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "user email validated can log in with valid credentials" do
+  test "confirmed user can log in with valid credentials" do
     post user_session_path, params: {
       user: {
         email: @user.email,
@@ -38,21 +40,25 @@ class UserSignInTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_select "h1", @user.email
+
+    assert session["warden.user.user.key"].present?
   end
 
   test "user cannot log in with invalid credentials" do
     post user_session_path, params: {
       user: {
         email: @user.email,
-        password: Faker::String.random(length: 8)
+        password: "wrongpassword"
       }
     }
 
     assert_response :unprocessable_entity
     assert_select "h3", I18n.t("devise.failure.not_found_in_database", authentication_keys: "Email")
+
+    assert_nil session["warden.user.user.key"]
   end
 
-  test "user cannot log in with unconfirmed email" do
+  test "unconfirmed user is redirected to instructions after login attempt" do
     post user_session_path, params: {
       user: {
         email: @unconfirmed_user.email,
@@ -64,13 +70,15 @@ class UserSignInTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_select "h2", I18n.t("instructions.title")
+
+    assert_nil session["warden.user.user.key"]
   end
 
-  test "user can see google sign-in button" do
+  test "sign-in page shows Google sign-in button" do
     assert_select "a[href=?]", user_google_oauth2_omniauth_authorize_path
   end
 
-  test "user can access to sign-up page from sign-in page" do
+  test "sign-in page has link to sign-up page" do
     assert_select "p" do |elements|
       elements.each do |element|
         assert_match(/#{I18n.t('devise.sessions.create_account').strip}/, element.text.strip)
