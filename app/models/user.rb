@@ -15,10 +15,6 @@ class User < ApplicationRecord
     provider.blank? && uid.blank? && super
   end
 
-  def email_required?
-    super
-  end
-
   def active_for_authentication?
     super || !confirmed?
   end
