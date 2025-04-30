@@ -9,7 +9,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "user fixture is valid" do
-    assert users(:user_two).valid?
+    assert @user.valid?
   end
 
   test "user requires an email" do
@@ -38,7 +38,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "user has a valid role" do
-    assert_includes [ 0, 1, 2 ], @user.role # Need to be changed to enum
-    # assert_includes User.roles.keys, @user.role
+    assert_includes User.roles.keys, @user.role
   end
 end
