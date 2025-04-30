@@ -2,8 +2,8 @@
 
 require 'faker'
 
-# Crear usuarios aleatorios
-10.times do
+# Create fake user
+9.times do
   login_google = rand(0..1)
 
   if login_google == 1
@@ -16,7 +16,7 @@ require 'faker'
       user.uid = google_auth[:uid]
       user.provider = google_auth[:provider]
       user.role = rand(0..2)
-      user.confirmed_at = Time.current
+      user.confirmed_at = Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
     end
   else
     User.find_or_create_by!(email: Faker::Internet.unique.email) do |user|
@@ -26,7 +26,7 @@ require 'faker'
       user.last_name = Faker::Name.last_name
       user.phone = Faker::PhoneNumber.phone_number
       user.role = rand(0..2)
-      user.confirmed_at = Time.current
+      user.confirmed_at = Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
     end
   end
 end
@@ -38,7 +38,6 @@ User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.last_name = 'User'
   user.password = '123qweASD'
   user.password_confirmation = '123qweASD'
-  user.phone = '+525555555555'
   user.role = 2
 end
 
