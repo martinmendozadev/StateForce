@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
-  # enum role: { guest: 0, standard: 1, admin: 2 }
+  enum :role, guest: 0, standard: 1, admin: 2
 
   # Pasword validation
   validates :password, presence: true, if: -> { provider.blank? && uid.blank? }
