@@ -7,10 +7,9 @@ class User < ApplicationRecord
 
   enum :role, guest: 0, standard: 1, admin: 2
 
-  # Pasword validation
-  validates :password, presence: true, if: -> { provider.blank? && uid.blank? }
+  # Ensure password is required only when setting or updating it, and skip for provider-based users
+  validates :password, presence: true, if: -> { new_record? || (password.present? && provider.blank?) }, unless: -> { provider.present? && uid.present? }
 
-  # Devise pasword validation
   def password_required?
     provider.blank? && uid.blank? && super
   end
