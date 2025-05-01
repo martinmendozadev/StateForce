@@ -43,7 +43,7 @@ en:
     description: "We noticed you haven't confirmed your email address yet."
     back_to_login: "Already confirmed? Sign in"
   learn_more:
-    title: "Learn More About StateForce"
+    title: "StateForce"
     vision:
       title: "Vision"
       body: "To build a nationwide emergency resource management platform that ensures faster, smarter, and more coordinated responses to critical incidents, saving lives and maximizing impact."
@@ -52,9 +52,10 @@ en:
       body: "To improve emergency response times through real-time coordination, availability tracking, and intelligent resource allocation at the state level—while laying the foundation for national integration."
     what_is:
       title: "What is StateForce?"
-      body: "StateForce is a real-time emergency resource management system designed for use by state-level public safety agencies and emergency institutions. It provides a unified platform to monitor, allocate, and respond with medical, rescue, and law enforcement resources during critical events.\n\nWhether it’s an ambulance en route, a hospital with limited ICU beds, or a helicopter on standby—StateForce ensures that every resource is visible, accessible, and optimally deployed when seconds count."
+      body: "Is a real-time emergency resource management system designed for use by state-level public safety agencies and emergency institutions. It provides a unified platform to monitor, allocate, and respond with medical, rescue, and law enforcement resources during critical events.\n\nWhether it’s an ambulance en route, a hospital with limited ICU beds, or a helicopter on standby—StateForce ensures that every resource is visible, accessible, and optimally deployed when seconds count."
     features:
       title: "Key Features"
+      body: "StateForce empowers emergency services with cutting-edge tools for real-time resource management, rapid coordination, and data-driven decision making. Designed for high-impact environments, our platform streamlines operations and enhances response times when every second counts."
       list:
         - title: "Centralized Resource Dashboard"
           description: "Track real-time availability of ambulances, rescue vehicles, hospitals, medical equipment, and more."
@@ -70,6 +71,13 @@ en:
           description: "Built to scale from local to national deployment with future integrations like 911, weather alerts, and hospital databases."
     contributors:
       title: "Contributors"
-      body: "StateForce is a collaborative effort by a team of dedicated professionals committed to enhancing emergency response systems. Our diverse backgrounds in technology, public safety, and healthcare drive our mission to create a safer, more efficient world."
+      body: "StateForce is an open and collaborative project built by a passionate team of professionals committed to transforming emergency response systems. With diverse expertise in technology, public safety, and healthcare, we believe in the power of collective effort to build a faster, safer, and more resilient future. We welcome contributors who share our mission and want to make a real-world impact."
     trusted_by:
       title: "Trusted by the most relevant institutions"
+    statistics:
+      emergency_services: "Emergency services"
+      emergency_services_value: "14,000"
+      assets_saved: "Resoruces saved"
+      assets_saved_value: "$2.1 millions"
+      covered_territory: "Covered territory"
+      covered_territory_value: "4,893 km"
