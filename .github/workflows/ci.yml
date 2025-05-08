@@ -10,7 +10,8 @@ permissions:
 
 jobs:
   scan_ruby:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+
 
     steps:
       - name: Checkout code
@@ -79,7 +80,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip xvfb libnss3 libgconf-2-4 libxi6 libxcursor1 libxrandr2 libxss1 libxtst6 libasound2 fonts-liberation libappindicator1 xdg-utils
+          sudo apt-get install -y wget unzip xvfb libnss3 libgconf-2-4 libxi6 libxcursor1 libxrandr2 libxss1 libxtst6 libasound2t64 fonts-liberation libappindicator3-1 xdg-utils
           wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
           sudo apt-get update
