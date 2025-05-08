@@ -1,0 +1,83 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+en:
+  landing:
+    company_name: StateForce
+    nav:
+      login: Log in
+      learn_more: Learn more
+    hero:
+      title: Real-time Emergency Resource Management
+      subtitle: Optimize coordination and response efforts across emergency services with a unified, live dashboard.
+      cta:
+        primary: Sign Up
+  instructions:
+    title: "Confirm your account"
+    description: "We noticed you haven't confirmed your email address yet."
+    back_to_login: "Already confirmed? Sign in"
+  learn_more:
+    title: "StateForce"
+    vision:
+      title: "Vision"
+      body: "To build a nationwide emergency resource management platform that ensures faster, smarter, and more coordinated responses to critical incidents, saving lives and maximizing impact."
+    mission:
+      title: "Our mission"
+      body: "To improve emergency response times through real-time coordination, availability tracking, and intelligent resource allocation at the state level—while laying the foundation for national integration."
+    what_is:
+      title: "What is StateForce?"
+      body: "Is a real-time emergency resource management system designed for use by state-level public safety agencies and emergency institutions. It provides a unified platform to monitor, allocate, and respond with medical, rescue, and law enforcement resources during critical events.\n\nWhether it’s an ambulance en route, a hospital with limited ICU beds, or a helicopter on standby—StateForce ensures that every resource is visible, accessible, and optimally deployed when seconds count."
+    features:
+      title: "Key Features"
+      body: "StateForce empowers emergency services with cutting-edge tools for real-time resource management, rapid coordination, and data-driven decision making. Designed for high-impact environments, our platform streamlines operations and enhances response times when every second counts."
+      list:
+        - title: "Centralized Resource Dashboard"
+          description: "Track real-time availability of ambulances, rescue vehicles, hospitals, medical equipment, and more."
+        - title: "Incident Coordination & Dispatch"
+          description: "Create, assign, and follow up on incidents with precise geolocation and response tracking."
+        - title: "Institution Management"
+          description: "Each public or private institution can manage its resources, schedules, and operational data independently."
+        - title: "Real-Time Maps & GPS"
+          description: "Visualize the location and movement of emergency units across the state."
+        - title: "Smart Alerts & Recommendations"
+          description: "Get notified about nearby resources or bottlenecks during emergencies using automated logic."
+        - title: "Scalable Architecture"
+          description: "Built to scale from local to national deployment with future integrations like 911, weather alerts, and hospital databases."
+    contributors:
+      title: "Contributors"
+      body: "StateForce is an open and collaborative project built by a passionate team of professionals committed to transforming emergency response systems. With diverse expertise in technology, public safety, and healthcare, we believe in the power of collective effort to build a faster, safer, and more resilient future. We welcome contributors who share our mission and want to make a real-world impact."
+    trusted_by:
+      title: "Trusted by the most relevant institutions"
+    statistics:
+      emergency_services: "Emergency services"
+      emergency_services_value: "14,000"
+      assets_saved: "Resoruces saved"
+      assets_saved_value: "$2.1 millions"
+      covered_territory: "Covered territory"
+      covered_territory_value: "4,893 km"
