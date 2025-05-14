@@ -32,10 +32,10 @@ StateForce is a Ruby on Rails application focused on optimizing emergency respon
 
 ## Configuration
 
-1. Copy `.env.sample` to `.env` and fill in the required values:
+1. Copy `.env.example` to `.env` and fill in the required values:
 
    ```bash
-   cp .env.sample .env
+   cp .env.example .env
    ```
 
 2. Install dependencies:
