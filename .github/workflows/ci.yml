@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -11,8 +11,6 @@ permissions:
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
-
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,7 +26,6 @@ jobs:
 
   scan_js:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -90,6 +87,11 @@ jobs:
           unzip chromedriver-linux64.zip
           sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Validate Chrome and Chromedriver installation
+        run: |
+          google-chrome --version
+          chromedriver --version
 
       - name: Checkout code
         uses: actions/checkout@v4
