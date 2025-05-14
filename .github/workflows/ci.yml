@@ -1,62 +1,69 @@
 name: CI
 
+# This workflow is triggered on pull requests and pushes to the main branch
 on:
   pull_request:
   push:
     branches: [main]
 
+# Permissions required for the workflow
 permissions:
   contents: read
 
 jobs:
+  # Job to scan Ruby code for common Rails security vulnerabilities
   scan_ruby:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
+      - name: Run Brakeman for static analysis
         run: bin/brakeman --no-pager
 
+  # Job to scan JavaScript dependencies for security vulnerabilities
   scan_js:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
+      - name: Run Importmap audit
         run: bin/importmap audit
 
+  # Job to lint Ruby code for consistent style
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
+      - name: Run RuboCop for linting
         run: bin/rubocop -f github
 
+  # Job to run tests for the application
   test:
     runs-on: ubuntu-latest
 
+    # Services required for the test job
     services:
       postgres:
         image: postgres
@@ -67,6 +74,7 @@ jobs:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
 
+      # Redis service is commented out but can be enabled if needed
       # redis:
       #   image: redis
       #   ports:
@@ -85,7 +93,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
@@ -101,7 +109,7 @@ jobs:
           bundle exec rails test
           xvfb-run -a bundle exec rails test:system
 
-      - name: Keep screenshots from failed system tests
+      - name: Upload screenshots from failed system tests
         uses: actions/upload-artifact@v4
         if: failure()
         with:
