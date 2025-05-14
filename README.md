@@ -8,12 +8,12 @@ StateForce is a Ruby on Rails application designed to optimize emergency respons
 
 ## 📚 Table of Contents
 
-1. [Overview](#overview)
-2. [Tech Stack](#tech-stack)
-3. [Getting Started](#getting-started)
-4. [Development Tools](#development-tools)
-5. [Documentation](#documentation)
-6. [Support](#support)
+1. [Overview](#-overview)
+2. [Tech Stack](#-tech-stack)
+3. [Getting Started](#-getting-started)
+4. [Development Tools](#-development-tools)
+5. [Documentation](#-documentation)
+6. [Support](#-support)
 
 ---
 
