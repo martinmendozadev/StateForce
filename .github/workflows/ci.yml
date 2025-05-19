@@ -85,6 +85,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: List files in script directory
+        run: ls -l script
+
       - name: Install system dependencies
         run: ./script/install_dependencies_to_github_actions.sh
 
