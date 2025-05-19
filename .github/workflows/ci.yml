@@ -82,6 +82,9 @@ jobs:
       #   options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Install system dependencies
         run: ./script/install_dependencies_to_github_actions.sh
 
@@ -89,9 +92,6 @@ jobs:
         run: |
           google-chrome --version
           chromedriver --version
-
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
