@@ -19,6 +19,8 @@ wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/136.0.7103.92/l
 unzip chromedriver-linux64.zip
 sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
 sudo chmod +x /usr/local/bin/chromedriver
+rm -f chromedriver-linux64.zip
+rm -rf chromedriver-linux64
 
 # Validate installations
 google-chrome --version
