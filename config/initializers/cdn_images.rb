@@ -12,5 +12,14 @@ CDN_IMAGES = {
   imss_logo: "https://res.cloudinary.com/dtezbna78/image/upload/v1746127214/StateForce/1200px-Logotipo_del_IMSS.svg_glrd0v.png",
   issste_logo: "https://res.cloudinary.com/dtezbna78/image/upload/v1746127215/StateForce/ISSSTE_logo_dv9ihc.png",
   logo: "https://res.cloudinary.com/dtezbna78/image/upload/v1745384932/StateForce/x0jvdecxhs3w2mmpbens.svg",
-  state_morelos: "https://res.cloudinary.com/dtezbna78/image/upload/v1746127214/StateForce/6716ac7d9152a5e837ae8564_LOGOS_SALUD_V6-p-500_rakywb.png"
+  state_morelos: "https://res.cloudinary.com/dtezbna78/image/upload/v1746127214/StateForce/6716ac7d9152a5e837ae8564_LOGOS_SALUD_V6-p-500_rakywb.png",
+
+  # Learn more imagenes:
+  lm_image1: "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80",
+  lm_image2: "https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80",
+  lm_image3: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-x=.4&w=396&h=528&q=80",
+  lm_image4: "https://images.unsplash.com/photo-1670272504528-790c24957dda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=left&w=400&h=528&q=80",
+  lm_image5: "https://images.unsplash.com/photo-1670272505284-8faba1c31f7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80",
+  lm_image6: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80",
+  lm_image7: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
 }.freeze
