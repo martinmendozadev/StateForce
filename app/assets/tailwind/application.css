@@ -9,7 +9,7 @@
   }
 
   body {
-    background-color: #0D1117;
+    background-color: oklch(0.13 0.028 261.692);
     color: #C9D1D9;
   }
 }
