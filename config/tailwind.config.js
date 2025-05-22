@@ -11,103 +11,131 @@ module.exports = {
     extend: {
       colors: {
         background: {
-          DEFAULT: '#0D1117', // Un gris muy oscuro, casi negro (como el fondo de GitHub)
-          surface: '#161B22', // Un gris ligeramente más claro para superficies elevadas
-          card: '#1E242C',    // Para tarjetas o secciones
-          100: '#0B0F1A', // fondo principal
-          200: '#121826', // superficie suave
-          300: '#1C2433'
+          DEFAULT: 'oklch(0.13 0.028 261.692)',
+          surface: 'oklch(0.16 0.025 261.692)',
+          card: 'oklch(0.19 0.022 261.692)',
+          100: 'oklch(0.11 0.020 261.692)',
+          200: 'oklch(0.15 0.030 261.692)',
+          300: 'oklch(0.18 0.035 261.692)'
         },
         text: {
-          DEFAULT: '#C9D1D9', // Texto principal, un gris claro para contraste
-          secondary: '#8B949E',// Texto secundario o menos importante
-          muted: '#586069',    // Texto aún más apagado
-          link: '#58A6FF',     // Color para enlaces, un azul brillante
-          100: '#FFFFFF',
-          200: '#E4E8F3',
-          300: '#A0A8C0'
+          DEFAULT: 'oklch(0.92 0.01 261.692)',
+          secondary: 'oklch(0.75 0.01 261.692)',
+          muted: 'oklch(0.60 0.01 261.692)',
+          link: 'oklch(0.70 0.20 250)',
+          100: 'oklch(1 0 0)',
+          200: 'oklch(0.95 0.01 261.692)',
+          300: 'oklch(0.80 0.01 261.692)',
+          disabled: 'oklch(0.50 0.01 261.692)'
         },
-        // Paleta semántica inspirada en las imágenes
-        primary: { // Principalmente tonos azules brillantes para acciones y elementos destacados
-          DEFAULT: '#2F81F7', // Azul brillante principal
-          100: '#DDF4FF',
-          200: '#B6E3FF',
-          300: '#8ED2FF',
-          400: '#58A6FF', // Similar al color de enlace, bueno para botones primarios
-          500: '#2F81F7', // Tono principal
-          600: '#1F6FEB',
-          700: '#165FC1',
-          800: '#104797',
-          900: '#0B3470',
-          hover: '#1F6FEB', // Para el hover de elementos primarios
+        primary: {
+          DEFAULT: 'oklch(0.68 0.22 255)',
+          hover: 'oklch(0.72 0.24 255)',
+          focus: 'oklch(0.72 0.24 255)',
+          disabled: 'oklch(0.85 0.15 260)',
+          100: 'oklch(0.95 0.10 260)',
+          200: 'oklch(0.85 0.15 260)',
+          300: 'oklch(0.75 0.18 260)',
+          400: 'oklch(0.65 0.20 260)',
+          500: 'oklch(0.55 0.22 260)',
+          600: 'oklch(0.45 0.22 260)',
+          700: 'oklch(0.35 0.20 260)',
+          800: 'oklch(0.25 0.18 260)',
+          900: 'oklch(0.18 0.15 260)',
         },
-        secondary: { // Podríamos usar un verde o un púrpura sutil de las imágenes
-          DEFAULT: '#3FB950', // Verde para éxito o información secundaria positiva
-          100: '#D1F7C4',
-          200: '#A8EDB4',
-          300: '#7FDE93',
-          400: '#56CF73',
-          500: '#3FB950', // Tono principal
-          600: '#2C9B4D',
-          700: '#1E7B42',
-          800: '#135C35',
-          900: '#0A3D28',
-          hover: '#2C9B4D',
+        secondary: {
+          DEFAULT: 'oklch(0.72 0.18 140)',
+          hover: 'oklch(0.68 0.22 140)',
+          focus: 'oklch(0.68 0.22 140)',
+          disabled: 'oklch(0.85 0.15 140)',
+          100: 'oklch(0.95 0.10 140)',
+          200: 'oklch(0.85 0.15 140)',
+          300: 'oklch(0.75 0.18 140)',
+          400: 'oklch(0.65 0.20 140)',
+          500: 'oklch(0.55 0.22 140)',
+          600: 'oklch(0.45 0.22 140)',
+          700: 'oklch(0.35 0.20 140)',
+          800: 'oklch(0.25 0.18 140)',
+          900: 'oklch(0.18 0.15 140)',
         },
-        accent: { // Para elementos que necesitan llamar mucho la atención, como alertas o notificaciones
-          DEFAULT: '#F7782F', // Naranja vibrante
-          100: '#FFEEDA',
-          200: '#FFD6B5',
-          300: '#FFBE90',
-          400: '#FFA76A',
-          500: '#F7782F', // Tono principal
-          600: '#DB5F20',
-          700: '#B34B1B',
-          800: '#8C3A15',
-          900: '#6F2D11',
-          hover: '#DB5F20',
+        accent: {
+          DEFAULT: 'oklch(0.73 0.25 40)',
+          hover: 'oklch(0.68 0.28 40)',
+          focus: 'oklch(0.68 0.28 40)',
+          disabled: 'oklch(0.85 0.18 40)',
+          100: 'oklch(0.95 0.12 40)',
+          200: 'oklch(0.85 0.18 40)',
+          300: 'oklch(0.75 0.22 40)',
+          400: 'oklch(0.65 0.25 40)',
+          500: 'oklch(0.55 0.25 40)',
+          600: 'oklch(0.45 0.25 40)',
+          700: 'oklch(0.35 0.22 40)',
+          800: 'oklch(0.25 0.20 40)',
+          900: 'oklch(0.18 0.18 40)',
         },
-         success: {
-          400: '#22C55E',
+        success: {
+          DEFAULT: 'oklch(0.70 0.22 145)',
+          hover: 'oklch(0.74 0.24 145)',
+          focus: 'oklch(0.74 0.24 145)',
+          disabled: 'oklch(0.88 0.15 150)',
+          content: 'oklch(0.96 0.004 260)',
+          100: 'oklch(0.95 0.10 150)',
+          200: 'oklch(0.88 0.15 150)',
+          300: 'oklch(0.80 0.18 150)',
+          400: 'oklch(0.70 0.20 150)',
+          500: 'oklch(0.63 0.22 150)',
+          600: 'oklch(0.56 0.22 150)',
+          700: 'oklch(0.49 0.20 150)',
+          800: 'oklch(0.42 0.18 150)',
+          900: 'oklch(0.35 0.16 150)',
         },
-        danger: { // Para errores o acciones destructivas
-          DEFAULT: '#DA3633', // Rojo
-          100: '#FFDEDE',
-          200: '#FFB9B9',
-          300: '#FF9494',
-          400: '#F86A6A',
-          500: '#DA3633', // Tono principal
-          600: '#B72424',
-          700: '#941A1A',
-          800: '#721212',
-          900: '#570D0D',
-          hover: '#B72424',
+        danger: {
+          DEFAULT: 'oklch(0.63 0.25 25)',
+          hover: 'oklch(0.58 0.28 25)',
+          focus: 'oklch(0.58 0.28 25)',
+          disabled: 'oklch(0.85 0.18 25)',
+          content: 'oklch(0.96 0.004 260)',
+          100: 'oklch(0.95 0.12 25)',
+          200: 'oklch(0.85 0.18 25)',
+          300: 'oklch(0.75 0.22 25)',
+          400: 'oklch(0.63 0.25 25)',
+          500: 'oklch(0.55 0.26 25)',
+          600: 'oklch(0.45 0.26 25)',
+          700: 'oklch(0.35 0.23 25)',
+          800: 'oklch(0.25 0.20 25)',
+          900: 'oklch(0.18 0.18 25)',
         },
-        warning: { // Para advertencias
-          DEFAULT: '#EBB32A', // Amarillo/Naranja
-          100: '#FFF8DD',
-          200: '#FFF0B8',
-          300: '#FFE793',
-          400: '#FFDD6E',
-          500: '#EBB32A', // Tono principal
-          600: '#CEA021',
-          700: '#AC861B',
-          800: '#886B14',
-          900: '#6A540F',
-          hover: '#CEA021',
+        warning: {
+          DEFAULT: 'oklch(0.82 0.25 85)',
+          hover: 'oklch(0.86 0.27 85)',
+          focus: 'oklch(0.86 0.27 85)',
+          disabled: 'oklch(0.92 0.17 100)',
+          content: 'oklch(0.25 0.05 85)',
+          100: 'oklch(0.98 0.10 100)',
+          200: 'oklch(0.92 0.17 100)',
+          300: 'oklch(0.83 0.24 100)',
+          400: 'oklch(0.77 0.26 100)',
+          500: 'oklch(0.70 0.27 100)',
+          600: 'oklch(0.63 0.28 100)',
+          700: 'oklch(0.56 0.27 100)',
+          800: 'oklch(0.49 0.26 100)',
+          900: 'oklch(0.42 0.25 100)',
         },
-        info: { // Para información neutral
-          DEFAULT: '#58A6FF', // Podríamos reusar el azul de 'link' o 'primary'
-          100: '#DDF4FF',
-          200: '#B6E3FF',
-          300: '#8ED2FF',
-          400: '#58A6FF',
-          500: '#2F81F7',
-          600: '#1F6FEB',
-          700: '#165FC1',
-          800: '#104797',
-          900: '#0B3470',
-          hover: '#1F6FEB',
+        info: {
+          DEFAULT: 'oklch(0.70 0.20 230)',
+          hover: 'oklch(0.74 0.22 230)',
+          focus: 'oklch(0.74 0.22 230)',
+          disabled: 'oklch(0.85 0.15 260)',
+          content: 'oklch(0.96 0.004 260)',
+          100: 'oklch(0.95 0.10 260)',
+          200: 'oklch(0.85 0.15 260)',
+          300: 'oklch(0.75 0.18 260)',
+          400: 'oklch(0.65 0.20 260)',
+          500: 'oklch(0.55 0.22 260)',
+          600: 'oklch(0.45 0.22 260)',
+          700: 'oklch(0.35 0.20 260)',
+          800: 'oklch(0.25 0.18 260)',
+          900: 'oklch(0.18 0.15 260)',
         },
       },
       fontFamily: {
