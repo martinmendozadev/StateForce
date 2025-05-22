@@ -5,10 +5,8 @@
     <% end %>
     <h2 class="mt-6 text-center text-2xl font-bold text-info"><%= t('devise.registrations.sign_up') %></h2>
   </div>
-
   <div class="mt-10 mx-auto w-full max-w-md">
     <div class="bg-background-surface p-12 shadow rounded-lg">
-
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-6" }) do |f| %>
         <div>
           <%= f.label :email, t('devise.registrations.email'), class: "block text-sm font-medium" %>
@@ -21,7 +19,6 @@
             </div>
           <% end %>
         </div>
-
         <div>
           <%= f.label :password, t('devise.registrations.password'), class: "block text-sm font-medium" %>
           <div class="mt-2">
@@ -33,7 +30,6 @@
             </div>
           <% end %>
         </div>
-
         <div>
           <%= f.label :password_confirmation, t('devise.registrations.password_confirmation'), class: "block text-sm font-medium" %>
           <div class="mt-2">
@@ -45,10 +41,8 @@
             </div>
           <% end %>
         </div>
-
         <%= f.submit t('devise.registrations.sign_up_button'), class: "w-full rounded-md bg-primary px-3 py-2 text-sm font-semibold shadow-sm hover:bg-primary-hover cursor-pointer" %>
       <% end %>
-
       <div>
         <div class="relative mt-10">
           <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -58,7 +52,6 @@
             <span class="bg-background-surface px-6 rounded text-center"><%= t('devise.registrations.or_continue_with') %></span>
           </div>
         </div>
-
         <div class="mt-6">
           <%= link_to user_google_oauth2_omniauth_authorize_path, class: "flex w-full items-center justify-center gap-3 rounded-md bg-background-overlay px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-500 hover:bg-gray-600 focus-visible:ring-transparent" do %>
             <%= cdn_image :google_icon, class: 'max-h-6' %>
@@ -66,15 +59,12 @@
           <% end %>
         </div>
       </div>
-
     </div>
-
-     <p class="mt-10 text-center text-sm/6">
+    <p class="mt-10 text-center text-sm/6">
       <%= link_to new_user_session_path, class: 'p-4' do %>
         <span><%= t('devise.registrations.already_have_account') %></span>
         <span class="font-semibold text-success hover:text-success-hover"><%= t('devise.registrations.sign_in') %></span>
       <% end %>
-     </p>
+    </p>
   </div>
-
 </div>
