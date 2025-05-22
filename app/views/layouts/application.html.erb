@@ -14,7 +14,7 @@
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="https://res.cloudinary.com/dtezbna78/image/upload/v1745384932/StateForce/x0jvdecxhs3w2mmpbens.svg" type="image/svg+xml">
+    <link rel="icon" href=<%= CDN_IMAGES[:favicon] %> type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
