@@ -10,6 +10,6 @@
 
   body {
     background-color: oklch(0.13 0.028 261.692);
-    color: #C9D1D9;
+    color: oklch(0.92 0.01 261.692);
   }
 }
