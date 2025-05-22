@@ -10,14 +10,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: {
-          DEFAULT: 'oklch(0.13 0.028 261.692)',
-          surface: 'oklch(0.16 0.025 261.692)',
-          card: 'oklch(0.19 0.022 261.692)',
-          100: 'oklch(0.11 0.020 261.692)',
-          200: 'oklch(0.15 0.030 261.692)',
-          300: 'oklch(0.18 0.035 261.692)'
-        },
+      background: {
+        border_on_default: 'oklch(0.20 0.030 262)',
+        border_on_soft: 'oklch(0.23 0.031 262.2)',
+        border_on_surface: 'oklch(0.29 0.033 262.7)',
+        DEFAULT: 'oklch(0.13 0.028 261.692)',
+        darker: 'oklch(0.09 0.025 261)',
+        overlay: 'oklch(0.39 0.036 263.5)',
+        raised: 'oklch(0.31 0.034 263)',
+        soft: 'oklch(0.18 0.030 262)', 
+        surface: 'oklch(0.24 0.032 262.5)',
+        100: 'oklch(0.18 0.030 262)',
+        200: 'oklch(0.24 0.032 262.5)',
+        300: 'oklch(0.31 0.034 263)',
+      }, 
         text: {
           DEFAULT: 'oklch(0.92 0.01 261.692)',
           secondary: 'oklch(0.75 0.01 261.692)',
