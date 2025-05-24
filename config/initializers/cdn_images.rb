@@ -11,10 +11,10 @@ CDN_IMAGES = {
   hero: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply",
   imss_logo: "https://res.cloudinary.com/dtezbna78/image/upload/v1746127214/StateForce/1200px-Logotipo_del_IMSS.svg_glrd0v.png",
   issste_logo: "https://res.cloudinary.com/dtezbna78/image/upload/v1746127215/StateForce/ISSSTE_logo_dv9ihc.png",
-  favicon: "https://res.cloudinary.com/dtezbna78/image/upload/v1745384932/StateForce/x0jvdecxhs3w2mmpbens.svg",
-  logo: "https://res.cloudinary.com/dtezbna78/image/upload/v1745384932/StateForce/x0jvdecxhs3w2mmpbens.svg",
-  logo_white: "https://res.cloudinary.com/dtezbna78/image/upload/v1747946019/StateForce/stateforce_shield_only_or74ep.svg",
-  logo_dark: "https://res.cloudinary.com/dtezbna78/image/upload/v1747944852/StateForce/ChatGPT-Image-21-may-2025_-11_59_10-p.m._ywoocb.svg",
-  logo_secondary: "https://res.cloudinary.com/dtezbna78/image/upload/v1747944852/StateForce/ChatGPT_Image_21_may_2025_11_59_10_p.m._mvyl0a.png",
+  favicon: "https://res.cloudinary.com/dtezbna78/image/upload/v1748045477/StateForce/logo_stateforce_color_icon.svg",
+  logo: "https://res.cloudinary.com/dtezbna78/image/upload/v1748045477/StateForce/logo_stateforce_color_icon.svg",
+  logo_white: "https://res.cloudinary.com/dtezbna78/image/upload/v1748045477/StateForce/logo_stateforce_color_icon.svg",
+  logo_dark: "https://res.cloudinary.com/dtezbna78/image/upload/v1747944852/StateForce/logo_stateforce_bg_black_icon.svg",
+  logo_secondary: "https://res.cloudinary.com/dtezbna78/image/upload/v1747944852/StateForce/logo_stateforce_black_image.png",
   state_morelos: "https://res.cloudinary.com/dtezbna78/image/upload/v1746127214/StateForce/6716ac7d9152a5e837ae8564_LOGOS_SALUD_V6-p-500_rakywb.png"
 }.freeze
