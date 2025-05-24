@@ -63,6 +63,8 @@ en:
     sessions:
       sign_in: "Sign in"
       signed_in: "Signed in successfully."
+      logout: "Logout"
+      signed_out: "Signed out successfully."
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
       or_continue_with: "Or continue with"
