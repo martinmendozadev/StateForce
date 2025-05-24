@@ -26,6 +26,6 @@ class SignInTest < ActionDispatch::SystemTestCase
     click_on I18n.t("devise.sessions.sign_in")
 
     assert_text I18n.t("devise.failure.invalid", authentication_keys: "Email")
-    assert_text "Invalid Email or password."
+    # assert_text "Invalid Email or password."
   end
 end

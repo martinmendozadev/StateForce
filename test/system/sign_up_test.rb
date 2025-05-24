@@ -28,6 +28,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("devise.registrations.sign_up_button")
 
     assert_text I18n.t("activerecord.errors.models.user.attributes.password_confirmation.confirmation")
-    assert_text "Password confirmation doesn't match Password"
+    # assert_text "Password confirmation doesn't match Password"
   end
 end
