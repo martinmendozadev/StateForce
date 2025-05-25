@@ -7,5 +7,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     options.add_argument("--disable-gpu")
     options.add_argument("--disable-site-isolation-trials")
     options.add_argument("--headless=new")
+
+    prefs = {
+      "credentials_enable_service" => false,
+      "profile.password_manager_enabled" => false
+    }
+    options.add_preference(:prefs, prefs)
   end
 end
