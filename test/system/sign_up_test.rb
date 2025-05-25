@@ -27,6 +27,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in I18n.t("devise.registrations.password_confirmation"), with: "mismatched_password"
     click_on I18n.t("devise.registrations.sign_up_button")
 
-    assert_text "Password confirmation doesn't match Password", wait: 5
+    assert_text "Password confirmation doesn't match Password"
   end
 end
