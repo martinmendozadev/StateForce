@@ -10,6 +10,10 @@ class SignInTest < ActionDispatch::SystemTestCase
     visit new_user_session_path
   end
 
+  def teardown
+    visit destroy_user_session_path
+  end
+
   test "renders the sign-in page" do
     assert_selector "h2", text: I18n.t("devise.sessions.sign_in")
   end

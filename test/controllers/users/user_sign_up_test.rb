@@ -4,6 +4,7 @@ require "test_helper"
 
 class UserSignupTest < ActionDispatch::IntegrationTest
   def setup
+    log_out(:user)
     @user = {
       last_name: Faker::Name.last_name,
       first_name: Faker::Name.first_name,

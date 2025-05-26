@@ -35,6 +35,10 @@ module ActiveSupport
     include Warden::Test::Helpers
     include OmniAuthTestHelper
 
+    def integration_test?
+      self.is_a?(ActionDispatch::IntegrationTest)
+    end
+
     def log_in(user)
       if integration_test?
           login_as(user, scope: :user)

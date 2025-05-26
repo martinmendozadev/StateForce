@@ -11,6 +11,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     visit new_user_registration_path
   end
 
+  def teardown
+    visit destroy_user_session_path
+  end
+
   test "user can access the sign-up page" do
     assert_selector "h2", text: I18n.t("devise.registrations.sign_up")
   end
