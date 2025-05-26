@@ -54,4 +54,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     assert_text "Password confirmation doesn't match Password"
   end
+
+  test "user can sign up with Google" do
+    mock_google_auth(email: "newgoogleuser@example.com", uid: "999999", name: "Google User")
+    visit new_user_registration_path
+    click_on I18n.t("devise.providers.google")
+    assert_current_path dashboard_path
+    assert_text "newgoogleuser@example.com"
+  end
 end

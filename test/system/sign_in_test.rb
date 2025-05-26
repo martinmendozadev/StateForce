@@ -50,4 +50,12 @@ class SignInTest < ActionDispatch::SystemTestCase
 
     assert_text I18n.t("devise.failure.invalid", authentication_keys: "Email")
   end
+
+  test "user can sign in with Google" do
+    mock_google_auth(email: "user2@stateforce.mx", uid: "1234567890", name: "User 2 Last")
+    visit new_user_session_path
+    click_on I18n.t("devise.providers.google")
+    assert_current_path dashboard_path
+    assert_text "user2@stateforce.mx"
+  end
 end

@@ -3,6 +3,25 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+require "omniauth"
+
+OmniAuth.config.test_mode = true
+
+module OmniAuthTestHelper
+  def mock_google_auth(email: "test@example.com", uid: "1234567890", name: "Test User")
+    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+      provider: "google_oauth2",
+      uid: uid,
+      info: {
+        email: email,
+        name: name,
+        first_name: name.split.first,
+        last_name: name.split.last,
+        image: "https://example.com/avatar.jpg"
+      }
+    })
+  end
+end
 
 module ActiveSupport
   class TestCase
@@ -14,6 +33,7 @@ module ActiveSupport
 
     include Devise::Test::IntegrationHelpers
     include Warden::Test::Helpers
+    include OmniAuthTestHelper
 
     def log_in(user)
       if integration_test?
