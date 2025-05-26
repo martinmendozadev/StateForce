@@ -11,6 +11,10 @@ class UserSignInTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  def teardown
+    log_out(@user)
+  end
+
   test "confirmed user can log in with valid credentials" do
     post user_session_path, params: {
       user: {

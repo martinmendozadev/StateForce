@@ -4,7 +4,6 @@ require "test_helper"
 
 class UserSignupTest < ActionDispatch::IntegrationTest
   def setup
-    log_out(:user)
     @user = {
       last_name: Faker::Name.last_name,
       first_name: Faker::Name.first_name,
@@ -15,6 +14,10 @@ class UserSignupTest < ActionDispatch::IntegrationTest
 
     get new_user_registration_path
     assert_response :success
+  end
+
+  def teardown
+    log_out(@user)
   end
 
    test "user can sign up with valid information" do
