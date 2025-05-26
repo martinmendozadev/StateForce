@@ -12,7 +12,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    visit destroy_user_session_path
+    page.execute_script(%Q{
+      fetch("#{destroy_user_session_path}", {method: "DELETE", credentials: "same-origin"});
+    })
   end
 
   test "user can access the sign-up page" do
