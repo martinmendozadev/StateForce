@@ -41,7 +41,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   test "sign-up page has link to sign-in page" do
     assert_text I18n.t("devise.registrations.already_have_account").strip
     assert_text I18n.t("devise.registrations.sign_in").strip
-
     assert_selector "a[href='#{new_user_session_path}']"
   end
 
