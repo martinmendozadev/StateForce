@@ -5,8 +5,12 @@ require "faker"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def setup
-    @user_password = Faker::Internet.password(min_length: 8, max_length: 20)
-    @user_email = Faker::Internet.email
+    @user =  {
+      password: Faker::Internet.password(min_length: 8, max_length: 20),
+      email: Faker::Internet.email,
+      uid: "1234567890",
+      name: "User 2 Last"
+    }
 
     visit new_user_registration_path
   end
@@ -43,29 +47,29 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     assert_selector "a[href='#{new_user_session_path}']"
   end
 
-  test "user can sign up with email and password successfully" do
-    fill_in I18n.t("devise.registrations.email"), with: @user_email
-    fill_in I18n.t("devise.registrations.password"), with: @user_password
-    fill_in I18n.t("devise.registrations.password_confirmation"), with: @user_password
-    click_on I18n.t("devise.registrations.sign_up_button")
-
-    assert_current_path users_instructions_path
-  end
-
   test "user cannot sign up with mismatched passwords" do
-    fill_in I18n.t("devise.registrations.email"),  with: @user_email
-    fill_in I18n.t("devise.registrations.password"), with: @user_password
+    fill_in I18n.t("devise.registrations.email"),  with: @user[:email]
+    fill_in I18n.t("devise.registrations.password"), with: @user[:password]
     fill_in I18n.t("devise.registrations.password_confirmation"), with: "mismatched_password"
     click_on I18n.t("devise.registrations.sign_up_button")
 
     assert_text "Password confirmation doesn't match Password"
   end
 
+  test "user can sign up with email and password successfully" do
+    fill_in I18n.t("devise.registrations.email"), with: @user[:email]
+    fill_in I18n.t("devise.registrations.password"), with: @user[:password]
+    fill_in I18n.t("devise.registrations.password_confirmation"), with: @user[:password]
+    click_on I18n.t("devise.registrations.sign_up_button")
+
+    assert_current_path users_instructions_path
+  end
+
   test "user can sign up with Google" do
-    mock_google_auth(email: "newgoogleuser@example.com", uid: "999999", name: "Google User")
+    mock_google_auth(email: @user[:email], uid: @user[:uid], name: @user[:name])
     visit new_user_registration_path
     click_on I18n.t("devise.providers.google")
     assert_current_path dashboard_path
-    assert_text "newgoogleuser@example.com"
+    assert_text @user[:email]
   end
 end
