@@ -21,7 +21,7 @@ class Users::OmniauthCallbacksControllerTest < ActionDispatch::IntegrationTest
     get user_google_oauth2_omniauth_callback_path
     follow_redirect!
     assert_equal dashboard_path, path
-    assert_match "user2@stateforce.mx", @response.body
+    assert_match @user[:email], @response.body
   end
 
   test "should redirect to sign up on failure" do
