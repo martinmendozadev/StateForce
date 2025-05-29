@@ -6,7 +6,7 @@ class InstructionsTest < ActionDispatch::SystemTestCase
   test "instructions page shows logo, title, description and back to login link" do
     visit users_instructions_path
 
-    assert_selector "img.h-10"
+    assert_selector "img.h-16"
 
     assert_text I18n.t("instructions.title")
 

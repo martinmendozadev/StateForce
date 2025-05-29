@@ -66,6 +66,6 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
-    assert_select "div.text-red-500", /#{I18n.t('errors.messages.taken')}/
+    assert_select "div.text-danger", /#{I18n.t('errors.messages.taken')}/
   end
 end
