@@ -68,6 +68,6 @@ class SignInTest < ActionDispatch::SystemTestCase
     visit new_user_session_path
     click_on I18n.t("devise.providers.google")
     assert_current_path dashboard_path
-    assert_text "user2@stateforce.mx"
+    assert_text user_auth[:email]
   end
 end
