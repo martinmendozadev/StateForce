@@ -59,9 +59,9 @@ class SignInTest < ActionDispatch::SystemTestCase
 
   test "user can sign in with Google" do
     user_auth =  {
-      email: "user2@stateforce.mx",
+      email: Faker::Internet.email,
       uid: "1234567890",
-      name: "User 2 Last"
+      name: Faker::Name.name
     }
 
     mock_google_auth(email: user_auth[:email], uid: user_auth[:uid], name: user_auth[:name])
