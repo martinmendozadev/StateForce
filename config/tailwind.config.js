@@ -25,8 +25,8 @@ module.exports = {
           disabled: 'oklch(0.70 0.21 25)',
           focus: 'oklch(0.70 0.28 25)',
           hover: 'oklch(0.48 0.28 25)',
-          800: 'oklch(0.40 0.29 25)',
-          950: 'oklch(0.26 0.31 25)',
+          800: 'oklch(0.40 0.30 25)',
+          950: 'oklch(0.28 0.32 25)',
         },
         info: { // Blue
           active: 'oklch(0.56 0.25 255)',
@@ -35,8 +35,8 @@ module.exports = {
           disabled: 'oklch(0.88 0.08 255)',
           focus: 'oklch(0.74 0.24 255)',
           hover: 'oklch(0.52 0.24 255)',
-          800: 'oklch(0.44 0.25 255)',
-          950: 'oklch(0.30 0.27 255)',
+          800: 'oklch(0.48 0.26 255)',
+          950: 'oklch(0.36 0.28 255)',
         },
         neutral: { // Gray
           content: 'oklch(0.96 0.004 261.692)',
@@ -66,8 +66,8 @@ module.exports = {
           disabled: 'oklch(0.71 0.17 325)',
           focus: 'oklch(0.71 0.23 325)',
           hover: 'oklch(0.49 0.22 325)',
-          800: 'oklch(0.41 0.23 325)',
-          950: 'oklch(0.27 0.25 325)',
+          800: 'oklch(0.42 0.21 330)',
+          950: 'oklch(0.32 0.23 330)',
         },
         success: { // Green
           active: 'oklch(0.53 0.27 145)',
@@ -76,8 +76,8 @@ module.exports = {
           disabled: 'oklch(0.76 0.19 145)',
           focus: 'oklch(0.76 0.24 145)',
           hover: 'oklch(0.54 0.24 145)',
-          800: 'oklch(0.46 0.25 145)',
-          950: 'oklch(0.32 0.27 145)',
+          800: 'oklch(0.47 0.28 145)',
+          950: 'oklch(0.37 0.30 145)',
         },
         text: {
           dark: 'oklch(0.20 0.01 261.692)',
@@ -88,11 +88,11 @@ module.exports = {
           active: 'oklch(0.58 0.29 40)',
           content: 'oklch(0.15 0.05 40)',
           DEFAULT: 'oklch(0.70 0.26 40)',
-          disabled: 'oklch(0.78 0.21 40)',
+          disabled: 'oklch(0.78 0.13 40)',
           focus: 'oklch(0.78 0.28 40)',
           hover: 'oklch(0.57 0.27 40)',
-          800: 'oklch(0.52 0.30 40)',
-          950: 'oklch(0.42 0.32 40)',
+          800: 'oklch(0.52 0.31 40)',
+          950: 'oklch(0.40 0.33 40)',
         },
       },
       fontFamily: {
@@ -118,4 +118,4 @@ module.exports = {
   },
   plugins: [
   ],
-}
+};
