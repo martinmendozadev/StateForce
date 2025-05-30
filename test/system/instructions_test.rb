@@ -12,7 +12,6 @@ class InstructionsTest < ActionDispatch::SystemTestCase
 
     assert_text I18n.t("instructions.description")
 
-    assert_selector "a[href='#{new_user_session_path}']", text: I18n.t("devise.registrations.already_have_account")
-    assert_text I18n.t("devise.registrations.sign_in")
+    assert_selector "a[href='#{new_user_session_path}']", text: I18n.t("instructions.back_to_login")
   end
 end

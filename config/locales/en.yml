@@ -41,7 +41,7 @@ en:
   instructions:
     title: "Confirm your account"
     description: "We noticed you haven't confirmed your email address yet."
-    back_to_login: "Already confirmed? Sign in"
+    back_to_login: "Already confirmed?"
   learn_more:
     title: "StateForce"
     vision:
