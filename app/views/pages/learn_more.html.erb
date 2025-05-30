@@ -2,7 +2,7 @@
     <header class="absolute inset-x-0 top-0 z-10 max-w-7xl mx-auto">
         <nav class="flex items-center justify-between pt-2 px-8" aria-label="Global">
             <%= link_to root_path, class: "p-4" do %>
-                <%= cdn_image :logo_white, class: "h-16", alt: t("landing.company_name") %>
+                <%= cdn_image :logo_white, class: "h-16", alt: t('common.state_force') %>
             <% end %>
 
             <%= link_to "#{t("landing.nav.login")} <span aria-hidden='true'>&rarr;</span>".html_safe, new_user_session_path, class: "text-sm font-semibold p-4" %>
@@ -132,7 +132,7 @@
 
     <footer class="mt-16 sm:mt-32">
         <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
-            <p class="mt-10 text-center text-sm/6 text-neutral-focus">&copy; StateForce, Inc. All rights reserved.</p>
+            <p class="mt-10 text-center text-sm/6 text-neutral-focus">&copy; <%= t("common.state_force") %>, Inc. All rights reserved.</p>
         </div>
     </footer>
 </div>
