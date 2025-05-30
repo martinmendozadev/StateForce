@@ -1,6 +1,6 @@
 <div class="min-h-screen flex items-center justify-center select-none">
   <div class="text-center">
-    <h1 class="text-3xl font-bold text-success mb-6"><%= current_user.email %></h1>
+    <h1 class="text-3xl font-bold text-info mb-6"><%= current_user.email %></h1>
     <%= button_to t("devise.sessions.logout"),
       destroy_user_session_path,
       method: :delete,
