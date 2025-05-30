@@ -3,11 +3,11 @@
     <%= link_to root_path do %>
       <%= cdn_image :logo_white, class: "mx-auto h-16 w-auto" %>
     <% end %>
-    <h2 class="mt-6 text-center text-2xl/9 font-bold text-primary"><%= t('devise.sessions.sign_in') %></h2>
+    <h2 class="mt-6 text-center text-2xl/9 font-bold text-success"><%= t('devise.sessions.sign_in') %></h2>
   </div>
 
   <div class="mt-10 mx-auto w-full max-w-md">
-    <div class="bg-background-300 p-12 shadow rounded-lg">
+    <div class="bg-background-surface p-12 shadow rounded-lg">
 
       <% if resource.errors.any? %>
         <div class="mb-6 rounded-md bg-danger p-4">
@@ -26,9 +26,9 @@
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
         <div>
-          <%= f.label :email, t('devise.registrations.email'), class: "block text-sm/6 font-medium" %>
+          <%= f.label :email, t('devise.registrations.email'), class: "block text-sm font-medium" %>
           <div class="mt-2">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "w-full rounded-md bg-background-overlay px-3 py-1.5 outline outline-1 -outline-offset-1 outline-text-muted focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-secondary" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "w-full rounded-md bg-background-overlay px-3 py-2 outline outline-1 -outline-offset-1 outline-neutral-focus focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-text" %>
           </div>
           <% if resource.errors[:email].any? %>
             <div class="mt-1 text-sm text-danger">
@@ -38,9 +38,9 @@
         </div>
 
         <div>
-          <%= f.label :password, t('devise.registrations.password'), class: "block text-sm/6 font-medium" %>
+          <%= f.label :password, t('devise.registrations.password'), class: "block text-sm font-medium" %>
           <div class="mt-2">
-            <%= f.password_field :password, autocomplete: "current-password", required: true, class: "w-full rounded-md bg-background-overlay px-3 py-1.5 outline outline-1 -outline-offset-1 outline-text-muted focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-secondary" %>
+            <%= f.password_field :password, autocomplete: "current-password", required: true, class: "w-full rounded-md bg-background-overlay px-3 py-2 outline outline-1 -outline-offset-1 outline-neutral-focus focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-text" %>
           </div>
           <% if resource.errors[:password].any? %>
             <div class="mt-1 text-sm text-danger">
@@ -54,42 +54,42 @@
             <div class="flex gap-3">
               <div class="flex h-6 shrink-0 items-center">
                 <div class="group grid size-4 grid-cols-1">
-                  <%= f.check_box :remember_me, class: "col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto cursor-pointer" %>
+                  <%= f.check_box :remember_me, class: "col-start-1 row-start-1 rounded-sm border border-neutral bg-white checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:border-neutral disabled:bg-neutral-focus disabled:checked:bg-neutral-focus forced-colors:appearance-auto cursor-pointer" %>
                 </div>
               </div>
-              <%= f.label :remember_me, t('devise.registrations.remember_me'), class: "block text-sm/6 cursor-pointer" %>
+              <%= f.label :remember_me, t('devise.registrations.remember_me'), class: "block text-sm cursor-pointer" %>
             </div>
-            <%= link_to t('devise.registrations.forgot_password'), new_user_password_path, class: "text-sm/6 text-primary hover:text-primary-hover" %>
+            <%= link_to t('devise.registrations.forgot_password'), new_user_password_path, class: "text-sm text-info hover:text-info-hover" %>
           </div>
         <% end %>
 
-        <%= f.submit t('devise.sessions.sign_in'), class: "w-full rounded-md bg-primary px-3 py-1.5 text-sm/6 font-semibold shadow-sm hover:bg-primary-hover cursor-pointer" %>
+        <%= f.submit t('devise.sessions.sign_in'), class: "w-full rounded-md bg-primary px-3 py-2 text-sm font-semibold shadow-sm hover:bg-primary-hover cursor-pointer" %>
       <% end %>
 
       <div>
         <div class="relative mt-10">
           <div class="absolute inset-0 flex items-center" aria-hidden="true">
-            <div class="w-full border-t border-text-muted"></div>
+            <div class="w-full border-t border-neutral"></div>
           </div>
-          <div class="relative flex justify-center text-sm/6 font-medium">
-            <span class="bg-background-100 px-6 rounded text-center"><%= t('devise.registrations.or_continue_with') %></span>
+          <div class="relative flex justify-center text-sm font-medium">
+            <span class="bg-background-surface px-6 rounded text-center"><%= t('devise.registrations.or_continue_with') %></span>
           </div>
         </div>
 
         <div class="mt-6">
           <%= link_to user_google_oauth2_omniauth_authorize_path, class: "flex w-full items-center justify-center gap-3 rounded-md bg-background-overlay px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-500 hover:bg-gray-600 focus-visible:ring-transparent" do %>
             <%= cdn_image :google_icon, class: 'max-h-6' %>
-            <span class="text-sm/6 font-semibold"><%= t('devise.providers.google') %></span>
+            <span class="text-sm font-semibold"><%= t('devise.providers.google') %></span>
           <% end %>
         </div>
       </div>
 
     </div>
 
-    <p class="mt-10 text-center text-sm/6">
+     <p class="mt-10 text-center text-sm/6">
       <%= link_to new_user_registration_path, class: 'p-4' do %>
         <span><%= t('devise.sessions.create_account') %></span>
-        <span class="font-semibold text-secondary hover:text-secondary-hover"><%= t('devise.registrations.sign_up') %></span>
+        <span class="font-semibold text-success hover:text-success-hover"><%= t('devise.registrations.sign_up') %></span>
       <% end %>
     </p>
   </div>
