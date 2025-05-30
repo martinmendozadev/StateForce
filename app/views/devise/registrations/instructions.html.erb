@@ -4,7 +4,7 @@
     <%= link_to root_path do %>
       <%= cdn_image :logo, class: "mx-auto h-16" %>
     <% end %>
-    <h2 class="mt-6 text-center text-2xl/9 font-bold text-primary">
+    <h2 class="mt-6 text-center text-2xl/9 font-bold text-info">
       <%= t('instructions.title') %>
     </h2>
   </div>
@@ -12,16 +12,17 @@
   <div class="mt-10 mx-auto w-1/2">
     <div class="bg-background-raised px-6 py-12 shadow rounded-lg">
 
-      <p class="text-center text-sm text-text-300">
+      <p class="text-center text-sm">
         <%= t('instructions.description') %>
       </p>
     </div>
 
     <p class="mt-10 text-center text-sm/6">
-      <%= link_to new_user_session_path, class: "text-secondary hover:text-secondary-hover" do %>
-        <%= t('instructions.back_to_login') %>
+      <%= link_to new_user_session_path, class: 'p-4' do %>
+        <span><%= t('devise.registrations.already_have_account') %></span>
+        <span class="font-semibold text-success hover:text-success-hover"><%= t('devise.registrations.sign_in') %></span>
       <% end %>
-    </p>
+     </p>
   </div>
 
 </div>
