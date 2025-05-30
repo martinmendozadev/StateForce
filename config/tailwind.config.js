@@ -50,7 +50,7 @@ module.exports = {
           900: 'oklch(0.19 0.014 262)',
         },
         primary: { // Indigo
-          active: 'oklch(0.38 0.23 285)',
+          active: 'oklch(0.49 0.21 275)',
           content: 'oklch(0.96 0.004 275)',
           DEFAULT: 'oklch(0.45 0.19 275)',
           disabled: 'oklch(0.61 0.15 275)',
@@ -87,12 +87,12 @@ module.exports = {
         warning: { // Orange
           active: 'oklch(0.58 0.29 40)',
           content: 'oklch(0.15 0.05 40)',
-          DEFAULT: 'oklch(0.65 0.26 40)', 
+          DEFAULT: 'oklch(0.70 0.26 40)',
           disabled: 'oklch(0.78 0.21 40)',
           focus: 'oklch(0.78 0.28 40)',
           hover: 'oklch(0.57 0.27 40)',
-          800: 'oklch(0.49 0.28 40)',
-          950: 'oklch(0.35 0.30 40)',
+          800: 'oklch(0.52 0.30 40)',
+          950: 'oklch(0.42 0.32 40)',
         },
       },
       fontFamily: {
