@@ -22,8 +22,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
     click_on I18n.t("devise.sessions.sign_in")
 
     assert_selector "#flash-messages .mb-2", visible: true
-    sleep 8.5
-    assert_no_selector "#flash-messages .mb-2", visible: true
+    assert_no_selector "#flash-messages .mb-2", visible: true, wait: 8.5
   end
 
   test "flash message can be closed manually" do
@@ -33,8 +32,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
 
     assert_selector "#flash-messages .mb-2", visible: true
     find("#flash-messages button[aria-label]").click
-    sleep 0.6
-    assert_no_selector "#flash-messages .mb-2", visible: true
+    assert_no_selector "#flash-messages .mb-2", visible: true, wait: 0.6
   end
 
   test "flash message for notice has correct color classes" do
