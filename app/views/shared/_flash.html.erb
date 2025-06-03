@@ -20,7 +20,7 @@
 </div>
 
 <script>
-  const flashMessagesDisappearedAfter = 8000;
+  window.flashMessagesDisappearedAfter = <%= GLOBAL_VARS[:flash_messages_disappeared_after] || 5000 %>;
 
   setTimeout(function() {
     document.querySelectorAll('[id^="flash-message-"]').forEach(function(el) {
