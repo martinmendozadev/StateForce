@@ -37,9 +37,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
       uid: Faker::Number.number(digits: 10),
       name: Faker::Name.name
     }
-
     mock_google_auth(email: user_auth[:email], uid: user_auth[:uid], name: user_auth[:name])
-    visit new_user_session_path
     click_on I18n.t("devise.providers.google")
 
     assert_selector "#flash-messages .bg-info.border-info-focus.text-info-content", visible: true
@@ -59,8 +57,6 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
 
   private
   def wrong_login
-    visit new_user_session_path
-
     fill_in I18n.t("devise.registrations.email"), with: @user.email
     fill_in I18n.t("devise.registrations.password"), with: "wrong_password"
     click_on I18n.t("devise.sessions.sign_in")
