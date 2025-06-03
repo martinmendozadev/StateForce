@@ -22,7 +22,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
     click_on I18n.t("devise.sessions.sign_in")
 
     assert_selector "#flash-messages .mb-2", visible: true
-    assert_no_selector "#flash-messages .mb-2", visible: true, wait: 8.5
+    assert_no_selector "#flash-messages .mb-2", visible: true, wait: GLOBAL_VARS[:flash_messages_disappeared_after] + 0.5
   end
 
   test "flash message can be closed manually" do
@@ -32,13 +32,13 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
 
     assert_selector "#flash-messages .mb-2", visible: true
     find("#flash-messages button[aria-label]").click
-    assert_no_selector "#flash-messages .mb-2", visible: true, wait: 0.6
+    assert_no_selector "#flash-messages .mb-2", visible: true, wait: 0.5
   end
 
   test "flash message for notice has correct color classes" do
     user_auth =  {
       email: Faker::Internet.email,
-      uid: "1234567890",
+      uid: Faker::Number.number(digits: 10),
       name: Faker::Name.name
     }
 
