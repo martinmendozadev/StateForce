@@ -1,5 +1,7 @@
-<%# Flash messages fixed at the top center, above all content %>
-<div id="flash-messages" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4 select-none transition-opacity duration-500">
+<div
+  id="flash-messages"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4 select-none transition-opacity duration-500"
+  data-disappear-after="<%= GLOBAL_VARS[:flash_messages_disappeared_after] || 5000 %>">
   <% flash.each_with_index do |(type, message), idx| %>
     <% alert_class = case type.to_sym
       when :notice then "bg-info border-info-focus text-info-content"
@@ -18,22 +20,3 @@
     </div>
   <% end %>
 </div>
-
-<script>
-  window.flashMessagesDisappearedAfter = <%= GLOBAL_VARS[:flash_messages_disappeared_after] || 5000 %>;
-
-  setTimeout(function() {
-    document.querySelectorAll('[id^="flash-message-"]').forEach(function(el) {
-      el.style.opacity = '0';
-      setTimeout(() => el.style.display = 'none', 500);
-    });
-  }, flashMessagesDisappearedAfter);
-
-  function closeFlash(idx) {
-    var el = document.getElementById('flash-message-' + idx);
-    if (el) {
-      el.style.opacity = '0';
-      setTimeout(function() { el.style.display = 'none'; }, 500);
-    }
-  }
-</script>
