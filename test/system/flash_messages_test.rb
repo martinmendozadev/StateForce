@@ -16,7 +16,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
     })
   end
 
-  test "flash message appears and disappears after 8 seconds" do
+  test "flash message appears and disappears after X seconds" do
     wrong_login
 
     assert_selector "#flash-messages .mb-2", visible: true
