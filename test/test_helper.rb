@@ -4,11 +4,12 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 require "omniauth"
+require "faker"
 
 OmniAuth.config.test_mode = true
 
 module OmniAuthTestHelper
-  def mock_google_auth(email: "test@example.com", uid: "1234567890", name: "Test User")
+  def mock_google_auth(email: Faker::Internet.email, uid: Faker::Number.number(digits: 10), name: Faker::Name.name)
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: "google_oauth2",
       uid: uid,
@@ -17,7 +18,7 @@ module OmniAuthTestHelper
         name: name,
         first_name: name.split.first,
         last_name: name.split.last,
-        image: "https://example.com/avatar.jpg"
+        image: Faker::Avatar.image
       }
     })
   end

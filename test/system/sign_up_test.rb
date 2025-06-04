@@ -7,9 +7,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def setup
     @user =  {
       password: Faker::Internet.password(min_length: 8, max_length: 20),
-      email: Faker::Internet.email,
-      uid: "1234567890",
-      name: "User 2 Last"
+      email: Faker::Internet.email
     }
 
     visit new_user_registration_path
@@ -66,7 +64,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   test "user can sign up with Google" do
-    mock_google_auth(email: @user[:email], uid: @user[:uid], name: @user[:name])
+    mock_google_auth(email: @user[:email])
     visit new_user_registration_path
     click_on I18n.t("devise.providers.google")
     assert_current_path dashboard_path
