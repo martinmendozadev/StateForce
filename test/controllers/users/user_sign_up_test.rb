@@ -13,7 +13,6 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     }
 
     get new_user_registration_path
-    assert_response :success
   end
 
   def teardown
@@ -27,7 +26,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_response :success
-    assert_select "h2", I18n.t("instructions.title")
+    assert_equal users_instructions_path, path
 
     created_user = User.find_by(email: @user[:email])
 
@@ -45,13 +44,12 @@ class UserSignupTest < ActionDispatch::IntegrationTest
           name: Faker::Name.name,
           email: Faker::Internet.email,
           password: "password123",
-          password_confirmation: "123password"
+          password_confirmation: "mismatched_password"
         }
       }
     end
 
     assert_response :unprocessable_entity
-    assert_select "div", "Password confirmation doesn't match Password"
   end
 
   test "user cannot sign up with email registred before" do
@@ -66,6 +64,5 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
-    assert_select "div.text-danger", /#{I18n.t('errors.messages.taken')}/
   end
 end

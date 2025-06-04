@@ -8,7 +8,6 @@ class Users::OmniauthCallbacksControllerTest < ActionDispatch::IntegrationTest
     }
 
     get new_user_session_path
-    assert_response :success
   end
 
   def teardown

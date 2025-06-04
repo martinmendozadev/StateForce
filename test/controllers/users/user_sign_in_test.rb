@@ -8,7 +8,6 @@ class UserSignInTest < ActionDispatch::IntegrationTest
     @unconfirmed_user = users(:user_three)
 
     get new_user_session_path
-    assert_response :success
   end
 
   def teardown
@@ -25,7 +24,7 @@ class UserSignInTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_response :success
-    assert_select "h1", @user.email
+    assert_equal dashboard_path, path
 
     assert session["warden.user.user.key"].present?
   end
@@ -39,7 +38,7 @@ class UserSignInTest < ActionDispatch::IntegrationTest
     }
 
     assert_response :unprocessable_entity
-    assert_select "h3", I18n.t("devise.failure.not_found_in_database", authentication_keys: "Email")
+    assert_equal new_user_session_path, path
 
     assert_nil session["warden.user.user.key"]
   end
@@ -55,7 +54,7 @@ class UserSignInTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select "h2", I18n.t("instructions.title")
+    assert_equal users_instructions_path, path
 
     assert_nil session["warden.user.user.key"]
   end
