@@ -60,6 +60,7 @@ class SignInTest < ActionDispatch::SystemTestCase
     mock_google_auth(email: @user.email)
     visit new_user_session_path
     click_on I18n.t("devise.providers.google")
+
     assert_current_path dashboard_path
     assert_text @user.email
   end
