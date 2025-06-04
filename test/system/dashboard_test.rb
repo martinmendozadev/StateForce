@@ -9,9 +9,7 @@ class DashboardTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    page.execute_script(%Q{
-      fetch("#{destroy_user_session_path}", {method: "DELETE", credentials: "same-origin"});
-    })
+    Warden.test_reset!
   end
 
   test "dashboard shows user email and logout button" do

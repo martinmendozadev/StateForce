@@ -10,9 +10,7 @@ class SignInTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    page.execute_script(%Q{
-      fetch("#{destroy_user_session_path}", {method: "DELETE", credentials: "same-origin"});
-    })
+    Warden.test_reset!
   end
 
   test "renders the sign-in page" do
