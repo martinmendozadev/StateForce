@@ -42,6 +42,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   test "sign-up page has link to sign-in page" do
     assert_text I18n.t("devise.registrations.already_have_account").strip
     assert_text I18n.t("devise.registrations.sign_in").strip
+
     assert_selector "a[href='#{new_user_session_path}']"
   end
 
@@ -67,6 +68,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     mock_google_auth(email: @user[:email])
     visit new_user_registration_path
     click_on I18n.t("devise.providers.google")
+
     assert_current_path dashboard_path
     assert_text @user[:email]
   end

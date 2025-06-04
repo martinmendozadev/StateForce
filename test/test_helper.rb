@@ -9,16 +9,18 @@ require "faker"
 OmniAuth.config.test_mode = true
 
 module OmniAuthTestHelper
-  def mock_google_auth(email: Faker::Internet.email, uid: Faker::Number.number(digits: 10), name: Faker::Name.name)
+  def mock_google_auth(email: Faker::Internet.email,
+    uid: Faker::Number.number(digits: 10),
+    name: Faker::Name.name,
+    image_url: Faker::Avatar.image
+    )
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: "google_oauth2",
       uid: uid,
       info: {
         email: email,
         name: name,
-        first_name: name.split.first,
-        last_name: name.split.last,
-        image: Faker::Avatar.image
+        image: image_url
       }
     })
   end
