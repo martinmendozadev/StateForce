@@ -8,6 +8,10 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
+  def teardown
+    log_out @user
+  end
+
   test "should get dashboard index for confirmed and signed in users" do
     get dashboard_path
     assert_response :success

@@ -7,18 +7,14 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def setup
     @user =  {
       password: Faker::Internet.password(min_length: 8, max_length: 20),
-      email: Faker::Internet.email,
-      uid: "1234567890",
-      name: "User 2 Last"
+      email: Faker::Internet.email
     }
 
     visit new_user_registration_path
   end
 
   def teardown
-    page.execute_script(%Q{
-      fetch("#{destroy_user_session_path}", {method: "DELETE", credentials: "same-origin"});
-    })
+    log_out
   end
 
   test "user can access the sign-up page" do
@@ -44,6 +40,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   test "sign-up page has link to sign-in page" do
     assert_text I18n.t("devise.registrations.already_have_account").strip
     assert_text I18n.t("devise.registrations.sign_in").strip
+
     assert_selector "a[href='#{new_user_session_path}']"
   end
 
@@ -66,9 +63,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   test "user can sign up with Google" do
-    mock_google_auth(email: @user[:email], uid: @user[:uid], name: @user[:name])
+    mock_google_auth(email: @user[:email])
     visit new_user_registration_path
     click_on I18n.t("devise.providers.google")
+
     assert_current_path dashboard_path
     assert_text @user[:email]
   end

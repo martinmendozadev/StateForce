@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "test_helper"
-require "faker"
 
 class DashboardTest < ActionDispatch::SystemTestCase
   def setup
@@ -10,9 +9,7 @@ class DashboardTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    page.execute_script(%Q{
-      fetch("#{destroy_user_session_path}", {method: "DELETE", credentials: "same-origin"});
-    })
+    log_out
   end
 
   test "dashboard shows user email and logout button" do

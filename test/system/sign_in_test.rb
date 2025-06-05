@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "test_helper"
-require "faker"
 
 class SignInTest < ActionDispatch::SystemTestCase
   def setup
@@ -11,9 +10,7 @@ class SignInTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    page.execute_script(%Q{
-      fetch("#{destroy_user_session_path}", {method: "DELETE", credentials: "same-origin"});
-    })
+    log_out
   end
 
   test "renders the sign-in page" do
@@ -58,16 +55,11 @@ class SignInTest < ActionDispatch::SystemTestCase
   end
 
   test "user can sign in with Google" do
-    user_auth =  {
-      email: Faker::Internet.email,
-      uid: "1234567890",
-      name: Faker::Name.name
-    }
-
-    mock_google_auth(email: user_auth[:email], uid: user_auth[:uid], name: user_auth[:name])
+    mock_google_auth(email: @user.email)
     visit new_user_session_path
     click_on I18n.t("devise.providers.google")
+
     assert_current_path dashboard_path
-    assert_text user_auth[:email]
+    assert_text @user.email
   end
 end

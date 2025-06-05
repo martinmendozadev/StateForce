@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "test_helper"
-require "faker"
 
 class FlashMessagesTest < ActionDispatch::SystemTestCase
   def setup
@@ -11,9 +10,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    page.execute_script(%Q{
-      fetch("#{destroy_user_session_path}", {method: "DELETE", credentials: "same-origin"});
-    })
+    log_out
   end
 
   test "flash message appears and disappears after X seconds" do
@@ -32,12 +29,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
   end
 
   test "flash message for notice has correct color classes" do
-    user_auth =  {
-      email: Faker::Internet.email,
-      uid: Faker::Number.number(digits: 10),
-      name: Faker::Name.name
-    }
-    mock_google_auth(email: user_auth[:email], uid: user_auth[:uid], name: user_auth[:name])
+    mock_google_auth
     click_on I18n.t("devise.providers.google")
 
     assert_selector "#flash-messages .bg-info.border-info-focus.text-info-content", visible: true

@@ -4,20 +4,23 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 require "omniauth"
+require "faker"
 
 OmniAuth.config.test_mode = true
 
 module OmniAuthTestHelper
-  def mock_google_auth(email: "test@example.com", uid: "1234567890", name: "Test User")
+  def mock_google_auth(email: Faker::Internet.email,
+    uid: Faker::Number.number(digits: 10),
+    name: Faker::Name.name,
+    image_url: Faker::Avatar.image
+    )
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: "google_oauth2",
       uid: uid,
       info: {
         email: email,
         name: name,
-        first_name: name.split.first,
-        last_name: name.split.last,
-        image: "https://example.com/avatar.jpg"
+        image: image_url
       }
     })
   end
@@ -41,15 +44,17 @@ module ActiveSupport
 
     def log_in(user)
       if integration_test?
-          login_as(user, scope: :user)
+        login_as(user, scope: :user)
       else
         sign_in(user)
       end
     end
 
-    def log_out(user)
+    def log_out(user = nil)
       if integration_test?
         logout(:user)
+      elsif self.is_a?(ActionDispatch::SystemTestCase)
+        Warden.test_reset!
       else
         sign_out(user)
       end
