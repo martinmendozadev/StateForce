@@ -1,3 +1,9 @@
+[![Build Status](https://img.shields.io/github/actions/workflow/status/martinmendozadev/StateForce/ci.yml?branch=main)](https://github.com/martinmendozadev/StateForce/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Coverage Status](https://img.shields.io/codecov/c/github/martinmendozadev/StateForce)](https://codecov.io/gh/martinmendozadev/StateForce)
+[![Ruby](https://img.shields.io/badge/Ruby-3.4.3-red.svg)](https://www.ruby-lang.org/)
+[![Rails](https://img.shields.io/badge/Rails-8.0.2-red.svg)](https://rubyonrails.org/)
+
 # 🚨 StateForce
 
 **Real-time Emergency Resource Management**
@@ -119,15 +125,21 @@ To run StateForce locally:
 
 For full technical documentation, visit the [StateForce Wiki](https://github.com/martinmendozadev/StateForce/wiki), including:
 
-- 🧩 Entity Model Overview
+- 🧩 [Entity Model Overview](https://github.com/martinmendozadev/StateForce/wiki/DataBase)
 - ✨ Features and Modules
-- 📡 API Integration and Endpoints
-- 🚀 Deployment Guide
-- 🛠 Troubleshooting
-- 🤝 Contributing Guidelines
-- 🧑‍💻 Code Style Guide
+- 🚦 [Roles Definition](https://github.com/martinmendozadev/StateForce/wiki/Roles-Definition)
+- 🚀 [System Architecture](https://github.com/martinmendozadev/StateForce/wiki/System-Architecture)
+- 📝 [Testing Guide](https://github.com/martinmendozadev/StateForce/wiki/Testing-Guide)
+- 🧑‍💻 [Code Style Guide](https://github.com/martinmendozadev/StateForce/wiki/Style-Guide)
 
 ---
+
+## 🤗 Contributing
+
+We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before submitting a pull request.
+
+- Open issues for bugs or feature requests.
+- Fork the repo and submit a pull request for improvements.
 
 ## 🤝 Support
 
@@ -136,3 +148,13 @@ If you run into issues or have questions:
 📬 **[martinmendozadev@gmail.com](mailto:martinmendozadev@gmail.com)**
 
 We welcome contributions and feedback to improve StateForce for emergency services everywhere.
+
+## 🙏 Credits & Acknowledgements
+
+- Developed by [martinmendozadev](https://github.com/martinmendozadev)
+- Inspired by the needs emergency services professionals.
+- Built with Ruby on Rails, Hotwire, and the open source community.
+
+## 📝 License
+
+This project is licensed under the terms of the [MIT License](LICENSE).
