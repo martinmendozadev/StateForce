@@ -8,7 +8,7 @@
 
 **Real-time Emergency Resource Management**
 
-StateForce is a Ruby on Rails application designed to optimize emergency response resources in real-time. Built for use by the **Centro de Enlace y Comunicaciones (CECOM)** at the state level, the system centralizes the management of medical, police, rescue, and fire department assets to reduce response times and improve coordination.
+StateForce is a Ruby on Rails application designed to optimize emergency response operations and resources in real time. Built for use by the **Centro de Enlace y Comunicaciones (CECOM)** at the state level, the system centralizes the management of medical, police, rescue, and fire department assets to reduce response times and improve coordination.
 
 ---
 
@@ -50,7 +50,7 @@ StateForce empowers emergency services with a modern, reliable, and scalable pla
 
 Want to try StateForce right now?
 
-Then visit [statefoce.mx](http://localhost:3000) and log in as guest user:
+Then visit [stateforce.mx](http://localhost:3000) and log in as a guest user:
 
 ---
 
@@ -183,7 +183,7 @@ StateForce currently supports Spanish and English. The interface language is pri
 ## 🙏 Credits & Acknowledgements
 
 - Developed by [martinmendozadev](https://github.com/martinmendozadev)
-- Inspired by the needs emergency services professionals.
+- Inspired by the needs of emergency services professionals.
 - Built with Ruby on Rails, Hotwire, and the open source community.
 
 ## 📝 License
