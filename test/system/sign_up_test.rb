@@ -14,7 +14,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    Warden.test_reset!
+    log_out
   end
 
   test "user can access the sign-up page" do

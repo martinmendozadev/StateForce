@@ -9,7 +9,7 @@ class DashboardTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    Warden.test_reset!
+    log_out
   end
 
   test "dashboard shows user email and logout button" do

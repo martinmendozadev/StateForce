@@ -10,7 +10,7 @@ class SignInTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    Warden.test_reset!
+    log_out
   end
 
   test "renders the sign-in page" do
