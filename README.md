@@ -103,6 +103,10 @@ To run StateForce locally:
 
 - **System Tests (Capybara + Selenium)**
 
+  ```bash
+  bin/rails test:system
+  ```
+
   Includes headless browser testing with screenshot support for failures.
 
 - **Hot Reloading with Turbo**
