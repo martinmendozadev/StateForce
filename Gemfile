@@ -77,3 +77,5 @@ group :test do
 end
 
 gem "pundit", "~> 2.5"
+
+gem "simplecov-cobertura", "~> 2.1", group: :test
