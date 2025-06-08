@@ -1,0 +1,71 @@
+{
+  "name": "StateForce",
+  "description": "Real-time Emergency Resource Management.",
+  "website": "https://stateforce.mx",
+  "repository": "https://github.com/martinmendozadev/StateForce",
+  "logo": "https://res.cloudinary.com/dtezbna78/image/upload/v1748045477/StateForce/logo_stateforce_color_icon.svg",
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "image": "heroku/ruby",
+  "addons": [
+    "heroku-postgresql:basic",
+    "heroku-redis:mini",
+    "scheduler:standard",
+    "logtail:free"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "rails db:migrate"
+  },
+  "env":{
+    "APP_ENV": {
+      "description": "The environment the app is running in",
+      "value": "production"
+    }
+  },
+  "environments": {
+    "test": {
+      "formation": {
+        "test": {
+          "quantity": 1,
+          "size": "standard-1x"
+        }
+      },
+      "addons": [
+        "heroku-postgresql:in-dyno"
+      ],
+      "scripts": {
+        "test-setup": "rails assets:precompile",
+        "test": "rails test"
+      },
+      "env":{
+        "APP_ENV": {
+          "description": "The environment the app is running in",
+          "value": "test"
+        }
+      }
+    },
+    "staging": {
+      "addons": [
+        "heroku-postgresql:in-dyno"
+      ],
+      "scripts": {
+        "postdeploy": "rails db:migrate"
+      },
+      "env":{
+        "APP_ENV": {
+          "description": "The environment the app is running in",
+          "value": "staging"
+        }
+      }
+    }
+  }
+}
