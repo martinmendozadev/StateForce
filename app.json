@@ -63,7 +63,7 @@
       "env":{
         "APP_ENV": {
           "description": "The environment the app is running in",
-          "value": "stagging"
+          "value": "staging"
         }
       }
     }
