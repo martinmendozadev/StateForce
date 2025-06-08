@@ -1,6 +1,15 @@
 @import "tailwindcss";
+@config "../../../config/tailwind.config.js";
 
-:root {
-    background-color: oklch(21% .034 264.665);
-    color: white
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    background-color: oklch(0.13 0.028 261.692);
+    color: oklch(0.92 0.01 261.692);
+  }
 }

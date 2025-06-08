@@ -1,0 +1,22 @@
+<div
+  id="flash-messages"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4 select-none transition-opacity duration-500"
+  data-disappear-after="<%= GLOBAL_VARS[:flash_messages_disappeared_after] || 5000 %>">
+  <% flash.each_with_index do |(type, message), idx| %>
+    <% alert_class = case type.to_sym
+      when :notice then "bg-info border-info-focus text-info-content"
+      when :alert, :error then "bg-danger border-danger-focus text-danger-content"
+      else "bg-neutral border-neutral-focus text-neutral-content"
+    end %>
+    <div id="flash-message-<%= idx %>" class="mb-2 p-4 rounded border-l-4 shadow-sm relative <%= alert_class %> transition-opacity duration-500">
+      <button
+        type="button"
+        aria-label="<%= t('common.close') %>"
+        onclick="closeFlash(<%= idx %>)"
+        class="absolute top-2 right-2 text-xl font-bold leading-none cursor-pointer hover:text-neutral-disabled focus:outline-none">
+            &times;
+        </button>
+      <p class="text-sm font-medium pr-6"><%= message %></p>
+    </div>
+  <% end %>
+</div>

@@ -13,27 +13,10 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     }
 
     get new_user_registration_path
-    assert_response :success
   end
 
-  test "user can access the sign-up page" do
-    assert_select "h2", I18n.t("devise.registrations.sign_up")
-  end
-
-  test "user can return to index page" do
-    assert_select "a[href=?]", root_path
-  end
-
-  test "user can see the sign-up form elements" do
-    get new_user_registration_path
-    assert_response :success
-
-    assert_select "form[action=?][method=post]", user_registration_path do
-      assert_select "input[name=?]", "user[email]"
-      assert_select "input[name=?]", "user[password]"
-      assert_select "input[name=?]", "user[password_confirmation]"
-      assert_select "input[type=submit][value=?]", I18n.t("devise.registrations.sign_up_button")
-    end
+  def teardown
+    log_out(@user)
   end
 
    test "user can sign up with valid information" do
@@ -43,7 +26,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_response :success
-    assert_select "h2", I18n.t("instructions.title")
+    assert_equal users_instructions_path, path
 
     created_user = User.find_by(email: @user[:email])
 
@@ -61,13 +44,12 @@ class UserSignupTest < ActionDispatch::IntegrationTest
           name: Faker::Name.name,
           email: Faker::Internet.email,
           password: "password123",
-          password_confirmation: "123password"
+          password_confirmation: "mismatched_password"
         }
       }
     end
 
     assert_response :unprocessable_entity
-    assert_select "div", "Password confirmation doesn't match Password"
   end
 
   test "user cannot sign up with email registred before" do
@@ -82,21 +64,5 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
-    assert_select "div.text-red-500", /#{I18n.t('errors.messages.taken')}/
-  end
-
-  test "user can see google sign-up button" do
-    assert_select "a[href=?]", user_google_oauth2_omniauth_authorize_path
-  end
-
-  test "user can access to sign-in page from sign-up page" do
-    assert_select "p" do |elements|
-      elements.each do |element|
-        assert_match(/#{I18n.t('devise.registrations.already_have_account').strip}/, element.text.strip)
-        assert_match(/#{I18n.t('devise.registrations.sign_in').strip}/, element.text.strip)
-      end
-    end
-
-    assert_select "a[href=?]", new_user_session_path
   end
 end

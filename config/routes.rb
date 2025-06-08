@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "dashboards#index"
   get "/learn_more", to: "pages#learn_more"
+  get "/color_palette", to: "pages#color_palette"
   get "users/instructions", to: "users/instructions#instructions"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
