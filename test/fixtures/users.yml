@@ -40,3 +40,36 @@ user_three:
   last_name: "Last Name 3"
   role: 1
   updated_at: <%= 5.day.ago %>
+
+admin:
+  created_at: <%= 3.days.ago %>
+  confirmed_at: <%= 2.days.ago %>
+  email: admin@stateforce.mx
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  first_name: "User 4"
+  id: 4
+  last_name: "Last Name 4"
+  role: 2
+  updated_at: <%= 1.days.ago %>
+
+standard:
+  created_at: <%= 3.days.ago %>
+  confirmed_at: <%= 2.days.ago %>
+  email: standard@stateforce.mx
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  first_name: "User 5"
+  id: 5
+  last_name: "Last Name 5"
+  role: 1
+  updated_at: <%= 1.days.ago %>
+
+guest:
+  created_at: <%= 3.days.ago %>
+  confirmed_at: <%= 2.days.ago %>
+  email: guest@stateforce.mx
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  first_name: "User 6"
+  id: 6
+  last_name: "Last Name 6"
+  role: 0
+  updated_at: <%= 1.days.ago %>

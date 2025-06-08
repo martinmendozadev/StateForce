@@ -28,6 +28,37 @@
 #       enabled: "ON"
 
 en:
+  common:
+    yes: "Yes"
+    no: "No"
+    ok: "OK"
+    cancel: "Cancel"
+    save: "Save"
+    delete: "Delete"
+    edit: "Edit"
+    back: "Back"
+    next: "Next"
+    previous: "Previous"
+    submit: "Submit"
+    close: "Close"
+    loading: "Loading..."
+    error: "Error"
+    success: "Success"
+    warning: "Warning"
+    info: "Info"
+    confirm: "Confirm"
+    search: "Search"
+    filter: "Filter"
+    clear: "Clear"
+    view: "View"
+    create: "Create"
+    update: "Update"
+    manage: "Manage"
+    help: "Help"
+    learn_more: "Learn more"
+    terms_of_service: "Terms of Service"
+    privacy_policy: "Privacy Policy"
+    state_force: "StateForce"
   landing:
     company_name: StateForce
     nav:
@@ -41,7 +72,7 @@ en:
   instructions:
     title: "Confirm your account"
     description: "We noticed you haven't confirmed your email address yet."
-    back_to_login: "Already confirmed? Sign in"
+    back_to_login: "Already confirmed?"
   learn_more:
     title: "StateForce"
     vision:
@@ -76,8 +107,8 @@ en:
       title: "Trusted by the most relevant institutions"
     statistics:
       emergency_services: "Emergency services"
-      emergency_services_value: "14,000"
-      assets_saved: "Resoruces saved"
-      assets_saved_value: "$2.1 millions"
+      emergency_services_value: "+4,681"
+      assets_saved: "Cost savings"
+      assets_saved_value: "$2.5M"
       covered_territory: "Covered territory"
-      covered_territory_value: "4,893 km"
+      covered_territory_value: "4,893 km²"

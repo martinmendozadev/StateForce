@@ -1,65 +1,69 @@
 name: CI
 
+# This workflow is triggered on pull requests and pushes to the main branch
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
+# Permissions required for the workflow
 permissions:
   contents: read
 
 jobs:
+  # Job to scan Ruby code for common Rails security vulnerabilities
   scan_ruby:
     runs-on: ubuntu-latest
-
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
+      - name: Run Brakeman for static analysis
         run: bin/brakeman --no-pager
 
+  # Job to scan JavaScript dependencies for security vulnerabilities
   scan_js:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
+      - name: Run Importmap audit
         run: bin/importmap audit
 
+  # Job to lint Ruby code for consistent style
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
+      - name: Run RuboCop for linting
         run: bin/rubocop -f github
 
+  # Job to run tests for the application
   test:
     runs-on: ubuntu-latest
 
+    # Services required for the test job
     services:
       postgres:
         image: postgres
@@ -70,6 +74,7 @@ jobs:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
 
+      # Redis service is commented out but can be enabled if needed
       # redis:
       #   image: redis
       #   ports:
@@ -77,24 +82,24 @@ jobs:
       #   options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip xvfb libnss3 libxi6 libxcursor1 libxrandr2 libxss1 libxtst6 libasound2t64 fonts-liberation libappindicator3-1 indicator-application xdg-utils
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-          wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/136.0.7103.92/linux64/chromedriver-linux64.zip
-          unzip chromedriver-linux64.zip
-          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
-
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: List files in script directory
+        run: ls -l script
+
+      - name: Make script executable
+        run: chmod +x script/install_dependencies_to_github_actions.sh
+
+      - name: Install system dependencies
+        run: script/install_dependencies_to_github_actions.sh
+
+      - name: Validate Chrome and Chromedriver installation
+        run: |
+          google-chrome --version
+          chromedriver --version
+
+      - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
@@ -110,10 +115,15 @@ jobs:
           bundle exec rails test
           xvfb-run -a bundle exec rails test:system
 
-      - name: Keep screenshots from failed system tests
+      - name: Upload screenshots from failed system tests
         uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
