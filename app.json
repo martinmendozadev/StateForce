@@ -53,7 +53,7 @@
         }
       }
     },
-    "stagging": {
+    "staging": {
       "addons": [
         "heroku-postgresql:in-dyno"
       ],
