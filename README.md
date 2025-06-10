@@ -200,4 +200,4 @@ StateForce currently supports Spanish and English. The interface language is pri
 
 ## 📝 License
 
-This project is licensed under the terms of the [MIT License](LICENSE).
+This project is licensed under the terms of the [Apache License 2.0](LICENSE).
