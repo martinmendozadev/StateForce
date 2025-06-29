@@ -1,7 +1,7 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/martinmendozadev/StateForce/ci.yml?branch=main)](https://github.com/martinmendozadev/StateForce/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Coverage Status](https://img.shields.io/codecov/c/github/martinmendozadev/StateForce)](https://codecov.io/gh/martinmendozadev/StateForce)
-[![Ruby](https://img.shields.io/badge/Ruby-3.4.3-red.svg)](https://www.ruby-lang.org/)
+[![Ruby](https://img.shields.io/badge/Ruby-3.4.4-red.svg)](https://www.ruby-lang.org/)
 [![Rails](https://img.shields.io/badge/Rails-8.0.2-red.svg)](https://rubyonrails.org/)
 
 # 🚨 StateForce
@@ -57,7 +57,7 @@ Visit [stateforce.mx](http://localhost:3000) and log in
 
 ## 🛠 Tech Stack
 
-- **Ruby 3.4.3** – Elegant, powerful backend language.
+- **Ruby 3.4.4** – Elegant, powerful backend language.
 - **Rails 8.0.2** – Framework optimized for developer productivity and performance.
 - **PostgreSQL 17** – Reliable, production-grade relational database.
 - **Redis** – Used for background jobs and caching.
@@ -83,7 +83,7 @@ To run StateForce locally:
 2. **Install Ruby**
 
    ```bash
-   rbenv install 3.4.3 && rbenv global 3.4.3
+   rbenv install 3.4.4 && rbenv global 3.4.4
    ```
 
 3. **Install Dependencies**
