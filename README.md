@@ -24,19 +24,18 @@ _Screenshots and more details available in the [Wiki](https://github.com/martinm
 
 ## 📚 Table of Contents
 
-1. [Overview](#-overview)
-2. [Demo](#-demo)
+1. [Demo](#-demo)
+2. [Overview](#-overview)
 3. [Quickstart](#-quickstart)
 4. [Tech Stack](#-tech-stack)
 5. [Getting Started](#-getting-started)
-6. [Example Usage](#-example-usage)
-7. [Development Tools](#-development-tools)
-8. [Documentation](#-documentation)
-9. [Contributing](#-contributing)
-10. [Support](#-support)
-11. [Internationalization](#-internationalization)
-12. [Credits & Acknowledgements](#-credits--acknowledgements)
-13. [License](#-license)
+6. [Development Tools](#-development-tools)
+7. [Documentation](#-documentation)
+8. [Contributing](#-contributing)
+9. [Support](#-support)
+10. [Internationalization](#-internationalization)
+11. [Credits & Acknowledgements](#-credits--acknowledgements)
+12. [License](#-license)
 
 ---
 
