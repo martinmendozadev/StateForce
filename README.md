@@ -8,7 +8,7 @@
 
 **Real-time Emergency Resource Management**
 
-StateForce is a Ruby on Rails application designed to optimize emergency response operations and resources in real time. Built for use by the **Centro de Enlace y Comunicaciones (CECOM)** at the state level, the system centralizes the management of medical, police, rescue, and fire department assets to reduce response times and improve coordination.
+StateForce is a Ruby on Rails application designed to optimize emergency response operations and resources in real time. Originally developed for the **Centro Regulador de Urgencias Médicas (CRUM)** at the state level in Mexico, the system centralizes the management of medical, police, rescue, and fire department assets to reduce response times and improve coordination. It can also be adapted for use by any organization managing multiple emergency services.
 
 ---
 
@@ -24,19 +24,18 @@ _Screenshots and more details available in the [Wiki](https://github.com/martinm
 
 ## 📚 Table of Contents
 
-1. [Overview](#-overview)
-2. [Demo](#-demo)
+1. [Demo](#-demo)
+2. [Overview](#-overview)
 3. [Quickstart](#-quickstart)
 4. [Tech Stack](#-tech-stack)
 5. [Getting Started](#-getting-started)
-6. [Example Usage](#-example-usage)
-7. [Development Tools](#-development-tools)
-8. [Documentation](#-documentation)
-9. [Contributing](#-contributing)
-10. [Support](#-support)
-11. [Internationalization](#-internationalization)
-12. [Credits & Acknowledgements](#-credits--acknowledgements)
-13. [License](#-license)
+6. [Development Tools](#-development-tools)
+7. [Documentation](#-documentation)
+8. [Contributing](#-contributing)
+9. [Support](#-support)
+10. [Internationalization](#-internationalization)
+11. [Credits & Acknowledgements](#-credits--acknowledgements)
+12. [License](#-license)
 
 ---
 
@@ -44,13 +43,15 @@ _Screenshots and more details available in the [Wiki](https://github.com/martinm
 
 StateForce empowers emergency services with a modern, reliable, and scalable platform for managing real-time resources such as ambulances, hospitals, rescue units, helicopters, and specialists. It features role-based access control, real-time updates, and seamless integration of data from public APIs.
 
+The application is tailored for the **Centro Regulador de Urgencias Médicas (CRUM)** but can be customized to meet the needs of other emergency response organizations across different regions.
+
 ---
 
 ## ⚡ Quickstart
 
 Want to try StateForce right now?
 
-Then visit [stateforce.mx](http://localhost:3000) and log in as a guest user:
+Visit [stateforce.mx](http://localhost:3000) and log in
 
 ---
 
@@ -148,14 +149,18 @@ To run StateForce locally:
 
 ## 📖 Documentation
 
-For full technical documentation, visit the [StateForce Wiki](https://github.com/martinmendozadev/StateForce/wiki), including:
+For full technical documentation, please visit the [StateForce Wiki](https://github.com/martinmendozadev/StateForce/wiki), which includes:
 
-- 🧩 [Entity Model Overview](https://github.com/martinmendozadev/StateForce/wiki/DataBase)
-- ✨ Features and Modules
+### **Core Topics**
+
+- 🏠 [Home](https://github.com/martinmendozadev/StateForce/wiki/Home)
+- 🛠 [Architecture Diagram](https://github.com/martinmendozadev/StateForce/wiki/Architecture-Diagram)
+- 🧩 [DataBase](https://github.com/martinmendozadev/StateForce/wiki/DataBase)
 - 🚦 [Roles Definition](https://github.com/martinmendozadev/StateForce/wiki/Roles-Definition)
-- 🚀 [System Architecture](https://github.com/martinmendozadev/StateForce/wiki/System-Architecture)
+- ✨ [System Architecture](https://github.com/martinmendozadev/StateForce/wiki/System-Architecture)
 - 📝 [Testing Guide](https://github.com/martinmendozadev/StateForce/wiki/Testing-Guide)
-- 🧑‍💻 [Code Style Guide](https://github.com/martinmendozadev/StateForce/wiki/Style-Guide)
+- 👤 [Users Flow](https://github.com/martinmendozadev/StateForce/wiki/Users-Flow)
+- 🎨 [Style Guide](https://github.com/martinmendozadev/StateForce/wiki/Style-Guide)
 
 ---
 
@@ -166,6 +171,8 @@ We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) and
 - Open issues for bugs or feature requests.
 - Fork the repo and submit a pull request for improvements.
 
+---
+
 ## 🤝 Support
 
 If you run into issues or have questions:
@@ -173,6 +180,8 @@ If you run into issues or have questions:
 📬 **[martinmendozadev@gmail.com](mailto:martinmendozadev@gmail.com)**
 
 We welcome contributions and feedback to improve StateForce for emergency services everywhere.
+
+---
 
 ## 🌐 Internationalization
 
@@ -186,6 +195,8 @@ StateForce currently supports Spanish and English. The interface language is pri
 - Inspired by the needs of emergency services professionals.
 - Built with Ruby on Rails, Hotwire, and the open source community.
 
+---
+
 ## 📝 License
 
-This project is licensed under the terms of the [MIT License](LICENSE).
+This project is licensed under the terms of the [Apache License 2.0](LICENSE).
