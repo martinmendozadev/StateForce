@@ -1,8 +1,8 @@
 require "test_helper"
 
 class ApplicationJobTest < ActiveJob::TestCase
-  test "job class is defined" do
-    assert ApplicationJob.new.is_a?(ApplicationJob)
+  test "job class is defined and inherits from ActiveJob::Base" do
+    assert ApplicationJob < ActiveJob::Base
   end
 
   test "job is enqueued successfully" do
