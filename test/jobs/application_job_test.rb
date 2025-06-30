@@ -22,10 +22,16 @@ class ApplicationJobTest < ActiveJob::TestCase
   end
 
   test "job logs arguments when performed" do
+    log_output = StringIO.new
+    Rails.logger = Logger.new(log_output)
+
     perform_enqueued_jobs do
-      assert_logs(/ApplicationJob performed with arguments: \[{:foo=>"bar"}\]/) do
-        ApplicationJob.perform_later({ foo: "bar" })
-      end
+      ApplicationJob.perform_later({ foo: "bar" })
     end
+
+    log_output.rewind
+    assert_match(/ApplicationJob performed with arguments: \[\{foo: \"bar\"\}\]/, log_output.read)
+  ensure
+    Rails.logger = ActiveSupport::Logger.new(STDOUT) # Restaurar el logger original
   end
 end
