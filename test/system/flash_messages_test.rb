@@ -10,7 +10,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    log_out
+    log_out @user
   end
 
   test "flash message appears and disappears after X seconds" do

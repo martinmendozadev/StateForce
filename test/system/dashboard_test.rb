@@ -9,7 +9,7 @@ class DashboardTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    log_out
+    log_out @user
   end
 
   test "dashboard shows user email and logout button" do

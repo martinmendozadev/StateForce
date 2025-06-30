@@ -14,7 +14,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    log_out
+    log_out @user
   end
 
   test "user can access the sign-up page" do
