@@ -10,7 +10,7 @@ class SignInTest < ActionDispatch::SystemTestCase
   end
 
   def teardown
-    log_out
+    log_out @user
   end
 
   test "renders the sign-in page" do
