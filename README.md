@@ -55,14 +55,6 @@ Visit [stateforce.mx](http://localhost:3000) and log in
 
 ---
 
-## ⚡ Quickstart
-
-Want to try StateForce right now?
-
-Visit [stateforce.mx](http://localhost:3000) and log in
-
----
-
 ## 🛠 Tech Stack
 
 - **Ruby 3.4.5** – Elegant, powerful backend language.
@@ -180,7 +172,6 @@ We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) and
 - Fork the repo and submit a pull request for improvements.
 
 ---
-
 
 ## 🤝 Support
 
