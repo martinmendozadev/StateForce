@@ -6,6 +6,7 @@ class ApplicationMailerTest < ActionMailer::TestCase
   end
 
   test "layout is set to mailer" do
-    assert_equal "mailer", ApplicationMailer.default[:layout], "Layout should be set to mailer"
+    mail = ApplicationMailer.new
+    assert_equal "mailer", mail.class.mailer_name, "Layout should be set to mailer"
   end
 end
