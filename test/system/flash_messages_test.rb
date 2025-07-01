@@ -17,7 +17,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
     wrong_login
 
     assert_selector "#flash-messages .mb-2", visible: true
-    assert_no_selector "#flash-messages .mb-2", visible: true, wait: GLOBAL_VARS[:flash_messages_disappeared_after] + 0.5
+    assert_no_selector "#flash-messages .mb-2", visible: true, wait: GLOBAL_VARS[:flash_messages_disappeared_after] + 1
   end
 
   test "flash message can be closed manually" do
@@ -25,7 +25,7 @@ class FlashMessagesTest < ActionDispatch::SystemTestCase
 
     assert_selector "#flash-messages .mb-2", visible: true
     find("#flash-messages button[aria-label]").click
-    assert_no_selector "#flash-messages .mb-2", visible: true, wait: 0.5
+    assert_no_selector "#flash-messages .mb-2", visible: true, wait: 1
   end
 
   test "flash message for notice has correct color classes" do

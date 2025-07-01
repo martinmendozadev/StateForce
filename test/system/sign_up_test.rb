@@ -13,10 +13,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     visit new_user_registration_path
   end
 
-  def teardown
-    log_out @user
-  end
-
   test "user can access the sign-up page" do
     assert_selector "h2", text: I18n.t("devise.registrations.sign_up")
   end
@@ -60,6 +56,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("devise.registrations.sign_up_button")
 
     assert_current_path users_instructions_path
+    log_out User.new(@user)
   end
 
   test "user can sign up with Google" do
@@ -69,5 +66,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     assert_current_path dashboard_path
     assert_text @user[:email]
+    log_out User.new(@user)
   end
 end
