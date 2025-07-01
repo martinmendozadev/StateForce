@@ -5,7 +5,7 @@ require "test_helper"
 class DashboardTest < ActionDispatch::SystemTestCase
   def setup
     @user = users(:user_one)
-    sign_in @user
+    log_in @user
   end
 
   def teardown
