@@ -56,16 +56,17 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("devise.registrations.sign_up_button")
 
     assert_current_path users_instructions_path
+
     log_out User.new(@user)
   end
 
   test "user can sign up with Google" do
     mock_google_auth(email: @user[:email])
-    visit new_user_registration_path
     click_on I18n.t("devise.providers.google")
 
     assert_current_path dashboard_path
     assert_text @user[:email]
+
     log_out User.new(@user)
   end
 end
