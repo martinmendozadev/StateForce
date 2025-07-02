@@ -59,7 +59,10 @@ module ActiveSupport
     end
 
     def log_out(user)
-      sign_out user
+      if !integration_test?
+        sign_out user
+      end
+
       logout user
       Warden.test_reset!
     end
