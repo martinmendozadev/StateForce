@@ -55,6 +55,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   test "user can sign up with email and password successfully" do
+    log_out @user
+
     fill_in I18n.t("devise.registrations.email"), with: @user[:email]
     fill_in I18n.t("devise.registrations.password"), with: @user[:password]
     fill_in I18n.t("devise.registrations.password_confirmation"), with: @user[:password]
@@ -64,6 +66,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   test "user can sign up with Google" do
+    log_out @user
+
     mock_google_auth(email: @user[:email])
     click_on I18n.t("devise.providers.google")
 
