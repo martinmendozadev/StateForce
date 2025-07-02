@@ -54,14 +54,13 @@ module ActiveSupport
       if integration_test?
         login_as(user, scope: :user)
       else
-        sign_in(user)
+        sign_in user
       end
     end
 
     def log_out(user = nil)
-      if integration_test?
+      if integration_test? || self.is_a?(ActionDispatch::SystemTestCase)
         logout(user)
-      elsif self.is_a?(ActionDispatch::SystemTestCase)
         Warden.test_reset!
       else
         sign_out(user)

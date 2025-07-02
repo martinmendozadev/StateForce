@@ -9,6 +9,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       password: Faker::Internet.password(min_length: 8, max_length: 20),
       email: Faker::Internet.email
     }
+    log_out @user
 
     visit new_user_registration_path
   end
@@ -54,6 +55,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   test "user can sign up with email and password successfully" do
+    log_out @user
+
     fill_in I18n.t("devise.registrations.email"), with: @user[:email]
     fill_in I18n.t("devise.registrations.password"), with: @user[:password]
     fill_in I18n.t("devise.registrations.password_confirmation"), with: @user[:password]
@@ -63,8 +66,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   test "user can sign up with Google" do
+    log_out @user
+
     mock_google_auth(email: @user[:email])
-    visit new_user_registration_path
     click_on I18n.t("devise.providers.google")
 
     assert_current_path dashboard_path

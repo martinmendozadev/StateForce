@@ -5,6 +5,7 @@ require "test_helper"
 class SignInTest < ActionDispatch::SystemTestCase
   def setup
     @user = users(:user_one)
+    log_out @user
 
     visit new_user_session_path
   end
@@ -56,7 +57,6 @@ class SignInTest < ActionDispatch::SystemTestCase
 
   test "user can sign in with Google" do
     mock_google_auth(email: @user.email)
-    visit new_user_session_path
     click_on I18n.t("devise.providers.google")
 
     assert_current_path dashboard_path
