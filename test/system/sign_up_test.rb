@@ -9,8 +9,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       password: Faker::Internet.password(min_length: 8, max_length: 20),
       email: Faker::Internet.email
     }
+    log_out @user
 
     visit new_user_registration_path
+  end
+
+  def teardown
+    log_out @user
   end
 
   test "user can access the sign-up page" do
@@ -56,8 +61,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("devise.registrations.sign_up_button")
 
     assert_current_path users_instructions_path
-
-    log_out User.new(@user)
   end
 
   test "user can sign up with Google" do
@@ -66,7 +69,5 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     assert_current_path dashboard_path
     assert_text @user[:email]
-
-    log_out User.new(@user)
   end
 end
