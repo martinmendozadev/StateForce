@@ -59,9 +59,7 @@ module ActiveSupport
     end
 
     def log_out(user = nil)
-      if integration_test?
-        logout(user)
-      elsif self.is_a?(ActionDispatch::SystemTestCase)
+      if integration_test? || self.is_a?(ActionDispatch::SystemTestCase)
         logout(user)
         Warden.test_reset!
       else
