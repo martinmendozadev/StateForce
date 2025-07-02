@@ -5,6 +5,7 @@ require "test_helper"
 class FlashMessagesTest < ActionDispatch::SystemTestCase
   def setup
     @user = users(:user_one)
+    log_out @user
 
     visit new_user_session_path
   end

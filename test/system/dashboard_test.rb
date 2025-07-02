@@ -5,6 +5,8 @@ require "test_helper"
 class DashboardTest < ActionDispatch::SystemTestCase
   def setup
     @user = users(:user_one)
+
+    log_out @user
     log_in @user
   end
 
