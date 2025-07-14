@@ -78,4 +78,4 @@ end
 
 gem "pundit", "~> 2.5"
 
-gem "simplecov-cobertura", "~> 2.1", group: :test
+gem "simplecov-cobertura", "~> 3.0", group: :test
