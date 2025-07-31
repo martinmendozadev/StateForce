@@ -36,8 +36,4 @@ class UserTest < ActiveSupport::TestCase
   test "user has a valid encrypted password" do
     assert @user.encrypted_password.present?
   end
-
-  test "user has a valid role" do
-    assert_includes User.roles.keys, @user.role
-  end
 end
