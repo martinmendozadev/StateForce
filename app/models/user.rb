@@ -6,15 +6,17 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
 
+  ## Relationships
+  belongs_to :avatar, class_name: "Attachment", optional: true
+
+  ## Enums
+  enum :provider, google_oauth2: 0
+
   ## Validations
   validates :email, presence: true, length: { maximum: 150 }, uniqueness: true
   validates :name,  length: { maximum: 75 }, allow_blank: true
   # Ensure password is required only when setting or updating it, and skip for provider-based users
   validates :password, presence: true, if: -> { new_record? || (password.present? && provider.blank?) }, unless: -> { provider.present? && uid.present? }
-
-
-  ## Enums
-  enum :provider, google_oauth2: 0
 
 
   def password_required?
@@ -36,7 +38,6 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.avatar_url = auth.info.image
       user.confirmed_at = Time.current
     end
   end
