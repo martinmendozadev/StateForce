@@ -2,7 +2,7 @@ require "test_helper"
 
 class ApplicationPolicyTest < ActiveSupport::TestCase
   def setup
-    @user = users(:user_one)
+    @user = users(:one)
     @record = Object.new # Replace with a valid record object if needed
     @policy = ApplicationPolicy.new(@user, @record)
   end

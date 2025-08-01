@@ -4,7 +4,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = users(:user_one)
+    @user = users(:one)
     @unconfirmed_user = users(:user_three)
   end
 

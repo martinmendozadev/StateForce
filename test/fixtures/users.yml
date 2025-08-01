@@ -5,7 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 
-user_one:
+one:
   created_at: <%= 3.days.ago %>
   confirmed_at: <%= 2.days.ago %>
   email: user1@stateforce.mx

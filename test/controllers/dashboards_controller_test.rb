@@ -4,7 +4,7 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   def setup
-    @user = users(:user_one)
+    @user = users(:one)
     sign_in @user
   end
 
