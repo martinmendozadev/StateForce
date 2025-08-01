@@ -10,9 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_24_032006) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_31_194231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "file_type", ["certification", "document", "image", "other", "video"]
+  create_enum "visibility", ["public", "private", "restricted"]
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "content_type", limit: 25
+    t.text "description"
+    t.string "file_name", limit: 75
+    t.bigint "file_size"
+    t.enum "file_type", default: "other", null: false, enum_type: "file_type"
+    t.string "file_url", null: false
+    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
+    t.bigint "uploader_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["uploader_user_id"], name: "index_attachments_on_uploader_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", limit: 150, default: "", null: false
@@ -28,13 +48,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_24_032006) do
     t.boolean "active", default: true
     t.string "uid"
     t.integer "provider", limit: 2
-    t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "avatar_id"
+    t.index ["avatar_id"], name: "index_users_on_avatar_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid"], name: "index_users_on_uid"
   end
+
+  add_foreign_key "attachments", "users", column: "uploader_user_id"
+  add_foreign_key "users", "attachments", column: "avatar_id"
 end
