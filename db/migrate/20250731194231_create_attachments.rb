@@ -1,13 +1,7 @@
 class CreateAttachments < ActiveRecord::Migration[8.0]
-  def up
-    # Postgres native ENUMs
-    execute <<-SQL
-      CREATE TYPE file_type AS ENUM ('certification', 'document', 'image', 'other', 'video');
-    SQL
-
-    execute <<-SQL
-      CREATE TYPE visibility AS ENUM ('public', 'private', 'restricted');
-    SQL
+  def change
+    create_enum :file_type, %w[certification document image other video]
+    create_enum :visibility, %w[public private restricted]
 
     create_table :attachments do |t|
       ## Custom fields
@@ -16,9 +10,9 @@ class CreateAttachments < ActiveRecord::Migration[8.0]
       t.string  :file_name, limit: 75
       t.bigint  :file_size
 
-      t.column  :file_type, :file_type, null: false, default: 'other'
-      t.string  :file_url, null: false
-      t.column  :visibility, :visibility, null: false, default: 'private'
+      t.enum :file_type, enum_type: "file_type", default: 'other', null: false
+      t.string :file_url, null: false
+      t.enum :visibility, enum_type: "visibility", default: "private", null: false
 
       ## References
       t.references :uploader_user, null: false, foreign_key: { to_table: :users }
@@ -34,18 +28,5 @@ class CreateAttachments < ActiveRecord::Migration[8.0]
       t.references :avatar, foreign_key: { to_table: :attachments }
       t.remove :avatar_url
     end
-  end
-
-  def down
-    ## Reverse the migration in case of rollback
-    change_table :users do |t|
-      t.string :avatar_url
-      t.remove_references :avatar, foreign_key: true
-    end
-
-    drop_table :attachments
-
-    execute "DROP TYPE file_type;"
-    execute "DROP TYPE visibility;"
   end
 end
