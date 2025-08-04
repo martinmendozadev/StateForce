@@ -44,6 +44,18 @@ end
   )
 end
 
+# Create fake notes
+9.times do
+  Note.create(
+    body: Faker::Lorem.paragraph(sentence_count: 3),
+    title: Faker::Lorem.sentence(word_count: 5),
+    visibility: Note.visibilities.keys.sample,
+    creator_user_id: 1,
+    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

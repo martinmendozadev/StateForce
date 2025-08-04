@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_31_194231) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_04_085356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -32,6 +32,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_194231) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["uploader_user_id"], name: "index_attachments_on_uploader_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.string "title", limit: 100, null: false
+    t.text "body", null: false
+    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
+    t.bigint "creator_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,5 +71,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_194231) do
   end
 
   add_foreign_key "attachments", "users", column: "uploader_user_id"
+  add_foreign_key "notes", "users", column: "creator_user_id"
   add_foreign_key "users", "attachments", column: "avatar_id"
 end
