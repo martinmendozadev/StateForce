@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_04_085356) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_05_073028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "postgis"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
@@ -32,6 +33,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_04_085356) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["uploader_user_id"], name: "index_attachments_on_uploader_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "address", limit: 150
+    t.text "key_name"
+    t.string "place_name", limit: 100
+    t.geography "coordinates", limit: {srid: 4326, type: "st_point", geographic: true}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
   create_table "notes", force: :cascade do |t|
