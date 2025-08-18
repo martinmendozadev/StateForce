@@ -2,6 +2,21 @@
 
 require 'faker'
 
+# Create fake locations
+9.times do
+  Location.create(
+    address: Faker::Address.full_address,
+    key_name: Faker::Address.secondary_address,
+    place_name: Faker::Address.community,
+    coordinates: RGeo::Geographic.spherical_factory(srid: 4326).point(
+      Faker::Address.longitude,
+      Faker::Address.latitude
+    ),
+    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
+  )
+end
+
 # Create fake user
 users = 9.times do
   login_google = rand(0..1)
