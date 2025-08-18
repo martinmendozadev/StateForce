@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_05_073028) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_18_070622) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -18,6 +18,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_073028) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "file_type", ["certification", "document", "image", "other", "video"]
+  create_enum "resource_status", ["available", "maintenance", "out_of_service", "unknown"]
+  create_enum "sector_type", ["public", "private", "social", "unknown"]
   create_enum "visibility", ["public", "private", "restricted"]
 
   create_table "attachments", force: :cascade do |t|
@@ -33,6 +35,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_073028) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["uploader_user_id"], name: "index_attachments_on_uploader_user_id"
+  end
+
+  create_table "institutions", force: :cascade do |t|
+    t.string "callsign", limit: 50
+    t.text "description"
+    t.string "name", limit: 150, null: false
+    t.enum "sector_type", default: "unknown", null: false, enum_type: "sector_type"
+    t.enum "status", default: "unknown", null: false, enum_type: "resource_status"
+    t.bigint "director_id"
+    t.bigint "location_id", null: false
+    t.bigint "parent_institution_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["callsign"], name: "index_institutions_on_callsign", unique: true
+    t.index ["director_id"], name: "index_institutions_on_director_id"
+    t.index ["location_id"], name: "index_institutions_on_location_id"
+    t.index ["name"], name: "index_institutions_on_name", unique: true
+    t.index ["parent_institution_id"], name: "index_institutions_on_parent_institution_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -82,6 +103,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_073028) do
   end
 
   add_foreign_key "attachments", "users", column: "uploader_user_id"
+  add_foreign_key "institutions", "institutions", column: "parent_institution_id"
+  add_foreign_key "institutions", "locations"
+  add_foreign_key "institutions", "users", column: "director_id"
   add_foreign_key "notes", "users", column: "creator_user_id"
   add_foreign_key "users", "attachments", column: "avatar_id"
 end

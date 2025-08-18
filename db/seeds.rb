@@ -71,6 +71,18 @@ end
   )
 end
 
+# Create fake institutions
+9.times do
+  Institution.create(
+    name: Faker::Company.unique.name,
+    callsign: Faker::Company.unique.ein,
+    description: Faker::Lorem.paragraph,
+    sector_type: Institution.sector_types.keys.sample,
+    status: Institution.statuses.keys.sample,
+    location: Location.order('RANDOM()').first
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
