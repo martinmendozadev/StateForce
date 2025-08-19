@@ -83,6 +83,25 @@ end
   )
 end
 
+# Create fake events
+9.times do
+  Event.create!(
+    description: Faker::Lorem.sentence,
+    ended_at: Faker::Time.forward(days: 1),
+    event_type: Event.event_types.keys.sample,
+    event_code: Faker::Alphanumeric.unique.alphanumeric(number: 10),
+    priority_level: Event.priority_levels.keys.sample,
+    people_affected: Faker::Number.between(from: 1, to: 32767),
+    reported_by_text: Faker::Lorem.sentence,
+    reported_time: Faker::Time.backward(days: 1),
+    status: Event.statuses.keys.sample,
+    location: Location.order('RANDOM()').first,
+
+    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

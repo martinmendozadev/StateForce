@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_18_070622) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_19_210743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "event_category", ["animal_rescue", "bomb_threat", "emergency", "epidemic_response", "evacuation", "fire_incident", "flood_response", "hazardous_material", "infrastructure_collapse", "medical_emergency", "missing_person", "natural_disaster", "operative", "other", "power_outage", "public_disturbance", "rescue_operation", "simulacrum", "support_request", "traffic_accident", "training", "unknown"]
+  create_enum "event_status", ["assigned", "arrived", "cancelled", "closed", "en_route", "on_scene", "pending", "resolved"]
   create_enum "file_type", ["certification", "document", "image", "other", "video"]
+  create_enum "priority_level", ["critical", "high", "low", "medium", "unknown"]
   create_enum "resource_status", ["available", "maintenance", "out_of_service", "unknown"]
   create_enum "sector_type", ["public", "private", "social", "unknown"]
   create_enum "visibility", ["public", "private", "restricted"]
@@ -35,6 +38,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_18_070622) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["uploader_user_id"], name: "index_attachments_on_uploader_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.text "description"
+    t.datetime "ended_at", precision: nil
+    t.enum "event_type", default: "emergency", null: false, enum_type: "event_category"
+    t.string "event_code", limit: 50
+    t.enum "priority_level", default: "unknown", null: false, enum_type: "priority_level"
+    t.integer "people_affected", limit: 2, default: 0
+    t.string "reported_by_text", limit: 150
+    t.datetime "reported_time", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.enum "status", default: "pending", null: false, enum_type: "event_status"
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["event_code"], name: "index_events_on_event_code", unique: true
+    t.index ["location_id"], name: "index_events_on_location_id"
   end
 
   create_table "institutions", force: :cascade do |t|
@@ -103,6 +124,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_18_070622) do
   end
 
   add_foreign_key "attachments", "users", column: "uploader_user_id"
+  add_foreign_key "events", "locations"
   add_foreign_key "institutions", "institutions", column: "parent_institution_id"
   add_foreign_key "institutions", "locations"
   add_foreign_key "institutions", "users", column: "director_id"
