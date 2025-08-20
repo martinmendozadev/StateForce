@@ -142,6 +142,14 @@ end
   )
 end
 
+10.times do
+  PhoneNumber.create!(
+    extension: Faker::PhoneNumber.extension(length: 3),
+    number: Faker::PhoneNumber.phone_number,
+    phone_type: PhoneNumber.phone_types.keys.sample
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

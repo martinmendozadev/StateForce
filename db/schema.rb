@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_20_031410) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_20_035225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_031410) do
   create_enum "event_status", ["assigned", "arrived", "cancelled", "closed", "en_route", "on_scene", "pending", "resolved"]
   create_enum "file_type", ["certification", "document", "image", "other", "video"]
   create_enum "gender", ["female", "intersex", "male", "other"]
+  create_enum "phone_type", ["home", "landline", "mobile", "office", "other", "personal", "unknown"]
   create_enum "priority_level", ["critical", "high", "low", "medium", "unknown"]
   create_enum "recurrence_rule", ["once", "daily", "weekly", "monthly", "yearly"]
   create_enum "resource_status", ["available", "maintenance", "out_of_service", "unknown"]
@@ -141,6 +142,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_031410) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["event_id"], name: "index_patients_on_event_id"
+  end
+
+  create_table "phone_numbers", force: :cascade do |t|
+    t.string "extension", limit: 3
+    t.string "number", limit: 25
+    t.enum "phone_type", default: "personal", null: false, enum_type: "phone_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
   create_table "schedule_entries", force: :cascade do |t|
