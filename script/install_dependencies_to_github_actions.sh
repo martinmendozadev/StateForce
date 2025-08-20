@@ -14,14 +14,10 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl
 sudo apt-get update
 sudo apt-get install -y google-chrome-stable
 
-# Download and install Chromedriver
-wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/137.0.7151.119/linux64/chromedriver-linux64.zip
-unzip chromedriver-linux64.zip
-sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
-sudo chmod +x /usr/local/bin/chromedriver
-rm -f chromedriver-linux64.zip
-rm -rf chromedriver-linux64
+# We intentionally do NOT install a fixed chromedriver version.
+# Selenium Manager (bundled with selenium-webdriver >= 4.6) will download a matching driver at runtime.
+# This avoids version drift between Chrome and Chromedriver in CI.
 
-# Validate installations
+# Validate Chrome installation; chromedriver may not exist yet (ignore failure).
 google-chrome --version
-chromedriver --version
+chromedriver --version || echo "Chromedriver not preinstalled; Selenium Manager will provide it at runtime."
