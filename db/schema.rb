@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_20_035225) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_20_072102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -25,7 +25,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_035225) do
   create_enum "priority_level", ["critical", "high", "low", "medium", "unknown"]
   create_enum "recurrence_rule", ["once", "daily", "weekly", "monthly", "yearly"]
   create_enum "resource_status", ["available", "maintenance", "out_of_service", "unknown"]
+  create_enum "role", ["admin", "guest", "manager", "restricted", "standard", "superadmin"]
   create_enum "sector_type", ["public", "private", "social", "unknown"]
+  create_enum "status_invite", ["active", "accepted", "cancelled", "done", "draft", "expired", "paused", "pending", "retired", "revoked", "sent", "unknown"]
   create_enum "triage_status", ["black", "green", "red", "unknown", "yellow"]
   create_enum "visibility", ["public", "private", "restricted"]
 
@@ -90,6 +92,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_035225) do
     t.index ["location_id"], name: "index_institutions_on_location_id"
     t.index ["name"], name: "index_institutions_on_name", unique: true
     t.index ["parent_institution_id"], name: "index_institutions_on_parent_institution_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string "email", limit: 150
+    t.datetime "expires_at", null: false
+    t.enum "role", null: false, enum_type: "role"
+    t.enum "status", default: "draft", null: false, enum_type: "status_invite"
+    t.string "token", null: false
+    t.datetime "used_at"
+    t.bigint "inviter_id"
+    t.bigint "institution_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["institution_id"], name: "index_invites_on_institution_id"
+    t.index ["token"], name: "index_invites_on_token", unique: true
   end
 
   create_table "locations", force: :cascade do |t|
@@ -204,6 +222,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_035225) do
   add_foreign_key "institutions", "institutions", column: "parent_institution_id"
   add_foreign_key "institutions", "locations"
   add_foreign_key "institutions", "users", column: "director_id"
+  add_foreign_key "invites", "institutions"
+  add_foreign_key "invites", "users", column: "inviter_id"
   add_foreign_key "notes", "users", column: "creator_user_id"
   add_foreign_key "patient_vitals", "patients"
   add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"

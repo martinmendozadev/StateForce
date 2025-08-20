@@ -18,7 +18,7 @@ require 'faker'
 end
 
 # Create fake user
-users = 9.times do
+9.times do
   login_google = rand(0..1)
 
   if login_google == 1
@@ -147,6 +147,18 @@ end
     extension: Faker::PhoneNumber.extension(length: 3),
     number: Faker::PhoneNumber.phone_number,
     phone_type: PhoneNumber.phone_types.keys.sample
+  )
+end
+
+10.times do
+  Invite.create!(
+    email: Faker::Internet.email,
+    expires_at: Faker::Time.forward(days: 10),
+    role: Invite.roles.keys.sample,
+    status: Invite.statuses.keys.sample,
+    token: SecureRandom.hex(16),
+    institution: Institution.order("RANDOM()").first,
+    inviter: User.order("RANDOM()").first
   )
 end
 
