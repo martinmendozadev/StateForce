@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_19_210743) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_20_015009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -20,9 +20,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_19_210743) do
   create_enum "event_category", ["animal_rescue", "bomb_threat", "emergency", "epidemic_response", "evacuation", "fire_incident", "flood_response", "hazardous_material", "infrastructure_collapse", "medical_emergency", "missing_person", "natural_disaster", "operative", "other", "power_outage", "public_disturbance", "rescue_operation", "simulacrum", "support_request", "traffic_accident", "training", "unknown"]
   create_enum "event_status", ["assigned", "arrived", "cancelled", "closed", "en_route", "on_scene", "pending", "resolved"]
   create_enum "file_type", ["certification", "document", "image", "other", "video"]
+  create_enum "gender", ["female", "intersex", "male", "other"]
   create_enum "priority_level", ["critical", "high", "low", "medium", "unknown"]
   create_enum "resource_status", ["available", "maintenance", "out_of_service", "unknown"]
   create_enum "sector_type", ["public", "private", "social", "unknown"]
+  create_enum "triage_status", ["black", "green", "red", "unknown", "yellow"]
   create_enum "visibility", ["public", "private", "restricted"]
 
   create_table "attachments", force: :cascade do |t|
@@ -98,6 +100,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_19_210743) do
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
   end
 
+  create_table "patients", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.integer "age", limit: 2, null: false
+    t.enum "gender", default: "other", null: false, enum_type: "gender"
+    t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["event_id"], name: "index_patients_on_event_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", limit: 150, default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -129,5 +143,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_19_210743) do
   add_foreign_key "institutions", "locations"
   add_foreign_key "institutions", "users", column: "director_id"
   add_foreign_key "notes", "users", column: "creator_user_id"
+  add_foreign_key "patients", "events"
   add_foreign_key "users", "attachments", column: "avatar_id"
 end

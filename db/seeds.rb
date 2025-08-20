@@ -102,6 +102,20 @@ end
   )
 end
 
+# Create fake patients
+10.times do
+  Patient.create(
+    name: Faker::Name.name,
+    age: rand(0..100),
+    gender: Patient.genders.keys.sample,
+    triage_status: Patient.triage_statuses.keys.sample,
+    event: Event.order("RANDOM()").first,
+
+    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
