@@ -133,6 +133,15 @@ end
   )
 end
 
+10.times do
+  Contact.create!(
+    email: Faker::Internet.unique.email,
+    name: Faker::Name.name,
+    radio_frequency: "#{rand(100..500)}.#{rand(100..999)} MHz",
+    channel: rand(1..10)
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
