@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_20_015009) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_20_021544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -100,6 +100,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_015009) do
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
   end
 
+  create_table "patient_vitals", force: :cascade do |t|
+    t.integer "blood_pressure_systolic", limit: 2
+    t.integer "blood_pressure_diastolic", limit: 2
+    t.integer "capillary_blood_glucose", limit: 2
+    t.jsonb "glasgow_coma_score"
+    t.integer "heart_rate", limit: 2
+    t.integer "oxygen_saturation", limit: 2
+    t.datetime "recorded_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "respiratory_rate", limit: 2
+    t.decimal "temperature", precision: 4, scale: 1
+    t.bigint "patient_id", null: false
+    t.bigint "recorded_by_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["patient_id"], name: "index_patient_vitals_on_patient_id"
+    t.index ["recorded_by_user_id"], name: "index_patient_vitals_on_recorded_by_user_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.integer "age", limit: 2, null: false
@@ -143,6 +162,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_015009) do
   add_foreign_key "institutions", "locations"
   add_foreign_key "institutions", "users", column: "director_id"
   add_foreign_key "notes", "users", column: "creator_user_id"
+  add_foreign_key "patient_vitals", "patients"
+  add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"
   add_foreign_key "patients", "events"
   add_foreign_key "users", "attachments", column: "avatar_id"
 end

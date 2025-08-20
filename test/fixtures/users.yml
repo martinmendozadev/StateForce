@@ -6,12 +6,11 @@
 #
 
 one:
-  avatar_id: 1
+  avatar: one
   created_at: <%= 3.days.ago %>
   confirmed_at: <%= 2.days.ago %>
   email: user1@stateforce.mx
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  id: 1
   name: "User 1"
   updated_at: <%= 1.days.ago %>
 
@@ -20,7 +19,6 @@ two:
   confirmed_at: <%= 2.days.ago %>
   email: user2@stateforce.mx
   encrypted_password: ""
-  id: 2
   name: "User 2"
   provider: "google_oauth2"
   uid: "1234567890"
@@ -31,7 +29,6 @@ user_three:
   confirmed_at: nil
   email: user3@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  id: 3
   name: "Last Name 3"
   updated_at: <%= 5.day.ago %>
 
@@ -40,7 +37,6 @@ admin:
   confirmed_at: <%= 2.days.ago %>
   email: admin@stateforce.mx
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  id: 4
   name: "Last Name 4"
   updated_at: <%= 1.days.ago %>
 
@@ -49,7 +45,6 @@ standard:
   confirmed_at: <%= 2.days.ago %>
   email: standard@stateforce.mx
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  id: 5
   name: "Last Name 5"
   updated_at: <%= 1.days.ago %>
 
@@ -58,6 +53,5 @@ guest:
   confirmed_at: <%= 2.days.ago %>
   email: guest@stateforce.mx
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
-  id: 6
   name: "Last Name 6"
   updated_at: <%= 1.days.ago %>

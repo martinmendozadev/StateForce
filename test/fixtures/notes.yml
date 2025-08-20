@@ -9,6 +9,6 @@ one:
   title: "Patient's Condition Update"
   body: "The patient is stable but requires monitoring for 24 hours."
   visibility: private
-  creator_user_id: 1
+  creator_user: one
   created_at: <%= Time.current %>
   updated_at: <%= Time.current %>

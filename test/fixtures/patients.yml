@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   name: "Alice Smith"
   age: 28
   gender: female
@@ -11,7 +10,6 @@ one:
   updated_at: <%= Time.current %>
 
 two:
-  id: 2
   name: "Bob Johnson"
   age: 40
   gender: male
