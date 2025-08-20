@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_20_030314) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_20_031410) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -22,6 +22,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_030314) do
   create_enum "file_type", ["certification", "document", "image", "other", "video"]
   create_enum "gender", ["female", "intersex", "male", "other"]
   create_enum "priority_level", ["critical", "high", "low", "medium", "unknown"]
+  create_enum "recurrence_rule", ["once", "daily", "weekly", "monthly", "yearly"]
   create_enum "resource_status", ["available", "maintenance", "out_of_service", "unknown"]
   create_enum "sector_type", ["public", "private", "social", "unknown"]
   create_enum "triage_status", ["black", "green", "red", "unknown", "yellow"]
@@ -142,6 +143,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_030314) do
     t.index ["event_id"], name: "index_patients_on_event_id"
   end
 
+  create_table "schedule_entries", force: :cascade do |t|
+    t.string "title", limit: 100
+    t.text "description"
+    t.interval "duration"
+    t.datetime "ends_at"
+    t.datetime "estimated_ends_at"
+    t.enum "priority_level", default: "unknown", null: false, enum_type: "priority_level"
+    t.enum "recurrence_rule", default: "once", null: false, enum_type: "recurrence_rule"
+    t.datetime "repeat_until"
+    t.datetime "scheduled_at"
+    t.enum "status", default: "pending", null: false, enum_type: "event_status"
+    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
+    t.bigint "creator_user_id", null: false
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["creator_user_id"], name: "index_schedule_entries_on_creator_user_id"
+    t.index ["event_id"], name: "index_schedule_entries_on_event_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", limit: 150, default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -176,5 +198,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_030314) do
   add_foreign_key "patient_vitals", "patients"
   add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"
   add_foreign_key "patients", "events"
+  add_foreign_key "schedule_entries", "events"
+  add_foreign_key "schedule_entries", "users", column: "creator_user_id"
   add_foreign_key "users", "attachments", column: "avatar_id"
 end
