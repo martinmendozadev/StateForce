@@ -116,6 +116,23 @@ end
   )
 end
 
+# Create fake patient vitals
+10.times do
+  PatientVital.create(
+    blood_pressure_systolic: rand(90..140),
+    blood_pressure_diastolic: rand(60..90),
+    capillary_blood_glucose: rand(70..1000),
+    glasgow_coma_score: '{"verbal_response": 4, "motor_response": 5, "eye_response": 3}',
+    heart_rate: rand(40..150),
+    oxygen_saturation: rand(75..98),
+    recorded_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    respiratory_rate: rand(8..30),
+    temperature: rand(35.5..38.5),
+    patient: Patient.order("RANDOM()").first,
+    recorded_by_user: User.order("RANDOM()").first
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
