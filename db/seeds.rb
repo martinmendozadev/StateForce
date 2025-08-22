@@ -162,6 +162,21 @@ end
   )
 end
 
+# Create fake resource categories
+resource_categories = [
+  { name: "Medical Equipment", description: "Includes all types of medical supplies and devices used in patient care." },
+  { name: "Rescue Vehicles", description: "Covers ambulances, helicopters, and other emergency response vehicles." },
+  { name: "Protective Gear", description: "Personal protective equipment such as helmets, gloves, and vests." },
+  { name: "Food & Water Supplies", description: "Essential provisions for emergency response and relief." },
+  { name: "Shelter Materials", description: "Tents, blankets, and construction materials for temporary housing." }
+]
+
+resource_categories.each do |attrs|
+  ResourceCategory.find_or_create_by!(name: attrs[:name]) do |category|
+    category.description = attrs[:description]
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
