@@ -190,6 +190,20 @@ resource_categories.each_with_index do |attrs, i|
   end
 end
 
+# Create fake resources
+10.times do
+  Resource.create(
+    name: Faker::Vehicle.model,
+    description: Faker::Vehicle.make_and_model,
+    available_units: rand(1..5),
+    total_units: rand(5..10),
+    units_identifier: Faker::Alphanumeric.alpha(number: 10),
+    institution: Institution.order("RANDOM()").first,
+    resource_type: ResourceType.order("RANDOM()").first,
+    location: Location.order("RANDOM()").first
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

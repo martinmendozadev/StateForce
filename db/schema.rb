@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_22_061926) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_22_065644) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -191,6 +191,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_061926) do
     t.index ["resource_category_id"], name: "index_resource_types_on_resource_category_id"
   end
 
+  create_table "resources", force: :cascade do |t|
+    t.string "name", limit: 150, null: false
+    t.text "description"
+    t.integer "available_units", default: 0, null: false
+    t.integer "total_units", default: 0, null: false
+    t.string "units_identifier", limit: 50
+    t.bigint "icon_id"
+    t.bigint "institution_id", null: false
+    t.bigint "location_id", null: false
+    t.bigint "resource_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["icon_id"], name: "index_resources_on_icon_id"
+    t.index ["institution_id"], name: "index_resources_on_institution_id"
+    t.index ["location_id"], name: "index_resources_on_location_id"
+    t.index ["name", "institution_id"], name: "index_resources_on_name_and_institution_id", unique: true
+    t.index ["resource_type_id"], name: "index_resources_on_resource_type_id"
+  end
+
   create_table "schedule_entries", force: :cascade do |t|
     t.string "title", limit: 100
     t.text "description"
@@ -249,6 +269,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_061926) do
   add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"
   add_foreign_key "patients", "events"
   add_foreign_key "resource_types", "resource_categories"
+  add_foreign_key "resources", "attachments", column: "icon_id"
+  add_foreign_key "resources", "institutions"
+  add_foreign_key "resources", "locations"
+  add_foreign_key "resources", "resource_types"
   add_foreign_key "schedule_entries", "events"
   add_foreign_key "schedule_entries", "users", column: "creator_user_id"
   add_foreign_key "users", "attachments", column: "avatar_id"
