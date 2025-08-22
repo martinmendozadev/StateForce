@@ -171,9 +171,22 @@ resource_categories = [
   { name: "Shelter Materials", description: "Tents, blankets, and construction materials for temporary housing." }
 ]
 
-resource_categories.each do |attrs|
+resource_types = [
+  { name: "Ambulance", description: "Emergency vehicles equipped for patient transport.", category: "Rescue Vehicles" },
+  { name: "Fire Truck", description: "Specialized vehicles for firefighting operations.", category: "Rescue Vehicles" },
+  { name: "Helicopter", description: "Airborne vehicles for rapid emergency response.", category: "Rescue Vehicles" },
+  { name: "Defibrillator", description: "Medical equipment for cardiac emergencies.", category: "Medical Equipment" },
+  { name: "Ventilator", description: "Critical equipment for respiratory support.", category: "Medical Equipment" }
+]
+
+resource_categories.each_with_index do |attrs, i|
   ResourceCategory.find_or_create_by!(name: attrs[:name]) do |category|
     category.description = attrs[:description]
+    ResourceType.create!(
+      name: resource_types[i][:name],
+      description: resource_types[i][:description],
+      resource_category: category
+    )
   end
 end
 

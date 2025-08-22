@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_22_060922) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_22_061926) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -180,6 +180,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_060922) do
     t.index ["name"], name: "index_resource_categories_on_name", unique: true
   end
 
+  create_table "resource_types", force: :cascade do |t|
+    t.string "name", limit: 150, null: false
+    t.text "description"
+    t.bigint "resource_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["name", "resource_category_id"], name: "index_resource_types_on_name_and_resource_category_id", unique: true
+    t.index ["resource_category_id"], name: "index_resource_types_on_resource_category_id"
+  end
+
   create_table "schedule_entries", force: :cascade do |t|
     t.string "title", limit: 100
     t.text "description"
@@ -237,6 +248,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_060922) do
   add_foreign_key "patient_vitals", "patients"
   add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"
   add_foreign_key "patients", "events"
+  add_foreign_key "resource_types", "resource_categories"
   add_foreign_key "schedule_entries", "events"
   add_foreign_key "schedule_entries", "users", column: "creator_user_id"
   add_foreign_key "users", "attachments", column: "avatar_id"
