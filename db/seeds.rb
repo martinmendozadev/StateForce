@@ -204,6 +204,21 @@ end
   )
 end
 
+# Create fake patient transfers
+10.times do
+  PatientTransfer.create(
+    arrival_time: Faker::Time.forward(days: 1),
+    departure_time: Faker::Time.backward(days: 1),
+    status: PatientTransfer.statuses.keys.sample,
+    accepted_by_user: User.order("RANDOM()").first,
+    destination_institution: Institution.order("RANDOM()").first,
+    event: Event.order("RANDOM()").first,
+    patient: Patient.order("RANDOM()").first,
+    requesting_user: User.order("RANDOM()").first,
+    transport_resource: Resource.order("RANDOM()").first
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

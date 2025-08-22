@@ -1,0 +1,22 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  arrival_time: <%= 2.hours.from_now %>
+  departure_time: <%= 1.hour.from_now %>
+  status: pending
+  accepted_by_user: one
+  destination_institution: one
+  event: one
+  patient: one
+  requesting_user: two
+  transport_resource: one
+
+two:
+  arrival_time: <%= 3.hours.from_now %>
+  departure_time: <%= 2.hours.from_now %>
+  accepted_by_user: two
+  destination_institution: two
+  event: one
+  patient: two
+  requesting_user: one
+  transport_resource: two

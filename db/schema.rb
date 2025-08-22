@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_22_065644) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_22_071437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -129,6 +129,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_065644) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
+  end
+
+  create_table "patient_transfers", force: :cascade do |t|
+    t.datetime "arrival_time", precision: nil
+    t.datetime "departure_time", precision: nil
+    t.enum "status", default: "pending", null: false, enum_type: "event_status"
+    t.bigint "accepted_by_user_id", null: false
+    t.bigint "destination_institution_id", null: false
+    t.bigint "event_id", null: false
+    t.bigint "patient_id", null: false
+    t.bigint "requesting_user_id", null: false
+    t.bigint "transport_resource_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["accepted_by_user_id"], name: "index_patient_transfers_on_accepted_by_user_id"
+    t.index ["destination_institution_id"], name: "index_patient_transfers_on_destination_institution_id"
+    t.index ["event_id"], name: "index_patient_transfers_on_event_id"
+    t.index ["patient_id"], name: "index_patient_transfers_on_patient_id"
+    t.index ["requesting_user_id"], name: "index_patient_transfers_on_requesting_user_id"
+    t.index ["transport_resource_id"], name: "index_patient_transfers_on_transport_resource_id"
   end
 
   create_table "patient_vitals", force: :cascade do |t|
@@ -265,6 +286,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_065644) do
   add_foreign_key "invites", "institutions"
   add_foreign_key "invites", "users", column: "inviter_id"
   add_foreign_key "notes", "users", column: "creator_user_id"
+  add_foreign_key "patient_transfers", "events"
+  add_foreign_key "patient_transfers", "institutions", column: "destination_institution_id"
+  add_foreign_key "patient_transfers", "patients"
+  add_foreign_key "patient_transfers", "resources", column: "transport_resource_id"
+  add_foreign_key "patient_transfers", "users", column: "accepted_by_user_id"
+  add_foreign_key "patient_transfers", "users", column: "requesting_user_id"
   add_foreign_key "patient_vitals", "patients"
   add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"
   add_foreign_key "patients", "events"
