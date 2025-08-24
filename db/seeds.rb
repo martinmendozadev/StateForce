@@ -244,6 +244,18 @@ end
   )
 end
 
+# Create fake medical center profiles
+10.times do
+  MedicalCenterProfile.create(
+    operational_unit: OperationalUnit.order("RANDOM()").first,
+    external_pharmacy_available: [ true, false ].sample,
+    internal_pharmacy_available: [ true, false ].sample,
+    level: MedicalCenterProfile.levels.keys.sample,
+    operating_rooms_total: rand(1..5),
+    operating_rooms_available: rand(1..5)
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
