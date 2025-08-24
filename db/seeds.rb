@@ -266,6 +266,15 @@ end
   )
 end
 
+# Create user callsigns
+3.times do
+  UserCallsign.create!(
+    callsign: Faker::Alphanumeric.alpha(number: 6).upcase,
+    user: User.order("RANDOM()").first,
+    institution: Institution.order("RANDOM()").first
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

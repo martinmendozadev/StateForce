@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_041417) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_042432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -309,6 +309,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_041417) do
     t.index ["event_id"], name: "index_schedule_entries_on_event_id"
   end
 
+  create_table "user_callsigns", force: :cascade do |t|
+    t.string "callsign", limit: 50, null: false
+    t.bigint "institution_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["callsign", "institution_id"], name: "idx_unique_callsign_per_institution", unique: true
+    t.index ["institution_id"], name: "index_user_callsigns_on_institution_id"
+    t.index ["user_id"], name: "index_user_callsigns_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", limit: 150, default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -364,5 +376,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_041417) do
   add_foreign_key "resources", "resource_types"
   add_foreign_key "schedule_entries", "events"
   add_foreign_key "schedule_entries", "users", column: "creator_user_id"
+  add_foreign_key "user_callsigns", "institutions"
+  add_foreign_key "user_callsigns", "users"
   add_foreign_key "users", "attachments", column: "avatar_id"
 end
