@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_025331) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_032430) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_025331) do
   create_enum "entity_names", ["contacts", "events", "resources", "user", "patients", "institutions", "attachments", "schedule_entries", "phone_numbers", "invites", "resource_categories", "resource_types", "patient_transfers", "audit_logs", "unknown"]
   create_enum "event_category", ["animal_rescue", "bomb_threat", "emergency", "epidemic_response", "evacuation", "fire_incident", "flood_response", "hazardous_material", "infrastructure_collapse", "medical_emergency", "missing_person", "natural_disaster", "operative", "other", "power_outage", "public_disturbance", "rescue_operation", "simulacrum", "support_request", "traffic_accident", "training", "unknown"]
   create_enum "event_status", ["assigned", "arrived", "cancelled", "closed", "en_route", "on_scene", "pending", "resolved"]
+  create_enum "facility_type", ["hospital", "clinic", "rescue_base", "command_center", "other"]
   create_enum "file_type", ["certification", "document", "image", "other", "video"]
   create_enum "gender", ["female", "intersex", "male", "other"]
   create_enum "phone_type", ["home", "landline", "mobile", "office", "other", "personal", "unknown"]
@@ -142,6 +143,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_025331) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
+  end
+
+  create_table "operational_units", force: :cascade do |t|
+    t.text "coverage"
+    t.string "name", limit: 150, null: false
+    t.enum "facility_type", null: false, enum_type: "facility_type"
+    t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
+    t.bigint "on_charge_shift_user_id"
+    t.bigint "parent_institution_id", null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["location_id"], name: "index_operational_units_on_location_id"
+    t.index ["on_charge_shift_user_id"], name: "index_operational_units_on_on_charge_shift_user_id"
+    t.index ["parent_institution_id"], name: "index_operational_units_on_parent_institution_id"
   end
 
   create_table "patient_transfers", force: :cascade do |t|
@@ -300,6 +317,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_025331) do
   add_foreign_key "invites", "institutions"
   add_foreign_key "invites", "users", column: "inviter_id"
   add_foreign_key "notes", "users", column: "creator_user_id"
+  add_foreign_key "operational_units", "institutions", column: "parent_institution_id"
+  add_foreign_key "operational_units", "locations"
+  add_foreign_key "operational_units", "users", column: "on_charge_shift_user_id"
   add_foreign_key "patient_transfers", "events"
   add_foreign_key "patient_transfers", "institutions", column: "destination_institution_id"
   add_foreign_key "patient_transfers", "patients"

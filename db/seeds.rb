@@ -231,6 +231,19 @@ end
   )
 end
 
+# Create fake operational units
+10.times do
+  OperationalUnit.create(
+    coverage: Faker::Lorem.paragraph,
+    name: Faker::Company.name,
+    parent_institution: Institution.order("RANDOM()").first,
+    location: Location.order("RANDOM()").first,
+    on_charge_shift_user: User.order("RANDOM()").first,
+    triage_status: OperationalUnit.triage_statuses.keys.sample,
+    facility_type: OperationalUnit.facility_types.keys.sample
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
