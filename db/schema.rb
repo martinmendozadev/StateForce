@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_203635) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_210239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -341,6 +341,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_203635) do
     t.index ["user_id"], name: "index_user_callsigns_on_user_id"
   end
 
+  create_table "user_competencies", primary_key: ["user_id", "competency_id"], force: :cascade do |t|
+    t.date "expiry_date"
+    t.bigint "user_id", null: false
+    t.bigint "competency_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["competency_id"], name: "index_user_competencies_on_competency_id"
+    t.index ["user_id"], name: "index_user_competencies_on_user_id"
+  end
+
   create_table "user_institutions", primary_key: ["user_id", "institution_id"], force: :cascade do |t|
     t.string "position", limit: 50, default: "member"
     t.enum "role", default: "guest", null: false, enum_type: "role"
@@ -412,6 +423,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_203635) do
   add_foreign_key "schedule_entries", "users", column: "creator_user_id"
   add_foreign_key "user_callsigns", "institutions"
   add_foreign_key "user_callsigns", "users"
+  add_foreign_key "user_competencies", "competencies"
+  add_foreign_key "user_competencies", "users"
   add_foreign_key "user_institutions", "institutions"
   add_foreign_key "user_institutions", "users"
   add_foreign_key "users", "attachments", column: "avatar_id"
