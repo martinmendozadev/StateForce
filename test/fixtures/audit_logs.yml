@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  action: created
+  entity_id: 1
+  entity_name: user
+  new_value: '{"email": "user@example.com", "role": "standard"}'
+  old_value: null
+  user: one
+  created_at: <%= Time.current %>
+
+two:
+  action: updated
+  entity_id: 2
+  entity_name: patients
+  new_value: '{"status": "active"}'
+  old_value: '{"status": "inactive"}'
+  user: two
+  created_at: <%= Time.current %>

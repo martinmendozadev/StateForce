@@ -219,6 +219,18 @@ end
   )
 end
 
+# Create fake audit logs
+10.times do
+  AuditLog.create(
+    action: AuditLog.actions.keys.sample,
+    entity_id: rand(1..10),
+    entity_name: AuditLog.entity_names.keys.sample,
+    new_value: Faker::Json.shallow_json,
+    old_value: Faker::Json.shallow_json,
+    user: User.order("RANDOM()").first
+  )
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
