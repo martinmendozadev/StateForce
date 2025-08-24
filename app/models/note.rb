@@ -1,6 +1,9 @@
 class Note < ApplicationRecord
    belongs_to :creator_user, class_name: "User"
 
+  has_many :operational_unit_notes, dependent: :destroy
+  has_many :operational_units, through: :operational_unit_notes
+
   enum :visibility, {
     public: "public",
     private: "private",

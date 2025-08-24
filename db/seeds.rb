@@ -316,6 +316,14 @@ end
   end
 end
 
+# Create operational unit notes
+10.times do
+  OperationalUnitNote.find_or_create_by!(operational_unit: OperationalUnit.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |oun|
+    oun.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+    oun.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

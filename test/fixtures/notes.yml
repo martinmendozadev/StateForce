@@ -12,3 +12,12 @@ one:
   creator_user: one
   created_at: <%= Time.current %>
   updated_at: <%= Time.current %>
+
+two:
+  id: 2
+  title: "Medication Change"
+  body: "The patient's medication has been changed to include a new antibiotic."
+  visibility: public
+  creator_user: two
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

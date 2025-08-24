@@ -4,6 +4,9 @@ class OperationalUnit < ApplicationRecord
   belongs_to :parent_institution, class_name: "Institution"
   belongs_to :on_charge_shift_user, class_name: "User", optional: true
 
+  has_many :operational_unit_notes, dependent: :destroy
+  has_many :notes, through: :operational_unit_notes
+
   # Enums
   enum :triage_status, {
     black: "black",
