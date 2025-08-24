@@ -6,12 +6,12 @@
 #
 one:
   operational_unit: one
-  note_id: 1
+  note: one
   created_at: <%= 1.day.ago %>
   updated_at: <%= 1.day.ago %>
 
 two:
   operational_unit: one
-  note_id: 2
+  note: two
   created_at: <%= 1.day.ago %>
   updated_at: <%= 1.day.ago %>

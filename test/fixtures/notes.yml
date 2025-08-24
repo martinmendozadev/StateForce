@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
   title: "Patient's Condition Update"
   body: "The patient is stable but requires monitoring for 24 hours."
   visibility: private
@@ -14,7 +13,6 @@ one:
   updated_at: <%= Time.current %>
 
 two:
-  id: 2
   title: "Medication Change"
   body: "The patient's medication has been changed to include a new antibiotic."
   visibility: public
