@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_064132) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_064919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -71,6 +71,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_064132) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["operational_unit_id"], name: "index_bed_inventories_on_operational_unit_id"
+  end
+
+  create_table "competencies", force: :cascade do |t|
+    t.enum "level", default: "unknown", null: false, enum_type: "proficiency_level"
+    t.bigint "specialty_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["specialty_id"], name: "index_competencies_on_specialty_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -360,6 +369,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_064132) do
   add_foreign_key "attachments", "users", column: "uploader_user_id"
   add_foreign_key "audit_logs", "users"
   add_foreign_key "bed_inventories", "operational_units"
+  add_foreign_key "competencies", "specialties"
   add_foreign_key "events", "locations"
   add_foreign_key "institutions", "institutions", column: "parent_institution_id"
   add_foreign_key "institutions", "locations"

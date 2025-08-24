@@ -277,15 +277,27 @@ end
 
 # Create specialties
 specialties = [
-  { name: "Cardiology", description: "Specializes in diagnosing and treating heart conditions.", code: "CARD-001" },
-  { name: "Pediatrics", description: "Focuses on the medical care of infants, children, and adolescents.", code: "PED-005" }
+  { id: 1, name: "Cardiology", description: "Specializes in diagnosing and treating heart conditions.", code: "CARD-001" },
+  { id: 2, name: "Pediatrics", description: "Focuses on the medical care of infants, children, and adolescents.", code: "PED-005" }
 ]
 
 specialties.each do |attrs|
   Specialty.find_or_create_by!(name: attrs[:name]) do |specialty|
     specialty.description = attrs[:description]
     specialty.code = attrs[:code]
+    specialty.id = attrs[:id]
   end
+end
+
+# Create competencies
+competencies = [
+  { specialty: specialties[0], level: "basic" },
+  { specialty: specialties[0], level: "advanced" },
+  { specialty: specialties[1], level: "basic" }
+]
+
+competencies.each do |attrs|
+  Competency.find_or_create_by!(specialty_id: attrs[:specialty][:id], level: attrs[:level])
 end
 
 # Default user config to Development
