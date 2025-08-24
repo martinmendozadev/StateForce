@@ -4,6 +4,9 @@ class Institution < ApplicationRecord
   belongs_to :director, class_name: "User", optional: true
   belongs_to :parent_institution, class_name: "Institution", optional: true
 
+  has_many :event_institutions, dependent: :destroy
+  has_many :events, through: :event_institutions
+
   ## Enums
   enum :sector_type, {
     public: "public",

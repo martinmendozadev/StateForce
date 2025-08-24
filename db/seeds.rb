@@ -324,6 +324,13 @@ end
   end
 end
 
+# Create event institutions
+10.times do
+  EventInstitution.find_or_create_by!(event: Event.order("RANDOM()").first, institution: Institution.order("RANDOM()").first) do |ei|
+    ei.assigned_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

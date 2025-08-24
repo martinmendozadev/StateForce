@@ -2,6 +2,9 @@ class Event < ApplicationRecord
   ## Relationships
   belongs_to :location, optional: true
 
+  has_many :event_institutions, dependent: :destroy
+  has_many :institutions, through: :event_institutions
+
   ## Enums
   enum :event_type, {
     animal_rescue: "animal_rescue",
