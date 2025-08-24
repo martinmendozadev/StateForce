@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_032430) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_035834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_032430) do
   create_enum "gender", ["female", "intersex", "male", "other"]
   create_enum "phone_type", ["home", "landline", "mobile", "office", "other", "personal", "unknown"]
   create_enum "priority_level", ["critical", "high", "low", "medium", "unknown"]
+  create_enum "proficiency_level", ["advanced", "basic", "medium", "unknown"]
   create_enum "recurrence_rule", ["once", "daily", "weekly", "monthly", "yearly"]
   create_enum "resource_status", ["available", "maintenance", "out_of_service", "unknown"]
   create_enum "role", ["admin", "guest", "manager", "restricted", "standard", "superadmin"]
@@ -132,6 +133,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_032430) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+  end
+
+  create_table "medical_center_profiles", force: :cascade do |t|
+    t.boolean "external_pharmacy_available", default: false
+    t.boolean "internal_pharmacy_available", default: false
+    t.enum "level", default: "unknown", null: false, enum_type: "proficiency_level"
+    t.integer "operating_rooms_total", limit: 2, default: 0, null: false
+    t.integer "operating_rooms_available", limit: 2, default: 0, null: false
+    t.bigint "operational_unit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["operational_unit_id"], name: "index_medical_center_profiles_on_operational_unit_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -316,6 +330,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_032430) do
   add_foreign_key "institutions", "users", column: "director_id"
   add_foreign_key "invites", "institutions"
   add_foreign_key "invites", "users", column: "inviter_id"
+  add_foreign_key "medical_center_profiles", "operational_units"
   add_foreign_key "notes", "users", column: "creator_user_id"
   add_foreign_key "operational_units", "institutions", column: "parent_institution_id"
   add_foreign_key "operational_units", "locations"

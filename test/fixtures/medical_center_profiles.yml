@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  operational_unit: two
+  external_pharmacy_available: true
+  internal_pharmacy_available: true
+  level: advanced
+  operating_rooms_total: 5
+  operating_rooms_available: 3
+
+two:
+  operational_unit: one
+  external_pharmacy_available: false
+  internal_pharmacy_available: true
+  level: basic
+  operating_rooms_total: 2
+  operating_rooms_available: 2
