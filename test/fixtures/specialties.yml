@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: "Cardiology"
+  description: "Specializes in diagnosing and treating heart conditions."
+  code: "CARD-001"
+
+two:
+  name: "Pediatrics"
+  description: "Focuses on the medical care of infants, children, and adolescents."
+  code: "PED-005"

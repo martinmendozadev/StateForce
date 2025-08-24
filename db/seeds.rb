@@ -275,6 +275,19 @@ end
   )
 end
 
+# Create specialties
+specialties = [
+  { name: "Cardiology", description: "Specializes in diagnosing and treating heart conditions.", code: "CARD-001" },
+  { name: "Pediatrics", description: "Focuses on the medical care of infants, children, and adolescents.", code: "PED-005" }
+]
+
+specialties.each do |attrs|
+  Specialty.find_or_create_by!(name: attrs[:name]) do |specialty|
+    specialty.description = attrs[:description]
+    specialty.code = attrs[:code]
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
