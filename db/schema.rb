@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_035834) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_041417) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_035834) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "actions", ["created", "deleted", "read", "restored", "updated"]
+  create_enum "bed_type", ["emergency", "gynecology", "icu", "internal_medicine", "isolated", "neonatal_icu", "pediatric", "trauma", "general", "maternity"]
   create_enum "entity_names", ["contacts", "events", "resources", "user", "patients", "institutions", "attachments", "schedule_entries", "phone_numbers", "invites", "resource_categories", "resource_types", "patient_transfers", "audit_logs", "unknown"]
   create_enum "event_category", ["animal_rescue", "bomb_threat", "emergency", "epidemic_response", "evacuation", "fire_incident", "flood_response", "hazardous_material", "infrastructure_collapse", "medical_emergency", "missing_person", "natural_disaster", "operative", "other", "power_outage", "public_disturbance", "rescue_operation", "simulacrum", "support_request", "traffic_accident", "training", "unknown"]
   create_enum "event_status", ["assigned", "arrived", "cancelled", "closed", "en_route", "on_scene", "pending", "resolved"]
@@ -59,6 +60,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_035834) do
     t.bigint "user_id"
     t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id"], name: "index_audit_logs_on_user_id"
+  end
+
+  create_table "bed_inventories", force: :cascade do |t|
+    t.integer "available", limit: 2, default: 0, null: false
+    t.enum "bed_type", null: false, enum_type: "bed_type"
+    t.integer "total", limit: 2, default: 0, null: false
+    t.bigint "operational_unit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["operational_unit_id"], name: "index_bed_inventories_on_operational_unit_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -324,6 +336,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_035834) do
 
   add_foreign_key "attachments", "users", column: "uploader_user_id"
   add_foreign_key "audit_logs", "users"
+  add_foreign_key "bed_inventories", "operational_units"
   add_foreign_key "events", "locations"
   add_foreign_key "institutions", "institutions", column: "parent_institution_id"
   add_foreign_key "institutions", "locations"
