@@ -300,6 +300,15 @@ competencies.each do |attrs|
   Competency.find_or_create_by!(specialty_id: attrs[:specialty][:id], level: attrs[:level])
 end
 
+# Create user institutions
+10.times do
+  UserInstitution.find_or_create_by!(user: User.order("RANDOM()").first, institution: Institution.order("RANDOM()").first) do |ui|
+    ui.position = Faker::Job.position
+    ui.role = UserInstitution.roles.keys.sample
+    ui.status = UserInstitution.statuses.keys.sample
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
