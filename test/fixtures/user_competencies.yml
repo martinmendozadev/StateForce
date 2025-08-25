@@ -3,9 +3,9 @@
 one:
   user: one
   competency: one
-  expiry_date: 2030-01-01
+  expiry_date: <%= 1.year.from_now %>
 
 two:
   user: one
   competency: two
-  expiry_date: 2028-06-15
+  expiry_date: <%= 3.year.from_now %>

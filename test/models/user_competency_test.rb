@@ -19,8 +19,8 @@ class UserCompetencyTest < ActiveSupport::TestCase
     assert_not @user_competency.valid?
   end
 
-  test "expiry_date should be in the future or today" do
-    @user_competency.expiry_date = Date.yesterday
+  test "expiry_date should be in the future from today" do
+    @user_competency.expiry_date = Date.today - 1.day
     assert_not @user_competency.valid?
   end
 
