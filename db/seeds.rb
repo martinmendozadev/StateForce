@@ -339,6 +339,14 @@ end
   end
 end
 
+# Create operational unit competencies
+10.times do
+  OperationalUnitCompetency.find_or_create_by!(operational_unit: OperationalUnit.order("RANDOM()").first, competency: Competency.order("RANDOM()").first) do |ouc|
+    ouc.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+    ouc.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

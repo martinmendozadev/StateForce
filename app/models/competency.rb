@@ -2,6 +2,9 @@ class Competency < ApplicationRecord
   # Associations
   belongs_to :specialty
 
+  has_many :operational_unit_competencies, dependent: :destroy
+  has_many :operational_units, through: :operational_unit_competencies
+
   # Enums
   enum :level, {
     advanced: "advanced",
