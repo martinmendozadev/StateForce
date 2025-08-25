@@ -375,6 +375,11 @@ end
   end
 end
 
+# Create institution attachments
+10.times do
+  InstitutionAttachment.find_or_create_by!(institution: Institution.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

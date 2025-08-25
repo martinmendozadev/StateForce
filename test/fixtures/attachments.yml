@@ -15,3 +15,15 @@ one:
   uploader_user: one
   created_at: <%= 2.days.ago %>
   updated_at: <%= 1.days.ago %>
+
+two:
+  content_type: image/png
+  description: This is a image file.
+  file_name: image two
+  file_size: 204800
+  file_type: image
+  file_url: https://cdn.stateforce.mx/uploads/123/image.png
+  visibility: public
+  uploader_user: two
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 1.days.ago %>

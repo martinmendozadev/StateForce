@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  institution: one
+  attachment: one
+
+two:
+  institution: one
+  attachment: two

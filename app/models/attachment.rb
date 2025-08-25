@@ -1,6 +1,9 @@
 class Attachment < ApplicationRecord
   belongs_to :uploader_user, class_name: "User"
 
+  has_many :institution_attachments, dependent: :destroy
+  has_many :institutions, through: :institution_attachments
+
   enum :file_type, {
     certification: "certification",
     document: "document",
