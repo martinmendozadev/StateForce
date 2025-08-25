@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_050900) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_052105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -103,6 +103,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_050900) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["email"], name: "index_contacts_on_email", unique: true
+  end
+
+  create_table "event_attachments", primary_key: ["event_id", "attachment_id"], force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "attachment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["attachment_id"], name: "index_event_attachments_on_attachment_id"
+    t.index ["event_id"], name: "index_event_attachments_on_event_id"
   end
 
   create_table "event_institutions", force: :cascade do |t|
@@ -506,6 +516,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_050900) do
   add_foreign_key "competencies", "specialties"
   add_foreign_key "contact_phone_numbers", "contacts"
   add_foreign_key "contact_phone_numbers", "phone_numbers"
+  add_foreign_key "event_attachments", "attachments"
+  add_foreign_key "event_attachments", "events"
   add_foreign_key "event_institutions", "events"
   add_foreign_key "event_institutions", "institutions"
   add_foreign_key "event_resources", "events"
