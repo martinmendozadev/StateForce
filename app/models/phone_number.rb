@@ -1,4 +1,8 @@
 class PhoneNumber < ApplicationRecord
+  # Associations
+  has_many :contact_phone_numbers, dependent: :destroy
+  has_many :contacts, through: :contact_phone_numbers
+
   # Enums
   enum :phone_type, {
     home: "home",

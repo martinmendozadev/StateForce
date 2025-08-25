@@ -361,6 +361,13 @@ end
   end
 end
 
+# Create contact phone numbers
+10.times do
+  ContactPhoneNumber.find_or_create_by!(contact: Contact.order("RANDOM()").first, phone_number: PhoneNumber.order("RANDOM()").first) do |cpn|
+    cpn.is_primary = [ true, false ].sample
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
