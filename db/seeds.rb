@@ -448,6 +448,15 @@ end
   end
 end
 
+# Create patient notes
+10.times do
+  PatientsNote.find_or_create_by!(patient: Patient.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |pn|
+    pn.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+    pn.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

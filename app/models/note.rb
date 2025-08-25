@@ -16,6 +16,9 @@ class Note < ApplicationRecord
   has_many :institution_notes, dependent: :destroy
   has_many :institutions, through: :institution_notes
 
+  has_many :patients_notes, dependent: :destroy
+  has_many :patients, through: :patients_notes
+
   # Enums
   enum :visibility, {
     public: "public",
