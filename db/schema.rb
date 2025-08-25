@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_060945) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_061548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -187,6 +187,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060945) do
     t.datetime "deleted_at"
     t.index ["contact_id"], name: "index_institution_contacts_on_contact_id"
     t.index ["institution_id"], name: "index_institution_contacts_on_institution_id"
+  end
+
+  create_table "institution_notes", primary_key: ["institution_id", "note_id"], force: :cascade do |t|
+    t.bigint "institution_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["institution_id"], name: "index_institution_notes_on_institution_id"
+    t.index ["note_id"], name: "index_institution_notes_on_note_id"
   end
 
   create_table "institutions", force: :cascade do |t|
@@ -581,6 +591,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060945) do
   add_foreign_key "institution_attachments", "institutions"
   add_foreign_key "institution_contacts", "contacts"
   add_foreign_key "institution_contacts", "institutions"
+  add_foreign_key "institution_notes", "institutions"
+  add_foreign_key "institution_notes", "notes"
   add_foreign_key "institutions", "institutions", column: "parent_institution_id"
   add_foreign_key "institutions", "locations"
   add_foreign_key "institutions", "users", column: "director_id"

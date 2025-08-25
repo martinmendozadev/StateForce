@@ -440,6 +440,14 @@ end
   end
 end
 
+# Create institution notes
+10.times do
+  InstitutionNote.find_or_create_by!(institution: Institution.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |ins|
+    ins.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+    ins.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

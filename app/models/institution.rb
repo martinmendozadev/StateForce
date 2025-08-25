@@ -16,6 +16,9 @@ class Institution < ApplicationRecord
   has_many :schedule_entries_institutions, dependent: :destroy
   has_many :schedule_entries, through: :schedule_entries_institutions
 
+  has_many :institution_notes, dependent: :destroy
+  has_many :notes, through: :institution_notes
+
   ## Enums
   enum :sector_type, {
     public: "public",
