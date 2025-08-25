@@ -8,6 +8,9 @@ class Resource < ApplicationRecord
   has_many :event_resources, dependent: :destroy
   has_many :events, through: :event_resources
 
+  has_many :resource_attachments, dependent: :destroy
+  has_many :attachments, through: :resource_attachments
+
   # Validations
   validates :name, presence: true, length: { maximum: 150 },
                    uniqueness: { scope: :institution_id, case_sensitive: false }

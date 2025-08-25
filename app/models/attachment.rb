@@ -10,6 +10,9 @@ class Attachment < ApplicationRecord
   has_many :event_attachments, dependent: :destroy
   has_many :events, through: :event_attachments
 
+  has_many :resource_attachments, dependent: :destroy
+  has_many :resources, through: :resource_attachments
+
   enum :file_type, {
     certification: "certification",
     document: "document",

@@ -390,6 +390,11 @@ end
   EventAttachment.find_or_create_by!(event: Event.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
 end
 
+# Create resource attachments
+10.times do
+  ResourceAttachment.find_or_create_by!(resource: Resource.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

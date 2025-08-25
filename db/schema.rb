@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_052105) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_053302) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -355,6 +355,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_052105) do
     t.datetime "deleted_at"
   end
 
+  create_table "resource_attachments", primary_key: ["resource_id", "attachment_id"], force: :cascade do |t|
+    t.bigint "resource_id", null: false
+    t.bigint "attachment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["attachment_id"], name: "index_resource_attachments_on_attachment_id"
+    t.index ["resource_id"], name: "index_resource_attachments_on_resource_id"
+  end
+
   create_table "resource_categories", force: :cascade do |t|
     t.string "name", limit: 150, null: false
     t.text "description"
@@ -553,6 +563,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_052105) do
   add_foreign_key "patient_vitals", "patients"
   add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"
   add_foreign_key "patients", "events"
+  add_foreign_key "resource_attachments", "attachments"
+  add_foreign_key "resource_attachments", "resources"
   add_foreign_key "resource_types", "resource_categories"
   add_foreign_key "resources", "attachments", column: "icon_id"
   add_foreign_key "resources", "institutions"
