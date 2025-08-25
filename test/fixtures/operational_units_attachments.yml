@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  operational_unit: one
+  attachment: one
+
+two:
+  operational_unit: two
+  attachment: two

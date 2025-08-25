@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_045520) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_050900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -274,6 +274,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_045520) do
     t.index ["parent_institution_id"], name: "index_operational_units_on_parent_institution_id"
   end
 
+  create_table "operational_units_attachments", primary_key: ["operational_unit_id", "attachment_id"], force: :cascade do |t|
+    t.bigint "operational_unit_id", null: false
+    t.bigint "attachment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["attachment_id"], name: "index_operational_units_attachments_on_attachment_id"
+    t.index ["operational_unit_id"], name: "index_operational_units_attachments_on_operational_unit_id"
+  end
+
   create_table "patient_transfers", force: :cascade do |t|
     t.datetime "arrival_time", precision: nil
     t.datetime "departure_time", precision: nil
@@ -520,6 +530,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_045520) do
   add_foreign_key "operational_units", "institutions", column: "parent_institution_id"
   add_foreign_key "operational_units", "locations"
   add_foreign_key "operational_units", "users", column: "on_charge_shift_user_id"
+  add_foreign_key "operational_units_attachments", "attachments"
+  add_foreign_key "operational_units_attachments", "operational_units"
   add_foreign_key "patient_transfers", "events"
   add_foreign_key "patient_transfers", "institutions", column: "destination_institution_id"
   add_foreign_key "patient_transfers", "patients"

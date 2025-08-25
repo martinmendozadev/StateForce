@@ -84,7 +84,7 @@ end
 end
 
 # Create fake events
-9.times do
+25.times do
   Event.create!(
     description: Faker::Lorem.sentence,
     ended_at: Faker::Time.forward(days: 1),
@@ -378,6 +378,11 @@ end
 # Create institution attachments
 10.times do
   InstitutionAttachment.find_or_create_by!(institution: Institution.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
+end
+
+# Create operational unit attachments
+10.times do
+  OperationalUnitsAttachment.find_or_create_by!(operational_unit: OperationalUnit.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
 end
 
 # Default user config to Development

@@ -10,6 +10,9 @@ class OperationalUnit < ApplicationRecord
   has_many :operational_unit_competencies, dependent: :destroy
   has_many :competencies, through: :operational_unit_competencies
 
+  has_many :operational_units_attachments, dependent: :destroy
+  has_many :attachments, through: :operational_units_attachments
+
   # Enums
   enum :triage_status, {
     black: "black",
