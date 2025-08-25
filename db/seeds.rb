@@ -368,6 +368,13 @@ end
   end
 end
 
+# Create user notes
+10.times do
+  UserNote.find_or_create_by!(user: User.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |un|
+    un.starred = [ true, false ].sample
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

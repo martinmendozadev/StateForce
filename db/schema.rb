@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_021220) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_022014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -444,6 +444,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_021220) do
     t.index ["user_id"], name: "index_user_institutions_on_user_id"
   end
 
+  create_table "user_notes", primary_key: ["user_id", "note_id"], force: :cascade do |t|
+    t.boolean "starred", default: false, null: false
+    t.bigint "user_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["note_id"], name: "index_user_notes_on_note_id"
+    t.index ["user_id"], name: "index_user_notes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", limit: 150, default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -521,5 +532,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_021220) do
   add_foreign_key "user_contacts", "users"
   add_foreign_key "user_institutions", "institutions"
   add_foreign_key "user_institutions", "users"
+  add_foreign_key "user_notes", "notes"
+  add_foreign_key "user_notes", "users"
   add_foreign_key "users", "attachments", column: "avatar_id"
 end

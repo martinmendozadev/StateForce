@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :user_contacts, dependent: :destroy
   has_many :contacts, through: :user_contacts
 
+  has_many :user_notes, dependent: :destroy
+  has_many :notes, through: :user_notes
+
   ## Enums
   enum :provider, google_oauth2: 0
 
