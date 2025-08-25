@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  last_edited_at: <%= 2.days.ago %>
+  note: one
+  user: one
+
+two:
+  last_edited_at: <%= 1.day.ago %>
+  note: two
+  user: two

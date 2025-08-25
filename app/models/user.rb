@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :user_notes, dependent: :destroy
   has_many :notes, through: :user_notes
 
+  has_many :note_editors, dependent: :destroy
+  has_many :edited_notes, through: :note_editors, source: :note
+
   ## Enums
   enum :provider, google_oauth2: 0
 

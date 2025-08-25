@@ -425,6 +425,13 @@ end
   end
 end
 
+# Create note editors
+10.times do
+  NoteEditor.find_or_create_by!(note: Note.order("RANDOM()").first, user: User.order("RANDOM()").first) do |ne|
+    ne.last_edited_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

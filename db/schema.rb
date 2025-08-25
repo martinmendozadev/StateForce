@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_055554) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -245,6 +245,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_055554) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["operational_unit_id"], name: "index_medical_center_profiles_on_operational_unit_id"
+  end
+
+  create_table "note_editors", primary_key: ["note_id", "user_id"], force: :cascade do |t|
+    t.datetime "last_edited_at", precision: nil
+    t.bigint "note_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["note_id"], name: "index_note_editors_on_note_id"
+    t.index ["user_id"], name: "index_note_editors_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -566,6 +577,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_055554) do
   add_foreign_key "invites", "institutions"
   add_foreign_key "invites", "users", column: "inviter_id"
   add_foreign_key "medical_center_profiles", "operational_units"
+  add_foreign_key "note_editors", "notes"
+  add_foreign_key "note_editors", "users"
   add_foreign_key "notes", "users", column: "creator_user_id"
   add_foreign_key "operational_unit_competencies", "competencies"
   add_foreign_key "operational_unit_competencies", "operational_units"

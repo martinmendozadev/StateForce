@@ -7,6 +7,9 @@ class Note < ApplicationRecord
   has_many :event_notes, dependent: :destroy
   has_many :events, through: :event_notes
 
+  has_many :note_editors, dependent: :destroy
+  has_many :editors, through: :note_editors, source: :user
+
   enum :visibility, {
     public: "public",
     private: "private",
