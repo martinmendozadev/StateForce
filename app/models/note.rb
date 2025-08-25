@@ -10,6 +10,9 @@ class Note < ApplicationRecord
   has_many :note_editors, dependent: :destroy
   has_many :editors, through: :note_editors, source: :user
 
+  has_many :resource_notes, dependent: :destroy
+  has_many :resources, through: :resource_notes
+
   enum :visibility, {
     public: "public",
     private: "private",

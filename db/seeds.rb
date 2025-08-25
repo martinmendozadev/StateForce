@@ -432,6 +432,14 @@ end
   end
 end
 
+# Create resource notes
+10.times do
+  ResourceNote.find_or_create_by!(resource: Resource.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |rn|
+    rn.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+    rn.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

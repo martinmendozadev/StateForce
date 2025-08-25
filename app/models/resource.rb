@@ -11,6 +11,9 @@ class Resource < ApplicationRecord
   has_many :resource_attachments, dependent: :destroy
   has_many :attachments, through: :resource_attachments
 
+  has_many :resource_notes, dependent: :destroy
+  has_many :notes, through: :resource_notes
+
   # Validations
   validates :name, presence: true, length: { maximum: 150 },
                    uniqueness: { scope: :institution_id, case_sensitive: false }

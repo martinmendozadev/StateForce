@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_060945) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -395,6 +395,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
     t.index ["name"], name: "index_resource_categories_on_name", unique: true
   end
 
+  create_table "resource_notes", primary_key: ["resource_id", "note_id"], force: :cascade do |t|
+    t.bigint "resource_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["note_id"], name: "index_resource_notes_on_note_id"
+    t.index ["resource_id"], name: "index_resource_notes_on_resource_id"
+  end
+
   create_table "resource_types", force: :cascade do |t|
     t.string "name", limit: 150, null: false
     t.text "description"
@@ -600,6 +610,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   add_foreign_key "patients", "events"
   add_foreign_key "resource_attachments", "attachments"
   add_foreign_key "resource_attachments", "resources"
+  add_foreign_key "resource_notes", "notes"
+  add_foreign_key "resource_notes", "resources"
   add_foreign_key "resource_types", "resource_categories"
   add_foreign_key "resources", "attachments", column: "icon_id"
   add_foreign_key "resources", "institutions"
