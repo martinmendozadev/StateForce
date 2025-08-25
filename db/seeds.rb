@@ -456,6 +456,11 @@ end
   end
 end
 
+# Create patient transfers notes
+10.times do
+  PatientTransfersNote.find_or_create_by!(patient_transfer: PatientTransfer.order("RANDOM()").first, note: Note.order("RANDOM()").first)
+end
+
 
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|

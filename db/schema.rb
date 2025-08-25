@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_062322) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_062901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -346,6 +346,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_062322) do
     t.index ["transport_resource_id"], name: "index_patient_transfers_on_transport_resource_id"
   end
 
+  create_table "patient_transfers_notes", primary_key: ["patient_transfer_id", "note_id"], force: :cascade do |t|
+    t.bigint "patient_transfer_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["note_id"], name: "index_patient_transfers_notes_on_note_id"
+    t.index ["patient_transfer_id"], name: "index_patient_transfers_notes_on_patient_transfer_id"
+  end
+
   create_table "patient_vitals", force: :cascade do |t|
     t.integer "blood_pressure_systolic", limit: 2
     t.integer "blood_pressure_diastolic", limit: 2
@@ -627,6 +637,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_062322) do
   add_foreign_key "patient_transfers", "resources", column: "transport_resource_id"
   add_foreign_key "patient_transfers", "users", column: "accepted_by_user_id"
   add_foreign_key "patient_transfers", "users", column: "requesting_user_id"
+  add_foreign_key "patient_transfers_notes", "notes"
+  add_foreign_key "patient_transfers_notes", "patient_transfers"
   add_foreign_key "patient_vitals", "patients"
   add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"
   add_foreign_key "patients", "events"
