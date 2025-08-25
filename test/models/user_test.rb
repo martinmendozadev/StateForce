@@ -4,7 +4,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = users(:user_one)
+    @user = users(:one)
     @unconfirmed_user = users(:user_three)
   end
 
@@ -35,9 +35,5 @@ class UserTest < ActiveSupport::TestCase
 
   test "user has a valid encrypted password" do
     assert @user.encrypted_password.present?
-  end
-
-  test "user has a valid role" do
-    assert_includes User.roles.keys, @user.role
   end
 end

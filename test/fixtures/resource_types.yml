@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: "Ambulance"
+  description: "Emergency vehicles equipped for patient transport."
+  resource_category: two
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 1.days.ago %>
+
+two:
+  name: "Fire Truck"
+  description: "Specialized vehicles for firefighting operations."
+  resource_category: two
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 1.days.ago %>

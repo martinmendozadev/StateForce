@@ -112,3 +112,8 @@ en:
       assets_saved_value: "$2.5M"
       covered_territory: "Covered territory"
       covered_territory_value: "4,893 km²"
+  location:
+    errors:
+      messages:
+        invalid_coordinates: "must be a valid geographic point (WGS 84)"
+        wrong_coordinates: "must be a valid RGeo point"
