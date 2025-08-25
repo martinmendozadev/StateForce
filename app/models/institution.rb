@@ -7,6 +7,9 @@ class Institution < ApplicationRecord
   has_many :event_institutions, dependent: :destroy
   has_many :events, through: :event_institutions
 
+  has_many :institution_contacts, dependent: :destroy
+  has_many :contacts, through: :institution_contacts
+
   ## Enums
   enum :sector_type, {
     public: "public",

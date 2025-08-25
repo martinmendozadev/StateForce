@@ -1,8 +1,9 @@
 class Contact < ApplicationRecord
   # Associations
-  # has_many :institution_contacts, dependent: :destroy
   # has_many :user_contacts, dependent: :destroy
   # has_many :contact_phone_numbers, dependent: :destroy
+  has_many :institution_contacts, dependent: :destroy
+  has_many :institutions, through: :institution_contacts
 
   # Validations
   validates :email,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_001732) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_002939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_001732) do
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "actions", ["created", "deleted", "read", "restored", "updated"]
   create_enum "bed_type", ["emergency", "gynecology", "icu", "internal_medicine", "isolated", "neonatal_icu", "pediatric", "trauma", "general", "maternity"]
+  create_enum "contact_type", ["emergency", "primary", "technical_support"]
   create_enum "entity_names", ["contacts", "events", "resources", "user", "patients", "institutions", "attachments", "schedule_entries", "phone_numbers", "invites", "resource_categories", "resource_types", "patient_transfers", "audit_logs", "unknown"]
   create_enum "event_category", ["animal_rescue", "bomb_threat", "emergency", "epidemic_response", "evacuation", "fire_incident", "flood_response", "hazardous_material", "infrastructure_collapse", "medical_emergency", "missing_person", "natural_disaster", "operative", "other", "power_outage", "public_disturbance", "rescue_operation", "simulacrum", "support_request", "traffic_accident", "training", "unknown"]
   create_enum "event_status", ["assigned", "arrived", "cancelled", "closed", "en_route", "on_scene", "pending", "resolved"]
@@ -134,6 +135,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_001732) do
     t.datetime "deleted_at"
     t.index ["event_code"], name: "index_events_on_event_code", unique: true
     t.index ["location_id"], name: "index_events_on_location_id"
+  end
+
+  create_table "institution_contacts", force: :cascade do |t|
+    t.enum "contact_type", default: "primary", null: false, enum_type: "contact_type"
+    t.bigint "institution_id", null: false
+    t.bigint "contact_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["contact_id"], name: "index_institution_contacts_on_contact_id"
+    t.index ["institution_id"], name: "index_institution_contacts_on_institution_id"
   end
 
   create_table "institutions", force: :cascade do |t|
@@ -445,6 +457,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_001732) do
   add_foreign_key "event_resources", "resources"
   add_foreign_key "event_resources", "users", column: "assigned_by_user_id"
   add_foreign_key "events", "locations"
+  add_foreign_key "institution_contacts", "contacts"
+  add_foreign_key "institution_contacts", "institutions"
   add_foreign_key "institutions", "institutions", column: "parent_institution_id"
   add_foreign_key "institutions", "locations"
   add_foreign_key "institutions", "users", column: "director_id"
