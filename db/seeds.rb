@@ -354,6 +354,13 @@ end
   end
 end
 
+# Create phone number associations
+10.times do
+  UserContact.find_or_create_by!(user: User.order("RANDOM()").first, contact: Contact.order("RANDOM()").first) do |uc|
+    uc.contact_type = UserContact.contact_types.keys.sample
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
