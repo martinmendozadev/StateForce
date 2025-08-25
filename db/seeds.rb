@@ -331,6 +331,14 @@ end
   end
 end
 
+# Create event resources
+10.times do
+  EventResource.find_or_create_by!(event: Event.order("RANDOM()").first, resource: Resource.order("RANDOM()").first, assigned_by_user: User.order("RANDOM()").first) do |er|
+    er.quantity_assigned = rand(1..5)
+    er.assigned_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

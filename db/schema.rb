@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_234148) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_235532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -102,6 +102,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_234148) do
     t.datetime "deleted_at"
     t.index ["event_id"], name: "index_event_institutions_on_event_id"
     t.index ["institution_id"], name: "index_event_institutions_on_institution_id"
+  end
+
+  create_table "event_resources", force: :cascade do |t|
+    t.integer "quantity_assigned", default: 1, null: false
+    t.datetime "assigned_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.bigint "event_id", null: false
+    t.bigint "resource_id", null: false
+    t.bigint "assigned_by_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["assigned_by_user_id"], name: "index_event_resources_on_assigned_by_user_id"
+    t.index ["event_id"], name: "index_event_resources_on_event_id"
+    t.index ["resource_id"], name: "index_event_resources_on_resource_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -417,6 +431,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_234148) do
   add_foreign_key "competencies", "specialties"
   add_foreign_key "event_institutions", "events"
   add_foreign_key "event_institutions", "institutions"
+  add_foreign_key "event_resources", "events"
+  add_foreign_key "event_resources", "resources"
+  add_foreign_key "event_resources", "users", column: "assigned_by_user_id"
   add_foreign_key "events", "locations"
   add_foreign_key "institutions", "institutions", column: "parent_institution_id"
   add_foreign_key "institutions", "locations"

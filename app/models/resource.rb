@@ -5,6 +5,9 @@ class Resource < ApplicationRecord
   belongs_to :icon, class_name: "Attachment", optional: true
   belongs_to :location, optional: true
 
+  has_many :event_resources, dependent: :destroy
+  has_many :events, through: :event_resources
+
   # Validations
   validates :name, presence: true, length: { maximum: 150 },
                    uniqueness: { scope: :institution_id, case_sensitive: false }

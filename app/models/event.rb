@@ -5,6 +5,9 @@ class Event < ApplicationRecord
   has_many :event_institutions, dependent: :destroy
   has_many :institutions, through: :event_institutions
 
+  has_many :event_resources, dependent: :destroy
+  has_many :resources, through: :event_resources
+
   ## Enums
   enum :event_type, {
     animal_rescue: "animal_rescue",

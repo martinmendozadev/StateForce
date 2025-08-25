@@ -9,6 +9,8 @@ class User < ApplicationRecord
   ## Relationships
   belongs_to :avatar, class_name: "Attachment", optional: true
 
+  has_many :assigned_event_resources, class_name: "EventResource", foreign_key: "assigned_by_user_id"
+
   ## Enums
   enum :provider, google_oauth2: 0
 
