@@ -4,6 +4,9 @@ class Note < ApplicationRecord
   has_many :operational_unit_notes, dependent: :destroy
   has_many :operational_units, through: :operational_unit_notes
 
+  has_many :event_notes, dependent: :destroy
+  has_many :events, through: :event_notes
+
   enum :visibility, {
     public: "public",
     private: "private",

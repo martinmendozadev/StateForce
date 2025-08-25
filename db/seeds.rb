@@ -417,6 +417,14 @@ end
   ScheduleEntriesInstitution.find_or_create_by!(schedule_entry: ScheduleEntry.order("RANDOM()").first, institution: Institution.order("RANDOM()").first)
 end
 
+# Create event notes
+10.times do
+  EventNote.find_or_create_by!(event: Event.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |en|
+    en.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+    en.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
+  end
+end
+
 # Default user config to Development
 User.find_or_create_by!(email: 'test@stateforce.mx') do |user|
   user.confirmed_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)

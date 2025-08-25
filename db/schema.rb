@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_053957) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_055554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -124,6 +124,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_053957) do
     t.datetime "deleted_at"
     t.index ["event_id"], name: "index_event_institutions_on_event_id"
     t.index ["institution_id"], name: "index_event_institutions_on_institution_id"
+  end
+
+  create_table "event_notes", primary_key: ["event_id", "note_id"], force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["event_id"], name: "index_event_notes_on_event_id"
+    t.index ["note_id"], name: "index_event_notes_on_note_id"
   end
 
   create_table "event_resources", force: :cascade do |t|
@@ -540,6 +550,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_053957) do
   add_foreign_key "event_attachments", "events"
   add_foreign_key "event_institutions", "events"
   add_foreign_key "event_institutions", "institutions"
+  add_foreign_key "event_notes", "events"
+  add_foreign_key "event_notes", "notes"
   add_foreign_key "event_resources", "events"
   add_foreign_key "event_resources", "resources"
   add_foreign_key "event_resources", "users", column: "assigned_by_user_id"
