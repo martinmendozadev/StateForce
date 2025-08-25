@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_053302) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_053957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -426,6 +426,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_053302) do
     t.index ["event_id"], name: "index_schedule_entries_on_event_id"
   end
 
+  create_table "schedule_entries_institutions", primary_key: ["schedule_entry_id", "institution_id"], force: :cascade do |t|
+    t.bigint "schedule_entry_id", null: false
+    t.bigint "institution_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["institution_id"], name: "index_schedule_entries_institutions_on_institution_id"
+    t.index ["schedule_entry_id"], name: "index_schedule_entries_institutions_on_schedule_entry_id"
+  end
+
   create_table "specialties", force: :cascade do |t|
     t.string "name", limit: 150, null: false
     t.text "description"
@@ -572,6 +582,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_053302) do
   add_foreign_key "resources", "resource_types"
   add_foreign_key "schedule_entries", "events"
   add_foreign_key "schedule_entries", "users", column: "creator_user_id"
+  add_foreign_key "schedule_entries_institutions", "institutions"
+  add_foreign_key "schedule_entries_institutions", "schedule_entries"
   add_foreign_key "user_callsigns", "institutions"
   add_foreign_key "user_callsigns", "users"
   add_foreign_key "user_competencies", "competencies"

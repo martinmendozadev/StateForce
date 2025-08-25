@@ -2,6 +2,9 @@ class ScheduleEntry < ApplicationRecord
   belongs_to :creator_user, class_name: "User"
   belongs_to :event, optional: true
 
+  has_many :schedule_entries_institutions, dependent: :destroy
+  has_many :institutions, through: :schedule_entries_institutions
+
   # Enums
   enum :priority_level, {
     critical: "critical",

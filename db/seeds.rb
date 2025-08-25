@@ -102,6 +102,23 @@ end
   )
 end
 
+# Create fake schedule entries
+10.times do
+  ScheduleEntry.create(
+    title: Faker::Lorem.sentence(word_count: 3),
+    description: Faker::Lorem.paragraph(sentence_count: 2),
+    priority_level: ScheduleEntry.priority_levels.keys.sample,
+    recurrence_rule: ScheduleEntry.recurrence_rules.keys.sample,
+    status: ScheduleEntry.statuses.keys.sample,
+    visibility: ScheduleEntry.visibilities.keys.sample,
+    creator_user_id: User.order('RANDOM()').first.id,
+    event_id: Event.order('RANDOM()').first.id,
+
+    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
+  )
+end
+
 # Create fake patients
 10.times do
   Patient.create(
@@ -393,6 +410,11 @@ end
 # Create resource attachments
 10.times do
   ResourceAttachment.find_or_create_by!(resource: Resource.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
+end
+
+# Create schedule entries institutions
+10.times do
+  ScheduleEntriesInstitution.find_or_create_by!(schedule_entry: ScheduleEntry.order("RANDOM()").first, institution: Institution.order("RANDOM()").first)
 end
 
 # Default user config to Development
