@@ -4,8 +4,8 @@ class CreateUserContacts < ActiveRecord::Migration[8.0]
       t.enum :contact_type, enum_type: "contact_type", null: false, default: "primary"
 
       ## References
-      t.references :user, null: false, foreign_key: { to_table: :users }
       t.references :contact, null: false, foreign_key: { to_table: :contacts }
+      t.references :user, null: false, foreign_key: { to_table: :users }
 
       ## Timestamps and soft delete
       t.timestamps null: false

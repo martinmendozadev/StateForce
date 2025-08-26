@@ -21,11 +21,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.string   :unconfirmed_email
 
       ## Custom fields
-      t.string :name, limit: 75
-      t.boolean :active, default: true
-      t.string :uid
-      t.integer :provider, limit: 1
-      t.string :avatar_url
+      t.string   :name, limit: 75
+      t.boolean  :active, default: true
+      t.string   :uid
+      t.integer  :provider, limit: 1
+      t.string   :avatar_url
 
       ## Timestamps and soft delete
       t.timestamps null: false

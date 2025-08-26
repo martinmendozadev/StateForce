@@ -1,8 +1,8 @@
 class CreateEventResources < ActiveRecord::Migration[8.0]
   def change
     create_table :event_resources do |t|
-      t.integer :quantity_assigned, null: false, default: 1
       t.datetime :assigned_at, null: false, default: -> { "CURRENT_TIMESTAMP" }
+      t.integer  :quantity_assigned, null: false, default: 1
 
       ## References
       t.references :event, null: false, foreign_key: { to_table: :events }

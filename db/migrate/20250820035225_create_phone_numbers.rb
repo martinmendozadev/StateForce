@@ -6,7 +6,7 @@ class CreatePhoneNumbers < ActiveRecord::Migration[8.0]
     create_table :phone_numbers do |t|
       t.string :extension, limit: 3
       t.string :number, limit: 25
-      t.enum :phone_type, enum_type: "phone_type", null: false, default: "personal"
+      t.enum   :phone_type, enum_type: "phone_type", null: false, default: "personal"
 
       ## Timestamps and soft delete
       t.timestamps null: false

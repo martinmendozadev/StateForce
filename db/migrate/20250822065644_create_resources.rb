@@ -1,9 +1,9 @@
 class CreateResources < ActiveRecord::Migration[8.0]
   def change
     create_table :resources do |t|
-      t.string  :name, limit: 150, null: false
-      t.text    :description
       t.integer :available_units, null: false, default: 0
+      t.text    :description
+      t.string  :name, limit: 150, null: false
       t.integer :total_units, null: false, default: 0
       t.string  :units_identifier, limit: 50
 
