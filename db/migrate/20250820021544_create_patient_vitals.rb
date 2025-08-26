@@ -4,7 +4,7 @@ class CreatePatientVitals < ActiveRecord::Migration[8.0]
       t.integer :blood_pressure_systolic, limit: 2
       t.integer :blood_pressure_diastolic, limit: 2
       t.integer :capillary_blood_glucose, limit: 2
-      t.jsonb :glasgow_coma_score
+      t.jsonb   :glasgow_coma_score
       t.integer :heart_rate, limit: 2
       t.integer :oxygen_saturation, limit: 2
       t.datetime :recorded_at, null: false, default: -> { "CURRENT_TIMESTAMP" }

@@ -3,10 +3,10 @@ class CreateOperationalUnits < ActiveRecord::Migration[8.0]
     create_enum :facility_type, %w[hospital clinic rescue_base command_center other]
 
     create_table :operational_units do |t|
-      t.text :coverage
+      t.text   :coverage
       t.string :name, limit: 150, null: false
-      t.enum :facility_type, enum_type: :facility_type, null: false
-      t.enum :triage_status, enum_type: :triage_status, null: false, default: "unknown"
+      t.enum   :facility_type, enum_type: :facility_type, null: false
+      t.enum   :triage_status, enum_type: :triage_status, null: false, default: "unknown"
 
       ## References
       t.references :on_charge_shift_user, foreign_key: { to_table: :users }

@@ -6,7 +6,7 @@ class CreateMedicalCenterProfiles < ActiveRecord::Migration[8.0]
     create_table :medical_center_profiles do |t|
       t.boolean :external_pharmacy_available, default: false
       t.boolean :internal_pharmacy_available, default: false
-      t.enum :level, enum_type: :proficiency_level, default: "unknown", null: false
+      t.enum    :level, enum_type: :proficiency_level, default: "unknown", null: false
       t.integer :operating_rooms_total, limit: 2, default: 0, null: false
       t.integer :operating_rooms_available, limit: 2, default: 0, null: false
 

@@ -4,11 +4,11 @@ class CreateInstitutions < ActiveRecord::Migration[8.0]
     create_enum :resource_status, %w[available maintenance out_of_service unknown]
 
     create_table :institutions do |t|
-      t.string :callsign, limit: 50
-      t.text :description
-      t.string :name, null: false, limit: 150
-      t.enum :sector_type, enum_type: "sector_type", default: "unknown", null: false
-      t.enum :status, enum_type: "resource_status", default: "unknown", null: false
+      t.string  :callsign, limit: 50
+      t.text    :description
+      t.string  :name, null: false, limit: 150
+      t.enum    :sector_type, enum_type: "sector_type", default: "unknown", null: false
+      t.enum    :status, enum_type: "resource_status", default: "unknown", null: false
 
       ## References
       t.references :director, foreign_key: { to_table: :users }, index: true

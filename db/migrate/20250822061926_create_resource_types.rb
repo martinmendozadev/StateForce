@@ -2,7 +2,7 @@ class CreateResourceTypes < ActiveRecord::Migration[8.0]
   def change
     create_table :resource_types do |t|
       t.string :name, limit: 150, null: false
-      t.text :description
+      t.text   :description
 
       ## References
       t.references :resource_category, null: false, foreign_key: true

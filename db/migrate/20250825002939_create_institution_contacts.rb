@@ -7,7 +7,7 @@ class CreateInstitutionContacts < ActiveRecord::Migration[8.0]
 
       ## References
       t.references :institution, null: false, foreign_key: true, type: :bigint
-      t.references :contact,     null: false, foreign_key: true, type: :bigint
+      t.references :contact, null: false, foreign_key: true, type: :bigint
 
       ## Timestamps and soft delete
       t.timestamps null: false

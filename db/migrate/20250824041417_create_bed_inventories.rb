@@ -16,7 +16,7 @@ class CreateBedInventories < ActiveRecord::Migration[8.0]
 
     create_table :bed_inventories do |t|
       t.integer :available, limit: 2, default: 0, null: false
-      t.enum :bed_type, enum_type: :bed_type, null: false
+      t.enum    :bed_type, enum_type: :bed_type, null: false
       t.integer :total, limit: 2, default: 0, null: false
 
       ## References

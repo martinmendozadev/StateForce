@@ -5,13 +5,13 @@ class CreateInvites < ActiveRecord::Migration[8.0]
     create_enum :role, %w[admin guest manager restricted standard superadmin]
 
     create_table :invites do |t|
-      t.string :email, limit: 150
-      t.datetime :expires_at, null: false
-      t.enum :role, enum_type: "role", null: false
-      t.enum :status, enum_type: "status_invite", null: false, default: "draft"
-      t.string :token, null: false
-      t.datetime :used_at
-      t.bigint :inviter_id
+      t.string    :email, limit: 150
+      t.datetime  :expires_at, null: false
+      t.enum      :role, enum_type: "role", null: false
+      t.enum      :status, enum_type: "status_invite", null: false, default: "draft"
+      t.string    :token, null: false
+      t.datetime  :used_at
+      t.bigint    :inviter_id
 
       ## References
       t.references :institution, null: false, foreign_key: { to_table: :institutions }
