@@ -31,8 +31,8 @@ class Attachment < ApplicationRecord
 
   # Validations
   validates :file_url, presence: true
-  validates :file_type, presence: true, inclusion: { in: file_types.keys }
-  validates :visibility, presence: true, inclusion: { in: visibilities.keys }
   validates :file_name, length: { maximum: 75 }, allow_blank: true
   validates :content_type, length: { maximum: 25 }, allow_blank: true
+  validates :file_type, presence: true, inclusion: { in: file_types.keys }
+  validates :visibility, presence: true, inclusion: { in: visibilities.keys }
 end
