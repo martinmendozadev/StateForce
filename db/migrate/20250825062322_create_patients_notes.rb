@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePatientsNotes < ActiveRecord::Migration[8.0]
   def change
     create_table :patients_notes, primary_key: [ :patient_id, :note_id ] do |t|

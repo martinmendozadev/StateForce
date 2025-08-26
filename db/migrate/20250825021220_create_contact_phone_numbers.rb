@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreateContactPhoneNumbers < ActiveRecord::Migration[8.0]
   def change
     create_table :contact_phone_numbers, primary_key: [ :contact_id, :phone_number_id ] do |t|
+      ## Custom fields
       t.boolean :is_primary, null: false, default: false
 
       ## References

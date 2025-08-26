@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreateCompetencies < ActiveRecord::Migration[8.0]
   def change
     create_table :competencies do |t|
+      ## Custom fields
       t.enum :level, enum_type: :proficiency_level, default: "unknown", null: false
 
       ## References

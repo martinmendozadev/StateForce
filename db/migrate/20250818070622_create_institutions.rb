@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 class CreateInstitutions < ActiveRecord::Migration[8.0]
   def change
+    ## Enums
     create_enum :sector_type, %w[public private social unknown]
     create_enum :resource_status, %w[available maintenance out_of_service unknown]
 
     create_table :institutions do |t|
+      ## Custom fields
       t.string  :callsign, limit: 50
       t.text    :description
       t.string  :name, null: false, limit: 150
@@ -20,6 +24,7 @@ class CreateInstitutions < ActiveRecord::Migration[8.0]
       t.datetime :deleted_at
     end
 
+    ## Indexes
     add_index :institutions, :name, unique: true
     add_index :institutions, :callsign, unique: true
   end

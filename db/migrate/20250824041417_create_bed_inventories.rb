@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CreateBedInventories < ActiveRecord::Migration[8.0]
   def change
-    # Enums
+    ## Enums
     create_enum :bed_type, %w[
       emergency
       gynecology
@@ -15,6 +17,7 @@ class CreateBedInventories < ActiveRecord::Migration[8.0]
     ]
 
     create_table :bed_inventories do |t|
+      ## Custom fields
       t.integer :available, limit: 2, default: 0, null: false
       t.enum    :bed_type, enum_type: :bed_type, null: false
       t.integer :total, limit: 2, default: 0, null: false

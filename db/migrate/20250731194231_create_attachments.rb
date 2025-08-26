@@ -2,6 +2,7 @@
 
 class CreateAttachments < ActiveRecord::Migration[8.0]
   def change
+    ## Enums
     create_enum :file_type, %w[certification document image other video]
     create_enum :visibility, %w[public private restricted]
 

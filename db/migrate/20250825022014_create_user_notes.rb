@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreateUserNotes < ActiveRecord::Migration[8.0]
   def change
     create_table :user_notes, primary_key: [ :user_id, :note_id ] do |t|
+      ## Custom fields
       t.boolean :starred, null: false, default: false
 
       ## References

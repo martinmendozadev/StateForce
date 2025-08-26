@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreateUserContacts < ActiveRecord::Migration[8.0]
   def change
     create_table :user_contacts, primary_key: [ :user_id, :contact_id, :contact_type ] do |t|
+      ## Custom fields
       t.enum :contact_type, enum_type: "contact_type", null: false, default: "primary"
 
       ## References

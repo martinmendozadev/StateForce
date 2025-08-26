@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 class CreateOperationalUnits < ActiveRecord::Migration[8.0]
   def change
     create_enum :facility_type, %w[hospital clinic rescue_base command_center other]
 
     create_table :operational_units do |t|
+      ## Custom fields
       t.text   :coverage
       t.enum   :facility_type, enum_type: :facility_type, null: false
       t.string :name, limit: 150, null: false

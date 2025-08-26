@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePatients < ActiveRecord::Migration[8.0]
   def change
     ## Enums
@@ -5,6 +7,7 @@ class CreatePatients < ActiveRecord::Migration[8.0]
     create_enum :triage_status, %w[black green red unknown yellow]
 
     create_table :patients do |t|
+      ## Custom fields
       t.integer :age, limit: 2, null: false
       t.enum    :gender, enum_type: :gender, null: false, default: "other"
       t.string  :name, null: false, limit: 100

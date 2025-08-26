@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreateResourceTypes < ActiveRecord::Migration[8.0]
   def change
     create_table :resource_types do |t|
+      ## Custom fields
       t.text   :description
       t.string :name, limit: 150, null: false
 
@@ -12,6 +15,7 @@ class CreateResourceTypes < ActiveRecord::Migration[8.0]
       t.datetime :deleted_at
     end
 
+    ## Indexes
     add_index :resource_types, [ :name, :resource_category_id ], unique: true
   end
 end

@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreateUserCompetencies < ActiveRecord::Migration[8.0]
   def change
     create_table :user_competencies, primary_key: [ :user_id, :competency_id ] do |t|
+      ## Custom fields
       t.date :expiry_date
 
       ## References

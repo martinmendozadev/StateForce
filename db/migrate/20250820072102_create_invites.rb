@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateInvites < ActiveRecord::Migration[8.0]
   def change
     ## Enums
@@ -5,6 +7,7 @@ class CreateInvites < ActiveRecord::Migration[8.0]
     create_enum :role, %w[admin guest manager restricted standard superadmin]
 
     create_table :invites do |t|
+      ## Custom fields
       t.string    :email, limit: 150
       t.datetime  :expires_at, null: false
       t.bigint    :inviter_id
@@ -21,6 +24,7 @@ class CreateInvites < ActiveRecord::Migration[8.0]
       t.datetime :deleted_at
     end
 
+    ## Indexes
     add_index :invites, :token, unique: true
     add_foreign_key :invites, :users, column: :inviter_id
   end

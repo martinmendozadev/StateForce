@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOperationalUnitCompetencies < ActiveRecord::Migration[8.0]
   def change
     create_table :operational_unit_competencies, primary_key: [ :operational_unit_id, :competency_id ] do |t|

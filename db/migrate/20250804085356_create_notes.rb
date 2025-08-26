@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 class CreateNotes < ActiveRecord::Migration[8.0]
   def change
+    ## Enums
     create_enum :visibility, %w[public private restricted]
 
     create_table :notes do |t|
+      ## Custom fields
       t.text    :body, null: false
       t.string  :title, null: false, limit: 100
       t.enum    :visibility, enum_type: "visibility", default: "private", null: false

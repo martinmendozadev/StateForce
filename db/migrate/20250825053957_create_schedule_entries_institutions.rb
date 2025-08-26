@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateScheduleEntriesInstitutions < ActiveRecord::Migration[8.0]
   def change
     create_table :schedule_entries_institutions, primary_key: [ :schedule_entry_id, :institution_id ] do |t|

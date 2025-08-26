@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEvents < ActiveRecord::Migration[8.0]
   def change
     ## Enums
@@ -11,6 +13,7 @@ class CreateEvents < ActiveRecord::Migration[8.0]
     create_enum :event_status, %w[assigned arrived cancelled closed en_route on_scene pending resolved]
 
     create_table :events do |t|
+      ## Custom fields
       t.text      :description
       t.timestamp :ended_at
       t.enum      :event_type, enum_type: "event_category", null: false, default: "emergency"
@@ -29,6 +32,7 @@ class CreateEvents < ActiveRecord::Migration[8.0]
       t.datetime :deleted_at
     end
 
+    ## Indexes
     add_index :events, :event_code, unique: true
   end
 end

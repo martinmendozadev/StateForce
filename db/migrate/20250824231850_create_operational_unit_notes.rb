@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOperationalUnitNotes < ActiveRecord::Migration[8.0]
   def change
     create_table :operational_unit_notes, primary_key: [ :operational_unit_id, :note_id ] do |t|

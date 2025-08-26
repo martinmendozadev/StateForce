@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class CreateMedicalCenterProfiles < ActiveRecord::Migration[8.0]
   def change
-    # Enums
+    ## Enums
     create_enum :proficiency_level, %w[advanced basic medium unknown]
 
     create_table :medical_center_profiles do |t|
+      ## Custom fields
       t.boolean :external_pharmacy_available, default: false
       t.boolean :internal_pharmacy_available, default: false
       t.enum    :level, enum_type: :proficiency_level, default: "unknown", null: false

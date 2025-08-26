@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreateEventInstitutions < ActiveRecord::Migration[8.0]
   def change
     create_table :event_institutions do |t|
+      ## Custom fields
       t.datetime :assigned_at, null: false, default: -> { "CURRENT_TIMESTAMP" }
 
       ## References

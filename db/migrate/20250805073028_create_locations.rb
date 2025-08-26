@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 class CreateLocations < ActiveRecord::Migration[8.0]
   def change
+    ## Extension
     enable_extension 'postgis'
 
     create_table :locations do |t|
+      ## Custom fields
       t.string :address, limit: 150
       t.st_point :coordinates, geographic: true, srid: 4326
       t.text    :key_name

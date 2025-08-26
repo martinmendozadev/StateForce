@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreatePatientTransfers < ActiveRecord::Migration[8.0]
   def change
     create_table :patient_transfers do |t|
+      ## Custom fields
       t.timestamp :arrival_time
       t.timestamp :departure_time
       t.enum      :status, enum_type: "event_status", null: false, default: "pending"

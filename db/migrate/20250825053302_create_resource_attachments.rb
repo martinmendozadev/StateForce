@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateResourceAttachments < ActiveRecord::Migration[8.0]
   def change
     create_table :resource_attachments, primary_key: [ :resource_id, :attachment_id ] do |t|

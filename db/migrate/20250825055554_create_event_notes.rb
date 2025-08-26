@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEventNotes < ActiveRecord::Migration[8.0]
   def change
     create_table :event_notes, primary_key: [ :event_id, :note_id ] do |t|

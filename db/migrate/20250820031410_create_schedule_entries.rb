@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class CreateScheduleEntries < ActiveRecord::Migration[8.0]
   def change
     ## Enums
     create_enum :recurrence_rule, %w[once daily weekly monthly yearly]
 
     create_table :schedule_entries do |t|
+      ## Custom fields
       t.text      :description
       t.interval  :duration
       t.datetime  :ends_at

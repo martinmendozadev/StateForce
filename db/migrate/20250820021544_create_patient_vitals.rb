@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreatePatientVitals < ActiveRecord::Migration[8.0]
   def change
     create_table :patient_vitals do |t|
+      ## Custom fields
       t.integer :blood_pressure_systolic, limit: 2
       t.integer :blood_pressure_diastolic, limit: 2
       t.integer :capillary_blood_glucose, limit: 2

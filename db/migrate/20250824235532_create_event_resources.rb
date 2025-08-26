@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class CreateEventResources < ActiveRecord::Migration[8.0]
   def change
     create_table :event_resources do |t|
+      ## Custom fields
       t.datetime :assigned_at, null: false, default: -> { "CURRENT_TIMESTAMP" }
       t.integer  :quantity_assigned, null: false, default: 1
 
