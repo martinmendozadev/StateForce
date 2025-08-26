@@ -1,18 +1,7 @@
 class Attachment < ApplicationRecord
   # Associations
   belongs_to :uploader_user, class_name: "User"
-
-  has_many :institution_attachments, dependent: :destroy
-  has_many :institutions, through: :institution_attachments
-
-  has_many :operational_units_attachments, dependent: :destroy
-  has_many :operational_units, through: :operational_units_attachments
-
-  has_many :event_attachments, dependent: :destroy
-  has_many :events, through: :event_attachments
-
-  has_many :resource_attachments, dependent: :destroy
-  has_many :resources, through: :resource_attachments
+  belongs_to :attachable, polymorphic: true, optional: true
 
   # Enums
   enum :file_type, {

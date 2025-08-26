@@ -14,6 +14,8 @@ class CreatePatientVitals < ActiveRecord::Migration[8.0]
       t.integer :respiratory_rate, limit: 2
       t.decimal :temperature, precision: 4, scale: 1, null: true
 
+      t.belongs_to :noteable, polymorphic: true
+
       ## References
       t.references :patient, null: false, foreign_key: { to_table: :patients }
       t.references :recorded_by_user, null: false, foreign_key: { to_table: :users }

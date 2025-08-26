@@ -14,6 +14,9 @@ class CreateInstitutions < ActiveRecord::Migration[8.0]
       t.enum    :sector_type, enum_type: "sector_type", default: "unknown", null: false
       t.enum    :status, enum_type: "resource_status", default: "unknown", null: false
 
+      t.belongs_to :noteable, polymorphic: true
+      t.belongs_to :attachment, polymorphic: true
+
       ## References
       t.references :director, foreign_key: { to_table: :users }, index: true
       t.references :location, null: false, foreign_key: { to_table: :locations }

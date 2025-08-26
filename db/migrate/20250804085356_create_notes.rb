@@ -11,6 +11,9 @@ class CreateNotes < ActiveRecord::Migration[8.0]
       t.string  :title, null: false, limit: 100
       t.enum    :visibility, enum_type: "visibility", default: "private", null: false
 
+      t.bigint  :noteable_id, index: true
+      t.string  :noteable_type, index: true
+
       ## References
       t.references :creator_user, null: false, foreign_key: { to_table: :users }
 

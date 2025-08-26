@@ -5,14 +5,10 @@ class Resource < ApplicationRecord
   belongs_to :icon, class_name: "Attachment", optional: true
   belongs_to :location, optional: true
 
+  has_many :notes, as: :noteable, dependent: :destroy
+
   has_many :event_resources, dependent: :destroy
   has_many :events, through: :event_resources
-
-  has_many :resource_attachments, dependent: :destroy
-  has_many :attachments, through: :resource_attachments
-
-  has_many :resource_notes, dependent: :destroy
-  has_many :notes, through: :resource_notes
 
   # Validations
   validates :name, presence: true, length: { maximum: 150 },

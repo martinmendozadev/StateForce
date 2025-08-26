@@ -40,36 +40,6 @@ end
   end
 end
 
-# Create fake attachments
-9.times do
-  file_type = Attachment.file_types.keys.sample
-  visibility = Attachment.visibilities.keys.sample
-
-  Attachment.create(
-    content_type: Faker::File.mime_type,
-    description: Faker::Lorem.sentence(word_count: 10),
-    file_name: Faker::File.unique.file_name(dir: 'uploads', ext: file_type.to_s),
-    file_size: Faker::Number.between(from: 1_000, to: 10_000),
-    file_type:,
-    file_url: Faker::Internet.unique.url(host: 'stateforce.mx', path: "/uploads/#{file_type}/#{Faker::File.unique.file_name(dir: 'uploads', ext: file_type.to_s)}"),
-    visibility:,
-    uploader_user_id: 1,
-    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
-    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
-  )
-end
-
-# Create fake notes
-9.times do
-  Note.create(
-    body: Faker::Lorem.paragraph(sentence_count: 3),
-    title: Faker::Lorem.sentence(word_count: 5),
-    visibility: Note.visibilities.keys.sample,
-    creator_user_id: 1,
-    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
-    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
-  )
-end
 
 # Create fake institutions
 9.times do
@@ -221,6 +191,41 @@ end
   )
 end
 
+# Create fake attachments
+9.times do
+  file_type = Attachment.file_types.keys.sample
+  visibility = Attachment.visibilities.keys.sample
+
+  Attachment.create(
+    content_type: Faker::File.mime_type,
+    description: Faker::Lorem.sentence(word_count: 10),
+    file_name: Faker::File.unique.file_name(dir: 'uploads', ext: file_type.to_s),
+    file_size: Faker::Number.between(from: 1_000, to: 10_000),
+    file_type:,
+    file_url: Faker::Internet.unique.url(host: 'stateforce.mx', path: "/uploads/#{file_type}/#{Faker::File.unique.file_name(dir: 'uploads', ext: file_type.to_s)}"),
+    visibility:,
+    uploader_user: User.order('RANDOM()').first,
+
+    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
+  )
+end
+
+# Create fake notes
+9.times do
+  Note.create(
+    body: Faker::Lorem.paragraph(sentence_count: 3),
+    title: Faker::Lorem.sentence(word_count: 5),
+    visibility: Note.visibilities.keys.sample,
+    creator_user: User.order('RANDOM()').first,
+    noteable: Resource.order("RANDOM()").first,
+    noteable_type: "Resource",
+
+    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
+  )
+end
+
 # Create fake patient transfers
 10.times do
   PatientTransfer.create(
@@ -333,14 +338,6 @@ end
   end
 end
 
-# Create operational unit notes
-10.times do
-  OperationalUnitNote.find_or_create_by!(operational_unit: OperationalUnit.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |oun|
-    oun.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-    oun.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-  end
-end
-
 # Create event institutions
 10.times do
   EventInstitution.find_or_create_by!(event: Event.order("RANDOM()").first, institution: Institution.order("RANDOM()").first) do |ei|
@@ -392,37 +389,9 @@ end
   end
 end
 
-# Create institution attachments
-10.times do
-  InstitutionAttachment.find_or_create_by!(institution: Institution.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
-end
-
-# Create operational unit attachments
-10.times do
-  OperationalUnitsAttachment.find_or_create_by!(operational_unit: OperationalUnit.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
-end
-
-# Create event attachments
-10.times do
-  EventAttachment.find_or_create_by!(event: Event.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
-end
-
-# Create resource attachments
-10.times do
-  ResourceAttachment.find_or_create_by!(resource: Resource.order("RANDOM()").first, attachment: Attachment.order("RANDOM()").first)
-end
-
 # Create schedule entries institutions
 10.times do
   ScheduleEntriesInstitution.find_or_create_by!(schedule_entry: ScheduleEntry.order("RANDOM()").first, institution: Institution.order("RANDOM()").first)
-end
-
-# Create event notes
-10.times do
-  EventNote.find_or_create_by!(event: Event.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |en|
-    en.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-    en.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-  end
 end
 
 # Create note editors
@@ -432,34 +401,6 @@ end
   end
 end
 
-# Create resource notes
-10.times do
-  ResourceNote.find_or_create_by!(resource: Resource.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |rn|
-    rn.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-    rn.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-  end
-end
-
-# Create institution notes
-10.times do
-  InstitutionNote.find_or_create_by!(institution: Institution.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |ins|
-    ins.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-    ins.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-  end
-end
-
-# Create patient notes
-10.times do
-  PatientsNote.find_or_create_by!(patient: Patient.order("RANDOM()").first, note: Note.order("RANDOM()").first) do |pn|
-    pn.created_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-    pn.updated_at = Faker::Time.between(from: 2.days.ago, to: Time.zone.today)
-  end
-end
-
-# Create patient transfers notes
-10.times do
-  PatientTransfersNote.find_or_create_by!(patient_transfer: PatientTransfer.order("RANDOM()").first, note: Note.order("RANDOM()").first)
-end
 
 
 # Default user config to Development

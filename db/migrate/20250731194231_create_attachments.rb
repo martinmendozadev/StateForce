@@ -17,6 +17,9 @@ class CreateAttachments < ActiveRecord::Migration[8.0]
       t.string  :file_url, null: false
       t.enum    :visibility, enum_type: "visibility", default: "private", null: false
 
+      t.bigint  :attachable_id, index: true
+      t.string  :attachable_type, index: true
+
       ## References
       t.references :uploader_user, null: false, foreign_key: { to_table: :users }
 

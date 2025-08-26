@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_062901) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -49,6 +49,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_062901) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "attachable_type"
+    t.bigint "attachable_id"
+    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id"
     t.index ["uploader_user_id"], name: "index_attachments_on_uploader_user_id"
   end
 
@@ -276,7 +279,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_062901) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "noteable_type"
+    t.bigint "noteable_id"
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
+    t.index ["noteable_type", "noteable_id"], name: "index_notes_on_noteable_type_and_noteable_id"
   end
 
   create_table "operational_unit_competencies", primary_key: ["operational_unit_id", "competency_id"], force: :cascade do |t|

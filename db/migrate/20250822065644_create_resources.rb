@@ -6,13 +6,16 @@ class CreateResources < ActiveRecord::Migration[8.0]
       ## Custom fields
       t.integer :available_units, null: false, default: 0
       t.text    :description
-      t.string  :name, limit: 150, null: false
+      t.string  :name, limit: 150, null: false, index: true
       t.integer :total_units, null: false, default: 0
       t.string  :units_identifier, limit: 50
 
+      t.belongs_to :noteable, polymorphic: true
+      t.belongs_to :attachment, polymorphic: true
+
       ## References
       t.references :icon, foreign_key: { to_table: :attachments }
-      t.references :institution, null: false, foreign_key: { to_table: :institutions }
+      t.references :institution, null: false, foreign_key: { to_table: :institutions }, index: true
       t.references :location, null: false, foreign_key: { to_table: :locations }
       t.references :resource_type, null: false, foreign_key: { to_table: :resource_types }
 
@@ -20,8 +23,5 @@ class CreateResources < ActiveRecord::Migration[8.0]
       t.timestamps null: false
       t.datetime :deleted_at
     end
-
-    ## Indexes
-    add_index :resources, [ :name, :institution_id ], unique: true
   end
 end

@@ -8,6 +8,8 @@ class CreatePatientTransfers < ActiveRecord::Migration[8.0]
       t.timestamp :departure_time
       t.enum      :status, enum_type: "event_status", null: false, default: "pending"
 
+      t.belongs_to :noteable, polymorphic: true
+
       ## References
       t.references :accepted_by_user, null: false, foreign_key: { to_table: :users }
       t.references :destination_institution, null: false, foreign_key: { to_table: :institutions }

@@ -4,20 +4,17 @@ class Institution < ApplicationRecord
   belongs_to :director, class_name: "User", optional: true
   belongs_to :parent_institution, class_name: "Institution", optional: true
 
+  has_many :notes, as: :noteable, dependent: :destroy
+  has_many :attachments, as: :attachable, dependent: :destroy
+
   has_many :event_institutions, dependent: :destroy
   has_many :events, through: :event_institutions
 
   has_many :institution_contacts, dependent: :destroy
   has_many :contacts, through: :institution_contacts
 
-  has_many :institution_attachments, dependent: :destroy
-  has_many :attachments, through: :institution_attachments
-
   has_many :schedule_entries_institutions, dependent: :destroy
   has_many :schedule_entries, through: :schedule_entries_institutions
-
-  has_many :institution_notes, dependent: :destroy
-  has_many :notes, through: :institution_notes
 
   ## Enums
   enum :sector_type, {

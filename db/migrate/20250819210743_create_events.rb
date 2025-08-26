@@ -24,6 +24,9 @@ class CreateEvents < ActiveRecord::Migration[8.0]
       t.timestamp :reported_time, null: false, default: -> { 'CURRENT_TIMESTAMP' }
       t.enum      :status, enum_type: "event_status", null: false, default: "pending"
 
+      t.belongs_to :noteable, polymorphic: true
+      t.belongs_to :attachment, polymorphic: true
+
       ## References
       t.references :location, foreign_key: { to_table: :locations }
 

@@ -19,6 +19,9 @@ class CreateScheduleEntries < ActiveRecord::Migration[8.0]
       t.string    :title, limit: 100
       t.enum      :visibility, enum_type: "visibility", default: "private", null: false
 
+      t.belongs_to :noteable, polymorphic: true
+      t.belongs_to :attachment, polymorphic: true
+
       ## References
       t.references :creator_user, null: false, foreign_key: { to_table: :users }
       t.references :event, null: false, foreign_key: { to_table: :events }

@@ -2,26 +2,10 @@ class Note < ApplicationRecord
   # Associations
   belongs_to :creator_user, class_name: "User"
 
-  has_many :operational_unit_notes, dependent: :destroy
-  has_many :operational_units, through: :operational_unit_notes
-
-  has_many :event_notes, dependent: :destroy
-  has_many :events, through: :event_notes
+  belongs_to :noteable, polymorphic: true
 
   has_many :note_editors, dependent: :destroy
   has_many :editors, through: :note_editors, source: :user
-
-  has_many :resource_notes, dependent: :destroy
-  has_many :resources, through: :resource_notes
-
-  has_many :institution_notes, dependent: :destroy
-  has_many :institutions, through: :institution_notes
-
-  has_many :patients_notes, dependent: :destroy
-  has_many :patients, through: :patients_notes
-
-  has_many :patient_transfers_notes, dependent: :destroy
-  has_many :patient_transfers, through: :patient_transfers_notes
 
   # Enums
   enum :visibility, {
@@ -31,7 +15,7 @@ class Note < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
+  validates :title, presence: true, length: { maximum: 100 }
   validates :visibility, presence: true, inclusion: { in: visibilities.keys }
 end

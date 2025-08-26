@@ -2,8 +2,7 @@ class Patient < ApplicationRecord
   ## Relationships
   belongs_to :event
 
-  has_many :patients_notes, dependent: :destroy
-  has_many :notes, through: :patients_notes
+  has_many :notes, as: :noteable, dependent: :destroy
 
   ## Enums
   enum :gender, {

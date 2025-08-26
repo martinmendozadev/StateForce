@@ -2,17 +2,14 @@ class Event < ApplicationRecord
   ## Relationships
   belongs_to :location, optional: true
 
+  has_many :notes, as: :noteable, dependent: :destroy
+  has_many :attachments, as: :attachable, dependent: :destroy
+
   has_many :event_institutions, dependent: :destroy
   has_many :institutions, through: :event_institutions
 
   has_many :event_resources, dependent: :destroy
   has_many :resources, through: :event_resources
-
-  has_many :event_attachments, dependent: :destroy
-  has_many :attachments, through: :event_attachments
-
-  has_many :event_notes, dependent: :destroy
-  has_many :notes, through: :event_notes
 
   ## Enums
   enum :event_type, {

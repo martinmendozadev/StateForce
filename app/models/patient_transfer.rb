@@ -7,8 +7,8 @@ class PatientTransfer < ApplicationRecord
   belongs_to :requesting_user, class_name: "User"
   belongs_to :transport_resource, class_name: "Resource"
 
-  has_many :patient_transfers_notes, dependent: :destroy
-  has_many :notes, through: :patient_transfers_notes
+  has_many :notes, as: :noteable, dependent: :destroy
+  has_many :attachments, as: :attachable, dependent: :destroy
 
   # Enums
   enum :status, {

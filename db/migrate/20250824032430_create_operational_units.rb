@@ -11,6 +11,9 @@ class CreateOperationalUnits < ActiveRecord::Migration[8.0]
       t.string :name, limit: 150, null: false
       t.enum   :triage_status, enum_type: :triage_status, null: false, default: "unknown"
 
+      t.belongs_to :noteable, polymorphic: true
+      t.belongs_to :attachment, polymorphic: true
+
       ## References
       t.references :location, null: false, foreign_key: { to_table: :locations }
       t.references :on_charge_shift_user, foreign_key: { to_table: :users }

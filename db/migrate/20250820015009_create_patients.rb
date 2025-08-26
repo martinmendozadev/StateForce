@@ -13,6 +13,8 @@ class CreatePatients < ActiveRecord::Migration[8.0]
       t.string  :name, null: false, limit: 100
       t.enum    :triage_status, enum_type: :triage_status, null: false, default: "unknown"
 
+      t.belongs_to :noteable, polymorphic: true
+
       ## References
       t.references :event, null: false, foreign_key: { to_table: :events }
 
