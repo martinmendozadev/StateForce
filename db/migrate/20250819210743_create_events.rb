@@ -22,7 +22,7 @@ class CreateEvents < ActiveRecord::Migration[8.0]
       t.enum      :status, enum_type: "event_status", null: false, default: "pending"
 
       ## References
-      t.references :location, foreign_key: true
+      t.references :location, foreign_key: { to_table: :locations }
 
       ## Timestamps and soft delete
       t.timestamps null: false

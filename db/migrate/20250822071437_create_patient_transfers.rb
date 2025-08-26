@@ -8,8 +8,8 @@ class CreatePatientTransfers < ActiveRecord::Migration[8.0]
       ## References
       t.references :accepted_by_user, null: false, foreign_key: { to_table: :users }
       t.references :destination_institution, null: false, foreign_key: { to_table: :institutions }
-      t.references :event, null: false, foreign_key: true
-      t.references :patient, null: false, foreign_key: true
+      t.references :event, null: false, foreign_key: { to_table: :events }
+      t.references :patient, null: false, foreign_key: { to_table: :patients }
       t.references :requesting_user, null: false, foreign_key: { to_table: :users }
       t.references :transport_resource, null: false, foreign_key: { to_table: :resources }
 

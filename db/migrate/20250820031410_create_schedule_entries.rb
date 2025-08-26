@@ -18,7 +18,7 @@ class CreateScheduleEntries < ActiveRecord::Migration[8.0]
 
       ## References
       t.references :creator_user, null: false, foreign_key: { to_table: :users }
-      t.references :event, null: false, foreign_key: true
+      t.references :event, null: false, foreign_key: { to_table: :events }
 
       ## Timestamps and soft delete
       t.timestamps null: false

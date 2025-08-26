@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAttachments < ActiveRecord::Migration[8.0]
   def change
     create_enum :file_type, %w[certification document image other video]
@@ -10,7 +12,7 @@ class CreateAttachments < ActiveRecord::Migration[8.0]
       t.string  :file_name, limit: 75
       t.bigint  :file_size
 
-      t.enum    :file_type, enum_type: "file_type", default: 'other', null: false
+      t.enum    :file_type, enum_type: "file_type", default: "other", null: false
       t.string  :file_url, null: false
       t.enum    :visibility, enum_type: "visibility", default: "private", null: false
 

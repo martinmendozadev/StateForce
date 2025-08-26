@@ -11,7 +11,7 @@ class CreatePatients < ActiveRecord::Migration[8.0]
       t.enum    :triage_status, enum_type: :triage_status, null: false, default: "unknown"
 
       ## References
-      t.references :event, null: false, foreign_key: true
+      t.references :event, null: false, foreign_key: { to_table: :events }
 
       ## Timestamps and soft delete
       t.timestamps null: false

@@ -5,7 +5,7 @@ class CreateResourceTypes < ActiveRecord::Migration[8.0]
       t.text   :description
 
       ## References
-      t.references :resource_category, null: false, foreign_key: true
+      t.references :resource_category, null: false, foreign_key: { to_table: :resource_categories }
 
       ## Timestamps and soft delete
       t.timestamps null: false

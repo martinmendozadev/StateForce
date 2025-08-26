@@ -12,7 +12,7 @@ class CreateInstitutions < ActiveRecord::Migration[8.0]
 
       ## References
       t.references :director, foreign_key: { to_table: :users }, index: true
-      t.references :location, null: false, foreign_key: true
+      t.references :location, null: false, foreign_key: { to_table: :locations }
       t.references :parent_institution, foreign_key: { to_table: :institutions }
 
       ## Timestamps and soft delete
