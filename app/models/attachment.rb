@@ -1,4 +1,5 @@
 class Attachment < ApplicationRecord
+  # Associations
   belongs_to :uploader_user, class_name: "User"
 
   has_many :institution_attachments, dependent: :destroy
@@ -13,20 +14,22 @@ class Attachment < ApplicationRecord
   has_many :resource_attachments, dependent: :destroy
   has_many :resources, through: :resource_attachments
 
+  # Enums
   enum :file_type, {
     certification: "certification",
     document: "document",
     image: "image",
     other: "other",
     video: "video"
-  }, prefix: true # => e.g., file_type_document?
+  }, prefix: true
 
   enum :visibility, {
     public: "public",
     private: "private",
     restricted: "restricted"
-  }, prefix: true # => e.g., visibility_private?
+  }, prefix: true
 
+  # Validations
   validates :file_url, presence: true
   validates :file_type, presence: true, inclusion: { in: file_types.keys }
   validates :visibility, presence: true, inclusion: { in: visibilities.keys }

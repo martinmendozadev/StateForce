@@ -10,6 +10,6 @@ class ContactPhoneNumber < ApplicationRecord
   validates :phone_number_id, presence: true
   validates :is_primary, inclusion: { in: [ true, false ] }
 
-  # Scope para obtener números primarios
+  # Scopes
   scope :primary, -> { where(is_primary: true) }
 end

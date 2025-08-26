@@ -30,7 +30,7 @@ class AuditLog < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :action, presence: true, inclusion: { in: actions.keys }
   validates :entity_id, presence: true
+  validates :action, presence: true, inclusion: { in: actions.keys }
   validates :entity_name, presence: true, inclusion: { in: entity_names.keys }
 end

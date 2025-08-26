@@ -1,4 +1,5 @@
 class Note < ApplicationRecord
+  # Associations
   belongs_to :creator_user, class_name: "User"
 
   has_many :operational_unit_notes, dependent: :destroy

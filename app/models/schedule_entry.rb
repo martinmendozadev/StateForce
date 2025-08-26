@@ -1,4 +1,5 @@
 class ScheduleEntry < ApplicationRecord
+  # Associations
   belongs_to :creator_user, class_name: "User"
   belongs_to :event, optional: true
 
