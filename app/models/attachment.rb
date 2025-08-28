@@ -1,7 +1,7 @@
 class Attachment < ApplicationRecord
   # Associations
   belongs_to :uploader_user, class_name: "User"
-  belongs_to :attachable, polymorphic: true, optional: true
+  belongs_to :attachable, polymorphic: true
 
   # Enums
   enum :file_type, {
