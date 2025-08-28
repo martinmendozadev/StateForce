@@ -43,19 +43,33 @@ end
 
 # Create fake institutions
 9.times do
-  Institution.create(
+  inst = Institution.create(
     name: Faker::Company.unique.name,
     callsign: Faker::Company.unique.ein,
     description: Faker::Lorem.paragraph,
     sector_type: Institution.sector_types.keys.sample,
     status: Institution.statuses.keys.sample,
-    location: Location.order('RANDOM()').first
+    location: Location.order('RANDOM()').first,
+    created_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today),
+    updated_at: Faker::Time.between(from: 15.days.ago, to: Time.zone.today)
   )
+
+  if [ true, false ].sample
+    inst.update(
+      director_id: User.order('RANDOM()').first.id,
+    )
+  end
+
+  if [ true, false ].sample
+    inst.update(
+      parent_institution_id: Institution.order('RANDOM()').first.id
+    )
+  end
 end
 
 # Create fake events
 25.times do
-  Event.create!(
+  Event.create(
     description: Faker::Lorem.sentence,
     ended_at: Faker::Time.forward(days: 1),
     event_type: Event.event_types.keys.sample,
@@ -77,8 +91,13 @@ end
   ScheduleEntry.create(
     title: Faker::Lorem.sentence(word_count: 3),
     description: Faker::Lorem.paragraph(sentence_count: 2),
+    duration: "#{rand(1..3)} hours",
+    ends_at: Faker::Time.forward(days: rand(2..4)),
+    estimated_ends_at: Faker::Time.forward(days: rand(1..3)),
     priority_level: ScheduleEntry.priority_levels.keys.sample,
     recurrence_rule: ScheduleEntry.recurrence_rules.keys.sample,
+    repeat_until: Faker::Time.forward(days: rand(1..15)),
+    scheduled_at: Faker::Time.forward(days: rand(1..23)),
     status: ScheduleEntry.statuses.keys.sample,
     visibility: ScheduleEntry.visibilities.keys.sample,
     creator_user_id: User.order('RANDOM()').first.id,
