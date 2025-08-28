@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -45,20 +45,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.enum "file_type", default: "other", null: false, enum_type: "file_type"
     t.string "file_url", null: false
     t.enum "visibility", default: "private", null: false, enum_type: "visibility"
+    t.string "attachable_type", null: false
+    t.bigint "attachable_id", null: false
     t.bigint "uploader_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.string "attachable_type"
-    t.bigint "attachable_id"
-    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id"
+    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable"
     t.index ["uploader_user_id"], name: "index_attachments_on_uploader_user_id"
   end
 
   create_table "audit_logs", force: :cascade do |t|
-    t.enum "entity_name", default: "unknown", null: false, enum_type: "entity_names"
     t.enum "action", null: false, enum_type: "actions"
     t.integer "entity_id", null: false
+    t.enum "entity_name", default: "unknown", null: false, enum_type: "entity_names"
     t.jsonb "new_value", null: false
     t.jsonb "old_value"
     t.bigint "user_id"
@@ -98,24 +98,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   end
 
   create_table "contacts", force: :cascade do |t|
+    t.integer "channel", limit: 2
     t.string "email", limit: 150
     t.string "name", limit: 50
     t.string "radio_frequency", limit: 75
-    t.integer "channel", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["email"], name: "index_contacts_on_email", unique: true
-  end
-
-  create_table "event_attachments", primary_key: ["event_id", "attachment_id"], force: :cascade do |t|
-    t.bigint "event_id", null: false
-    t.bigint "attachment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["attachment_id"], name: "index_event_attachments_on_attachment_id"
-    t.index ["event_id"], name: "index_event_attachments_on_event_id"
   end
 
   create_table "event_institutions", force: :cascade do |t|
@@ -129,19 +119,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.index ["institution_id"], name: "index_event_institutions_on_institution_id"
   end
 
-  create_table "event_notes", primary_key: ["event_id", "note_id"], force: :cascade do |t|
-    t.bigint "event_id", null: false
-    t.bigint "note_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["event_id"], name: "index_event_notes_on_event_id"
-    t.index ["note_id"], name: "index_event_notes_on_note_id"
-  end
-
   create_table "event_resources", force: :cascade do |t|
-    t.integer "quantity_assigned", default: 1, null: false
     t.datetime "assigned_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "quantity_assigned", default: 1, null: false
     t.bigint "event_id", null: false
     t.bigint "resource_id", null: false
     t.bigint "assigned_by_user_id", null: false
@@ -171,35 +151,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.index ["location_id"], name: "index_events_on_location_id"
   end
 
-  create_table "institution_attachments", primary_key: ["institution_id", "attachment_id"], force: :cascade do |t|
-    t.bigint "institution_id", null: false
-    t.bigint "attachment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["attachment_id"], name: "index_institution_attachments_on_attachment_id"
-    t.index ["institution_id"], name: "index_institution_attachments_on_institution_id"
-  end
-
   create_table "institution_contacts", force: :cascade do |t|
     t.enum "contact_type", default: "primary", null: false, enum_type: "contact_type"
-    t.bigint "institution_id", null: false
     t.bigint "contact_id", null: false
+    t.bigint "institution_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["contact_id"], name: "index_institution_contacts_on_contact_id"
     t.index ["institution_id"], name: "index_institution_contacts_on_institution_id"
-  end
-
-  create_table "institution_notes", primary_key: ["institution_id", "note_id"], force: :cascade do |t|
-    t.bigint "institution_id", null: false
-    t.bigint "note_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["institution_id"], name: "index_institution_notes_on_institution_id"
-    t.index ["note_id"], name: "index_institution_notes_on_note_id"
   end
 
   create_table "institutions", force: :cascade do |t|
@@ -214,21 +174,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["callsign"], name: "index_institutions_on_callsign", unique: true
+    t.index ["callsign", "name"], name: "index_institutions_on_callsign_and_name", unique: true
     t.index ["director_id"], name: "index_institutions_on_director_id"
     t.index ["location_id"], name: "index_institutions_on_location_id"
-    t.index ["name"], name: "index_institutions_on_name", unique: true
     t.index ["parent_institution_id"], name: "index_institutions_on_parent_institution_id"
   end
 
   create_table "invites", force: :cascade do |t|
     t.string "email", limit: 150
     t.datetime "expires_at", null: false
+    t.bigint "inviter_id"
     t.enum "role", null: false, enum_type: "role"
     t.enum "status", default: "draft", null: false, enum_type: "status_invite"
     t.string "token", null: false
     t.datetime "used_at"
-    t.bigint "inviter_id"
     t.bigint "institution_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -239,9 +198,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
 
   create_table "locations", force: :cascade do |t|
     t.string "address", limit: 150
+    t.geography "coordinates", limit: {srid: 4326, type: "st_point", geographic: true}
     t.text "key_name"
     t.string "place_name", limit: 100
-    t.geography "coordinates", limit: {srid: 4326, type: "st_point", geographic: true}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -272,22 +231,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string "title", limit: 100, null: false
     t.text "body", null: false
+    t.string "title", limit: 100, null: false
     t.enum "visibility", default: "private", null: false, enum_type: "visibility"
+    t.string "noteable_type", null: false
+    t.bigint "noteable_id", null: false
     t.bigint "creator_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.string "noteable_type"
-    t.bigint "noteable_id"
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
-    t.index ["noteable_type", "noteable_id"], name: "index_notes_on_noteable_type_and_noteable_id"
+    t.index ["noteable_type", "noteable_id"], name: "index_notes_on_noteable"
   end
 
   create_table "operational_unit_competencies", primary_key: ["operational_unit_id", "competency_id"], force: :cascade do |t|
-    t.bigint "operational_unit_id", null: false
     t.bigint "competency_id", null: false
+    t.bigint "operational_unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -295,40 +254,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.index ["operational_unit_id"], name: "index_operational_unit_competencies_on_operational_unit_id"
   end
 
-  create_table "operational_unit_notes", primary_key: ["operational_unit_id", "note_id"], force: :cascade do |t|
-    t.bigint "operational_unit_id", null: false
-    t.bigint "note_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["note_id"], name: "index_operational_unit_notes_on_note_id"
-    t.index ["operational_unit_id"], name: "index_operational_unit_notes_on_operational_unit_id"
-  end
-
   create_table "operational_units", force: :cascade do |t|
     t.text "coverage"
-    t.string "name", limit: 150, null: false
     t.enum "facility_type", null: false, enum_type: "facility_type"
+    t.string "name", limit: 150, null: false
     t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
+    t.bigint "location_id", null: false
     t.bigint "on_charge_shift_user_id"
     t.bigint "parent_institution_id", null: false
-    t.bigint "location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["location_id"], name: "index_operational_units_on_location_id"
     t.index ["on_charge_shift_user_id"], name: "index_operational_units_on_on_charge_shift_user_id"
     t.index ["parent_institution_id"], name: "index_operational_units_on_parent_institution_id"
-  end
-
-  create_table "operational_units_attachments", primary_key: ["operational_unit_id", "attachment_id"], force: :cascade do |t|
-    t.bigint "operational_unit_id", null: false
-    t.bigint "attachment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["attachment_id"], name: "index_operational_units_attachments_on_attachment_id"
-    t.index ["operational_unit_id"], name: "index_operational_units_attachments_on_operational_unit_id"
   end
 
   create_table "patient_transfers", force: :cascade do |t|
@@ -352,16 +291,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.index ["transport_resource_id"], name: "index_patient_transfers_on_transport_resource_id"
   end
 
-  create_table "patient_transfers_notes", primary_key: ["patient_transfer_id", "note_id"], force: :cascade do |t|
-    t.bigint "patient_transfer_id", null: false
-    t.bigint "note_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["note_id"], name: "index_patient_transfers_notes_on_note_id"
-    t.index ["patient_transfer_id"], name: "index_patient_transfers_notes_on_patient_transfer_id"
-  end
-
   create_table "patient_vitals", force: :cascade do |t|
     t.integer "blood_pressure_systolic", limit: 2
     t.integer "blood_pressure_diastolic", limit: 2
@@ -382,25 +311,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   end
 
   create_table "patients", force: :cascade do |t|
-    t.string "name", limit: 100, null: false
     t.integer "age", limit: 2, null: false
     t.enum "gender", default: "other", null: false, enum_type: "gender"
+    t.string "name", limit: 100, null: false
     t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["event_id"], name: "index_patients_on_event_id"
-  end
-
-  create_table "patients_notes", primary_key: ["patient_id", "note_id"], force: :cascade do |t|
-    t.bigint "patient_id", null: false
-    t.bigint "note_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["note_id"], name: "index_patients_notes_on_note_id"
-    t.index ["patient_id"], name: "index_patients_notes_on_patient_id"
   end
 
   create_table "phone_numbers", force: :cascade do |t|
@@ -412,50 +331,30 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.datetime "deleted_at"
   end
 
-  create_table "resource_attachments", primary_key: ["resource_id", "attachment_id"], force: :cascade do |t|
-    t.bigint "resource_id", null: false
-    t.bigint "attachment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["attachment_id"], name: "index_resource_attachments_on_attachment_id"
-    t.index ["resource_id"], name: "index_resource_attachments_on_resource_id"
-  end
-
   create_table "resource_categories", force: :cascade do |t|
-    t.string "name", limit: 150, null: false
     t.text "description"
+    t.string "name", limit: 150, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["name"], name: "index_resource_categories_on_name", unique: true
   end
 
-  create_table "resource_notes", primary_key: ["resource_id", "note_id"], force: :cascade do |t|
-    t.bigint "resource_id", null: false
-    t.bigint "note_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["note_id"], name: "index_resource_notes_on_note_id"
-    t.index ["resource_id"], name: "index_resource_notes_on_resource_id"
-  end
-
   create_table "resource_types", force: :cascade do |t|
-    t.string "name", limit: 150, null: false
     t.text "description"
+    t.string "name", limit: 150, null: false
     t.bigint "resource_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["name", "resource_category_id"], name: "index_resource_types_on_name_and_resource_category_id", unique: true
+    t.index ["name"], name: "index_resource_types_on_name", unique: true
     t.index ["resource_category_id"], name: "index_resource_types_on_resource_category_id"
   end
 
   create_table "resources", force: :cascade do |t|
-    t.string "name", limit: 150, null: false
-    t.text "description"
     t.integer "available_units", default: 0, null: false
+    t.text "description"
+    t.string "name", limit: 150, null: false
     t.integer "total_units", default: 0, null: false
     t.string "units_identifier", limit: 50
     t.bigint "icon_id"
@@ -473,7 +372,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   end
 
   create_table "schedule_entries", force: :cascade do |t|
-    t.string "title", limit: 100
     t.text "description"
     t.interval "duration"
     t.datetime "ends_at"
@@ -483,6 +381,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.datetime "repeat_until"
     t.datetime "scheduled_at"
     t.enum "status", default: "pending", null: false, enum_type: "event_status"
+    t.string "title", limit: 100
     t.enum "visibility", default: "private", null: false, enum_type: "visibility"
     t.bigint "creator_user_id", null: false
     t.bigint "event_id", null: false
@@ -494,8 +393,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   end
 
   create_table "schedule_entries_institutions", primary_key: ["schedule_entry_id", "institution_id"], force: :cascade do |t|
-    t.bigint "schedule_entry_id", null: false
     t.bigint "institution_id", null: false
+    t.bigint "schedule_entry_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -504,14 +403,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   end
 
   create_table "specialties", force: :cascade do |t|
-    t.string "name", limit: 150, null: false
-    t.text "description"
     t.string "code", limit: 50
+    t.text "description"
+    t.string "name", limit: 150, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["code"], name: "index_specialties_on_code", unique: true
-    t.index ["name"], name: "index_specialties_on_name", unique: true
+    t.index ["code", "name"], name: "index_specialties_on_code_and_name", unique: true
   end
 
   create_table "user_callsigns", force: :cascade do |t|
@@ -521,7 +419,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["callsign", "institution_id"], name: "idx_unique_callsign_per_institution", unique: true
+    t.index ["callsign", "institution_id"], name: "index_user_callsigns_on_callsign_and_institution_id", unique: true
     t.index ["institution_id"], name: "index_user_callsigns_on_institution_id"
     t.index ["user_id"], name: "index_user_callsigns_on_user_id"
   end
@@ -539,8 +437,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
 
   create_table "user_contacts", primary_key: ["user_id", "contact_id", "contact_type"], force: :cascade do |t|
     t.enum "contact_type", default: "primary", null: false, enum_type: "contact_type"
-    t.bigint "user_id", null: false
     t.bigint "contact_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -603,22 +501,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   add_foreign_key "competencies", "specialties"
   add_foreign_key "contact_phone_numbers", "contacts"
   add_foreign_key "contact_phone_numbers", "phone_numbers"
-  add_foreign_key "event_attachments", "attachments"
-  add_foreign_key "event_attachments", "events"
   add_foreign_key "event_institutions", "events"
   add_foreign_key "event_institutions", "institutions"
-  add_foreign_key "event_notes", "events"
-  add_foreign_key "event_notes", "notes"
   add_foreign_key "event_resources", "events"
   add_foreign_key "event_resources", "resources"
   add_foreign_key "event_resources", "users", column: "assigned_by_user_id"
   add_foreign_key "events", "locations"
-  add_foreign_key "institution_attachments", "attachments"
-  add_foreign_key "institution_attachments", "institutions"
   add_foreign_key "institution_contacts", "contacts"
   add_foreign_key "institution_contacts", "institutions"
-  add_foreign_key "institution_notes", "institutions"
-  add_foreign_key "institution_notes", "notes"
   add_foreign_key "institutions", "institutions", column: "parent_institution_id"
   add_foreign_key "institutions", "locations"
   add_foreign_key "institutions", "users", column: "director_id"
@@ -630,30 +520,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_26_090000) do
   add_foreign_key "notes", "users", column: "creator_user_id"
   add_foreign_key "operational_unit_competencies", "competencies"
   add_foreign_key "operational_unit_competencies", "operational_units"
-  add_foreign_key "operational_unit_notes", "notes"
-  add_foreign_key "operational_unit_notes", "operational_units"
   add_foreign_key "operational_units", "institutions", column: "parent_institution_id"
   add_foreign_key "operational_units", "locations"
   add_foreign_key "operational_units", "users", column: "on_charge_shift_user_id"
-  add_foreign_key "operational_units_attachments", "attachments"
-  add_foreign_key "operational_units_attachments", "operational_units"
   add_foreign_key "patient_transfers", "events"
   add_foreign_key "patient_transfers", "institutions", column: "destination_institution_id"
   add_foreign_key "patient_transfers", "patients"
   add_foreign_key "patient_transfers", "resources", column: "transport_resource_id"
   add_foreign_key "patient_transfers", "users", column: "accepted_by_user_id"
   add_foreign_key "patient_transfers", "users", column: "requesting_user_id"
-  add_foreign_key "patient_transfers_notes", "notes"
-  add_foreign_key "patient_transfers_notes", "patient_transfers"
   add_foreign_key "patient_vitals", "patients"
   add_foreign_key "patient_vitals", "users", column: "recorded_by_user_id"
   add_foreign_key "patients", "events"
-  add_foreign_key "patients_notes", "notes"
-  add_foreign_key "patients_notes", "patients"
-  add_foreign_key "resource_attachments", "attachments"
-  add_foreign_key "resource_attachments", "resources"
-  add_foreign_key "resource_notes", "notes"
-  add_foreign_key "resource_notes", "resources"
   add_foreign_key "resource_types", "resource_categories"
   add_foreign_key "resources", "attachments", column: "icon_id"
   add_foreign_key "resources", "institutions"
