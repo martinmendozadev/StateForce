@@ -17,7 +17,7 @@ class CreateEvents < ActiveRecord::Migration[8.0]
       t.text      :description
       t.timestamp :ended_at
       t.enum      :event_type, enum_type: "event_category", null: false, default: "emergency"
-      t.string    :event_code, limit: 50, unique: true, index: true
+      t.string    :event_code, limit: 50
       t.enum      :priority_level, enum_type: "priority_level", null: false, default: "unknown"
       t.integer   :people_affected, limit: 2, default: 0
       t.string    :reported_by_text, limit: 150
@@ -31,5 +31,8 @@ class CreateEvents < ActiveRecord::Migration[8.0]
       t.timestamps null: false
       t.datetime :deleted_at
     end
+
+    ## Indexes
+    add_index :events, [ :event_code ], unique: true
   end
 end

@@ -4,13 +4,16 @@ class CreateSpecialties < ActiveRecord::Migration[8.0]
   def change
     create_table :specialties do |t|
       ## Custom fields
-      t.string :code, limit: 50, unique: true, index: true
+      t.string :code, limit: 50
       t.text   :description
-      t.string :name, null: false, limit: 150, unique: true, index: true
+      t.string :name, null: false, limit: 150
 
       ## Timestamps and soft delete
       t.timestamps null: false
       t.datetime :deleted_at
     end
+
+    ## Indexes
+    add_index :specialties, [ :code, :name ], unique: true
   end
 end
