@@ -11,3 +11,9 @@ two:
   description: "Covers ambulances, helicopters, and other emergency response vehicles."
   created_at: <%= 2.days.ago %>
   updated_at: <%= 1.days.ago %>
+
+three:
+  name: "Communication Devices"
+  description: "Encompasses radios, satellite phones, and other communication tools."
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 1.days.ago %>

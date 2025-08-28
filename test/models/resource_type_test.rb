@@ -22,10 +22,9 @@ class ResourceTypeTest < ActiveSupport::TestCase
   end
 
   test "should allow same name in different categories" do
-    other_category = resource_categories(:one)
+    other_category = resource_categories(:three)
     duplicate = @resource_type.dup
     duplicate.resource_category = other_category
-    duplicate.id = 1000
     assert duplicate.valid?
   end
 end
