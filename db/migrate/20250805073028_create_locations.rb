@@ -12,8 +12,6 @@ class CreateLocations < ActiveRecord::Migration[8.0]
       t.text    :key_name
       t.string  :place_name, limit: 100
 
-      t.belongs_to :noteable, polymorphic: true
-
       ## Timestamps and soft delete
       t.timestamps null: false
       t.datetime :deleted_at

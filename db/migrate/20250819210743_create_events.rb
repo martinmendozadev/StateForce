@@ -17,15 +17,12 @@ class CreateEvents < ActiveRecord::Migration[8.0]
       t.text      :description
       t.timestamp :ended_at
       t.enum      :event_type, enum_type: "event_category", null: false, default: "emergency"
-      t.string    :event_code, limit: 50
+      t.string    :event_code, limit: 50, unique: true, index: true
       t.enum      :priority_level, enum_type: "priority_level", null: false, default: "unknown"
       t.integer   :people_affected, limit: 2, default: 0
       t.string    :reported_by_text, limit: 150
       t.timestamp :reported_time, null: false, default: -> { 'CURRENT_TIMESTAMP' }
       t.enum      :status, enum_type: "event_status", null: false, default: "pending"
-
-      t.belongs_to :noteable, polymorphic: true
-      t.belongs_to :attachment, polymorphic: true
 
       ## References
       t.references :location, foreign_key: { to_table: :locations }
@@ -34,8 +31,5 @@ class CreateEvents < ActiveRecord::Migration[8.0]
       t.timestamps null: false
       t.datetime :deleted_at
     end
-
-    ## Indexes
-    add_index :events, :event_code, unique: true
   end
 end

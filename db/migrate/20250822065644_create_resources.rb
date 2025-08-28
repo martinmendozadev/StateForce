@@ -10,9 +10,6 @@ class CreateResources < ActiveRecord::Migration[8.0]
       t.integer :total_units, null: false, default: 0
       t.string  :units_identifier, limit: 50
 
-      t.belongs_to :noteable, polymorphic: true
-      t.belongs_to :attachment, polymorphic: true
-
       ## References
       t.references :icon, foreign_key: { to_table: :attachments }
       t.references :institution, null: false, foreign_key: { to_table: :institutions }, index: true

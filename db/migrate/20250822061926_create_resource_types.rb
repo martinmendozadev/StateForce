@@ -5,17 +5,14 @@ class CreateResourceTypes < ActiveRecord::Migration[8.0]
     create_table :resource_types do |t|
       ## Custom fields
       t.text   :description
-      t.string :name, limit: 150, null: false
+      t.string :name, limit: 150, null: false, unique: true, index: true
 
       ## References
-      t.references :resource_category, null: false, foreign_key: { to_table: :resource_categories }
+      t.references :resource_category, null: false, foreign_key: { to_table: :resource_categories }, unique: true, index: true
 
       ## Timestamps and soft delete
       t.timestamps null: false
       t.datetime :deleted_at
     end
-
-    ## Indexes
-    add_index :resource_types, [ :name, :resource_category_id ], unique: true
   end
 end

@@ -13,7 +13,7 @@ class CreateInvites < ActiveRecord::Migration[8.0]
       t.bigint    :inviter_id
       t.enum      :role, enum_type: "role", null: false
       t.enum      :status, enum_type: "status_invite", null: false, default: "draft"
-      t.string    :token, null: false
+      t.string    :token, null: false, unique: true, index: true
       t.datetime  :used_at
 
       ## References
@@ -24,8 +24,7 @@ class CreateInvites < ActiveRecord::Migration[8.0]
       t.datetime :deleted_at
     end
 
-    ## Indexes
-    add_index :invites, :token, unique: true
+    ## Others
     add_foreign_key :invites, :users, column: :inviter_id
   end
 end
