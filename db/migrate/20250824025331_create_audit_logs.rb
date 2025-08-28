@@ -16,7 +16,7 @@ class CreateAuditLogs < ActiveRecord::Migration[8.0]
       ## References
       t.references :user, foreign_key: { to_table: :users }
 
-      ## Timestamps and soft delete
+      ## Timestamp
       t.timestamp :created_at, null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
   end
