@@ -18,8 +18,8 @@ class BedInventory < ApplicationRecord
 
   # Validations
   validates :bed_type, presence: true, inclusion: { in: bed_types.keys }
-  validates :available, numericality: { greater_than_or_equal_to: 0 }
-  validates :total, numericality: { greater_than_or_equal_to: 0 }
+  validates :available, numericality: { greater_than_or_equal_to: 0, only_integer: true }
+  validates :total, numericality: { greater_than_or_equal_to: 0, only_integer: true }
   validate :available_cannot_exceed_total
 
   private

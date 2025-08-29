@@ -9,7 +9,7 @@ class CreateNotes < ActiveRecord::Migration[8.0]
       ## Custom fields
       t.text    :body, null: false
       t.string  :title, null: false
-      t.enum    :visibility, enum_type: "visibility", default: "private", null: false
+      t.enum    :visibility, enum_type: :visibility, default: "private", null: false
 
       ## References
       t.references :noteable, polymorphic: true, null: false

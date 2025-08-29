@@ -7,9 +7,9 @@ class CreateAuditLogs < ActiveRecord::Migration[8.0]
 
     create_table :audit_logs do |t|
       ## Custom fields
-      t.enum    :action, enum_type: "actions", null: false
+      t.enum    :action, enum_type: :actions, null: false
       t.integer :entity_id, null: false
-      t.enum    :entity_name, enum_type: "entity_names", null: false, default: "unknown"
+      t.enum    :entity_name, enum_type: :entity_names, null: false, default: "unknown"
       t.jsonb   :new_value, null: false
       t.jsonb   :old_value
 

@@ -11,8 +11,8 @@ class CreateInvites < ActiveRecord::Migration[8.0]
       t.string    :email
       t.datetime  :expires_at, null: false
       t.bigint    :inviter_id
-      t.enum      :role, enum_type: "role", null: false, default: "guest"
-      t.enum      :status, enum_type: "status_invite", null: false, default: "draft"
+      t.enum      :role, enum_type: :role, null: false, default: "guest"
+      t.enum      :status, enum_type: :status_invite, null: false, default: "draft"
       t.string    :token, null: false
       t.datetime  :used_at
 

@@ -11,8 +11,8 @@ class CreateInstitutions < ActiveRecord::Migration[8.0]
       t.string  :callsign, limit: 100
       t.text    :description
       t.string  :name, null: false
-      t.enum    :sector_type, enum_type: "sector_type", default: "unknown", null: false
-      t.enum    :status, enum_type: "resource_status", default: "unknown", null: false
+      t.enum    :sector_type, enum_type: :sector_type, default: "unknown", null: false
+      t.enum    :status, enum_type: :resource_status, default: "unknown", null: false
 
       ## References
       t.references :director, foreign_key: { to_table: :users }, index: true

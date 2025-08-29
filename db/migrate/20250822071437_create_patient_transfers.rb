@@ -6,7 +6,7 @@ class CreatePatientTransfers < ActiveRecord::Migration[8.0]
       ## Custom fields
       t.timestamp :arrival_time
       t.timestamp :departure_time
-      t.enum      :status, enum_type: "event_status", null: false, default: "pending"
+      t.enum      :status, enum_type: :event_status, null: false, default: "pending"
 
       ## References
       t.references :accepted_by_user, null: false, foreign_key: { to_table: :users }

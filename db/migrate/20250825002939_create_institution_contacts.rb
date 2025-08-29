@@ -7,7 +7,7 @@ class CreateInstitutionContacts < ActiveRecord::Migration[8.0]
 
     create_table :institution_contacts do |t|
       ## Custom fields
-      t.enum :contact_type, enum_type: "contact_type", null: false, default: "primary"
+      t.enum :contact_type, enum_type: :contact_type, null: false, default: "primary"
 
       ## References
       t.references :contact, null: false, foreign_key: { to_table: :contacts }

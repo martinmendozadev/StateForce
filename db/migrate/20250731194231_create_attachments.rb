@@ -13,9 +13,9 @@ class CreateAttachments < ActiveRecord::Migration[8.0]
       t.string  :file_name
       t.bigint  :file_size
 
-      t.enum    :file_type, enum_type: "file_type", default: "other", null: false
+      t.enum    :file_type, enum_type: :file_type, default: "other", null: false
       t.string  :file_url, null: false
-      t.enum    :visibility, enum_type: "visibility", default: "private", null: false
+      t.enum    :visibility, enum_type: :visibility, default: "private", null: false
 
       ## References
       t.references :attachable, polymorphic: true, null: false
