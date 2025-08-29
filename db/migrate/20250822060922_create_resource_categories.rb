@@ -5,7 +5,7 @@ class CreateResourceCategories < ActiveRecord::Migration[8.0]
     create_table :resource_categories do |t|
       ## Custom fields
       t.text   :description
-      t.string :name, limit: 150, null: false
+      t.string :name, null: false
 
       ## Timestamps and soft delete
       t.timestamps null: false

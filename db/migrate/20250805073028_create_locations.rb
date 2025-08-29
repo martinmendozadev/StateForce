@@ -7,7 +7,7 @@ class CreateLocations < ActiveRecord::Migration[8.0]
 
     create_table :locations do |t|
       ## Custom fields
-      t.string :address, limit: 150
+      t.string :address
       t.st_point :coordinates, geographic: true, srid: 4326
       t.text    :key_name
       t.string  :place_name, limit: 100

@@ -4,9 +4,9 @@ class CreateSpecialties < ActiveRecord::Migration[8.0]
   def change
     create_table :specialties do |t|
       ## Custom fields
-      t.string :code, limit: 50
+      t.string :code
       t.text   :description
-      t.string :name, null: false, limit: 150
+      t.string :name, null: false
 
       ## Timestamps and soft delete
       t.timestamps null: false

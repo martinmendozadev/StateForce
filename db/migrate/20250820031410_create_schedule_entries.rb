@@ -16,7 +16,7 @@ class CreateScheduleEntries < ActiveRecord::Migration[8.0]
       t.datetime  :repeat_until
       t.datetime  :scheduled_at
       t.enum      :status, enum_type: "event_status", null: false, default: "pending"
-      t.string    :title, limit: 100
+      t.string    :title
       t.enum      :visibility, enum_type: "visibility", default: "private", null: false
 
       ## References

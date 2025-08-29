@@ -5,7 +5,7 @@ class CreateResourceTypes < ActiveRecord::Migration[8.0]
     create_table :resource_types do |t|
       ## Custom fields
       t.text   :description
-      t.string :name, limit: 150, null: false
+      t.string :name, null: false
 
       ## References
       t.references :resource_category, null: false, foreign_key: { to_table: :resource_categories }

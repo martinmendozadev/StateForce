@@ -5,8 +5,8 @@ class CreateContacts < ActiveRecord::Migration[8.0]
     create_table :contacts do |t|
       ## Custom fields
       t.integer :channel, limit: 2
-      t.string :email, limit: 150
-      t.string :name, limit: 50
+      t.string :email
+      t.string :name
       t.string :radio_frequency, limit: 75
 
       ## Timestamps and soft delete

@@ -40,7 +40,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   create_table "attachments", force: :cascade do |t|
     t.string "content_type", limit: 25
     t.text "description"
-    t.string "file_name", limit: 75
+    t.string "file_name"
     t.bigint "file_size"
     t.enum "file_type", default: "other", null: false, enum_type: "file_type"
     t.string "file_url", null: false
@@ -99,8 +99,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
 
   create_table "contacts", force: :cascade do |t|
     t.integer "channel", limit: 2
-    t.string "email", limit: 150
-    t.string "name", limit: 50
+    t.string "email"
+    t.string "name"
     t.string "radio_frequency", limit: 75
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -139,8 +139,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
     t.enum "event_type", default: "emergency", null: false, enum_type: "event_category"
     t.string "event_code", limit: 50
     t.enum "priority_level", default: "unknown", null: false, enum_type: "priority_level"
-    t.integer "people_affected", limit: 2, default: 0
-    t.string "reported_by_text", limit: 150
+    t.integer "people_affected", default: 0
+    t.string "reported_by_text"
     t.datetime "reported_time", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.enum "status", default: "pending", null: false, enum_type: "event_status"
     t.bigint "location_id"
@@ -163,9 +163,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "institutions", force: :cascade do |t|
-    t.string "callsign", limit: 50
+    t.string "callsign", limit: 100
     t.text "description"
-    t.string "name", limit: 150, null: false
+    t.string "name", null: false
     t.enum "sector_type", default: "unknown", null: false, enum_type: "sector_type"
     t.enum "status", default: "unknown", null: false, enum_type: "resource_status"
     t.bigint "director_id"
@@ -181,10 +181,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "invites", force: :cascade do |t|
-    t.string "email", limit: 150
+    t.string "email"
     t.datetime "expires_at", null: false
     t.bigint "inviter_id"
-    t.enum "role", null: false, enum_type: "role"
+    t.enum "role", default: "guest", null: false, enum_type: "role"
     t.enum "status", default: "draft", null: false, enum_type: "status_invite"
     t.string "token", null: false
     t.datetime "used_at"
@@ -197,7 +197,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "address", limit: 150
+    t.string "address"
     t.geography "coordinates", limit: {srid: 4326, type: "st_point", geographic: true}
     t.text "key_name"
     t.string "place_name", limit: 100
@@ -232,7 +232,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
 
   create_table "notes", force: :cascade do |t|
     t.text "body", null: false
-    t.string "title", limit: 100, null: false
+    t.string "title", null: false
     t.enum "visibility", default: "private", null: false, enum_type: "visibility"
     t.string "noteable_type", null: false
     t.bigint "noteable_id", null: false
@@ -257,7 +257,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   create_table "operational_units", force: :cascade do |t|
     t.text "coverage"
     t.enum "facility_type", null: false, enum_type: "facility_type"
-    t.string "name", limit: 150, null: false
+    t.string "name", null: false
     t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
     t.bigint "location_id", null: false
     t.bigint "on_charge_shift_user_id"
@@ -313,7 +313,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   create_table "patients", force: :cascade do |t|
     t.integer "age", limit: 2, null: false
     t.enum "gender", default: "other", null: false, enum_type: "gender"
-    t.string "name", limit: 100, null: false
+    t.string "name", null: false
     t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false
@@ -333,7 +333,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
 
   create_table "resource_categories", force: :cascade do |t|
     t.text "description"
-    t.string "name", limit: 150, null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -342,7 +342,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
 
   create_table "resource_types", force: :cascade do |t|
     t.text "description"
-    t.string "name", limit: 150, null: false
+    t.string "name", null: false
     t.bigint "resource_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -352,11 +352,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "resources", force: :cascade do |t|
-    t.integer "available_units", default: 0, null: false
+    t.integer "available_units", limit: 2, default: 0, null: false
     t.text "description"
-    t.string "name", limit: 150, null: false
-    t.integer "total_units", default: 0, null: false
-    t.string "units_identifier", limit: 50
+    t.string "name", null: false
+    t.integer "total_units", limit: 2, default: 0, null: false
+    t.string "units_identifier"
     t.bigint "icon_id"
     t.bigint "institution_id", null: false
     t.bigint "location_id", null: false
@@ -381,7 +381,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
     t.datetime "repeat_until"
     t.datetime "scheduled_at"
     t.enum "status", default: "pending", null: false, enum_type: "event_status"
-    t.string "title", limit: 100
+    t.string "title"
     t.enum "visibility", default: "private", null: false, enum_type: "visibility"
     t.bigint "creator_user_id", null: false
     t.bigint "event_id", null: false
@@ -403,9 +403,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "specialties", force: :cascade do |t|
-    t.string "code", limit: 50
+    t.string "code"
     t.text "description"
-    t.string "name", limit: 150, null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -471,7 +471,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", limit: 150, default: "", null: false
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -480,7 +480,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "name", limit: 75
+    t.string "name"
     t.boolean "active", default: true
     t.string "uid"
     t.integer "provider", limit: 2

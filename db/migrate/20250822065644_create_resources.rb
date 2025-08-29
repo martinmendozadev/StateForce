@@ -4,11 +4,11 @@ class CreateResources < ActiveRecord::Migration[8.0]
   def change
     create_table :resources do |t|
       ## Custom fields
-      t.integer :available_units, null: false, default: 0
+      t.integer :available_units, limit: 2, null: false, default: 0
       t.text    :description
-      t.string  :name, limit: 150, null: false
-      t.integer :total_units, null: false, default: 0
-      t.string  :units_identifier, limit: 50
+      t.string  :name, null: false
+      t.integer :total_units, limit: 2, null: false, default: 0
+      t.string  :units_identifier
 
       ## References
       t.references :icon, foreign_key: { to_table: :attachments }

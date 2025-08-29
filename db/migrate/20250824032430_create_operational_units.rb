@@ -8,7 +8,7 @@ class CreateOperationalUnits < ActiveRecord::Migration[8.0]
       ## Custom fields
       t.text   :coverage
       t.enum   :facility_type, enum_type: :facility_type, null: false
-      t.string :name, limit: 150, null: false
+      t.string :name, null: false
       t.enum   :triage_status, enum_type: :triage_status, null: false, default: "unknown"
 
       ## References

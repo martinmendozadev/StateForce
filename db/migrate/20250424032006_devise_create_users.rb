@@ -4,7 +4,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
   def change
     create_table :users do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: "", limit: 150
+      t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -21,7 +21,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.string   :unconfirmed_email
 
       ## Custom fields
-      t.string   :name, limit: 75
+      t.string   :name
       t.boolean  :active, default: true
       t.string   :uid
       t.integer  :provider, limit: 1

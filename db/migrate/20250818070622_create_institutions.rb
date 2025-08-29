@@ -8,9 +8,9 @@ class CreateInstitutions < ActiveRecord::Migration[8.0]
 
     create_table :institutions do |t|
       ## Custom fields
-      t.string  :callsign, limit: 50
+      t.string  :callsign, limit: 100
       t.text    :description
-      t.string  :name, null: false, limit: 150
+      t.string  :name, null: false
       t.enum    :sector_type, enum_type: "sector_type", default: "unknown", null: false
       t.enum    :status, enum_type: "resource_status", default: "unknown", null: false
 
