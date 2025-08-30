@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Competency < ApplicationRecord
   # Associations
   belongs_to :specialty
@@ -14,7 +16,5 @@ class Competency < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :specialty_id, presence: true
-  validates :level, uniqueness: { scope: :specialty_id }
-  validates :level, presence: true, inclusion: { in: levels.keys }
+  validates :level, presence: true, uniqueness: { scope: :specialty_id }
 end
