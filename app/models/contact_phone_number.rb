@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContactPhoneNumber < ApplicationRecord
   self.primary_key = [ :contact_id, :phone_number_id ]
 
@@ -6,8 +8,6 @@ class ContactPhoneNumber < ApplicationRecord
   belongs_to :phone_number
 
   # Validations
-  validates :contact_id, presence: true
-  validates :phone_number_id, presence: true
   validates :is_primary, inclusion: { in: [ true, false ] }
 
   # Scopes
