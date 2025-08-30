@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuditLog < ApplicationRecord
   # Associations
   belongs_to :user, optional: true
@@ -30,7 +32,21 @@ class AuditLog < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :entity_id, presence: true
-  validates :action, presence: true, inclusion: { in: actions.keys }
-  validates :entity_name, presence: true, inclusion: { in: entity_names.keys }
+  validates :action, presence: true
+  validates :entity_id,
+            presence: true,
+            numericality: { only_integer: true, greater_than: 0 }
+
+  validates :entity_name, presence: true
+
+  validates :new_value,
+            presence: true
+  validate :validate_json_fields
+
+  private
+
+  def validate_json_fields
+    errors.add(:new_value, "must be a JSON object") unless new_value.is_a?(Hash)
+    errors.add(:old_value, "must be a JSON object") if old_value.present? && !old_value.is_a?(Hash)
+  end
 end
