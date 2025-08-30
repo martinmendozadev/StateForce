@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Contact < ApplicationRecord
   # Associations
   has_many :institution_contacts, dependent: :destroy
