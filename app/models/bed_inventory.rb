@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BedInventory < ApplicationRecord
   # Associations
   belongs_to :operational_unit
@@ -17,15 +19,22 @@ class BedInventory < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :bed_type, presence: true, inclusion: { in: bed_types.keys }
-  validates :available, numericality: { greater_than_or_equal_to: 0, only_integer: true }
-  validates :total, numericality: { greater_than_or_equal_to: 0, only_integer: true }
+  validates :bed_type, presence: true
+
+  validates :available,
+            presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  validates :total,
+            presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
   validate :available_cannot_exceed_total
 
   private
 
   def available_cannot_exceed_total
-    return if available <= total
-    errors.add(:available, "cannot exceed total beds")
+    return if available.nil? || total.nil?
+    errors.add(:available, "cannot exceed total beds") if available > total
   end
 end
