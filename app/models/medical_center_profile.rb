@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MedicalCenterProfile < ApplicationRecord
   # Associations
   belongs_to :operational_unit
@@ -11,10 +13,11 @@ class MedicalCenterProfile < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :level, presence: true, inclusion: { in: levels.keys }
-  validates :operating_rooms_total, numericality: { greater_than_or_equal_to: 0 }
-  validates :operating_rooms_available, numericality: { greater_than_or_equal_to: 0 }
+  validates :operational_unit, presence: true
   validate :available_rooms_cannot_exceed_total
+  validates :level, presence: true, inclusion: { in: levels.keys }
+  validates :operating_rooms_total, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :operating_rooms_available, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   private
 

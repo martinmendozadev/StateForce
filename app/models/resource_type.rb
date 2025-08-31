@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class ResourceType < ApplicationRecord
   # Associations
   belongs_to :resource_category
   has_many :resources, dependent: :nullify
 
   # Validations
+  validates :resource_category, presence: true
   validates :name,
             presence: true,
             length: { maximum: 150 },

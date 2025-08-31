@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Note < ApplicationRecord
   # Associations
   belongs_to :creator_user, class_name: "User"
@@ -16,6 +18,8 @@ class Note < ApplicationRecord
 
   # Validations
   validates :body, presence: true
+  validates :noteable, presence: true
+  validates :creator_user, presence: true
   validates :title, presence: true, length: { maximum: 100 }
   validates :visibility, presence: true, inclusion: { in: visibilities.keys }
 end

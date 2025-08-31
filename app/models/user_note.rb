@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserNote < ApplicationRecord
   self.primary_key = [ :user_id, :note_id ]
 
@@ -6,8 +8,8 @@ class UserNote < ApplicationRecord
   belongs_to :note
 
   # Validations
-  validates :user_id, presence: true
-  validates :note_id, presence: true
+  validates :user, presence: true
+  validates :note, presence: true
   validates :starred, inclusion: { in: [ true, false ] }
 
   # Scopes

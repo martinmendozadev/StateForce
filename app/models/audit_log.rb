@@ -32,15 +32,15 @@ class AuditLog < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :action, presence: true
+  validates :action, presence: true, inclusion: { in: actions.keys }
+
   validates :entity_id,
             presence: true,
             numericality: { only_integer: true, greater_than: 0 }
 
-  validates :entity_name, presence: true
+  validates :entity_name, presence: true, inclusion: { in: entity_names.keys }
 
-  validates :new_value,
-            presence: true
+  validates :new_value, presence: true
   validate :validate_json_fields
 
   private

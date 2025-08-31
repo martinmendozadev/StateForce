@@ -41,6 +41,14 @@ class Attachment < ApplicationRecord
   validates :file_size,
             numericality: { only_integer: true, greater_than_or_equal_to: 0, allow_nil: true }
 
-  validates :file_type, presence: true
-  validates :visibility, presence: true
+  validates :file_type,
+            presence: true,
+            inclusion: { in: file_types.keys }
+
+  validates :visibility,
+            presence: true,
+            inclusion: { in: visibilities.keys }
+
+  validates :uploader_user, presence: true
+  validates :attachable, presence: true
 end

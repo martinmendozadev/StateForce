@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NoteEditor < ApplicationRecord
   self.primary_key = [ :note_id, :user_id ]
 
@@ -6,7 +8,7 @@ class NoteEditor < ApplicationRecord
   belongs_to :user
 
   # Validations
-  validates :note_id, presence: true
-  validates :user_id, presence: true
-  validates :last_edited_at, presence: true
+  validates :note, presence: true
+  validates :user, presence: true
+  validates :last_edited_at, timeliness: { type: :datetime }, allow_nil: true, if: -> { respond_to?(:last_edited_at) }
 end

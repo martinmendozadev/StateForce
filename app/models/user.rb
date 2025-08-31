@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -24,9 +26,14 @@ class User < ApplicationRecord
   enum :provider, google_oauth2: 0
 
   ## Validations
-  validates :email, presence: true, length: { maximum: 150 }, uniqueness: true
-  validates :name,  length: { maximum: 75 }, allow_blank: true
-  # Ensure password is required only when setting or updating it, and skip for provider-based users
+  validates :email,
+            presence: true,
+            length: { maximum: 150 },
+            uniqueness: { case_sensitive: false },
+            format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  validates :name, length: { maximum: 75 }, allow_blank: true
+  validates :uid, presence: true, if: -> { provider.present? }
   validates :password, presence: true, if: -> { new_record? || (password.present? && provider.blank?) }, unless: -> { provider.present? && uid.present? }
 
 

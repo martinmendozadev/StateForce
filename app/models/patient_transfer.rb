@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PatientTransfer < ApplicationRecord
   # Associations
   belongs_to :accepted_by_user, class_name: "User"
@@ -23,7 +25,13 @@ class PatientTransfer < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :status, presence: true, inclusion: { in: statuses.keys }
+  validates :event, presence: true
+  validates :patient, presence: true
   validates :departure_time, presence: true
+  validates :requesting_user, presence: true
+  validates :accepted_by_user, presence: true
+  validates :transport_resource, presence: true
+  validates :destination_institution, presence: true
+  validates :status, presence: true, inclusion: { in: statuses.keys }
   validates :arrival_time, comparison: { greater_than: :departure_time }, allow_nil: true
 end

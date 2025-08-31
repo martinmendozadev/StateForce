@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ScheduleEntry < ApplicationRecord
   # Associations
   belongs_to :creator_user, class_name: "User"
-  belongs_to :event, optional: true
+  belongs_to :event
 
   has_many :schedule_entries_institutions, dependent: :destroy
   has_many :institutions, through: :schedule_entries_institutions
@@ -41,9 +43,11 @@ class ScheduleEntry < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :title, presence: true, length: { maximum: 100 }
-  validates :priority_level, presence: true
-  validates :recurrence_rule, presence: true
+  validates :event, presence: true
   validates :status, presence: true
   validates :visibility, presence: true
+  validates :creator_user, presence: true
+  validates :priority_level, presence: true
+  validates :recurrence_rule, presence: true
+  validates :title, presence: true, length: { maximum: 100 }
 end

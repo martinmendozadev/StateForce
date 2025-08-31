@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Resource < ApplicationRecord
   # Associations
   belongs_to :institution
   belongs_to :resource_type
   belongs_to :icon, class_name: "Attachment", optional: true
-  belongs_to :location, optional: true
+  belongs_to :location
 
   has_many :notes, as: :noteable, dependent: :destroy
 
@@ -13,9 +15,15 @@ class Resource < ApplicationRecord
   # Validations
   validates :name, presence: true, length: { maximum: 150 },
                    uniqueness: { scope: :institution_id, case_sensitive: false }
+  validates :institution, presence: true
+  validates :resource_type, presence: true
+  validates :available_units,
+            presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  validates :available_units, numericality: { greater_than_or_equal_to: 0 }
-  validates :total_units, numericality: { greater_than_or_equal_to: 0 }
+  validates :total_units,
+            presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validate :available_cannot_exceed_total
 
   validates :units_identifier, length: { maximum: 50 }, allow_blank: true
@@ -23,7 +31,7 @@ class Resource < ApplicationRecord
   private
 
   def available_cannot_exceed_total
-    return if available_units.blank? || total_units.blank?
-    errors.add(:available_units, "cannot exceed total units") if available_units > total_units
+  return if available_units.nil? || total_units.nil?
+  errors.add(:available_units, "cannot exceed total units") if available_units > total_units
   end
 end

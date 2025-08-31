@@ -16,5 +16,6 @@ class Competency < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :level, presence: true, uniqueness: { scope: :specialty_id }
+  validates :level, presence: true, inclusion: { in: levels.keys }, uniqueness: { scope: :specialty_id }
+  validates :specialty, presence: true
 end

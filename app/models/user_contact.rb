@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserContact < ApplicationRecord
   self.primary_key = [ :user_id, :contact_id, :contact_type ]
 
@@ -13,7 +15,7 @@ class UserContact < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :user_id, presence: true
-  validates :contact_id, presence: true
+  validates :user, presence: true
+  validates :contact, presence: true
   validates :contact_type, presence: true, inclusion: { in: contact_types.keys }
 end

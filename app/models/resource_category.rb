@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceCategory < ApplicationRecord
   # Associations
   has_many :resources, dependent: :nullify

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhoneNumber < ApplicationRecord
   # Associations
   has_many :contact_phone_numbers, dependent: :destroy
@@ -15,7 +17,7 @@ class PhoneNumber < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :number, presence: true, length: { maximum: 25 }
+  validates :number, length: { maximum: 25 }, allow_blank: true
   validates :extension, length: { maximum: 3 }, allow_blank: true
   validates :phone_type, presence: true, inclusion: { in: phone_types.keys }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PatientVital < ApplicationRecord
   ## Relationships
   belongs_to :patient
@@ -28,5 +30,7 @@ class PatientVital < ApplicationRecord
             numericality: { greater_than_or_equal_to: -100.0, less_than_or_equal_to: 150.0 },
             allow_nil: true
 
+  validates :patient, presence: true
   validates :recorded_at, presence: true
+  validates :recorded_by_user, presence: true
 end

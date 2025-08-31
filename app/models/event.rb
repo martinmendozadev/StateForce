@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Event < ApplicationRecord
   ## Relationships
   belongs_to :location, optional: true
@@ -57,7 +59,10 @@ class Event < ApplicationRecord
   }, prefix: true
 
   ## Validations
-  validates :event_type, :priority_level, :status, :reported_time, presence: true
-  validates :event_code, uniqueness: true, allow_nil: true, length: { maximum: 50 }
+  validates :reported_time, presence: true
+  validates :status, presence: true, inclusion: { in: statuses.keys }
   validates :reported_by_text, length: { maximum: 150 }, allow_nil: true
+  validates :event_type, presence: true, inclusion: { in: event_types.keys }
+  validates :event_code, uniqueness: true, allow_nil: true, length: { maximum: 50 }
+  validates :priority_level, presence: true, inclusion: { in: priority_levels.keys }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OperationalUnit < ApplicationRecord
   # Associations
   belongs_to :location
@@ -31,7 +33,9 @@ class OperationalUnit < ApplicationRecord
   }, prefix: true
 
   # Validations
+  validates :location, presence: true
+  validates :parent_institution, presence: true
   validates :name, presence: true, length: { maximum: 150 }
-  validates :triage_status, presence: true, inclusion: { in: triage_statuses.keys }
   validates :facility_type, presence: true, inclusion: { in: facility_types.keys }
+  validates :triage_status, presence: true, inclusion: { in: triage_statuses.keys }
 end

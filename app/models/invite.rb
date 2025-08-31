@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Invite < ApplicationRecord
   # Associations
   belongs_to :institution
-  belongs_to :inviter, class_name: "User"
+  belongs_to :inviter, class_name: "User", optional: true
 
   # Enums
   enum :role, {
@@ -29,11 +31,12 @@ class Invite < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :email, presence: true, length: { maximum: 150 }, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :expires_at, presence: true
-  validates :token, presence: true, uniqueness: true
   validates :role, presence: true
   validates :status, presence: true
+  validates :expires_at, presence: true
+  validates :institution, presence: true
+  validates :token, presence: true, uniqueness: true
+  validates :email, presence: true, length: { maximum: 150 }, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   # Scopes
   scope :active, -> { where(status: :pending).where("expires_at > ?", Time.current) }

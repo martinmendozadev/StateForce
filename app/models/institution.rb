@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Institution < ApplicationRecord
   ## Relationships
   belongs_to :location
@@ -31,6 +33,9 @@ class Institution < ApplicationRecord
   }, prefix: true
 
   ## Validations
+  validates :location, presence: true
+  validates :status, presence: true, inclusion: { in: statuses.keys }
   validates :name, presence: true, uniqueness: true, length: { maximum: 150 }
+  validates :sector_type, presence: true, inclusion: { in: sector_types.keys }
   validates :callsign, uniqueness: true, allow_nil: true, length: { maximum: 50 }
 end

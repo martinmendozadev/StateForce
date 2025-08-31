@@ -14,7 +14,7 @@ class Contact < ApplicationRecord
   # Validations
   validates :email,
             presence: true,
-            uniqueness: true,
+            uniqueness: { case_sensitive: false },
             length: { maximum: 150 },
             format: { with: URI::MailTo::EMAIL_REGEXP }
 
