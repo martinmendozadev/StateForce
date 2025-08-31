@@ -48,6 +48,9 @@ gem "thruster", require: false
 gem 'devise'
 gem 'omniauth-google-oauth2'
 
+# Validate date and time attributes
+gem "validates_timeliness"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

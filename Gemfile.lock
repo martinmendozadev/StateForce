@@ -413,6 +413,7 @@ GEM
     thruster (0.1.14-aarch64-linux)
     thruster (0.1.14-arm64-darwin)
     thruster (0.1.14-x86_64-linux)
+    timeliness (0.5.3)
     timeout (0.4.3)
     tsort (0.2.0)
     turbo-rails (2.0.16)
@@ -425,6 +426,9 @@ GEM
     unicode-emoji (4.0.4)
     uri (1.0.3)
     useragent (0.16.11)
+    validates_timeliness (8.0.0)
+      activemodel (>= 8.0.0, < 9)
+      timeliness (>= 0.3.10, < 1)
     version_gem (1.1.8)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -485,6 +489,7 @@ DEPENDENCIES
   thruster
   turbo-rails
   tzinfo-data
+  validates_timeliness
   web-console
 
 BUNDLED WITH
