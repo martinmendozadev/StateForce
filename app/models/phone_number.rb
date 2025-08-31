@@ -17,7 +17,7 @@ class PhoneNumber < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :number, length: { maximum: 25 }, allow_blank: true
+  validates :number, length: { maximum: 25 }, presence: true
   validates :extension, length: { maximum: 3 }, allow_blank: true
   validates :phone_type, presence: true, inclusion: { in: phone_types.keys }
 end

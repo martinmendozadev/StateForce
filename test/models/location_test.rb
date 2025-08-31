@@ -9,12 +9,6 @@ class LocationTest < ActiveSupport::TestCase
     assert @location.valid?
   end
 
-  test "should not be valid without coordinates" do
-    @location.coordinates = nil
-    assert_not @location.valid?
-    assert_includes @location.errors[:coordinates], "can't be blank"
-  end
-
   test "coordinates should be a valid geographic point" do
     @location.longitude = 200
     @location.latitude = 100

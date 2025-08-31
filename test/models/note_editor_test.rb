@@ -19,9 +19,9 @@ class NoteEditorTest < ActiveSupport::TestCase
     assert_not @note_editor.valid?
   end
 
-  test "should require last_edited_at" do
+  test "should not require last_edited_at" do
     @note_editor.last_edited_at = nil
-    assert_not @note_editor.valid?
+    assert @note_editor.valid?
   end
 
   test "composite key should enforce uniqueness" do

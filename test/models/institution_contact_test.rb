@@ -32,6 +32,6 @@ class InstitutionContactTest < ActiveSupport::TestCase
       contact_type: @ic.contact_type
     )
   assert_not duplicate.valid?
-  assert_includes duplicate.errors[:contact_type], "has already been taken"
+  assert_includes duplicate.errors[:institution_id], "association already exists for this contact and type"
   end
 end
