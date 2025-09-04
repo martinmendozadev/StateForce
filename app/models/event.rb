@@ -60,9 +60,19 @@ class Event < ApplicationRecord
 
   ## Validations
   validates :reported_time, presence: true
-  validates :status, presence: true, inclusion: { in: statuses.keys }
-  validates :reported_by_text, length: { maximum: 150 }, allow_nil: true
-  validates :event_type, presence: true, inclusion: { in: event_types.keys }
-  validates :event_code, uniqueness: true, allow_nil: true, length: { maximum: 50 }
-  validates :priority_level, presence: true, inclusion: { in: priority_levels.keys }
+  validates :status, presence: true
+  validates :event_type, presence: true
+  validates :priority_level, presence: true
+
+  validates :event_code,
+            uniqueness: true,
+            length: { maximum: 50 },
+            allow_nil: true
+
+  validates :reported_by_text,
+            length: { maximum: 150 },
+            allow_nil: true
+
+  validates :people_affected,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 end
