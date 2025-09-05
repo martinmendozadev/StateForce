@@ -13,8 +13,12 @@ class Location < ApplicationRecord
 
   private
 
+  def numeric?(value)
+    true if Float(value) rescue false
+  end
+
   def set_coordinates_from_lon_lat
-    return unless longitude.present? && latitude.present?
+    return unless numeric?(longitude) && numeric?(latitude)
 
     lon = longitude.to_f
     lat = latitude.to_f
