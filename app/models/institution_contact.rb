@@ -3,20 +3,19 @@
 class InstitutionContact < ApplicationRecord
   self.primary_key = [ :institution_id, :contact_id, :contact_type ]
 
-  # Associations
+  ## Associations
   belongs_to :institution
   belongs_to :contact
 
-  # Enum
+  ## Enum
   enum :contact_type, {
     emergency: "emergency",
     primary: "primary",
     technical_support: "technical_support"
   }, prefix: true
 
-  # Validations
-  validates :contact, presence: true
-  validates :institution, presence: true
+  ## Validations
+  validates :institution_id, presence: true, uniqueness: { scope: [ :contact_id, :contact_type ], message: "association already exists for this contact and type" }
+  validates :contact_id, presence: true
   validates :contact_type, presence: true, inclusion: { in: contact_types.keys }
-  validates :institution_id, uniqueness: { scope: [ :contact_id, :contact_type ], message: "association already exists for this contact and type" }
 end
