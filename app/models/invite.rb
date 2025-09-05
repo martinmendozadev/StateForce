@@ -12,7 +12,8 @@ class Invite < ApplicationRecord
     manager: "manager",
     restricted: "restricted",
     standard: "standard",
-    superadmin: "superadmin"
+    superadmin: "superadmin",
+    unknown: "unknown" # agregar solo si el schema lo define con default
   }, prefix: true
 
   enum :status, {
@@ -31,13 +32,16 @@ class Invite < ApplicationRecord
   }, prefix: true
 
   # Validations
-  validates :role, presence: true
-  validates :status, presence: true
-  validates :expires_at, presence: true
   validates :institution, presence: true
+  validates :role, presence: true, inclusion: { in: roles.keys }
+  validates :status, presence: true, inclusion: { in: statuses.keys }
+  validates :expires_at, presence: true
   validates :token, presence: true, uniqueness: true
-  validates :email, presence: true, length: { maximum: 150 }, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email,
+            presence: true,
+            length: { maximum: 150 },
+            format: { with: URI::MailTo::EMAIL_REGEXP }
 
   # Scopes
-  scope :active, -> { where(status: :pending).where("expires_at > ?", Time.current) }
+  scope :pending_and_valid, -> { where(status: :pending).where("expires_at > ?", Time.current) }
 end
