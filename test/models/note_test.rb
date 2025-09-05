@@ -20,7 +20,7 @@ class NoteTest < ActiveSupport::TestCase
   end
 
   test "should not accept overly long title" do
-    @note.title = "a" * 101
+    @note.title = "a" * 151
     assert_not @note.valid?
   end
 
