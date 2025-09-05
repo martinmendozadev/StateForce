@@ -29,13 +29,15 @@ class Institution < ApplicationRecord
   enum :status, {
     available: "available",
     maintenance: "maintenance",
-    out_of_service: "out_of_service"
+    out_of_service: "out_of_service",
+    unknown: "unknown"
   }, prefix: true
 
   ## Validations
   validates :location, presence: true
-  validates :status, presence: true, inclusion: { in: statuses.keys }
-  validates :name, presence: true, uniqueness: true, length: { maximum: 150 }
+  validates :name, presence: true, length: { maximum: 150 }
+  validates :callsign, length: { maximum: 100 }, allow_nil: true
   validates :sector_type, presence: true, inclusion: { in: sector_types.keys }
-  validates :callsign, uniqueness: true, allow_nil: true, length: { maximum: 50 }
+  validates :status, presence: true, inclusion: { in: statuses.keys }
+  validates :callsign, uniqueness: { scope: :name, message: "and name combination must be unique" }
 end
