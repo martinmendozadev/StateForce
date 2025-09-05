@@ -11,14 +11,8 @@ class NoteEditor < ApplicationRecord
   # Validations
   validates :note, presence: true
   validates :user, presence: true
-
-  # Validación de unicidad por clave compuesta
   validates :user_id, uniqueness: { scope: :note_id, message: "already assigned as editor for this note" }
-
-  # Validación de fecha
   validates :last_edited_at, timeliness: { type: :datetime }, allow_nil: true
-
-  # Opcional: asegurar que no haya fechas futuras incoherentes
   validate :last_edited_at_cannot_be_in_future, if: -> { last_edited_at.present? }
 
   private
