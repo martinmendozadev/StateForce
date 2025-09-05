@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class OperationalUnitCompetency < ApplicationRecord
-  self.primary_keys = %i[operational_unit_id competency_id]
-
+  self.primary_key = %i[operational_unit_id competency_id]
   ## Associations
   belongs_to :operational_unit
   belongs_to :competency
