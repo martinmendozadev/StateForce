@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OperationalUnit < ApplicationRecord
-  # Associations
+  ## Associations
   belongs_to :location
   belongs_to :parent_institution, class_name: "Institution"
   belongs_to :on_charge_shift_user, class_name: "User", optional: true
@@ -15,7 +15,7 @@ class OperationalUnit < ApplicationRecord
   has_many :operational_units_attachments, dependent: :destroy
   has_many :attachments, through: :operational_units_attachments
 
-  # Enums
+  ## Enums
   enum :triage_status, {
     black: "black",
     green: "green",
@@ -32,7 +32,7 @@ class OperationalUnit < ApplicationRecord
     other: "other"
   }, prefix: true
 
-  # Validations
+  ## Validations
   validates :location, presence: true
   validates :parent_institution, presence: true
   validates :name, presence: true, length: { maximum: 150 }
