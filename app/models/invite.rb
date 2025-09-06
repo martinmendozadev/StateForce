@@ -12,8 +12,7 @@ class Invite < ApplicationRecord
     manager: "manager",
     restricted: "restricted",
     standard: "standard",
-    superadmin: "superadmin",
-    unknown: "unknown" # agregar solo si el schema lo define con default
+    superadmin: "superadmin"
   }, prefix: true
 
   enum :status, {
