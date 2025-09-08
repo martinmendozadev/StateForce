@@ -4,11 +4,9 @@
       <%= link_to root_path, class: "p-4" do %>
         <%= cdn_image :logo_white, class: "h-16", alt: t("landing.company_name") %>
       <% end %>
-
       <%= link_to "#{t("landing.nav.login")} <span aria-hidden='true'>&rarr;</span>".html_safe, new_user_session_path, class: "text-sm font-semibold p-4" %>
     </nav>
   </header>
-
   <div class="relative isolate overflow-hidden h-full">
     <%= cdn_image :hero, class: "absolute inset-0 -z-10 size-full object-cover" %>
     <div class="absolute inset-x-0 -z-10 overflow-hidden blur-3xl -top-80">
@@ -17,7 +15,6 @@
         style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
       </div>
     </div>
-
     <div class="mx-auto h-full flex justify-center items-center">
       <div class="max-w-2xl">
         <div class="text-center">
@@ -29,7 +26,6 @@
           </div>
         </div>
       </div>
-    </div> 
-
+    </div>
   </div>
 </div>

@@ -1,0 +1,22 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: "Ambulance A-12"
+  description: "Advanced life support ambulance equipped with ventilators."
+  available_units: 3
+  total_units: 5
+  units_identifier: "AMB-12"
+  institution: two
+  resource_type: two
+  location: one
+  icon: one
+
+two:
+  name: "Fire Truck 7"
+  description: "Heavy duty fire truck with water pump."
+  available_units: 2
+  total_units: 3
+  units_identifier: "FT-7"
+  institution: one
+  resource_type: two
+  location: one

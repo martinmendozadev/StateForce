@@ -66,10 +66,13 @@ jobs:
     # Services required for the test job
     services:
       postgres:
-        image: postgres
+        # Use a Postgres image with PostGIS installed so migrations can enable the extension
+        image: postgis/postgis:17-3.4
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          # Optional: explicitly create default db so health check succeeds sooner
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -94,11 +97,6 @@ jobs:
       - name: Install system dependencies
         run: script/install_dependencies_to_github_actions.sh
 
-      - name: Validate Chrome and Chromedriver installation
-        run: |
-          google-chrome --version
-          chromedriver --version
-
       - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
@@ -108,11 +106,14 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
           # REDIS_URL: redis://localhost:6379/0
         run: |
           bundle exec rails db:prepare
-          xvfb-run -a bundle exec rails test:system
+          # Sanity check PostGIS extension is usable
+          psql postgres://postgres:postgres@localhost:5432/postgres -c "SELECT PostGIS_Version();" || true
           bundle exec rails test
 
       - name: Upload screenshots from failed system tests

@@ -21,21 +21,22 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.string   :unconfirmed_email
 
       ## Custom fields
-      t.integer :role, null: false, default: 0
-      t.string :first_name
-      t.string :last_name
-      t.string :phone
-      t.boolean :active, default: true
-      t.string :uid
-      t.string :provider
-      t.string :avatar_url
+      t.string   :name
+      t.boolean  :active, default: true
+      t.string   :uid
+      t.integer  :provider, limit: 1
+      t.string   :avatar_url
 
+      ## Timestamps and soft delete
       t.timestamps null: false
+      t.datetime :deleted_at
     end
 
+    ## Indexes
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
-    # add_index :users, :confirmation_token,   unique: true
+    add_index :users, :confirmation_token,   unique: true
+    add_index :users, :uid
     # add_index :users, :unlock_token,         unique: true
   end
 end

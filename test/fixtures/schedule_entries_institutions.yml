@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  schedule_entry: one
+  institution: one
+
+two:
+  schedule_entry: two
+  institution: two

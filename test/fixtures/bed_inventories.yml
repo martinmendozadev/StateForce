@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  operational_unit: one
+  bed_type: icu
+  available: 5
+  total: 10
+
+two:
+  operational_unit: two
+  bed_type: general
+  available: 20
+  total: 25
