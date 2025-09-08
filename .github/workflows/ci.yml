@@ -142,6 +142,31 @@ jobs:
           echo "Coverage XML (first 50 lines):"
           head -n 50 coverage/coverage.xml || true
 
+      - name: "Merge SimpleCov resultsets and regenerate cobertura XML"
+        if: ${{ always() }}
+        run: |
+          echo "Found resultset files:"
+          ls -la coverage/.resultset* || true
+          ruby -e "
+            require 'simplecov'
+            require 'simplecov-cobertura'
+            SimpleCov.root(File.expand_path('.', Dir.pwd))
+            resultsets = Dir['coverage/.resultset*json']
+            puts 'Collating: ' + resultsets.join(', ')
+            if resultsets.empty?
+              puts 'No resultset files to collate'
+              exit 0
+            end
+            SimpleCov.collate(resultsets, 'rails') do
+              SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+                SimpleCov::Formatter::HTMLFormatter,
+                SimpleCov::Formatter::CoberturaFormatter
+              ])
+            end
+          "
+          echo "Re-generated coverage/coverage.xml head:"
+          head -n 50 coverage/coverage.xml || true
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
