@@ -137,4 +137,46 @@ class UserTest < ActiveSupport::TestCase
     # users(:one) has avatar: one in fixtures
     assert @user.avatar.present?
   end
+
+  test "association reflections are configured correctly" do
+    # avatar belongs_to Attachment and is optional
+    r = User.reflect_on_association(:avatar)
+    assert_equal :belongs_to, r.macro
+    assert_equal "Attachment", r.options[:class_name]
+    assert r.options[:optional]
+
+    # assigned_event_resources has proper class_name and foreign_key
+    r2 = User.reflect_on_association(:assigned_event_resources)
+    assert_equal :has_many, r2.macro
+    assert_equal "EventResource", r2.options[:class_name]
+    assert_equal "assigned_by_user_id", r2.options[:foreign_key]
+
+    # user_contacts -> contacts through
+    r3 = User.reflect_on_association(:user_contacts)
+    assert_equal :has_many, r3.macro
+    assert_equal :destroy, r3.options[:dependent]
+
+    r4 = User.reflect_on_association(:contacts)
+    assert_equal :has_many, r4.macro
+    assert_equal :user_contacts, r4.options[:through]
+
+    # user_notes -> notes through
+    rn = User.reflect_on_association(:user_notes)
+    assert_equal :has_many, rn.macro
+    assert_equal :destroy, rn.options[:dependent]
+
+    rnotes = User.reflect_on_association(:notes)
+    assert_equal :has_many, rnotes.macro
+    assert_equal :user_notes, rnotes.options[:through]
+
+    # note_editors -> edited_notes through note_editors source note
+    re = User.reflect_on_association(:note_editors)
+    assert_equal :has_many, re.macro
+    assert_equal :destroy, re.options[:dependent]
+
+    redited = User.reflect_on_association(:edited_notes)
+    assert_equal :has_many, redited.macro
+    assert_equal :note_editors, redited.options[:through]
+    assert_equal :note, redited.options[:source]
+  end
 end
