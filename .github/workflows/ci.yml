@@ -136,7 +136,9 @@ jobs:
         if: ${{ always() }}
         run: |
           echo "Coverage files to upload:"
-          ls -la coverage/*.resultset.json coverage/coverage.xml || true
+          # include the hidden .resultset.json explicitly because globbing
+          # patterns like coverage/*.resultset.json do not match dotfiles
+          ls -la coverage/.resultset.json coverage/*.resultset.json coverage/coverage.xml || true
           echo "Coverage XML (first 50 lines):"
           head -n 50 coverage/coverage.xml || true
 
@@ -148,6 +150,7 @@ jobs:
           # receives a stable coverage report even when tests run in parallel.
           files: |
             coverage/coverage.xml
+            coverage/.resultset.json
             coverage/*.resultset.json
           flags: unit-tests
           verbose: true
