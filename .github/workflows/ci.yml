@@ -132,11 +132,22 @@ jobs:
           echo "Resultset JSON (first 200 lines):"
           head -n 200 coverage/.resultset.json || true
 
+      - name: "Diagnostic: which coverage files will be uploaded"
+        if: ${{ always() }}
+        run: |
+          echo "Coverage files to upload:"
+          ls -la coverage/*.resultset.json coverage/coverage.xml || true
+          echo "Coverage XML (first 50 lines):"
+          head -n 50 coverage/coverage.xml || true
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          # Explicitly upload the SimpleCov resultset to avoid autodetection issues
-          files: coverage/.resultset.json
+          # Upload the Cobertura XML and any SimpleCov resultset files so Codecov
+          # receives a stable coverage report even when tests run in parallel.
+          files: |
+            coverage/coverage.xml
+            coverage/*.resultset.json
           flags: unit-tests
           verbose: true
