@@ -71,8 +71,6 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          # Optional: explicitly create default db so health check succeeds sooner
-          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -106,14 +104,9 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: postgres
-          PGPASSWORD: postgres
           # REDIS_URL: redis://localhost:6379/0
         run: |
           bundle exec rails db:prepare
-          # Sanity check PostGIS extension is usable
-          psql postgres://postgres:postgres@localhost:5432/postgres -c "SELECT PostGIS_Version();" || true
           bundle exec rails test
 
       - name: Upload screenshots from failed system tests
@@ -124,42 +117,7 @@ jobs:
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
 
-      - name: "Diagnostic: show coverage files (for Codecov debugging)"
-        if: ${{ always() }}
-        run: |
-          echo "Coverage dir listing:"
-          ls -la coverage || true
-          echo "Resultset JSON (first 200 lines):"
-          head -n 200 coverage/.resultset.json || true
-
-      - name: "Diagnostic: which coverage files will be uploaded"
-        if: ${{ always() }}
-        run: |
-          echo "Coverage files to upload:"
-          # include the hidden .resultset.json explicitly because globbing
-          # patterns like coverage/*.resultset.json do not match dotfiles
-          ls -la coverage/.resultset.json coverage/*.resultset.json coverage/coverage.xml || true
-          echo "Coverage XML (first 50 lines):"
-          head -n 50 coverage/coverage.xml || true
-
-      - name: "Merge SimpleCov resultsets and regenerate cobertura XML"
-        if: ${{ always() }}
-        run: |
-          echo "Found resultset files:"
-          ls -la coverage/.resultset* || true
-          bundle exec ruby script/merge_coverage.rb || true
-          echo "Re-generated coverage/coverage.xml head:"
-          head -n 50 coverage/coverage.xml || true
-
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          # Upload the Cobertura XML and any SimpleCov resultset files so Codecov
-          # receives a stable coverage report even when tests run in parallel.
-          files: |
-            coverage/coverage.xml
-            coverage/.resultset.json
-            coverage/*.resultset.json
-          flags: unit-tests
-          verbose: true
