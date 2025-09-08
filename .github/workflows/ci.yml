@@ -124,7 +124,19 @@ jobs:
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
 
+      - name: Diagnostic: show coverage files (for Codecov debugging)
+        if: always()
+        run: |
+          echo "Coverage dir listing:"
+          ls -la coverage || true
+          echo "Resultset JSON (first 200 lines):"
+          head -n 200 coverage/.resultset.json || true
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          # Explicitly upload the SimpleCov resultset to avoid autodetection issues
+          files: coverage/.resultset.json
+          flags: unit-tests
+          verbose: true
