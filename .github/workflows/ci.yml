@@ -147,32 +147,7 @@ jobs:
         run: |
           echo "Found resultset files:"
           ls -la coverage/.resultset* || true
-          # Run under Bundler so gems from the Gemfile are available. If SimpleCov
-          # isn't present for any reason, print a message and continue (don't fail).
-          bundle exec ruby -e "begin
-            require 'simplecov'
-            require 'simplecov-cobertura'
-            SimpleCov.root(File.expand_path('.', Dir.pwd))
-            resultsets = Dir['coverage/.resultset*json']
-            puts 'Collating: ' + resultsets.join(', ')
-            if resultsets.empty?
-              puts 'No resultset files to collate'
-              exit 0
-            end
-            SimpleCov.collate(resultsets, 'rails') do
-              SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-                SimpleCov::Formatter::HTMLFormatter,
-                SimpleCov::Formatter::CoberturaFormatter
-              ])
-            end
-          rescue LoadError => e
-            puts "SimpleCov not available: #{e.message}"
-            exit 0
-          rescue => e
-            puts "SimpleCov collate failed: #{e.class}: #{e.message}"
-            puts e.backtrace.join("\n")
-            exit 0
-          end"
+          bundle exec ruby script/merge_coverage.rb || true
           echo "Re-generated coverage/coverage.xml head:"
           head -n 50 coverage/coverage.xml || true
 
