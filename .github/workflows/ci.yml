@@ -97,11 +97,6 @@ jobs:
       - name: Install system dependencies
         run: script/install_dependencies_to_github_actions.sh
 
-      - name: Validate Chrome and Chromedriver installation
-        run: |
-          google-chrome --version
-          chromedriver --version
-
       - name: Set up Ruby environment
         uses: ruby/setup-ruby@v1
         with:
@@ -119,8 +114,6 @@ jobs:
           bundle exec rails db:prepare
           # Sanity check PostGIS extension is usable
           psql postgres://postgres:postgres@localhost:5432/postgres -c "SELECT PostGIS_Version();" || true
-          # Run system tests separately so a webdriver issue doesn't hide unit test failures
-          xvfb-run -a bundle exec rails test:system || echo "System tests failed (likely webdriver); proceeding to unit tests"
           bundle exec rails test
 
       - name: Upload screenshots from failed system tests
