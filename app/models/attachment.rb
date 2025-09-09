@@ -1,24 +1,15 @@
 # frozen_string_literal: true
 
 class Attachment < ApplicationRecord
+  include Enums
+
   # Associations
   belongs_to :uploader_user, class_name: "User"
   belongs_to :attachable, polymorphic: true
 
   # Enums
-  enum :file_type, {
-    certification: "certification",
-    document: "document",
-    image: "image",
-    other: "other",
-    video: "video"
-  }, prefix: true
-
-  enum :visibility, {
-    public: "public",
-    private: "private",
-    restricted: "restricted"
-  }, prefix: true
+  enum :file_type, FILE_TYPES, prefix: true
+  enum :visibility, VISIBILITIES, prefix: true
 
   # Validations
   validates :file_url,
