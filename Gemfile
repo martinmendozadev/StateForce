@@ -65,7 +65,7 @@ group :development, :test do
   # Fake data for database seeding
   gem 'faker'
 
-  # Envarioment vars
+  # Environment vars
   gem 'dotenv-rails'
 end
 
