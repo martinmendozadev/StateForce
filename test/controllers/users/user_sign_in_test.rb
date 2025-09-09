@@ -4,7 +4,7 @@ require "test_helper"
 
 class UserSignInTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:user_one)
+    @user = users(:one)
     @unconfirmed_user = users(:user_three)
 
     get new_user_session_path

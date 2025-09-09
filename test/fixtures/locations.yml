@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  address: "14 Main St, Central City, MEX"
+  key_name: "central_hq"
+  place_name: "Central HQ"
+  coordinates: <%= RGeo::Geographic.spherical_factory(srid: 4326).point(-99.1332, 19.4326).as_text %>
+
+two:
+  address: "22 Second St, Central City, MEX"
+  key_name: "central_hq"
+  place_name: "Central HQ"
+  coordinates: <%= RGeo::Geographic.spherical_factory(srid: 4326).point(-99.1332, 19.4326).as_text %>

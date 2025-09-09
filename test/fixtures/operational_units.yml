@@ -1,0 +1,18 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  coverage: "Covers all urban areas within a 30 km radius"
+  name: "Central Rescue Base"
+  parent_institution: one
+  location: one
+  on_charge_shift_user: one
+  triage_status: green
+  facility_type: rescue_base
+
+two:
+  coverage: "Provides care for northern districts"
+  name: "City General Hospital"
+  parent_institution: two
+  location: one
+  triage_status: yellow
+  facility_type: hospital

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -5,10 +7,35 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
-  enum :role, guest: 0, standard: 1, admin: 2
 
-  # Ensure password is required only when setting or updating it, and skip for provider-based users
+  ## Relationships
+  belongs_to :avatar, class_name: "Attachment", optional: true
+
+  has_many :assigned_event_resources, class_name: "EventResource", foreign_key: "assigned_by_user_id"
+
+  has_many :user_contacts, dependent: :destroy
+  has_many :contacts, through: :user_contacts
+
+  has_many :user_notes, dependent: :destroy
+  has_many :notes, through: :user_notes
+
+  has_many :note_editors, dependent: :destroy
+  has_many :edited_notes, through: :note_editors, source: :note
+
+  ## Enums
+  enum :provider, google_oauth2: 0
+
+  ## Validations
+  validates :email,
+            presence: true,
+            length: { maximum: 150 },
+            uniqueness: { case_sensitive: false },
+            format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  validates :name, length: { maximum: 75 }, allow_blank: true
+  validates :uid, presence: true, if: -> { provider.present? }
   validates :password, presence: true, if: -> { new_record? || (password.present? && provider.blank?) }, unless: -> { provider.present? && uid.present? }
+
 
   def password_required?
     provider.blank? && uid.blank? && super
@@ -26,11 +53,9 @@ class User < ApplicationRecord
     where(email: auth.info.email).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.first_name = auth.info.first_name
-      user.last_name = auth.info.last_name
+      user.name = auth.info.name
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.avatar_url = auth.info.image
       user.confirmed_at = Time.current
     end
   end

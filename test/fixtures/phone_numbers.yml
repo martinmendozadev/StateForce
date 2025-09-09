@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: "+526641401806"
+  extension: "014"
+  phone_type: "mobile"
+
+two:
+  number: "+525512345678"
+  extension: ""
+  phone_type: "landline"

@@ -58,7 +58,7 @@ Visit [stateforce.mx](http://localhost:3000) and log in
 ## 🛠 Tech Stack
 
 - **Ruby 3.4.5** – Elegant, powerful backend language.
-- **Rails 8.0.2** – Framework optimized for developer productivity and performance.
+- **Rails 8.0.2.1** – Framework optimized for developer productivity and performance.
 - **PostgreSQL 17** – Reliable, production-grade relational database.
 - **Redis** – Used for background jobs and caching.
 - **TailwindCSS 4** – Utility-first CSS framework for rapid UI development.
@@ -82,15 +82,13 @@ To run StateForce locally:
 
 2. **Install Ruby**
 
-   ```bash
-   rbenv install 3.4.5 && rbenv local 3.4.5
-   ```
+   [Go to Doc](https://www.ruby-lang.org/en/documentation/installation/)
 
 3. **Install Dependencies**
 
    ```bash
+   gem install bundler
    bundle install
-   yarn install
    ```
 
 4. **Set Up Environment Variables**
