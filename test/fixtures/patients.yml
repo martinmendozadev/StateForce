@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: "Alice Smith"
+  age: 28
+  gender: female
+  triage_status: green
+  event: one
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+two:
+  name: "Bob Johnson"
+  age: 40
+  gender: male
+  triage_status: red
+  event: one
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

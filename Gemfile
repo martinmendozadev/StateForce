@@ -6,6 +6,8 @@ gem "rails", "~> 8.0.2"
 gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+# Use postgis for geospatial data in Active Record
+gem 'activerecord-postgis-adapter'
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -46,6 +48,9 @@ gem "thruster", require: false
 gem 'devise'
 gem 'omniauth-google-oauth2'
 
+# Validate date and time attributes
+gem "validates_timeliness"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -59,6 +64,9 @@ group :development, :test do
 
   # Fake data for database seeding
   gem 'faker'
+
+  # Envarioment vars
+  gem 'dotenv-rails'
 end
 
 group :development do

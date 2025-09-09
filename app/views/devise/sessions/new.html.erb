@@ -5,10 +5,8 @@
     <% end %>
     <h2 class="mt-6 text-center text-2xl/9 font-bold text-info"><%= t('devise.sessions.sign_in') %></h2>
   </div>
-
   <div class="mt-10 mx-auto w-full max-w-md">
     <div class="bg-background-surface p-12 shadow rounded-lg">
-
       <% if resource.errors.any? %>
         <div class="mb-6 rounded-md bg-danger p-4">
           <h3 class="text-sm font-semibold"><%= t('errors.messages.not_saved', count: resource.errors.count) %></h3>
@@ -23,7 +21,6 @@
           <h3 class="text-sm font-semibold"><%= flash[:alert] %></h3>
         </div>
       <% end %>
-
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
         <div>
           <%= f.label :email, t('devise.registrations.email'), class: "block text-sm font-medium" %>
@@ -36,7 +33,6 @@
             </div>
           <% end %>
         </div>
-
         <div>
           <%= f.label :password, t('devise.registrations.password'), class: "block text-sm font-medium" %>
           <div class="mt-2">
@@ -48,7 +44,6 @@
             </div>
           <% end %>
         </div>
-
         <% if devise_mapping.rememberable? %>
           <div class="flex items-center justify-between">
             <div class="flex gap-3">
@@ -62,10 +57,8 @@
             <%= link_to t('devise.registrations.forgot_password'), new_user_password_path, class: "text-sm text-info hover:text-info-hover" %>
           </div>
         <% end %>
-
         <%= f.submit t('devise.sessions.sign_in'), class: "w-full rounded-md bg-primary px-3 py-2 text-sm font-semibold shadow-sm hover:bg-primary-hover cursor-pointer" %>
       <% end %>
-
       <div>
         <div class="relative mt-10">
           <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -75,7 +68,6 @@
             <span class="bg-background-surface px-6 rounded text-center"><%= t('devise.registrations.or_continue_with') %></span>
           </div>
         </div>
-
         <div class="mt-6">
           <%= link_to user_google_oauth2_omniauth_authorize_path, class: "flex w-full items-center justify-center gap-3 rounded-md bg-background-overlay px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-500 hover:bg-gray-600 focus-visible:ring-transparent" do %>
             <%= cdn_image :google_icon, class: 'max-h-6' %>
@@ -83,15 +75,12 @@
           <% end %>
         </div>
       </div>
-
     </div>
-
-     <p class="mt-10 text-center text-sm/6">
+    <p class="mt-10 text-center text-sm/6">
       <%= link_to new_user_registration_path, class: 'p-4' do %>
         <span><%= t('devise.sessions.create_account') %></span>
         <span class="font-semibold text-success hover:text-success-hover"><%= t('devise.registrations.sign_up') %></span>
       <% end %>
     </p>
   </div>
-
 </div>

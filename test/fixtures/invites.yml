@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: "invitee1@example.com"
+  expires_at: <%= 2.days.from_now %>
+  role: guest
+  status: sent
+  token: "abc123token"
+  institution: one
+  inviter: one
+
+two:
+  email: "invitee2@example.com"
+  expires_at: <%= 3.days.from_now %>
+  role: admin
+  status: pending
+  token: "xyz789token"
+  institution: two
+  inviter: two

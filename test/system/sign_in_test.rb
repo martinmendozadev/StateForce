@@ -4,7 +4,7 @@ require "test_helper"
 
 class SignInTest < ActionDispatch::SystemTestCase
   def setup
-    @user = users(:user_one)
+    @user = users(:one)
     log_out @user
 
     visit new_user_session_path

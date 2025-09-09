@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+class CreateInstitutions < ActiveRecord::Migration[8.0]
+  def change
+    ## Enums
+    create_enum :sector_type, %w[public private social unknown]
+    create_enum :resource_status, %w[available maintenance out_of_service unknown]
+
+    create_table :institutions do |t|
+      ## Custom fields
+      t.string  :callsign, limit: 100
+      t.text    :description
+      t.string  :name, null: false
+      t.enum    :sector_type, enum_type: :sector_type, default: "unknown", null: false
+      t.enum    :status, enum_type: :resource_status, default: "unknown", null: false
+
+      ## References
+      t.references :director, foreign_key: { to_table: :users }, index: true
+      t.references :location, null: false, foreign_key: { to_table: :locations }
+      t.references :parent_institution, foreign_key: { to_table: :institutions }
+
+      ## Timestamps and soft delete
+      t.timestamps null: false
+      t.datetime :deleted_at
+    end
+
+    ## Indexes
+    add_index :institutions, [ :callsign, :name ], unique: true
+  end
+end

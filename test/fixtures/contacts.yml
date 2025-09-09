@@ -1,0 +1,12 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: "contact1@hospital.org"
+  name: "Emergency Coordinator"
+  radio_frequency: "155.800 MHz"
+  channel: 5
+
+two:
+  email: "contact2@firestation.org"
+  name: "Fire Station Chief"
+  radio_frequency: "156.250 MHz"

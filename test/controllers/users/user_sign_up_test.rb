@@ -56,7 +56,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_no_difference "User.count" do
       post user_registration_path, params: {
         user: {
-          email: users(:user_one).email,
+          email: users(:one).email,
           password: "password123",
           password_confirmation: "password123"
         }

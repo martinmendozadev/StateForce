@@ -2,6 +2,14 @@
 
 require "simplecov"
 require "simplecov-cobertura"
+
+# Ensure SimpleCov uses the repository root so recorded paths are consistent
+# between local runs and CI containers. Also give each parallel worker a
+# unique command name so resultset files don't overwrite each other.
+SimpleCov.root(File.expand_path("..", __dir__))
+SimpleCov.command_name "Minitest-#{ENV['TEST_ENV_NUMBER'] || '1'}"
+SimpleCov.merge_timeout 3600
+
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
   SimpleCov::Formatter::CoberturaFormatter
