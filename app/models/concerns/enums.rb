@@ -9,6 +9,19 @@ module Enums
     updated: "updated"
   }.freeze
 
+  BED_TYPES = {
+    emergency: "emergency",
+    gynecology: "gynecology",
+    icu: "icu",
+    internal_medicine: "internal_medicine",
+    isolated: "isolated",
+    neonatal_icu: "neonatal_icu",
+    pediatric: "pediatric",
+    trauma: "trauma",
+    general: "general",
+    maternity: "maternity"
+  }.freeze
+
   ENTITY_NAMES = {
     contacts: "contacts",
     events: "events",
