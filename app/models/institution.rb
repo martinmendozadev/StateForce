@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Institution < ApplicationRecord
+  include Enums
+
   ## Relationships
   belongs_to :location
   belongs_to :director, class_name: "User", optional: true
@@ -19,19 +21,8 @@ class Institution < ApplicationRecord
   has_many :schedule_entries, through: :schedule_entries_institutions
 
   ## Enums
-  enum :sector_type, {
-    public: "public",
-    private: "private",
-    social: "social",
-    unknown: "unknown"
-  }, prefix: true
-
-  enum :status, {
-    available: "available",
-    maintenance: "maintenance",
-    out_of_service: "out_of_service",
-    unknown: "unknown"
-  }, prefix: true
+  enum :sector_type, SECTOR_TYPES, prefix: true
+  enum :status, INSTITUTION_STATUSES, prefix: true
 
   ## Validations
   validates :location, presence: true

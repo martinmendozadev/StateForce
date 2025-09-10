@@ -79,6 +79,13 @@ module Enums
     video:         "video"
   }.freeze
 
+  INSTITUTION_STATUSES = {
+    available: "available",
+    maintenance: "maintenance",
+    out_of_service: "out_of_service",
+    unknown: "unknown"
+  }.freeze
+
   LEVELS = {
     advanced: "advanced",
     basic: "basic",
@@ -103,6 +110,13 @@ module Enums
     on_scene: "on_scene",
     pending: "pending",
     resolved: "resolved"
+  }.freeze
+
+  SECTOR_TYPES = {
+    public: "public",
+    private: "private",
+    social: "social",
+    unknown: "unknown"
   }.freeze
 
   VISIBILITIES = {
