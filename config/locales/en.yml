@@ -132,3 +132,8 @@ en:
     errors:
       messages:
         invalid_room_total: "cannot exceed total operating rooms"
+  note_editor:
+    errors:
+      messages:
+        already_assigned: "already assigned as editor for this note"
+        cannot_be_in_future: "cannot be in the future"
