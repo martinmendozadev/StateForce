@@ -87,6 +87,13 @@ module Enums
     video:         "video"
   }.freeze
 
+  GENDERS = {
+    female: "female",
+    intersex: "intersex",
+    male: "male",
+    other: "other"
+  }.freeze
+
   INSTITUTION_STATUSES = {
     available: "available",
     maintenance: "maintenance",
