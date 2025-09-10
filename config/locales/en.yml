@@ -128,3 +128,7 @@ en:
       messages:
         invalid_coordinates: "must be a valid geographic point (WGS 84)"
         wrong_coordinates: "must be a valid RGeo point"
+  medical_center_profile:
+    errors:
+      messages:
+        invalid_room_total: "cannot exceed total operating rooms"

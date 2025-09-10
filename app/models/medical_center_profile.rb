@@ -16,13 +16,13 @@ class MedicalCenterProfile < ApplicationRecord
   validates :operating_rooms_total, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :operating_rooms_available, numericality: {
     less_than_or_equal_to: :operating_rooms_total,
-    message: "cannot exceed total operating rooms"
+    message: I18n.t("medical_center_profile.errors.messages.invalid_room_total")
   }
 
   private
 
   def available_rooms_cannot_exceed_total
     return if operating_rooms_available <= operating_rooms_total
-    errors.add(:operating_rooms_available, "cannot exceed total operating rooms")
+    errors.add(:operating_rooms_available, I18n.t("medical_center_profile.errors.messages.invalid_room_total"))
   end
 end
