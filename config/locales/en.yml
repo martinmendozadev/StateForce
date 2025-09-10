@@ -145,3 +145,7 @@ en:
     errors:
       messages:
         invalid_total: "cannot exceed total units"
+  user_callsign:
+    errors:
+      messages:
+        invalid_institution: "already assigned in this institution"
