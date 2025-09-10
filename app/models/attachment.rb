@@ -7,27 +7,29 @@ class Attachment < ApplicationRecord
   belongs_to :uploader_user, class_name: "User"
   belongs_to :attachable, polymorphic: true
 
+
   # Enums
   enum :file_type, FILE_TYPES, prefix: true
   enum :visibility, VISIBILITIES, prefix: true
+
 
   # Validations
   validates :file_url,
             presence: true,
             format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
-                      message: "must be a valid URL" }
+                      message: I18n.t("attachment.errors.messages.not_a_url") }
 
   validates :file_name,
             presence: true,
             length: { maximum: 75 },
             format: { with: /\A[\w\s\-.]+\z/,
-                      message: "only allows letters, numbers, spaces, dashes and dots" }
+                      message: I18n.t("attachment.errors.messages.file_name_format") }
 
   validates :content_type,
             presence: true,
             length: { maximum: 25 },
             format: { with: %r{\A[\w\-/]+\z},
-                      message: "must be a valid MIME type (e.g., image/png)" }
+                      message: I18n.t("attachment.errors.messages.content_type_format") }
 
   validates :file_size,
             numericality: { only_integer: true, greater_than_or_equal_to: 0, allow_nil: true }

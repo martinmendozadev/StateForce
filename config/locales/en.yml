@@ -28,6 +28,12 @@
 #       enabled: "ON"
 
 en:
+  attachment:
+    errors:
+      messages:
+        not_a_url: "must be a valid URL"
+        file_name_format: "can only contain letters, numbers, spaces, dots, dashes, and underscores"
+        content_type_format: "must be a valid MIME type (e.g., image/png)"
   common:
     yes: "Yes"
     no: "No"
