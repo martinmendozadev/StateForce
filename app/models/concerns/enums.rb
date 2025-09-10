@@ -101,6 +101,30 @@ module Enums
     unknown: "unknown"
   }.freeze
 
+  ROLES = {
+    admin: "admin",
+    guest: "guest",
+    manager: "manager",
+    restricted: "restricted",
+    standard: "standard",
+    superadmin: "superadmin"
+  }.freeze
+
+  INVITE_STATUSES = {
+    active: "active",
+    accepted: "accepted",
+    cancelled: "cancelled",
+    done: "done",
+    draft: "draft",
+    expired: "expired",
+    paused: "paused",
+    pending: "pending",
+    retired: "retired",
+    revoked: "revoked",
+    sent: "sent",
+    unknown: "unknown"
+  }
+
   STATUS = {
     assigned: "assigned",
     arrived: "arrived",
