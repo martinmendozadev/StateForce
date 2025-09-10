@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ScheduleEntry < ApplicationRecord
+  include Enums
+
   # Associations
   belongs_to :creator_user, class_name: "User"
   belongs_to :event
@@ -9,38 +11,10 @@ class ScheduleEntry < ApplicationRecord
   has_many :institutions, through: :schedule_entries_institutions
 
   # Enums
-  enum :priority_level, {
-    critical: "critical",
-    high: "high",
-    low: "low",
-    medium: "medium",
-    unknown: "unknown"
-  }, prefix: true
-
-  enum :recurrence_rule, {
-    once: "once",
-    daily: "daily",
-    weekly: "weekly",
-    monthly: "monthly",
-    yearly: "yearly"
-  }, prefix: true
-
-  enum :status, {
-    assigned: "assigned",
-    arrived: "arrived",
-    cancelled: "cancelled",
-    closed: "closed",
-    en_route: "en_route",
-    on_scene: "on_scene",
-    pending: "pending",
-    resolved: "resolved"
-  }, prefix: true
-
-  enum :visibility, {
-    public: "public",
-    private: "private",
-    restricted: "restricted"
-  }, prefix: true
+  enum :status, STATUS, prefix: true
+  enum :visibility, VISIBILITIES, prefix: true
+  enum :priority_level, PRIORITY_LEVELS, prefix: true
+  enum :recurrence_rule, RECURRENCE_RULES, prefix: true
 
   # Validations
   validates :event, presence: true

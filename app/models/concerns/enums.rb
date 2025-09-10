@@ -126,6 +126,14 @@ module Enums
     unknown: "unknown"
   }.freeze
 
+  RECURRENCE_RULES = {
+    once: "once",
+    daily: "daily",
+    weekly: "weekly",
+    monthly: "monthly",
+    yearly: "yearly"
+  }.freeze
+
   ROLES = {
     admin: "admin",
     guest: "guest",
