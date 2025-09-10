@@ -137,3 +137,7 @@ en:
       messages:
         already_assigned: "already assigned as editor for this note"
         cannot_be_in_future: "cannot be in the future"
+  operational_unit_competency:
+    errors:
+      messages:
+        association_exists: "association with this competency already exists"

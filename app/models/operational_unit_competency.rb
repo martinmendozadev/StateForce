@@ -11,7 +11,7 @@ class OperationalUnitCompetency < ApplicationRecord
   validates :competency, presence: true
   validates :operational_unit_id, uniqueness: {
     scope: :competency_id,
-    message: "association with this competency already exists"
+    message: I18n.t("operational_unit_competency.errors.messages.association_exists")
   }
 
   ## Scopes
