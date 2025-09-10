@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Note < ApplicationRecord
+  include Enums
+
   ## Relationships
   belongs_to :creator_user, class_name: "User"
   belongs_to :noteable, polymorphic: true
@@ -8,11 +10,7 @@ class Note < ApplicationRecord
   has_many :editors, through: :note_editors, source: :user
 
   ## Enums
-  enum :visibility, {
-    private: "private",
-    public: "public",
-    restricted: "restricted"
-  }, prefix: true
+  enum :visibility, VISIBILITIES, prefix: true
 
   ## Validations
   validates :creator_user, presence: true
