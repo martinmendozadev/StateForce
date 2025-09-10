@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Competency < ApplicationRecord
+  include Enums
   # Associations
   belongs_to :specialty
 
@@ -8,12 +9,7 @@ class Competency < ApplicationRecord
   has_many :operational_units, through: :operational_unit_competencies
 
   # Enums
-  enum :level, {
-    advanced: "advanced",
-    basic: "basic",
-    medium: "medium",
-    unknown: "unknown"
-  }, prefix: true
+  enum :level, LEVELS, prefix: true
 
   # Validations
   validates :level, presence: true, inclusion: { in: levels.keys }, uniqueness: { scope: :specialty_id }

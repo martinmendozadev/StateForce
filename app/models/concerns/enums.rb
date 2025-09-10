@@ -48,6 +48,13 @@ module Enums
     video:         "video"
   }.freeze
 
+  LEVELS = {
+    advanced: "advanced",
+    basic: "basic",
+    medium: "medium",
+    unknown: "unknown"
+  }.freeze
+
   VISIBILITIES = {
     public:     "public",
     private:    "private",
