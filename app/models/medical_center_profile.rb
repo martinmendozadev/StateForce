@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
 class MedicalCenterProfile < ApplicationRecord
+  include Enums
+
   # Associations
   belongs_to :operational_unit
 
   # Enums
-  enum :level, {
-    advanced: "advanced",
-    basic: "basic",
-    medium: "medium",
-    unknown: "unknown"
-  }, prefix: true
+  enum :level, LEVELS, prefix: true
 
   # Validations
   validates :operational_unit, presence: true
