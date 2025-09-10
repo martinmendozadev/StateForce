@@ -108,6 +108,16 @@ module Enums
     unknown: "unknown"
   }.freeze
 
+  PHONE_TYPES = {
+    home: "home",
+    landline: "landline",
+    mobile: "mobile",
+    office: "office",
+    other: "other",
+    personal: "personal",
+    unknown: "unknown"
+  }.freeze
+
   PRIORITY_LEVELS = {
     critical: "critical",
     high: "high",
