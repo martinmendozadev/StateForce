@@ -40,6 +40,31 @@ module Enums
     unknown: "unknown"
   }.freeze
 
+  EVENT_TYPES = {
+    animal_rescue: "animal_rescue",
+    bomb_threat: "bomb_threat",
+    emergency: "emergency",
+    epidemic_response: "epidemic_response",
+    evacuation: "evacuation",
+    fire_incident: "fire_incident",
+    flood_response: "flood_response",
+    hazardous_material: "hazardous_material",
+    infrastructure_collapse: "infrastructure_collapse",
+    medical_emergency: "medical_emergency",
+    missing_person: "missing_person",
+    natural_disaster: "natural_disaster",
+    operative: "operative",
+    other: "other",
+    power_outage: "power_outage",
+    public_disturbance: "public_disturbance",
+    rescue_operation: "rescue_operation",
+    simulacrum: "simulacrum",
+    support_request: "support_request",
+    traffic_accident: "traffic_accident",
+    training: "training",
+    unknown: "unknown"
+  }.freeze
+
   FILE_TYPES = {
     certification: "certification",
     document:      "document",
@@ -53,6 +78,25 @@ module Enums
     basic: "basic",
     medium: "medium",
     unknown: "unknown"
+  }.freeze
+
+  PRIORITY_LEVELS = {
+    critical: "critical",
+    high: "high",
+    low: "low",
+    medium: "medium",
+    unknown: "unknown"
+  }.freeze
+
+  STATUS = {
+    assigned: "assigned",
+    arrived: "arrived",
+    cancelled: "cancelled",
+    closed: "closed",
+    en_route: "en_route",
+    on_scene: "on_scene",
+    pending: "pending",
+    resolved: "resolved"
   }.freeze
 
   VISIBILITIES = {
