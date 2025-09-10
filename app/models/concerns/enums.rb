@@ -71,6 +71,14 @@ module Enums
     unknown: "unknown"
   }.freeze
 
+  FACILITY_TYPES = {
+    hospital: "hospital",
+    clinic: "clinic",
+    rescue_base: "rescue_base",
+    command_center: "command_center",
+    other: "other"
+}.freeze
+
   FILE_TYPES = {
     certification: "certification",
     document:      "document",
@@ -123,7 +131,7 @@ module Enums
     revoked: "revoked",
     sent: "sent",
     unknown: "unknown"
-  }
+  }.freeze
 
   STATUS = {
     assigned: "assigned",
@@ -141,6 +149,14 @@ module Enums
     private: "private",
     social: "social",
     unknown: "unknown"
+  }.freeze
+
+  TRIAGE_STATUSES = {
+    black: "black",
+    green: "green",
+    red: "red",
+    unknown: "unknown",
+    yellow: "yellow"
   }.freeze
 
   VISIBILITIES = {

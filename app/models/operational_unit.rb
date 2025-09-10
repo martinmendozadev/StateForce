@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class OperationalUnit < ApplicationRecord
+  include Enums
+
   ## Associations
   belongs_to :location
   belongs_to :parent_institution, class_name: "Institution"
@@ -16,21 +18,8 @@ class OperationalUnit < ApplicationRecord
   has_many :attachments, through: :operational_units_attachments
 
   ## Enums
-  enum :triage_status, {
-    black: "black",
-    green: "green",
-    red: "red",
-    unknown: "unknown",
-    yellow: "yellow"
-  }, prefix: true
-
-  enum :facility_type, {
-    hospital: "hospital",
-    clinic: "clinic",
-    rescue_base: "rescue_base",
-    command_center: "command_center",
-    other: "other"
-  }, prefix: true
+  enum :triage_status, TRIAGE_STATUSES, prefix: true
+  enum :facility_type, FACILITY_TYPES, prefix: true
 
   ## Validations
   validates :location, presence: true
