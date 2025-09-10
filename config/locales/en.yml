@@ -141,3 +141,7 @@ en:
     errors:
       messages:
         association_exists: "association with this competency already exists"
+  resource:
+    errors:
+      messages:
+        invalid_total: "cannot exceed total units"

@@ -32,6 +32,6 @@ class Resource < ApplicationRecord
 
   def available_cannot_exceed_total
   return if available_units.nil? || total_units.nil?
-  errors.add(:available_units, "cannot exceed total units") if available_units > total_units
+  errors.add(:available_units, I18n.t("resource.errors.messages.invalid_total")) if available_units > total_units
   end
 end
