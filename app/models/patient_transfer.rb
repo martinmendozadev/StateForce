@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PatientTransfer < ApplicationRecord
+  include Enums
+
   ## Associations
   belongs_to :accepted_by_user, class_name: "User"
   belongs_to :destination_institution, class_name: "Institution"
@@ -13,16 +15,7 @@ class PatientTransfer < ApplicationRecord
   has_many :attachments, as: :attachable, dependent: :destroy
 
   ## Enums
-  enum :status, {
-    assigned: "assigned",
-    arrived: "arrived",
-    cancelled: "cancelled",
-    closed: "closed",
-    en_route: "en_route",
-    on_scene: "on_scene",
-    pending: "pending",
-    resolved: "resolved"
-  }, prefix: true
+  enum :status, STATUS, prefix: true
 
   ## Validations
   validates :event, presence: true
