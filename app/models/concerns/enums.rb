@@ -22,6 +22,12 @@ module Enums
     maternity: "maternity"
   }.freeze
 
+  CONTACT_TYPES = {
+    emergency: "emergency",
+    primary: "primary",
+    technical_support: "technical_support"
+  }.freeze
+
   ENTITY_NAMES = {
     contacts: "contacts",
     events: "events",
