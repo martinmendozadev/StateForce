@@ -11,7 +11,6 @@ class BedInventory < ApplicationRecord
 
   # Validations
   validates :bed_type, presence: true
-
   validates :operational_unit, presence: true
 
   validates :available,

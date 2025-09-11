@@ -2,14 +2,13 @@
 
 class AuditLog < ApplicationRecord
   include Enums
+
   # Associations
   belongs_to :user, optional: true
-
 
   # Enums
   enum :action, ACTIONS, prefix: true
   enum :entity_name, ENTITY_NAMES, prefix: true
-
 
   # Validations
   validate :validate_json_fields

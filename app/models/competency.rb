@@ -2,6 +2,7 @@
 
 class Competency < ApplicationRecord
   include Enums
+
   # Associations
   belongs_to :specialty
 
