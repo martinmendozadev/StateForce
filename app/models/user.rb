@@ -11,7 +11,7 @@ class User < ApplicationRecord
   ## Relationships
   belongs_to :avatar, class_name: "Attachment", optional: true
 
-  has_many :assigned_event_resources, class_name: "EventResource", foreign_key: "assigned_by_user_id"
+  has_many :assigned_event_resources, class_name: "EventResource", foreign_key: "assigned_by_user_id", dependent: :destroy
 
   has_many :user_contacts, dependent: :destroy
   has_many :contacts, through: :user_contacts
