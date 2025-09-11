@@ -30,5 +30,5 @@ class Institution < ApplicationRecord
   validates :callsign, length: { maximum: 100 }, allow_nil: true
   validates :sector_type, presence: true, inclusion: { in: sector_types.keys }
   validates :status, presence: true, inclusion: { in: statuses.keys }
-  validates :callsign, uniqueness: { scope: :name, message: "and name combination must be unique" }
+  validates :callsign, uniqueness: { scope: :name, message: I18n.t("enums.errors.messages.invalid_combination") }
 end

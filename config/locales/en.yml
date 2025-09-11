@@ -84,6 +84,8 @@ en:
     title: "Confirm your account"
     description: "We noticed you haven't confirmed your email address yet."
     back_to_login: "Already confirmed?"
+    error:
+      invalid_combination: "and name combination must be unique"
   learn_more:
     title: "StateForce"
     vision:
