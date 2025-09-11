@@ -13,6 +13,6 @@ class Competency < ApplicationRecord
   enum :level, LEVELS, prefix: true
 
   # Validations
-  validates :level, presence: true, inclusion: { in: levels.keys }, uniqueness: { scope: :specialty_id }
   validates :specialty, presence: true
+  validates :level, presence: true, inclusion: { in: levels.keys }, uniqueness: { scope: :specialty_id }
 end

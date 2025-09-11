@@ -7,9 +7,9 @@ class Resource < ApplicationRecord
   belongs_to :resource_type
   belongs_to :icon, class_name: "Attachment", optional: true
 
-  has_many :notes, as: :noteable, dependent: :destroy
-  has_many :event_resources, dependent: :destroy
   has_many :events, through: :event_resources
+  has_many :event_resources, dependent: :destroy
+  has_many :notes, as: :noteable, dependent: :destroy
 
   # Validations
   validates :institution, presence: true
