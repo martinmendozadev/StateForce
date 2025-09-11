@@ -13,7 +13,7 @@ class NoteEditor < ApplicationRecord
   validates :user, presence: true
   validates :user_id, uniqueness: { scope: :note_id, message: I18n.t("note_editor.errors.messages.already_assigned") }
   validates :last_edited_at, timeliness: { type: :datetime }, allow_nil: true
-  # validate :last_edited_at_cannot_be_in_future, if: -> { last_edited_at.present? }
+  validate :last_edited_at_cannot_be_in_future, if: -> { last_edited_at.present? }
 
   private
 
