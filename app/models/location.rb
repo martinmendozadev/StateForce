@@ -4,9 +4,9 @@ class Location < ApplicationRecord
   attr_accessor :longitude, :latitude
 
   # Validations
+  validate :coordinates_format
   validates :address, length: { maximum: 150 }, allow_nil: true
   validates :place_name, length: { maximum: 100 }, allow_nil: true
-  validate :coordinates_format
 
   before_validation :set_coordinates_from_lon_lat, if: -> { longitude.present? || latitude.present? }
 

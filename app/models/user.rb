@@ -11,13 +11,13 @@ class User < ApplicationRecord
   # Associations
   belongs_to :avatar, class_name: "Attachment", optional: true
 
-  has_many :assigned_event_resources, class_name: "EventResource", foreign_key: "assigned_by_user_id", dependent: :destroy
-  has_many :user_contacts, dependent: :destroy
-  has_many :contacts, through: :user_contacts
-  has_many :user_notes, dependent: :destroy
   has_many :notes, through: :user_notes
+  has_many :user_notes, dependent: :destroy
   has_many :note_editors, dependent: :destroy
+  has_many :contacts, through: :user_contacts
+  has_many :user_contacts, dependent: :destroy
   has_many :edited_notes, through: :note_editors, source: :note
+  has_many :assigned_event_resources, class_name: "EventResource", foreign_key: "assigned_by_user_id", dependent: :destroy
 
   # Enums
   enum :provider, google_oauth2: 0
@@ -52,8 +52,8 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.name = auth.info.name
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
       user.confirmed_at = Time.current
+      user.password = Devise.friendly_token[0, 20]
     end
   end
 end

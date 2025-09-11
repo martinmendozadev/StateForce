@@ -4,8 +4,8 @@ class ScheduleEntry < ApplicationRecord
   include Enums
 
   # Associations
-  belongs_to :creator_user, class_name: "User"
   belongs_to :event
+  belongs_to :creator_user, class_name: "User"
 
   has_many :schedule_entries_institutions, dependent: :destroy
   has_many :institutions, through: :schedule_entries_institutions

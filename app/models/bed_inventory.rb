@@ -11,6 +11,7 @@ class BedInventory < ApplicationRecord
 
   # Validations
   validates :bed_type, presence: true
+  validate :available_cannot_exceed_total
   validates :operational_unit, presence: true
 
   validates :available,
@@ -20,8 +21,6 @@ class BedInventory < ApplicationRecord
   validates :total,
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-
-  validate :available_cannot_exceed_total
 
   private
 

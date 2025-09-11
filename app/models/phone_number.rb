@@ -4,8 +4,8 @@ class PhoneNumber < ApplicationRecord
   include Enums
 
   # Associations
-  has_many :contact_phone_numbers, dependent: :destroy
   has_many :contacts, through: :contact_phone_numbers
+  has_many :contact_phone_numbers, dependent: :destroy
 
   # Enums
   enum :phone_type, PHONE_TYPES, prefix: true

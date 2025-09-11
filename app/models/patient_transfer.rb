@@ -4,12 +4,12 @@ class PatientTransfer < ApplicationRecord
   include Enums
 
   # Associations
-  belongs_to :accepted_by_user, class_name: "User"
-  belongs_to :destination_institution, class_name: "Institution"
   belongs_to :event
   belongs_to :patient
   belongs_to :requesting_user, class_name: "User"
+  belongs_to :accepted_by_user, class_name: "User"
   belongs_to :transport_resource, class_name: "Resource"
+  belongs_to :destination_institution, class_name: "Institution"
 
   has_many :notes, as: :noteable, dependent: :destroy
   has_many :attachments, as: :attachable, dependent: :destroy

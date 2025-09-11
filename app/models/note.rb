@@ -14,8 +14,8 @@ class Note < ApplicationRecord
   enum :visibility, VISIBILITIES, prefix: true
 
   # Validations
-  validates :creator_user, presence: true
   validates :noteable, presence: true
+  validates :creator_user, presence: true
   validates :title, presence: true, length: { maximum: 150 }
   validates :body, presence: true, length: { minimum: 1 }
   validates :visibility, presence: true, inclusion: { in: visibilities.keys }

@@ -12,6 +12,9 @@ class Attachment < ApplicationRecord
   enum :visibility, VISIBILITIES, prefix: true
 
   # Validations
+  validates :uploader_user, presence: true
+  validates :attachable, presence: true
+
   validates :file_url,
             presence: true,
             format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
@@ -39,7 +42,4 @@ class Attachment < ApplicationRecord
   validates :visibility,
             presence: true,
             inclusion: { in: visibilities.keys }
-
-  validates :uploader_user, presence: true
-  validates :attachable, presence: true
 end
