@@ -6,8 +6,8 @@ class InstitutionContact < ApplicationRecord
   self.primary_key = [ :institution_id, :contact_id, :contact_type ]
 
   # Associations
-  belongs_to :institution
   belongs_to :contact
+  belongs_to :institution
 
   # Enum
   enum :contact_type, CONTACT_TYPES, prefix: true
