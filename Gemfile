@@ -67,13 +67,17 @@ group :development, :test do
 
   # Environment vars
   gem 'dotenv-rails'
+
+  # Linting and formatting
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rails-omakase", require: false
+  gem "rubocop-performance", require: false
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'rubocop', require: false
-  gem 'rubocop-rails', require: false
   gem 'letter_opener'
 end
 
@@ -82,8 +86,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "simplecov", require: false
+  gem "simplecov-cobertura", "~> 2.1", group: :test
 end
 
 gem "pundit", "~> 2.5"
 
-gem "simplecov-cobertura", "~> 2.1", group: :test
