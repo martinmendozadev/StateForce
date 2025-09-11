@@ -3,7 +3,7 @@
 class Note < ApplicationRecord
   include Enums
 
-  # Relationships
+  # Associations
   belongs_to :creator_user, class_name: "User"
   belongs_to :noteable, polymorphic: true
   has_many :note_editors, dependent: :destroy

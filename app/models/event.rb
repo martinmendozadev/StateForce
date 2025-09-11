@@ -3,7 +3,7 @@
 class Event < ApplicationRecord
   include Enums
 
-  # Relationships
+  # Associations
   belongs_to :location, optional: true
 
   has_many :notes, as: :noteable, dependent: :destroy

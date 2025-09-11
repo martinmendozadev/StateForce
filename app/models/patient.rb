@@ -3,7 +3,7 @@
 class Patient < ApplicationRecord
   include Enums
 
-  # Relationships
+  # Associations
   belongs_to :event
 
   has_many :notes, as: :noteable, dependent: :destroy

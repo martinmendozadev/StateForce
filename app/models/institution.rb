@@ -3,7 +3,7 @@
 class Institution < ApplicationRecord
   include Enums
 
-  # Relationships
+  # Associations
   belongs_to :location
   belongs_to :director, class_name: "User", optional: true
   belongs_to :parent_institution, class_name: "Institution", optional: true

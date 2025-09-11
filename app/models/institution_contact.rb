@@ -3,7 +3,6 @@
 class InstitutionContact < ApplicationRecord
   include Enums
 
-  # Composite Primary Key
   self.primary_key = [ :institution_id, :contact_id, :contact_type ]
 
   # Associations

@@ -8,7 +8,6 @@ class Resource < ApplicationRecord
   belongs_to :location
 
   has_many :notes, as: :noteable, dependent: :destroy
-
   has_many :event_resources, dependent: :destroy
   has_many :events, through: :event_resources
 
