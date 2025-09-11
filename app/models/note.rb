@@ -6,6 +6,7 @@ class Note < ApplicationRecord
   # Associations
   belongs_to :creator_user, class_name: "User"
   belongs_to :noteable, polymorphic: true
+
   has_many :note_editors, dependent: :destroy
   has_many :editors, through: :note_editors, source: :user
 
