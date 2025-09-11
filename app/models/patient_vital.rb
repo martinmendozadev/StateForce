@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class PatientVital < ApplicationRecord
-  ## Relationships
+  # Relationships
   belongs_to :patient
   belongs_to :recorded_by_user, class_name: "User"
 
-  ## Validations
+  # Validations
   validates :blood_pressure_systolic, :blood_pressure_diastolic,
             numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 },
             allow_nil: true

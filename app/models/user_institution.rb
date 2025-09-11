@@ -3,7 +3,6 @@
 class UserInstitution < ApplicationRecord
   include Enums
 
-  # Composite Primary Key
   self.primary_key = [ :user_id, :institution_id ]
 
   # Associations

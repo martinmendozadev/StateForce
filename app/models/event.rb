@@ -3,7 +3,7 @@
 class Event < ApplicationRecord
   include Enums
 
-  ## Relationships
+  # Relationships
   belongs_to :location, optional: true
 
   has_many :notes, as: :noteable, dependent: :destroy
@@ -15,12 +15,12 @@ class Event < ApplicationRecord
   has_many :event_resources, dependent: :destroy
   has_many :resources, through: :event_resources
 
-  ## Enums
+  # Enums
   enum :status, STATUS, prefix: true
   enum :event_type, EVENT_TYPES, prefix: true
   enum :priority_level, PRIORITY_LEVELS, prefix: true
 
-  ## Validations
+  # Validations
   validates :reported_time, presence: true
   validates :status, presence: true
   validates :event_type, presence: true

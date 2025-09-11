@@ -2,11 +2,12 @@
 
 class OperationalUnitCompetency < ApplicationRecord
   self.primary_key = %i[operational_unit_id competency_id]
-  ## Associations
+
+  # Associations
   belongs_to :operational_unit
   belongs_to :competency
 
-  ## Validations
+  # Validations
   validates :operational_unit, presence: true
   validates :competency, presence: true
   validates :operational_unit_id, uniqueness: {
@@ -14,6 +15,6 @@ class OperationalUnitCompetency < ApplicationRecord
     message: I18n.t("operational_unit_competency.errors.messages.association_exists")
   }
 
-  ## Scopes
+  # Scopes
   scope :active, -> { where(deleted_at: nil) }
 end

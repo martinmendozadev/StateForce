@@ -3,7 +3,7 @@
 class PatientTransfer < ApplicationRecord
   include Enums
 
-  ## Associations
+  # Associations
   belongs_to :accepted_by_user, class_name: "User"
   belongs_to :destination_institution, class_name: "Institution"
   belongs_to :event
@@ -14,10 +14,10 @@ class PatientTransfer < ApplicationRecord
   has_many :notes, as: :noteable, dependent: :destroy
   has_many :attachments, as: :attachable, dependent: :destroy
 
-  ## Enums
+  # Enums
   enum :status, STATUS, prefix: true
 
-  ## Validations
+  # Validations
   validates :event, presence: true
   validates :patient, presence: true
   validates :departure_time, presence: true

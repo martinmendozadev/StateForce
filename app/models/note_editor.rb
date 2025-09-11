@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class NoteEditor < ApplicationRecord
-  ## Composite primary key
   self.primary_key = %i[note_id user_id]
 
   # Associations

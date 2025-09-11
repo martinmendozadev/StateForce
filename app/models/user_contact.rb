@@ -3,7 +3,6 @@
 class UserContact < ApplicationRecord
   include Enums
 
-  # Composite primary key
   self.primary_key = [ :user_id, :contact_id, :contact_type ]
 
   # Associations

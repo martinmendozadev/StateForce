@@ -3,7 +3,7 @@
 class Institution < ApplicationRecord
   include Enums
 
-  ## Relationships
+  # Relationships
   belongs_to :location
   belongs_to :director, class_name: "User", optional: true
   belongs_to :parent_institution, class_name: "Institution", optional: true
@@ -20,11 +20,11 @@ class Institution < ApplicationRecord
   has_many :schedule_entries_institutions, dependent: :destroy
   has_many :schedule_entries, through: :schedule_entries_institutions
 
-  ## Enums
+  # Enums
   enum :sector_type, SECTOR_TYPES, prefix: true
   enum :status, INSTITUTION_STATUSES, prefix: true
 
-  ## Validations
+  # Validations
   validates :location, presence: true
   validates :name, presence: true, length: { maximum: 150 }
   validates :callsign, length: { maximum: 100 }, allow_nil: true

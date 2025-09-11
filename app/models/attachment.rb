@@ -7,11 +7,9 @@ class Attachment < ApplicationRecord
   belongs_to :uploader_user, class_name: "User"
   belongs_to :attachable, polymorphic: true
 
-
   # Enums
   enum :file_type, FILE_TYPES, prefix: true
   enum :visibility, VISIBILITIES, prefix: true
-
 
   # Validations
   validates :file_url,

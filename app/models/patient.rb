@@ -3,16 +3,16 @@
 class Patient < ApplicationRecord
   include Enums
 
-  ## Relationships
+  # Relationships
   belongs_to :event
 
   has_many :notes, as: :noteable, dependent: :destroy
 
-  ## Enums
+  # Enums
   enum :gender, GENDERS, prefix: true
   enum :triage_status, TRIAGE_STATUSES, prefix: true
 
-  ## Validations
+  # Validations
   validates :event, presence: true
   validates :name, presence: true, length: { maximum: 100 }
   validates :gender, presence: true, inclusion: { in: genders.keys }

@@ -3,7 +3,7 @@
 class Location < ApplicationRecord
   attr_accessor :longitude, :latitude
 
-  ## Validations
+  # Validations
   validates :address, length: { maximum: 150 }, allow_nil: true
   validates :place_name, length: { maximum: 100 }, allow_nil: true
   validate :coordinates_format

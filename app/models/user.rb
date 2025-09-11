@@ -8,7 +8,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
 
-  ## Relationships
+  # Relationships
   belongs_to :avatar, class_name: "Attachment", optional: true
 
   has_many :assigned_event_resources, class_name: "EventResource", foreign_key: "assigned_by_user_id", dependent: :destroy
@@ -22,10 +22,10 @@ class User < ApplicationRecord
   has_many :note_editors, dependent: :destroy
   has_many :edited_notes, through: :note_editors, source: :note
 
-  ## Enums
+  # Enums
   enum :provider, google_oauth2: 0
 
-  ## Validations
+  # Validations
   validates :email,
             presence: true,
             length: { maximum: 150 },
