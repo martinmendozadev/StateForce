@@ -33,7 +33,7 @@ class Attachment < ApplicationRecord
                       message: I18n.t("attachment.errors.messages.content_type_format") }
 
   validates :file_size,
-            numericality: { only_integer: true, greater_than_or_equal_to: 0, allow_nil: true }
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   validates :file_type,
             presence: true,
