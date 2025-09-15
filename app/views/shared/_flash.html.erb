@@ -6,7 +6,7 @@
     <% alert_class = case type.to_sym
     when :notice then "bg-info border-info-focus text-info-content"
     when :alert, :error then "bg-danger border-danger-focus text-danger-content"
-      else "bg-neutral border-neutral-focus text-neutral-content"
+    else "bg-neutral border-neutral-focus text-neutral-content"
     end %>
     <div id="flash-message-<%= idx %>" class="mb-2 p-4 rounded border-l-4 shadow-sm relative <%= alert_class %> transition-opacity duration-500">
       <button
