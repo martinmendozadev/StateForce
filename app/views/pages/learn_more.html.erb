@@ -2,7 +2,7 @@
   <header class="absolute inset-x-0 top-0 z-10 max-w-7xl mx-auto">
     <nav class="flex items-center justify-between pt-2 px-8" aria-label="Global">
       <%= link_to root_path, class: "p-4" do %>
-        <%= cdn_image :logo_white, class: "h-16", alt: t('common.state_force') %>
+        <%= cdn_image :logo_white, class: "h-16", alt: t("common.state_force") %>
       <% end %>
       <%= link_to "#{t("landing.nav.login")} <span aria-hidden='true'>&rarr;</span>".html_safe, new_user_session_path, class: "text-sm font-semibold p-4" %>
     </nav>
@@ -18,27 +18,27 @@
       <div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
         <div class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
           <div class="relative">
-            <%= cdn_image :lm_image1, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt:"team image 1" %>
+            <%= cdn_image :lm_image1, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt: "team image 1" %>
             <div class="absolute inset-0 rounded-xl ring-1 ring-inset"></div>
           </div>
         </div>
         <div class="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
           <div class="relative">
-            <%= cdn_image :lm_image2, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt:"team image 2" %>
+            <%= cdn_image :lm_image2, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt: "team image 2" %>
             <div class="absolute inset-0 rounded-xl ring-1 ring-inset"></div>
           </div>
           <div class="relative">
-            <%= cdn_image :lm_image3, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt:"team image 3" %>
+            <%= cdn_image :lm_image3, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt: "team image 3" %>
             <div class="absolute inset-0 rounded-xl ring-1 ring-inset"></div>
           </div>
         </div>
         <div class="w-44 flex-none space-y-8 pt-32 sm:pt-0">
           <div class="relative">
-            <%= cdn_image :lm_image4, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt:"team image 4" %>
+            <%= cdn_image :lm_image4, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt: "team image 4" %>
             <div class="absolute inset-0 rounded-xl ring-1 ring-inset"></div>
           </div>
           <div class="relative">
-            <%= cdn_image :lm_image5, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt:"team image 5" %>
+            <%= cdn_image :lm_image5, class: "aspect-[2/3] w-full rounded-xl object-cover shadow-lg", alt: "team image 5" %>
             <div class="absolute inset-0 rounded-xl ring-1 ring-inset"></div>
           </div>
         </div>
@@ -75,7 +75,7 @@
     </div>
     <!-- Image section -->
     <div class="mt-32 mx-auto max-w-7xl relative">
-      <%= cdn_image :lm_image6, class: "aspect-[5/2] w-full object-cover rounded-3xl shadow-lg", alt:"team members" %>
+      <%= cdn_image :lm_image6, class: "aspect-[5/2] w-full object-cover rounded-3xl shadow-lg", alt: "team members" %>
       <div class="absolute inset-0 rounded-3xl ring-1 ring-inset"></div>
     </div>
     <!-- Values section -->
@@ -97,9 +97,9 @@
     <div class="mt-32">
       <h2 class="text-center text-lg font-semibold"><%= t("learn_more.trusted_by.title") %></h2>
       <div class="mx-auto mt-10 flex flex-wrap justify-around gap-16">
-        <%= cdn_image :firefighter_icon, class: "object-contain  max-w-32", alt:"Bomberos" %>
-        <%= cdn_image :ceccom_logo, class: "object-contain max-w-32", alt:"Cruz Roja Morelos" %>
-        <%= cdn_image :cemer_logo, class: "object-contain max-w-32", alt:"CEMER" %>
+        <%= cdn_image :firefighter_icon, class: "object-contain  max-w-32", alt: "Bomberos" %>
+        <%= cdn_image :ceccom_logo, class: "object-contain max-w-32", alt: "Cruz Roja Morelos" %>
+        <%= cdn_image :cemer_logo, class: "object-contain max-w-32", alt: "CEMER" %>
         <%= cdn_image :civil_protection_logo, class: "object-contain max-w-32", alt: "Protección Civil" %>
         <%= cdn_image :imss_logo, class: "object-contain max-w-32", alt: "IMSS" %>
         <%= cdn_image :issste_logo, class: "object-contain max-w-32", alt: "ISSSTE" %>
