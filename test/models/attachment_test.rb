@@ -15,7 +15,7 @@ class AttachmentTest < ActiveSupport::TestCase
     assert_includes @attachment.errors[:file_url], "can't be blank"
   end
 
-  test "should require a URL format the file_url" do
+  test "should require a URL format for the file_url" do
     @attachment.file_url = "stateforce.mx"
     assert_not @attachment.valid?
     assert_includes @attachment.errors[:file_url],  I18n.t("attachment.errors.messages.not_a_url")
