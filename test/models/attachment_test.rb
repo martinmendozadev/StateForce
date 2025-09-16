@@ -35,7 +35,7 @@ class AttachmentTest < ActiveSupport::TestCase
     assert_includes @attachment.errors[:file_name], "is too long (maximum is 75 characters)"
   end
 
-  test "should require a file_size grater than 0" do
+  test "should require a file_size greater than 0" do
     @attachment.file_size = -1
     assert_not @attachment.valid?
     assert_includes @attachment.errors[:file_size], "must be greater than or equal to 0"
