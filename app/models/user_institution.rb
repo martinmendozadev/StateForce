@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UserInstitution < ApplicationRecord
+  include Enums
+
   self.primary_key = [ :user_id, :institution_id ]
 
   # Associations
@@ -8,29 +10,8 @@ class UserInstitution < ApplicationRecord
   belongs_to :institution
 
   # Enums
-  enum :role, {
-    admin: "admin",
-    guest: "guest",
-    manager: "manager",
-    restricted: "restricted",
-    standard: "standard",
-    superadmin: "superadmin"
-  }, prefix: true
-
-  enum :status, {
-    active: "active",
-    accepted: "accepted",
-    cancelled: "cancelled",
-    done: "done",
-    draft: "draft",
-    expired: "expired",
-    paused: "paused",
-    pending: "pending",
-    retired: "retired",
-    revoked: "revoked",
-    sent: "sent",
-    unknown: "unknown"
-  }, prefix: true
+  enum :role, ROLES, prefix: true
+  enum :status, INVITE_STATUSES, prefix: true
 
   # Validations
   validates :role, presence: true

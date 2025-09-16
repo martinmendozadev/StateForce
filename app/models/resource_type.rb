@@ -3,6 +3,7 @@
 class ResourceType < ApplicationRecord
   # Associations
   belongs_to :resource_category
+
   has_many :resources, dependent: :nullify
 
   # Validations

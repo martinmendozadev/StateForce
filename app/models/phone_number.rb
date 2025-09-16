@@ -1,20 +1,14 @@
 # frozen_string_literal: true
 
 class PhoneNumber < ApplicationRecord
+  include Enums
+
   # Associations
-  has_many :contact_phone_numbers, dependent: :destroy
   has_many :contacts, through: :contact_phone_numbers
+  has_many :contact_phone_numbers, dependent: :destroy
 
   # Enums
-  enum :phone_type, {
-    home: "home",
-    landline: "landline",
-    mobile: "mobile",
-    office: "office",
-    other: "other",
-    personal: "personal",
-    unknown: "unknown"
-  }, prefix: true
+  enum :phone_type, PHONE_TYPES, prefix: true
 
   # Validations
   validates :number, length: { maximum: 25 }, presence: true

@@ -1,41 +1,22 @@
 # frozen_string_literal: true
 
 class Invite < ApplicationRecord
+  include Enums
+
   # Associations
   belongs_to :institution
   belongs_to :inviter, class_name: "User", optional: true
 
   # Enums
-  enum :role, {
-    admin: "admin",
-    guest: "guest",
-    manager: "manager",
-    restricted: "restricted",
-    standard: "standard",
-    superadmin: "superadmin"
-  }, prefix: true
-
-  enum :status, {
-    active: "active",
-    accepted: "accepted",
-    cancelled: "cancelled",
-    done: "done",
-    draft: "draft",
-    expired: "expired",
-    paused: "paused",
-    pending: "pending",
-    retired: "retired",
-    revoked: "revoked",
-    sent: "sent",
-    unknown: "unknown"
-  }, prefix: true
+  enum :role, ROLES, prefix: true
+  enum :status, INVITE_STATUSES, prefix: true
 
   # Validations
+  validates :expires_at, presence: true
   validates :institution, presence: true
+  validates :token, presence: true, uniqueness: true
   validates :role, presence: true, inclusion: { in: roles.keys }
   validates :status, presence: true, inclusion: { in: statuses.keys }
-  validates :expires_at, presence: true
-  validates :token, presence: true, uniqueness: true
   validates :email,
             presence: true,
             length: { maximum: 150 },

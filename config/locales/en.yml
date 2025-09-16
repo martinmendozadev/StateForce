@@ -28,6 +28,17 @@
 #       enabled: "ON"
 
 en:
+  attachment:
+    errors:
+      messages:
+        not_a_url: "must be a valid URL"
+        file_name_format: "can only contain letters, numbers, spaces, dots, dashes, and underscores"
+        content_type_format: "must be a valid MIME type (e.g., image/png)"
+  audit_log:
+    models:
+      errors:
+        messages:
+          invalid_json_object: "must be a JSON object"
   common:
     yes: "Yes"
     no: "No"
@@ -73,6 +84,8 @@ en:
     title: "Confirm your account"
     description: "We noticed you haven't confirmed your email address yet."
     back_to_login: "Already confirmed?"
+    error:
+      invalid_combination: "and name combination must be unique"
   learn_more:
     title: "StateForce"
     vision:
@@ -117,3 +130,24 @@ en:
       messages:
         invalid_coordinates: "must be a valid geographic point (WGS 84)"
         wrong_coordinates: "must be a valid RGeo point"
+  medical_center_profile:
+    errors:
+      messages:
+        invalid_room_total: "cannot exceed total operating rooms"
+  note_editor:
+    errors:
+      messages:
+        already_assigned: "already assigned as editor for this note"
+        cannot_be_in_future: "cannot be in the future"
+  operational_unit_competency:
+    errors:
+      messages:
+        association_exists: "association with this competency already exists"
+  resource:
+    errors:
+      messages:
+        invalid_total: "cannot exceed total units"
+  user_callsign:
+    errors:
+      messages:
+        invalid_institution: "already assigned in this institution"
