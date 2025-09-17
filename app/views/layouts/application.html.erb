@@ -20,7 +20,10 @@
   <body>
     <main class="isolate relative z-10">
       <%= render "shared/flash" %>
-      <%= yield %>
+      <% if current_user.present? %>
+        <%= render "shared/sidebar" %>
+      <% end %>
+        <%= yield %>
     </main>
     <!-- Grid Background -->
     <svg
