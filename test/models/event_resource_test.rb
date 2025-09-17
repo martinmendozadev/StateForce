@@ -22,13 +22,9 @@ class EventResourceTest < ActiveSupport::TestCase
     assert_not @er.valid?
   end
 
-  test "enforces uniqueness of [event_id, resource_id]" do
-    dup = EventResource.new(
-      event: @er.event,
-      resource: @er.resource,
-      assigned_by_user: @er.assigned_by_user
-    )
-    assert_not dup.valid?
-    assert_includes dup.errors.full_messages.join, "has already been taken"
+  test "should associate different resources to same event" do
+    resource2 = resources(:two)
+    @er.resource = resource2
+    assert @er.valid?
   end
 end

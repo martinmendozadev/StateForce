@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UserContact < ApplicationRecord
+  include Enums
+
   self.primary_key = [ :user_id, :contact_id, :contact_type ]
 
   # Associations
@@ -8,11 +10,7 @@ class UserContact < ApplicationRecord
   belongs_to :contact
 
   # Enums
-  enum :contact_type, {
-    emergency: "emergency",
-    primary: "primary",
-    technical_support: "technical_support"
-  }, prefix: true
+  enum :contact_type, CONTACT_TYPES, prefix: true
 
   # Validations
   validates :user, presence: true

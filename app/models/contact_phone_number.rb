@@ -8,9 +8,9 @@ class ContactPhoneNumber < ApplicationRecord
   belongs_to :phone_number
 
   # Validations
-  validates :is_primary, inclusion: { in: [ true, false ] }
   validates :contact, presence: true
   validates :phone_number, presence: true
+  validates :is_primary, inclusion: { in: [ true, false ] }
 
   # Scopes
   scope :primary, -> { where(is_primary: true) }

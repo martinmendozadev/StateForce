@@ -1,10 +1,44 @@
-inherit_from: .rubocop_todo.yml
+plugins:
+  - rubocop-rails
+  - rubocop-erb
 
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+inherit_from:
+  - .rubocop_todo.yml
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  TargetRubyVersion: 3.4.5
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "db/schema.rb"
+    - "db/migrate/*"
+    - "Gemfile"
+    - "lib/tasks/*.rake"
+    - "bin/*"
+    - "config/puma.rb"
+    - "config/spring.rb"
+    - "config/environments/*.rb"
+    - "spec/spec_helper.rb"
+    - "config.ru"
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 200
+
+Rails/TimeZone:
+  Enabled: true
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: true

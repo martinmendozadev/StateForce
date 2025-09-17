@@ -11,7 +11,7 @@ class CreateAttachments < ActiveRecord::Migration[8.0]
       t.string  :content_type, limit: 25
       t.text    :description
       t.string  :file_name
-      t.bigint  :file_size
+      t.bigint  :file_size, default: 0
 
       t.enum    :file_type, enum_type: :file_type, default: "other", null: false
       t.string  :file_url, null: false

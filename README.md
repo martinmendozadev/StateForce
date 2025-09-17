@@ -1,8 +1,8 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/martinmendozadev/StateForce/ci.yml?branch=main)](https://github.com/martinmendozadev/StateForce/actions)
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
+[![License: GPL-2.0](https://img.shields.io/badge/License-GNU%20GPL-blue)](LICENSE)
 [![Coverage Status](https://img.shields.io/codecov/c/github/martinmendozadev/StateForce)](https://codecov.io/gh/martinmendozadev/StateForce)
 [![Ruby](https://img.shields.io/badge/Ruby-3.4.5-red.svg)](https://www.ruby-lang.org/)
-[![Rails](https://img.shields.io/badge/Rails-8.0.2-red.svg)](https://rubyonrails.org/)
+[![Rails](https://img.shields.io/badge/Rails-8.0.2.1-red.svg)](https://rubyonrails.org/)
 
 # 🚨 StateForce
 
@@ -197,4 +197,4 @@ StateForce currently supports Spanish and English. The interface language is pri
 
 ## 📝 License
 
-This project is licensed under the terms of the [Apache License 2.0](LICENSE).
+This project is licensed under the terms of the [GNU General Public License v2.0](LICENSE).

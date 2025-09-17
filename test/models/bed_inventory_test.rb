@@ -20,6 +20,21 @@ class BedInventoryTest < ActiveSupport::TestCase
     assert_not @inventory.valid?
   end
 
+  test "should require operational_unit" do
+    @inventory.operational_unit = nil
+    assert_not @inventory.valid?
+  end
+
+  test "should require available greater or equal to zero" do
+    @inventory.available = -1
+    assert_not @inventory.valid?
+  end
+
+  test "should require total greater or equal to zero" do
+    @inventory.total = -1
+    assert_not @inventory.valid?
+  end
+
   test "default values should be set" do
     new_inv = BedInventory.new(bed_type: "general", operational_unit: operational_units(:two))
     assert_equal 0, new_inv.available
