@@ -68,7 +68,7 @@ end
 end
 
 # Create fake events
-25.times do
+10.times do
   Event.create(
     description: Faker::Lorem.sentence,
     ended_at: Faker::Time.forward(days: 1),

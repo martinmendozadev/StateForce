@@ -99,6 +99,17 @@ class UserTest < ActiveSupport::TestCase
     assert_equal :unconfirmed, @unconfirmed_user.inactive_message
   end
 
+  test "inactive_message returns :unconfirmed only for unconfirmed users" do
+    confirmed = users(:one)
+    unconfirmed = users(:user_three)
+
+    # Unconfirmed user path
+    assert_equal :unconfirmed, unconfirmed.inactive_message, "Expected :unconfirmed for unconfirmed user"
+
+    # Confirmed user should delegate to Devise's default (not :unconfirmed)
+    refute_equal :unconfirmed, confirmed.inactive_message, "Confirmed user should not have :unconfirmed inactive message"
+  end
+
   test "from_omniauth creates or finds user and sets fields" do
     auth = OpenStruct.new(
       provider: "google_oauth2",

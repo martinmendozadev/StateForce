@@ -15,6 +15,12 @@ class AttachmentTest < ActiveSupport::TestCase
     assert_includes @attachment.errors[:file_url], "can't be blank"
   end
 
+  test "should require a URL format for the file_url" do
+    @attachment.file_url = "stateforce.mx"
+    assert_not @attachment.valid?
+    assert_includes @attachment.errors[:file_url],  I18n.t("attachment.errors.messages.not_a_url")
+  end
+
   test "should require valid file_type enum" do
     assert Attachment.file_types.include?(@attachment.file_type)
   end
@@ -27,6 +33,12 @@ class AttachmentTest < ActiveSupport::TestCase
     @attachment.file_name = "a" * 76
     assert_not @attachment.valid?
     assert_includes @attachment.errors[:file_name], "is too long (maximum is 75 characters)"
+  end
+
+  test "should require a file_size greater than 0" do
+    @attachment.file_size = -1
+    assert_not @attachment.valid?
+    assert_includes @attachment.errors[:file_size], "must be greater than or equal to 0"
   end
 
   test "should belong to uploader_user" do

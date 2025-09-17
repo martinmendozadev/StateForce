@@ -1,26 +1,17 @@
 # frozen_string_literal: true
 
 class BedInventory < ApplicationRecord
+  include Enums
+
   # Associations
   belongs_to :operational_unit
 
   # Enums
-  enum :bed_type, {
-    emergency: "emergency",
-    gynecology: "gynecology",
-    icu: "icu",
-    internal_medicine: "internal_medicine",
-    isolated: "isolated",
-    neonatal_icu: "neonatal_icu",
-    pediatric: "pediatric",
-    trauma: "trauma",
-    general: "general",
-    maternity: "maternity"
-  }, prefix: true
+  enum :bed_type, BED_TYPES, prefix: true
 
   # Validations
   validates :bed_type, presence: true
-
+  validate :available_cannot_exceed_total
   validates :operational_unit, presence: true
 
   validates :available,
@@ -30,8 +21,6 @@ class BedInventory < ApplicationRecord
   validates :total,
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-
-  validate :available_cannot_exceed_total
 
   private
 

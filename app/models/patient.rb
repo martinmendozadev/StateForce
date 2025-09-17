@@ -1,28 +1,18 @@
 # frozen_string_literal: true
 
 class Patient < ApplicationRecord
-  ## Relationships
+  include Enums
+
+  # Associations
   belongs_to :event
 
   has_many :notes, as: :noteable, dependent: :destroy
 
-  ## Enums
-  enum :gender, {
-    female: "female",
-    intersex: "intersex",
-    male: "male",
-    other: "other"
-  }, prefix: true
+  # Enums
+  enum :gender, GENDERS, prefix: true
+  enum :triage_status, TRIAGE_STATUSES, prefix: true
 
-  enum :triage_status, {
-    black: "black",
-    green: "green",
-    red: "red",
-    unknown: "unknown",
-    yellow: "yellow"
-  }, prefix: true
-
-  ## Validations
+  # Validations
   validates :event, presence: true
   validates :name, presence: true, length: { maximum: 100 }
   validates :gender, presence: true, inclusion: { in: genders.keys }

@@ -1,4 +1,4 @@
-# config/initializers/cdn_images.rb
+# frozen_string_literal: true
 
 CDN_IMAGES = {
   arrow_right_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1745457865/StateForce/wvqztm3hwqcv6yqkvtng.svg",
