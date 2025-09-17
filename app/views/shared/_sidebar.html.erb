@@ -1,0 +1,80 @@
+<div class="relative flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 dark:border-white/10 dark:bg-gray-900 dark:before:pointer-events-none dark:before:absolute dark:before:inset-0 dark:before:bg-black/10">
+  <div class="relative flex h-16 shrink-0 items-center">
+    <%= link_to root_path, class: "p-4" do %>
+     <%= cdn_image :logo_white, class: "h-16", alt: t("landing.company_name") %>
+    <% end %>
+  </div>
+  <nav class="relative flex flex-1 flex-col">
+    <ul role="list" class="flex flex-1 flex-col gap-y-7">
+      <li>
+        <ul role="list" class="-mx-2 space-y-1">
+          <li>
+            <!-- Current: "bg-gray-50 dark:bg-white/5", Default: "hover:bg-gray-50 dark:hover:bg-white/5" -->
+            <%= link_to "Dashboard", "#", class: "block rounded-md bg-gray-50 py-2 pr-2 pl-10 text-sm/6 font-semibold text-gray-700 dark:bg-white/5 dark:text-gray-400" %>
+          </li>
+          <li>
+            <button type="button" command="--toggle" commandfor="sub-menu-1" class="flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5">
+     <%= svg_icon :arrow_right, class: "h-6", alt: "Arrow left" %>
+              Teams
+            </button>
+            <el-disclosure id="sub-menu-1" hidden class="contents">
+              <ul class="mt-1 px-2">
+                <li>
+          <%= link_to "audit", "#", class: "block rounded-md py-2 pr-2 pl-9 text-sm/6 text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+                </li>
+                <li>
+          <%= link_to "resources", "#", class: "block rounded-md py-2 pr-2 pl-9 text-sm/6 text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+                </li>
+                <li>
+          <%= link_to "event", "#", class: "block rounded-md py-2 pr-2 pl-9 text-sm/6 text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+                </li>
+              </ul>
+            </el-disclosure>
+          </li>
+          <li>
+            <button type="button" command="--toggle" commandfor="sub-menu-2" class="flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5">
+
+     <%= svg_icon :arrow_right, class: "h-6", alt: "Arrow left" %>
+              Projects
+            </button>
+            <el-disclosure id="sub-menu-2" hidden class="contents">
+              <ul class="mt-1 px-2">
+                <li>
+          <%= link_to "registration", "#", class: "block rounded-md py-2 pr-2 pl-9 text-sm/6 text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+                </li>
+                <li>
+          <%= link_to "notes", "#", class: "block rounded-md py-2 pr-2 pl-9 text-sm/6 text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+                </li>
+                <li>
+          <%= link_to "attachments", "#", class: "block rounded-md py-2 pr-2 pl-9 text-sm/6 text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+                </li>
+                <li>
+          <%= link_to "help", "#", class: "block rounded-md py-2 pr-2 pl-9 text-sm/6 text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+                </li>
+              </ul>
+            </el-disclosure>
+          </li>
+          <li>
+
+
+
+
+
+            <%= link_to "calendar", "#", class: "block rounded-md py-2 pr-2 pl-10 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+          </li>
+          <li>
+            <%= link_to "settings", "#", class: "block rounded-md py-2 pr-2 pl-10 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+          </li>
+          <li>
+            <%= link_to "Events", "#", class: "block rounded-md py-2 pr-2 pl-10 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-white/5" %>
+          </li>
+        </ul>
+      </li>
+      <li class="-mx-6 mt-auto">
+<%= link_to root_path, class: "p-4" do %>
+ <%= cdn_image current_user&.avatar&.url, class: "h-16", alt: current_user&.name %>
+       <% end %>
+      </li>
+    </ul>
+  </nav>
+</div>
