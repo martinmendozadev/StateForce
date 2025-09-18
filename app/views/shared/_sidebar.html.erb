@@ -13,12 +13,12 @@
   class: "block rounded-xl py-2 px-4  font-semibold  #{current_page?(dashboard_path) ? 'bg-background-soft text-success' : ''}" %>
 
           </li>
-          <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-events" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
+          <li class="pt-2 group">
+            <button type="button" command="--toggle" commandfor="submenu-events" aria-controls="submenu-events" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Events
             </button>
-            <el-disclosure id="submenu-events" hidden class="contents">
+            <el-disclosure id="submenu-events" class="hidden group-hover:block focus-within:block">
               <ul class="mt-1 px-2">
                 <li><%= link_to "Events", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info" %></li>
                 <li><%= link_to "Patient Transfers", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info" %></li>
@@ -26,12 +26,12 @@
             </el-disclosure>
           </li>
 
-          <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-resources" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
+          <li class="pt-2 group">
+            <button type="button" command="--toggle" commandfor="submenu-resources" aria-controls="submenu-resources" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Resources
             </button>
-            <el-disclosure id="submenu-resources" hidden class="contents">
+            <el-disclosure id="submenu-resources" class="hidden group-hover:block focus-within:block">
               <ul class="mt-1 px-2">
                 <li><%= link_to "Resources", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info" %></li>
                 <li><%= link_to "Resource Types", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info" %></li>
@@ -40,12 +40,12 @@
           </li>
 
 
-          <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-patients" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft ">
+          <li class="pt-2 group">
+            <button type="button" command="--toggle" commandfor="submenu-patients" aria-controls="submenu-patients" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft ">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Patients
             </button>
-            <el-disclosure id="submenu-patients" hidden class="contents">
+            <el-disclosure id="submenu-patients" class="hidden group-hover:block focus-within:block">
               <ul class="mt-1 px-2">
                 <li><%= link_to "Pacientes", "#", class: "block rounded-xl py-2 pl-6  hover:bg-background-soft hover:text-info " %></li>
                 <li><%= link_to "Constantes/Signos Vitales", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
@@ -54,12 +54,12 @@
             </el-disclosure>
           </li>
 
-          <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-institutions" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
+          <li class="pt-2 group">
+            <button type="button" command="--toggle" commandfor="submenu-institutions" aria-controls="submenu-institutions" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Institutions
             </button>
-            <el-disclosure id="submenu-institutions" hidden class="contents">
+            <el-disclosure id="submenu-institutions" class="hidden group-hover:block focus-within:block">
               <ul class="mt-1 px-2">
                 <li><%= link_to "Institutions", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
                 <li><%= link_to "Operational Units", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
@@ -68,12 +68,12 @@
             </el-disclosure>
           </li>
 
-          <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-users" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
+          <li class="pt-2 group">
+            <button type="button" command="--toggle" commandfor="submenu-reports" aria-controls="submenu-reports" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Reports
             </button>
-            <el-disclosure id="submenu-users" hidden class="contents">
+            <el-disclosure id="submenu-reports" class="hidden group-hover:block focus-within:block">
               <ul class="mt-1 px-2">
                 <li><%= link_to "Audit Log", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
                 <li><%= link_to "Analytics", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
@@ -82,12 +82,12 @@
             </el-disclosure>
           </li>
 
-          <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-users" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft ">
+          <li class="pt-2 group">
+            <button type="button" command="--toggle" commandfor="submenu-others" aria-controls="submenu-others" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft ">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Others
             </button>
-            <el-disclosure id="submenu-users"  class="contents">
+            <el-disclosure id="submenu-others" class="hidden group-hover:block focus-within:block">
               <ul class="mt-1 px-2">
                 <li><%= link_to "Calendar", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
                 <li><%= link_to "Settings", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
