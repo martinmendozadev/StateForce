@@ -1,4 +1,4 @@
-<div class="relative flex grow flex-col gap-y-6 overflow-y-auto bg-gradient-to-tr from-white/80 to-primary/10 px-6 py-8 dark:from-gray-900/90 dark:to-primary/20 shadow-xl rounded-3xl mx-4 my-6">
+<div class="relative flex grow flex-col gap-y-6 overflow-y-auto bg-background-surface px-6 py-8 shadow-xl rounded-3xl mx-4 my-6 h-full">
   <div class="relative">
     <%= link_to root_path, class: "p-2" do %>
       <%= cdn_image :logo_white, class: "h-14 drop-shadow-lg", alt: t("landing.company_name") %>
@@ -9,86 +9,88 @@
       <li>
         <ul role="list" class="space-y-2">
           <li>
-            <%= link_to "Dashboard", dashboard_path, class: "block rounded-xl py-2 px-4 text-base font-semibold text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %>
+            <%= link_to "Dashboard", dashboard_path,
+  class: "block rounded-xl py-2 px-4  font-semibold  #{current_page?(dashboard_path) ? 'bg-background-soft text-success' : ''}" %>
+
           </li>
           <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-events" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 text-left text-base font-semibold text-neutral-focus hover:bg-primary/10 hover:text-primary transition">
+            <button type="button" command="--toggle" commandfor="submenu-events" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Events
             </button>
             <el-disclosure id="submenu-events" hidden class="contents">
               <ul class="mt-1 px-2">
-                <li><%= link_to "Events", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Patient Transfers", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
+                <li><%= link_to "Events", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info" %></li>
+                <li><%= link_to "Patient Transfers", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info" %></li>
               </ul>
             </el-disclosure>
           </li>
 
           <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-resources" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 text-left text-base font-semibold text-neutral-focus hover:bg-primary/10 hover:text-primary transition">
+            <button type="button" command="--toggle" commandfor="submenu-resources" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Resources
             </button>
             <el-disclosure id="submenu-resources" hidden class="contents">
               <ul class="mt-1 px-2">
-                <li><%= link_to "Resources", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Resource Types", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
+                <li><%= link_to "Resources", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info" %></li>
+                <li><%= link_to "Resource Types", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info" %></li>
               </ul>
             </el-disclosure>
           </li>
 
 
           <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-patients" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 text-left text-base font-semibold text-neutral-focus hover:bg-primary/10 hover:text-primary transition">
+            <button type="button" command="--toggle" commandfor="submenu-patients" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft ">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Patients
             </button>
             <el-disclosure id="submenu-patients" hidden class="contents">
               <ul class="mt-1 px-2">
-                <li><%= link_to "Pacientes", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Constantes/Signos Vitales", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Notas Clínicas", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
+                <li><%= link_to "Pacientes", "#", class: "block rounded-xl py-2 pl-6  hover:bg-background-soft hover:text-info " %></li>
+                <li><%= link_to "Constantes/Signos Vitales", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
+                <li><%= link_to "Notas Clínicas", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
               </ul>
             </el-disclosure>
           </li>
 
           <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-institutions" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 text-left text-base font-semibold text-neutral-focus hover:bg-primary/10 hover:text-primary transition">
+            <button type="button" command="--toggle" commandfor="submenu-institutions" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Institutions
             </button>
             <el-disclosure id="submenu-institutions" hidden class="contents">
               <ul class="mt-1 px-2">
-                <li><%= link_to "Institutions", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Operational Units", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Beds and Operating Rooms", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
+                <li><%= link_to "Institutions", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
+                <li><%= link_to "Operational Units", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
+                <li><%= link_to "Beds and Operating Rooms", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
               </ul>
             </el-disclosure>
           </li>
 
           <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-users" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 text-left text-base font-semibold text-neutral-focus hover:bg-primary/10 hover:text-primary transition">
+            <button type="button" command="--toggle" commandfor="submenu-users" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Reports
             </button>
             <el-disclosure id="submenu-users" hidden class="contents">
               <ul class="mt-1 px-2">
-                <li><%= link_to "Audit Log", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Analytics", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Pending Reports", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
+                <li><%= link_to "Audit Log", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
+                <li><%= link_to "Analytics", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
+                <li><%= link_to "Pending Reports", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
               </ul>
             </el-disclosure>
           </li>
 
           <li class="pt-2">
-            <button type="button" command="--toggle" commandfor="submenu-users" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 text-left text-base font-semibold text-neutral-focus hover:bg-primary/10 hover:text-primary transition">
+            <button type="button" command="--toggle" commandfor="submenu-users" class="mt-1 flex w-full items-center gap-x-3 rounded-xl p-2 font-semibold hover:bg-background-soft ">
               <%= svg_icon :arrow_right, class: "h-5", alt: "Toggle" %>
               Others
             </button>
-            <el-disclosure id="submenu-users" hidden class="contents">
+            <el-disclosure id="submenu-users"  class="contents">
               <ul class="mt-1 px-2">
-                <li><%= link_to "Calendar", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
-                <li><%= link_to "Settings", "#", class: "block rounded-xl py-2 pl-6 text-base text-neutral-focus hover:bg-primary/10 hover:text-primary transition" %></li>
+                <li><%= link_to "Calendar", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
+                <li><%= link_to "Settings", "#", class: "block rounded-xl py-2 pl-6 hover:bg-background-soft hover:text-info " %></li>
               </ul>
             </el-disclosure>
           </li>
@@ -97,7 +99,7 @@
       </li>
 
       <li class="-mx-4 mt-auto">
-        <%= link_to "#", class: "flex items-center gap-4 rounded-2xl p-4 hover:bg-primary/10 transition" do %>
+        <%= link_to "#", class: "flex items-center gap-4 rounded-2xl p-4 hover:bg-background-soft " do %>
 
 <% if current_user&.avatar.blank? %>
         <span class="inline-flex size-10 items-center justify-center rounded-full bg-gray-500 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10">
@@ -108,7 +110,7 @@
 <% end %>
 
           <div class="min-w-0">
-            <p class="truncate text-base font-semibold text-neutral-focus"><%= current_user&.name || "Usuario" %></p>
+            <p class="truncate text-base font-semibold text-neutral-focus"><%= current_user&.name || "User" %></p>
             <p class="truncate text-xs text-neutral-focus/70"><%= current_user&.email %></p>
           </div>
         <% end %>
