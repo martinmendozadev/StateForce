@@ -106,7 +106,7 @@
   <span class="font-medium text-white"><%= current_user&.name&.first&.upcase %></span>
 </span>
 <% else %>
-          <%= cdn_image current_user&.avatar&.url, class: "h-12 w-12 rounded-full object-cover ring-2 ring-primary/40   inline-block size-9 rounded-full outline -outline-offset-1 outline-black/5 dark:outline-white/10", alt: current_user&.name %>
+          <%= cdn_image current_user&.avatar&.file_url, class: "h-12 w-12 rounded-full object-cover ring-2 ring-primary/40   inline-block size-9 rounded-full outline -outline-offset-1 outline-black/5 dark:outline-white/10", alt: current_user&.name %>
 <% end %>
 
           <div class="min-w-0">
