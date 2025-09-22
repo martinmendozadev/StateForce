@@ -66,7 +66,7 @@ group :development, :test do
   gem 'faker'
 
   # Environment vars
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', groups: [:development, :test]
 
   # Linting and formatting
   gem "rubocop", require: false
