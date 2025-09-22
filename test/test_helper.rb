@@ -16,7 +16,7 @@ SimpleCov.command_name "Minitest-#{ENV['TEST_ENV_NUMBER'] || '1'}"
 SimpleCov.merge_timeout 3600
 
 # Use Cobertura XML only in CI to avoid local parse issues when runs are interrupted.
-formatters = [SimpleCov::Formatter::HTMLFormatter]
+formatters = [ SimpleCov::Formatter::HTMLFormatter ]
 formatters << SimpleCov::Formatter::CoberturaFormatter if ENV["CI"] == "true"
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(formatters)
 SimpleCov.start "rails"
