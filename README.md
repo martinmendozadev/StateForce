@@ -1,7 +1,7 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/martinmendozadev/StateForce/ci.yml?branch=main)](https://github.com/martinmendozadev/StateForce/actions)
 [![License: GPL-2.0](https://img.shields.io/badge/License-GNU%20GPL-blue)](LICENSE)
 [![Coverage Status](https://img.shields.io/codecov/c/github/martinmendozadev/StateForce)](https://codecov.io/gh/martinmendozadev/StateForce)
-[![Ruby](https://img.shields.io/badge/Ruby-3.4.5-red.svg)](https://www.ruby-lang.org/)
+[![Ruby](https://img.shields.io/badge/Ruby-3.4-red.svg)](https://www.ruby-lang.org/)
 [![Rails](https://img.shields.io/badge/Rails-8.0.2.1-red.svg)](https://rubyonrails.org/)
 
 # 🚨 StateForce
@@ -57,7 +57,7 @@ Visit [stateforce.mx](http://localhost:3000) and log in
 
 ## 🛠 Tech Stack
 
-- **Ruby 3.4.5** – Elegant, powerful backend language.
+- **Ruby 3.4** – Elegant, powerful backend language.
 - **Rails 8.0.2.1** – Framework optimized for developer productivity and performance.
 - **PostgreSQL 17** – Reliable, production-grade relational database.
 - **Redis** – Used for background jobs and caching.
