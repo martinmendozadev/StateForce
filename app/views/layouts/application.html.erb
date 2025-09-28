@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-white dark:bg-gray-900">
   <head>
     <title><%= content_for(:title) || "StateForce" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,23 +16,34 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
   </head>
-  <body>
-    <div class="min-h-screen w-full md:flex md:items-stretch">
-      <% if current_user.present? %>
-        <aside class="hidden md:block md:sticky md:top-0 md:shrink-0">
-          <div class="w-64 lg:w-72 xl:w-80 h-full">
-            <%= render "shared/sidebar" %>
+  <body class="h-full">
+    <% if current_user.present? %>
+      <%= render 'shared/sidebar' %>
+      <div class="lg:pl-56">
+        <div class="sticky top-0 z-40 border-b border-background-overlay/30 bg-background-surface px-4 py-3 shadow-xs sm:px-6 lg:px-8 flex items-center gap-4">
+          <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-text lg:hidden">
+            <span class="sr-only">Open sidebar</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-6">
+              <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <div class="flex-1">
+            <%= render 'shared/header' %>
           </div>
-        </aside>
-      <% end %>
-      <div class="flex-1 min-w-0">
+        </div>
         <main class="isolate relative z-10 min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-          <%= render "shared/flash" %>
+          <%= render 'shared/flash' %>
           <%= yield %>
         </main>
       </div>
-    </div>
+    <% else %>
+      <main class="isolate relative z-10 min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+        <%= render 'shared/flash' %>
+        <%= yield %>
+      </main>
+    <% end %>
     <!-- Grid Background -->
     <svg
       class="fixed inset-0 -z-10 w-full h-full stroke-background-emphasis [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"
