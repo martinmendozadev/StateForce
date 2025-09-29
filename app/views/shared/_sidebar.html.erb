@@ -53,7 +53,7 @@
 
 <%# Render the captured nav content via a helper partial approach %>
 <%# This allows us to reuse markup above inside mobile & desktop wrappers %>
-<% unless lookup_context.find_all('shared/_sidebar_nav').any? %>
+<% unless lookup_context.find_all("shared/_sidebar_nav").any? %>
   <%# Dynamically create a virtual partial by writing to a temporary safe buffer %>
   <%# (Rails will not persist this; we simply reuse content_for) %>
 <% end %>

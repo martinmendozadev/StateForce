@@ -20,7 +20,7 @@
   </head>
   <body class="h-full">
     <% if current_user.present? %>
-      <%= render 'shared/sidebar' %>
+      <%= render "shared/sidebar" %>
       <div class="lg:pl-56">
         <div class="sticky top-0 z-40 border-b border-background-overlay/30 bg-background-surface px-4 py-3 shadow-xs sm:px-6 lg:px-8 flex items-center gap-4">
           <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-text lg:hidden">
@@ -30,17 +30,17 @@
             </svg>
           </button>
           <div class="flex-1">
-            <%= render 'shared/header' %>
+            <%= render "shared/header" %>
           </div>
         </div>
         <main class="isolate relative z-10 min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-          <%= render 'shared/flash' %>
+          <%= render "shared/flash" %>
           <%= yield %>
         </main>
       </div>
     <% else %>
       <main class="isolate relative z-10 min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <%= render 'shared/flash' %>
+        <%= render "shared/flash" %>
         <%= yield %>
       </main>
     <% end %>
