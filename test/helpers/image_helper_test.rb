@@ -85,9 +85,9 @@ class ImageHelperTest < ActionView::TestCase
   test "svg_icon with title adds role img and removes aria-hidden" do
     write_icon(:title_test, '<svg viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"></svg>')
     html = svg_icon(:title_test, title: "Titulo")
-    assert_includes html, '<title>Titulo</title>'
+    assert_includes html, "<title>Titulo</title>"
     assert_includes html, 'role="img"'
-    refute_includes html, 'aria-hidden'
+    refute_includes html, "aria-hidden"
   end
 
   test "svg_icon without title keeps aria-hidden" do
