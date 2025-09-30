@@ -4,37 +4,37 @@
       <ul role="list" class="-mx-2 space-y-1">
         <li>
           <% active = current_page?(dashboard_path) %>
-          <%= link_to dashboard_path, class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold transition #{active ? 'bg-background-soft text-success' : 'text-neutral hover:bg-background-soft hover:text-info'}" do %>
+          <%= link_to dashboard_path, class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold transition #{active ? 'bg-background-soft text-success' : 'text-neutral-focus hover:bg-background-soft hover:text-info'}" do %>
             <%= svg_icon :dashboard_icon, class: "size-6 shrink-0 #{active ? 'text-success' : 'text-neutral-focus group-hover:text-info'}", title: "Dashboard" %>
             <span><%= t("dashboard.name") %></span>
           <% end %>
         </li>
         <li>
-          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral hover:bg-background-soft hover:text-info" do %>
+          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral-focus hover:bg-background-soft hover:text-info" do %>
             <%= svg_icon :event_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
             <span><%= t("event.name") %></span>
           <% end %>
         </li>
         <li>
-          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral hover:bg-background-soft hover:text-info" do %>
+          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral-focus hover:bg-background-soft hover:text-info" do %>
             <%= svg_icon :resource_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
             <span><%= t("resource.name") %></span>
           <% end %>
         </li>
         <li>
-          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral hover:bg-background-soft hover:text-info" do %>
+          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral-focus hover:bg-background-soft hover:text-info" do %>
             <%= svg_icon :institution_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
             <span><%= t("institution.name") %></span>
           <% end %>
         </li>
         <li>
-          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral hover:bg-background-soft hover:text-info" do %>
+          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral-focus hover:bg-background-soft hover:text-info" do %>
             <%= svg_icon :calendar_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
             <span><%= t("calendar.name") %></span>
           <% end %>
         </li>
         <li>
-          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral hover:bg-background-soft hover:text-info" do %>
+          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral-focus hover:bg-background-soft hover:text-info" do %>
             <%= svg_icon :report_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
             <span><%= t("audit_log.name") %></span>
           <% end %>
@@ -42,7 +42,7 @@
       </ul>
     </li>
     <li class="mt-auto -mx-2">
-      <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral hover:bg-background-soft hover:text-info" do %>
+      <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral-focus hover:bg-background-soft hover:text-info" do %>
             <%= svg_icon :settings_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
         <span><%= t("settings.name") %></span>
       <% end %>
