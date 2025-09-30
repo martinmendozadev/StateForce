@@ -8,7 +8,7 @@
       <%= cdn_image current_user.avatar.file_url, class: "h-10 w-10 rounded-full object-cover ring-2 ring-primary", alt: current_user.name %>
     <% end %>
     <div class="min-w-0">
-      <p class="truncate text-sm font-semibold "><%= current_user&.name || "User" %></p>
+      <p class="truncate text-sm font-semibold "><%= current_user&.name || t("common.user") %></p>
       <p class="truncate text-xs text-neutral-focus "><%= current_user&.email %></p>
     </div>
   <% end %>

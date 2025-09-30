@@ -35,10 +35,13 @@ en:
         file_name_format: "can only contain letters, numbers, spaces, dots, dashes, and underscores"
         content_type_format: "must be a valid MIME type (e.g., image/png)"
   audit_log:
+    name: "Reports"
     models:
       errors:
         messages:
           invalid_json_object: "must be a JSON object"
+  calendar:
+    name: "Calendar"
   common:
     yes: "Yes"
     no: "No"
@@ -52,6 +55,7 @@ en:
     previous: "Previous"
     submit: "Submit"
     close: "Close"
+    sidebar: "Sidebar"
     loading: "Loading..."
     error: "Error"
     success: "Success"
@@ -64,12 +68,17 @@ en:
     view: "View"
     create: "Create"
     update: "Update"
+    user: "User"
     manage: "Manage"
     help: "Help"
     learn_more: "Learn more"
     terms_of_service: "Terms of Service"
     privacy_policy: "Privacy Policy"
     state_force: "StateForce"
+  dashboard:
+    name: "Dashboard"
+  event:
+    name: "Events"
   landing:
     company_name: StateForce
     nav:
@@ -86,6 +95,8 @@ en:
     back_to_login: "Already confirmed?"
     error:
       invalid_combination: "and name combination must be unique"
+  institution:
+    name: "Institutions"
   learn_more:
     title: "StateForce"
     vision:
@@ -144,9 +155,12 @@ en:
       messages:
         association_exists: "association with this competency already exists"
   resource:
+    name: "Resource"
     errors:
       messages:
         invalid_total: "cannot exceed total units"
+  settings:
+    name: "Settings"
   user_callsign:
     errors:
       messages:
