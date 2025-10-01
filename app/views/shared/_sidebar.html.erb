@@ -36,26 +36,3 @@
     <%= render "shared/sidebar_nav" %>
   </div>
 </div>
-
-<%# We create a separate template section to avoid duplication. %>
-<% content_for :_sidebar_nav do %>
-    <%= render "shared/sidebar_nav" %>
-<% end %>
-
-<%# Render the captured nav content via a helper partial approach %>
-<%# This allows us to reuse markup above inside mobile & desktop wrappers %>
-<% unless lookup_context.find_all("shared/_sidebar_nav").any? %>
-  <%# Dynamically create a virtual partial by writing to a temporary safe buffer %>
-  <%# (Rails will not persist this; we simply reuse content_for) %>
-<% end %>
-
-<%# Provide a renderable object for sidebar_nav %>
-<%# We use render inline if partial missing - but simpler: we stored inside content_for, now expose via helper call below. %>
-<%# Provide a small helperish construct: %>
-<%# We just output content_for when partial is rendered. %>
-<%# Create a pseudo partial interface: %>
-
-<%# Expose content for partial name used above %>
-<% content_for?(:_sidebar_nav) && view_flow.set(:sidebar_nav, content_for(:_sidebar_nav)) %>
-
-<%# When `render partial: "shared/sidebar_nav"` is called above, Rails will attempt to find a file; since we haven't created one, you may wish to actually create it. For reliability we will instead replace those render calls with direct output below in a subsequent edit if needed. %>
