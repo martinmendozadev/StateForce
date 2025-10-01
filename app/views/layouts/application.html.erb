@@ -16,27 +16,12 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
   </head>
   <body>
     <main class="isolate relative">
       <%= render "shared/flash" %>
-      <% if current_user.present? %>
-        <div class="lg:pl-56">
-          <div class="sticky top-0 border-b border-background-overlay bg-background-surface p-3 sm:px-6 lg:px-8 flex items-center gap-4">
-            <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-text lg:hidden cursor-pointer">
-              <span class="sr-only">Open sidebar</span>
-              <%= svg_icon :open_icon,  class: "size-6", title: "Open sidebar" %>
-            </button>
-            <div class="flex-1">
-              <%= render "shared/header" %>
-            </div>
-          </div>
-          <%= yield %>
-        </div>
-        <%= render "shared/sidebar" %>
-      <% else %>
-        <%= yield %>
-      <% end %>
+      <%= render "shared/base_layout" %>
     </main>
     <!-- Grid Background -->
     <%= svg_icon :square_background,
