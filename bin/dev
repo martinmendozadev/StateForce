@@ -6,6 +6,19 @@ if ! gem list foreman -i --silent; then
   gem install foreman
 fi
 
+# Make sure RubyGems bin dir(s) are on PATH so the 'foreman' executable is discoverable
+# This covers both system and user install locations.
+GEM_BINDIR=$(ruby -e 'require "rbconfig"; puts RbConfig::CONFIG["bindir"]' 2>/dev/null)
+USER_GEM_BINDIR=$(ruby -e 'require "rubygems"; puts Gem.bindir rescue nil' 2>/dev/null)
+USER_GEM_BIN_DIR_ALT=$(ruby -e 'require "rubygems"; puts File.join(Gem.user_dir, "bin") rescue nil' 2>/dev/null)
+
+for dir in "$GEM_BINDIR" "$USER_GEM_BINDIR" "$USER_GEM_BIN_DIR_ALT" "$HOME/.gem/bin" "$HOME/.local/bin"; do
+  if [ -n "$dir" ] && [ -d "$dir" ] && ! echo ":$PATH:" | grep -q ":$dir:"; then
+    PATH="$dir:$PATH"
+  fi
+done
+export PATH
+
 # Default to port 3000 if not specified
 export PORT="${PORT:-3000}"
 
@@ -14,4 +27,15 @@ export RUBY_DEBUG_OPEN="true"
 export RUBY_DEBUG_LAZY="true"
 
 # Start development processes with Procfile.dev
-exec foreman start -f Procfile.dev "$@"
+# Prefer plain 'foreman' if now on PATH; otherwise try via Ruby (-S) or Bundler.
+if command -v foreman >/dev/null 2>&1; then
+  exec foreman start -f Procfile.dev "$@"
+elif command -v ruby >/dev/null 2>&1 && ruby -e 'exit(system(%q{which foreman} + " >/dev/null 2>&1 ? 0 : 1))' 2>/dev/null; then
+  exec ruby -S foreman start -f Procfile.dev "$@"
+elif command -v bundle >/dev/null 2>&1; then
+  exec bundle exec foreman start -f Procfile.dev "$@"
+else
+  echo "Error: 'foreman' not found on PATH and could not be executed via Ruby or Bundler."
+  echo "Ensure your gem bin directory is on PATH or install foreman: gem install foreman"
+  exit 127
+fi

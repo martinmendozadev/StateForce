@@ -3,6 +3,11 @@
 require "simplecov"
 require "simplecov-cobertura"
 
+# Work around macOS Heimdal/GSSAPI crashes triggered by libpq when connecting to Postgres.
+# See: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE
+# Disabling GSSAPI encryption prevents loading the Heimdal odpac plugin that crashes under some setups.
+ENV["PGGSSENCMODE"] ||= "disable"
+
 # Ensure SimpleCov uses the repository root so recorded paths are consistent
 # between local runs and CI containers. Also give each parallel worker a
 # unique command name so resultset files don't overwrite each other.
@@ -10,10 +15,10 @@ SimpleCov.root(File.expand_path("..", __dir__))
 SimpleCov.command_name "Minitest-#{ENV['TEST_ENV_NUMBER'] || '1'}"
 SimpleCov.merge_timeout 3600
 
-SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::HTMLFormatter,
-  SimpleCov::Formatter::CoberturaFormatter
-])
+# Use Cobertura XML only in CI to avoid local parse issues when runs are interrupted.
+formatters = [ SimpleCov::Formatter::HTMLFormatter ]
+formatters << SimpleCov::Formatter::CoberturaFormatter if ENV["CI"] == "true"
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(formatters)
 SimpleCov.start "rails"
 
 ENV["RAILS_ENV"] ||= "test"

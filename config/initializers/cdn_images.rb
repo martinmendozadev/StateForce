@@ -9,6 +9,14 @@ CDN_IMAGES = {
   logo_white: "https://res.cloudinary.com/dtezbna78/image/upload/v1748045477/StateForce/logo_stateforce_color_icon.svg",
   logo_dark: "https://res.cloudinary.com/dtezbna78/image/upload/v1747944852/StateForce/logo_stateforce_bg_black_icon.svg",
   logo_secondary: "https://res.cloudinary.com/dtezbna78/image/upload/v1747944852/StateForce/logo_stateforce_black_image.png",
+  close_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1759183732/StateForce/icons/close_qxkxze.svg",
+  dashboard_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1759203679/StateForce/icons/events_ynmdvv.svg",
+  event_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1759203924/StateForce/icons/event_l1ogpe.svg",
+  resource_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1759204338/StateForce/icons/resoruce_vlfbmr.svg",
+  institution_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1759204457/StateForce/icons/institution_q9hngv.svg",
+  calendar_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1759204661/StateForce/icons/calendar_ebphew.svg",
+  report_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1759204660/StateForce/icons/analytic_jkf8gj.svg",
+  settings_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1759204663/StateForce/icons/settings_g9f3ra.svg",
 
   # Learn more imagenes:
   firefighter_icon: "https://res.cloudinary.com/dtezbna78/image/upload/v1746127214/StateForce/bomberos-ciudad-de-mexico-logo-png_seeklogo-21095_iocutc.png",

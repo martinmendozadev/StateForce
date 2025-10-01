@@ -57,10 +57,10 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  gem "brakeman"
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
+  gem "rubocop-rails-omakase"
 
   # Fake data for database seeding
   gem 'faker'
@@ -69,10 +69,11 @@ group :development, :test do
   gem 'dotenv-rails'
 
   # Linting and formatting
-  gem "rubocop", require: false
-  gem "rubocop-erb", require: false
-  gem "rubocop-rails", require: false
-  gem "rubocop-performance", require: false
+  gem "rubocop"
+  # Pin to 0.6.0 to avoid the herb-native parser introduced in 0.7.x which segfaults on macOS ARM with Ruby 3.4
+  gem "rubocop-erb", "= 0.6.0"
+  gem "rubocop-rails"
+  gem "rubocop-performance"
 end
 
 group :development do
@@ -85,9 +86,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "simplecov", require: false
-  gem "simplecov-cobertura", "~> 2.1", group: :test
+  gem "simplecov"
+  gem "simplecov-cobertura"
 end
 
-gem "pundit", "~> 2.5"
-
+gem "pundit"

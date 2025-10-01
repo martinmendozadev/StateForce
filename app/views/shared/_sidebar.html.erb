@@ -1,0 +1,38 @@
+<el-dialog>
+  <dialog id="sidebar" class="backdrop:bg-transparent lg:hidden">
+    <el-dialog-backdrop class="fixed inset-0 bg-background-overlay transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
+    <div tabindex="0" class="fixed inset-0 flex focus:outline-none ">
+      <el-dialog-panel class="group/dialog-panel relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
+        <div class="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out group-data-closed/dialog-panel:opacity-0">
+          <button type="button" command="close" commandfor="sidebar" class="-m-2.5 p-2.5 text-text bg-background-surface cursor-pointer">
+            <span class="sr-only"><%= t("common.close") %> <%= t("common.sidebar") %></span>
+              <%= svg_icon :close_icon, class: "size-6", title: "#{t('common.close')} #{t('common.sidebar')}" %>
+          </button>
+        </div>
+
+        <div class="relative flex grow flex-col gap-y-6 overflow-y-auto bg-background-surface p-6 ring-1 ring-background-overlay">
+          <div class="flex h-12 items-center">
+            <%= link_to dashboard_path, class: "flex items-center gap-2" do %>
+              <%= cdn_image :logo_white, class: "h-10 w-auto", alt: t("landing.company_name") %>
+            <h2 class="text-lg font-semibold text-text select-none"><%= t("landing.company_name") %></h2>
+            <% end %>
+          </div>
+          <%= render "shared/sidebar_nav" %>
+        </div>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>
+
+<!-- Static desktop sidebar -->
+<div class="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-56 lg:flex-col">
+  <div class="flex grow flex-col gap-y-6 overflow-y-auto border-r border-background-overlay bg-background-surface p-6 ">
+    <div class="flex h-12 items-center">
+      <%= link_to dashboard_path, class: "flex items-center gap-2" do %>
+        <%= cdn_image :logo_white, class: "h-10 w-auto", alt: t("landing.company_name") %>
+        <h2 class="text-lg font-semibold select-none"><%= t("landing.company_name") %></h2>
+      <% end %>
+    </div>
+    <%= render "shared/sidebar_nav" %>
+  </div>
+</div>

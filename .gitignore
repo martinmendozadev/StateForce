@@ -35,6 +35,8 @@ config/master.key
 # dotenv, dotenv-rails
 .env
 .env*.local
+.env.development
+.env.test
 
 # Ignore precompiled assets
 /public/assets
