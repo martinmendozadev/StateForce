@@ -25,11 +25,9 @@
         <%= render "shared/sidebar" %>
           <div class="lg:pl-56">
             <div class="sticky top-0 z-40 border-b border-background-overlay/30 bg-background-surface px-4 py-3 shadow-xs sm:px-6 lg:px-8 flex items-center gap-4">
-              <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-text lg:hidden">
+              <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-text lg:hidden cursor-pointer">
                 <span class="sr-only">Open sidebar</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-6">
-                  <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+    <%= svg_icon :open_icon,  class: "size-6", title: "Open sidebar" %>
               </button>
               <div class="flex-1">
                 <%= render "shared/header" %>
