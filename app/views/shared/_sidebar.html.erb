@@ -4,7 +4,7 @@
     <div tabindex="0" class="fixed inset-0 flex focus:outline-none ">
       <el-dialog-panel class="group/dialog-panel relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
         <div class="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out group-data-closed/dialog-panel:opacity-0">
-          <button type="button" command="close" commandfor="sidebar" class="-m-2.5 p-2.5 text-text bg-background-surface">
+          <button type="button" command="close" commandfor="sidebar" class="-m-2.5 p-2.5 text-text bg-background-surface cursor-pointer">
             <span class="sr-only"><%= t("common.close") %> <%= t("common.sidebar") %></span>
               <%= svg_icon :close_icon, class: "size-6", title: "#{t('common.close')} #{t('common.sidebar')}" %>
           </button>
@@ -30,20 +30,13 @@
     <div class="flex h-12 items-center">
       <%= link_to dashboard_path, class: "flex items-center gap-2" do %>
         <%= cdn_image :logo_white, class: "h-10 w-auto", alt: t("landing.company_name") %>
-      <h2 class="text-lg font-semibold select-none"><%= t("landing.company_name") %></h2>
+        <h2 class="text-lg font-semibold select-none"><%= t("landing.company_name") %></h2>
       <% end %>
     </div>
     <%= render "shared/sidebar_nav" %>
   </div>
 </div>
 
-<!-- Spacer for desktop -->
-<div class="hidden lg:block lg:pl-56"></div>
-
-<%# Inline partial for navigation reused by mobile and desktop - defined below to keep single source %>
-<%# Using capture & content_for not needed; we render via partial inside this same file using a local block %>
-
-<%# Define the navigation list in an inline partial style %>
 <%# We create a separate template section to avoid duplication. %>
 <% content_for :_sidebar_nav do %>
     <%= render "shared/sidebar_nav" %>
@@ -61,7 +54,6 @@
 <%# Provide a small helperish construct: %>
 <%# We just output content_for when partial is rendered. %>
 <%# Create a pseudo partial interface: %>
-<%# NOTE: For simplicity, create a real partial file `_sidebar_nav.html.erb` could be better, but per single-file change requirement we inline. %>
 
 <%# Expose content for partial name used above %>
 <% content_for?(:_sidebar_nav) && view_flow.set(:sidebar_nav, content_for(:_sidebar_nav)) %>
