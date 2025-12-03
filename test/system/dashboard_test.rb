@@ -13,5 +13,4 @@ class DashboardTest < ActionDispatch::SystemTestCase
   def teardown
     log_out @user
   end
-
 end
