@@ -13,20 +13,14 @@
       <p class="truncate text-sm font-semibold"><%= current_user&.name || t("common.user") %></p>
       <p class="truncate text-xs text-neutral-focus"><%= current_user&.email %></p>
     </div>
-    <svg class="h-4 w-4 text-neutral" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-    </svg>
   </summary>
 
   <div class="absolute right-0 mt-2 w-64 rounded-md border shadow-xl border-r border-background-overlay bg-background-surface">
     <nav class="py-2">
 
   <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group  rounded-md text-neutral-focus hover:bg-background-soft hover:text-info" do %>
-        <svg class="h-5 w-5 text-neutral" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.866 0-7 3.134-7 7h2c0-2.761 2.239-5 5-5s5 2.239 5 5h2c0-3.866-3.134-7-7-7z" />
-        </svg>
+    <%= svg_icon :avatar, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
         <span class="text-sm">My profile</span>
-      </a>
   <% end %>
 
   <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group  rounded-md text-neutral-focus hover:bg-background-soft hover:text-info" do %>
@@ -37,25 +31,19 @@
   <div class="my-2 border-t border-base-300"></div>
 
   <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group  rounded-md text-neutral-focus hover:bg-background-soft hover:text-info" do %>
-        <svg class="h-5 w-5 text-neutral" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2l7 4v6c0 5-3.5 9.74-7 10-3.5-.26-7-5-7-10V6l7-4z" />
-        </svg>
+    <%= svg_icon :shield, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
         <span class="text-sm">Privacy policy</span>
   <% end %>
 
   <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group  rounded-md text-neutral-focus hover:bg-background-soft hover:text-info" do %>
-        <svg class="h-5 w-5 text-neutral" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11 3a1 1 0 011-1h0a1 1 0 011 1v6h6a1 1 0 011 1v0a1 1 0 01-1 1h-6v6a1 1 0 01-1 1h0a1 1 0 01-1-1v-6H5a1 1 0 01-1-1v0a1 1 0 011-1h6V3z" />
-        </svg>
+    <%= svg_icon :plus, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
         <span class="text-sm">Share feedback</span>
   <% end %>
 
       <div class="my-2 border-t border-base-300"></div>
 
   <%= link_to destroy_user_session_path, data: { turbo_method: :delete  }, class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info" do %>
-        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M16 13v-2H7V8l-5 4 5 4v-3h9zm3-10H11a2 2 0 00-2 2v3h2V5h8v14h-8v-3H9v3a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2z" />
-        </svg>
+    <%= svg_icon :signout, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
     <span class="text-sm" ><%= t("devise.sessions.logout") %></span>
   <% end %>
 
