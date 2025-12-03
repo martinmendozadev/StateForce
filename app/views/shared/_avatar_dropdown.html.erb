@@ -1,4 +1,4 @@
-<details class="relative inline-block">
+<details class="relative inline-block" data-controller="avatar-dropdown">
   <summary aria-haspopup="menu" class="group list-none cursor-pointer flex items-center gap-3 rounded-md px-2 py-1 hover:bg-background-soft focus:outline-none focus:ring-2 focus:ring-primary/50">
     <div class="flex items-center gap-3 rounded-md p-2">
     <% if current_user&.avatar.blank? %>
@@ -15,7 +15,7 @@
     </div>
   </summary>
 
-  <div class="absolute right-0 mt-2 w-64 rounded-md border shadow-xl border-background-overlay bg-background-surface">
+  <div class="absolute right-0 mt-2 w-64 rounded-md border shadow-xl border-background-overlay bg-background-surface" data-avatar-dropdown-target="panel">
     <nav role="menu" aria-label="Account menu" class="py-2">
 
   <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
