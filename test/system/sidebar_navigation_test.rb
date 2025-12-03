@@ -9,8 +9,7 @@ class SidebarNavigationTest < ActionDispatch::SystemTestCase
     "resource.name",
     "institution.name",
     "calendar.name",
-    "audit_log.name",
-    "settings.name"
+    "audit_log.name"
   ].freeze
 
   def setup
