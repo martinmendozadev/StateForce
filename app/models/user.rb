@@ -47,13 +47,42 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(email: auth.info.email).first_or_create do |user|
-      user.uid = auth.uid
-      user.name = auth.info.name
-      user.email = auth.info.email
-      user.provider = auth.provider
-      user.confirmed_at = Time.current
-      user.password = Devise.friendly_token[0, 20]
+    user = where(email: auth.info.email).first_or_create do |u|
+      u.uid = auth.uid
+      u.name = auth.info.name
+      u.email = auth.info.email
+      u.provider = auth.provider
+      u.confirmed_at = Time.current
+      u.password = Devise.friendly_token[0, 20]
     end
+
+    image_url = auth.info.image.presence
+
+    if image_url.present?
+      begin
+        if user.avatar.present? && user.avatar.file_url != image_url
+          user.avatar.update(
+            file_url: image_url,
+          )
+        else
+          attachment = Attachment.create(
+            attachable_type: "User",
+            attachable_id: user.id,
+            content_type: "image/jpeg",
+            file_name: "avatar_#{user.id}.jpg",
+            file_url: image_url,
+            file_size: 1,
+            uploader_user_id: user.id
+          )
+          user.update(avatar: attachment)
+        end
+
+      rescue StandardError
+       # silently ignore avatar persistence issues to not break login
+       Rails.logger.warn("Avatar persistence failed for user #{user.id}")
+      end
+    end
+
+    user
   end
 end
