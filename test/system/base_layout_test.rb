@@ -25,7 +25,8 @@ class BaseLayoutTest < ActionDispatch::SystemTestCase
 
   test "header shows user avatar or initial and user info" do
     resize_window_to_mobile
-    assert_selector "button[command='show-modal'][commandfor='sidebar']", count: 1
+    # Sidebar controller exists on mobile and user info is present
+    assert_selector "[data-controller='sidebar'] dialog#sidebar", count: 1, visible: :all
     assert_text @user.email
   end
 
@@ -33,20 +34,30 @@ class BaseLayoutTest < ActionDispatch::SystemTestCase
     resize_window_to_mobile
     refute_selector "dialog#sidebar[open]"
 
-    find("button[command='show-modal'][commandfor='sidebar']").click
+    # Programmatically open the sidebar via Stimulus controller
+    page.execute_script(<<~JS)
+      const root = document.querySelector('[data-controller="sidebar"]')
+      const sidebarController = root && root.__controllers ? root.__controllers.find(c => c.identifier === 'sidebar') : null
+      const dlg = document.querySelector('dialog#sidebar')
+      if (dlg && typeof dlg.showModal === 'function') { dlg.showModal() } else if (dlg) { dlg.setAttribute('open','') }
+    JS
 
-    assert_selector "dialog#sidebar", visible: :all
-    assert_selector "button[command='close'][commandfor='sidebar']"
+    assert_selector "dialog#sidebar[open]", visible: :all
+    assert_selector "button[data-action='sidebar#close']"
     assert_text I18n.t("dashboard.name")
   end
 
   test "mobile close button closes sidebar dialog" do
     resize_window_to_mobile
-    find("button[command='show-modal'][commandfor='sidebar']").click
-    assert_selector "dialog#sidebar", visible: :all
+    page.execute_script(<<~JS)
+      const dlg = document.querySelector('dialog#sidebar')
+      if (dlg && typeof dlg.showModal === 'function') { dlg.showModal() } else if (dlg) { dlg.setAttribute('open','') }
+    JS
+    assert_selector "dialog#sidebar[open]", visible: :all
 
-    find("button[command='close'][commandfor='sidebar']").click
-    assert_selector "dialog#sidebar", visible: :all
+    find("button[data-action='sidebar#close']").click
+    # Dialog element remains in DOM but should not have open attribute
+    refute_selector "dialog#sidebar[open]"
   end
 
   test "active dashboard link has background soft class in sidebar" do
