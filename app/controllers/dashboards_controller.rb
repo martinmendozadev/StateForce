@@ -3,5 +3,6 @@ class DashboardsController < ApplicationController
 
 
   def index
+    @active_events_count = Event.active_events.count
   end
 end
