@@ -20,7 +20,11 @@
   <body>
     <main class="isolate relative">
       <%= render "shared/flash" %>
-      <%= render "shared/base_layout" %>
+      <% if show_base_layout? %>
+        <%= render "shared/base_layout" %>
+      <% else %>
+        <%= yield %>
+      <% end %>
     </main>
     <%= render "shared/grid_background" %>
   </body>
