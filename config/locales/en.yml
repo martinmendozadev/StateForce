@@ -73,8 +73,10 @@ en:
     help: "Help"
     learn_more: "Learn more"
     terms_of_service: "Terms of Service"
-    privacy_policy: "Privacy Policy"
+    privacy_policy: "Privacy policy"
     state_force: "StateForce"
+    share_feedback: "Share feedback"
+    profile: "My profile"
   dashboard:
     name: "Dashboard"
   event:

@@ -16,7 +16,6 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
   </head>
   <body>
     <main class="isolate relative">
@@ -24,6 +23,5 @@
       <%= render "shared/base_layout" %>
     </main>
     <%= render "shared/grid_background" %>
-    <%= javascript_include_tag "flash_messages", "data-turbo-track": "reload" %>
   </body>
 </html>

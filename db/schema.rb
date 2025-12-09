@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
+ActiveRecord::Schema[8.1].define(version: 2025_08_25_060152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -38,142 +38,142 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   create_enum "visibility", ["public", "private", "restricted"]
 
   create_table "attachments", force: :cascade do |t|
+    t.bigint "attachable_id", null: false
+    t.string "attachable_type", null: false
     t.string "content_type", limit: 25
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "description"
     t.string "file_name"
     t.bigint "file_size"
     t.enum "file_type", default: "other", null: false, enum_type: "file_type"
     t.string "file_url", null: false
-    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
-    t.string "attachable_type", null: false
-    t.bigint "attachable_id", null: false
-    t.bigint "uploader_user_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.bigint "uploader_user_id", null: false
+    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
     t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable"
     t.index ["uploader_user_id"], name: "index_attachments_on_uploader_user_id"
   end
 
   create_table "audit_logs", force: :cascade do |t|
     t.enum "action", null: false, enum_type: "actions"
+    t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.integer "entity_id", null: false
     t.enum "entity_name", default: "unknown", null: false, enum_type: "entity_names"
     t.jsonb "new_value", null: false
     t.jsonb "old_value"
     t.bigint "user_id"
-    t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id"], name: "index_audit_logs_on_user_id"
   end
 
   create_table "bed_inventories", force: :cascade do |t|
     t.integer "available", limit: 2, default: 0, null: false
     t.enum "bed_type", null: false, enum_type: "bed_type"
-    t.integer "total", limit: 2, default: 0, null: false
-    t.bigint "operational_unit_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "operational_unit_id", null: false
+    t.integer "total", limit: 2, default: 0, null: false
+    t.datetime "updated_at", null: false
     t.index ["operational_unit_id"], name: "index_bed_inventories_on_operational_unit_id"
   end
 
   create_table "competencies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.enum "level", default: "unknown", null: false, enum_type: "proficiency_level"
     t.bigint "specialty_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["specialty_id"], name: "index_competencies_on_specialty_id"
   end
 
   create_table "contact_phone_numbers", primary_key: ["contact_id", "phone_number_id"], force: :cascade do |t|
-    t.boolean "is_primary", default: false, null: false
     t.bigint "contact_id", null: false
-    t.bigint "phone_number_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.boolean "is_primary", default: false, null: false
+    t.bigint "phone_number_id", null: false
+    t.datetime "updated_at", null: false
     t.index ["contact_id"], name: "index_contact_phone_numbers_on_contact_id"
     t.index ["phone_number_id"], name: "index_contact_phone_numbers_on_phone_number_id"
   end
 
   create_table "contacts", force: :cascade do |t|
     t.integer "channel", limit: 2
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.string "email"
     t.string "name"
     t.string "radio_frequency", limit: 75
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["email"], name: "index_contacts_on_email", unique: true
   end
 
   create_table "event_institutions", force: :cascade do |t|
     t.datetime "assigned_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.bigint "event_id", null: false
     t.bigint "institution_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["event_id"], name: "index_event_institutions_on_event_id"
     t.index ["institution_id"], name: "index_event_institutions_on_institution_id"
   end
 
   create_table "event_resources", force: :cascade do |t|
     t.datetime "assigned_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.integer "quantity_assigned", default: 1, null: false
-    t.bigint "event_id", null: false
-    t.bigint "resource_id", null: false
     t.bigint "assigned_by_user_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "event_id", null: false
+    t.integer "quantity_assigned", default: 1, null: false
+    t.bigint "resource_id", null: false
+    t.datetime "updated_at", null: false
     t.index ["assigned_by_user_id"], name: "index_event_resources_on_assigned_by_user_id"
     t.index ["event_id"], name: "index_event_resources_on_event_id"
     t.index ["resource_id"], name: "index_event_resources_on_resource_id"
   end
 
   create_table "events", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "description"
     t.datetime "ended_at", precision: nil
-    t.enum "event_type", default: "emergency", null: false, enum_type: "event_category"
     t.string "event_code", limit: 50
-    t.enum "priority_level", default: "unknown", null: false, enum_type: "priority_level"
+    t.enum "event_type", default: "emergency", null: false, enum_type: "event_category"
+    t.bigint "location_id"
     t.integer "people_affected", default: 0
+    t.enum "priority_level", default: "unknown", null: false, enum_type: "priority_level"
     t.string "reported_by_text"
     t.datetime "reported_time", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.enum "status", default: "pending", null: false, enum_type: "event_status"
-    t.bigint "location_id"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["event_code"], name: "index_events_on_event_code", unique: true
     t.index ["location_id"], name: "index_events_on_location_id"
   end
 
   create_table "institution_contacts", force: :cascade do |t|
-    t.enum "contact_type", default: "primary", null: false, enum_type: "contact_type"
     t.bigint "contact_id", null: false
-    t.bigint "institution_id", null: false
+    t.enum "contact_type", default: "primary", null: false, enum_type: "contact_type"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "institution_id", null: false
+    t.datetime "updated_at", null: false
     t.index ["contact_id"], name: "index_institution_contacts_on_contact_id"
     t.index ["institution_id"], name: "index_institution_contacts_on_institution_id"
   end
 
   create_table "institutions", force: :cascade do |t|
     t.string "callsign", limit: 100
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "description"
-    t.string "name", null: false
-    t.enum "sector_type", default: "unknown", null: false, enum_type: "sector_type"
-    t.enum "status", default: "unknown", null: false, enum_type: "resource_status"
     t.bigint "director_id"
     t.bigint "location_id", null: false
+    t.string "name", null: false
     t.bigint "parent_institution_id"
-    t.datetime "created_at", null: false
+    t.enum "sector_type", default: "unknown", null: false, enum_type: "sector_type"
+    t.enum "status", default: "unknown", null: false, enum_type: "resource_status"
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["callsign", "name"], name: "index_institutions_on_callsign_and_name", unique: true
     t.index ["director_id"], name: "index_institutions_on_director_id"
     t.index ["location_id"], name: "index_institutions_on_location_id"
@@ -181,17 +181,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "invites", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.string "email"
     t.datetime "expires_at", null: false
+    t.bigint "institution_id", null: false
     t.bigint "inviter_id"
     t.enum "role", default: "guest", null: false, enum_type: "role"
     t.enum "status", default: "draft", null: false, enum_type: "status_invite"
     t.string "token", null: false
-    t.datetime "used_at"
-    t.bigint "institution_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.datetime "used_at"
     t.index ["institution_id"], name: "index_invites_on_institution_id"
     t.index ["token"], name: "index_invites_on_token", unique: true
   end
@@ -199,90 +199,90 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   create_table "locations", force: :cascade do |t|
     t.string "address"
     t.geography "coordinates", limit: {srid: 4326, type: "st_point", geographic: true}
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "key_name"
     t.string "place_name", limit: 100
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
   end
 
   create_table "medical_center_profiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.boolean "external_pharmacy_available", default: false
     t.boolean "internal_pharmacy_available", default: false
     t.enum "level", default: "unknown", null: false, enum_type: "proficiency_level"
-    t.integer "operating_rooms_total", limit: 2, default: 0, null: false
     t.integer "operating_rooms_available", limit: 2, default: 0, null: false
+    t.integer "operating_rooms_total", limit: 2, default: 0, null: false
     t.bigint "operational_unit_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["operational_unit_id"], name: "index_medical_center_profiles_on_operational_unit_id"
   end
 
   create_table "note_editors", primary_key: ["note_id", "user_id"], force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.datetime "last_edited_at", precision: nil
     t.bigint "note_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.bigint "user_id", null: false
     t.index ["note_id"], name: "index_note_editors_on_note_id"
     t.index ["user_id"], name: "index_note_editors_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
     t.text "body", null: false
-    t.string "title", null: false
-    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
-    t.string "noteable_type", null: false
-    t.bigint "noteable_id", null: false
-    t.bigint "creator_user_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "creator_user_id", null: false
     t.datetime "deleted_at"
+    t.bigint "noteable_id", null: false
+    t.string "noteable_type", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
     t.index ["creator_user_id"], name: "index_notes_on_creator_user_id"
     t.index ["noteable_type", "noteable_id"], name: "index_notes_on_noteable"
   end
 
   create_table "operational_unit_competencies", primary_key: ["operational_unit_id", "competency_id"], force: :cascade do |t|
     t.bigint "competency_id", null: false
-    t.bigint "operational_unit_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "operational_unit_id", null: false
+    t.datetime "updated_at", null: false
     t.index ["competency_id"], name: "index_operational_unit_competencies_on_competency_id"
     t.index ["operational_unit_id"], name: "index_operational_unit_competencies_on_operational_unit_id"
   end
 
   create_table "operational_units", force: :cascade do |t|
     t.text "coverage"
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.enum "facility_type", null: false, enum_type: "facility_type"
-    t.string "name", null: false
-    t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
     t.bigint "location_id", null: false
+    t.string "name", null: false
     t.bigint "on_charge_shift_user_id"
     t.bigint "parent_institution_id", null: false
-    t.datetime "created_at", null: false
+    t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["location_id"], name: "index_operational_units_on_location_id"
     t.index ["on_charge_shift_user_id"], name: "index_operational_units_on_on_charge_shift_user_id"
     t.index ["parent_institution_id"], name: "index_operational_units_on_parent_institution_id"
   end
 
   create_table "patient_transfers", force: :cascade do |t|
-    t.datetime "arrival_time", precision: nil
-    t.datetime "departure_time", precision: nil
-    t.enum "status", default: "pending", null: false, enum_type: "event_status"
     t.bigint "accepted_by_user_id", null: false
+    t.datetime "arrival_time", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.datetime "departure_time", precision: nil
     t.bigint "destination_institution_id", null: false
     t.bigint "event_id", null: false
     t.bigint "patient_id", null: false
     t.bigint "requesting_user_id", null: false
+    t.enum "status", default: "pending", null: false, enum_type: "event_status"
     t.bigint "transport_resource_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["accepted_by_user_id"], name: "index_patient_transfers_on_accepted_by_user_id"
     t.index ["destination_institution_id"], name: "index_patient_transfers_on_destination_institution_id"
     t.index ["event_id"], name: "index_patient_transfers_on_event_id"
@@ -292,78 +292,78 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "patient_vitals", force: :cascade do |t|
-    t.integer "blood_pressure_systolic", limit: 2
     t.integer "blood_pressure_diastolic", limit: 2
+    t.integer "blood_pressure_systolic", limit: 2
     t.integer "capillary_blood_glucose", limit: 2
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.jsonb "glasgow_coma_score"
     t.integer "heart_rate", limit: 2
     t.integer "oxygen_saturation", limit: 2
+    t.bigint "patient_id", null: false
     t.datetime "recorded_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.bigint "recorded_by_user_id", null: false
     t.integer "respiratory_rate", limit: 2
     t.decimal "temperature", precision: 4, scale: 1
-    t.bigint "patient_id", null: false
-    t.bigint "recorded_by_user_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["patient_id"], name: "index_patient_vitals_on_patient_id"
     t.index ["recorded_by_user_id"], name: "index_patient_vitals_on_recorded_by_user_id"
   end
 
   create_table "patients", force: :cascade do |t|
     t.integer "age", limit: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.bigint "event_id", null: false
     t.enum "gender", default: "other", null: false, enum_type: "gender"
     t.string "name", null: false
     t.enum "triage_status", default: "unknown", null: false, enum_type: "triage_status"
-    t.bigint "event_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["event_id"], name: "index_patients_on_event_id"
   end
 
   create_table "phone_numbers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.string "extension", limit: 3
     t.string "number", limit: 25
     t.enum "phone_type", default: "personal", null: false, enum_type: "phone_type"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
   end
 
   create_table "resource_categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "description"
     t.string "name", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["name"], name: "index_resource_categories_on_name", unique: true
   end
 
   create_table "resource_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "description"
     t.string "name", null: false
     t.bigint "resource_category_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["name"], name: "index_resource_types_on_name", unique: true
     t.index ["resource_category_id"], name: "index_resource_types_on_resource_category_id"
   end
 
   create_table "resources", force: :cascade do |t|
     t.integer "available_units", limit: 2, default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "description"
-    t.string "name", null: false
-    t.integer "total_units", limit: 2, default: 0, null: false
-    t.string "units_identifier"
     t.bigint "icon_id"
     t.bigint "institution_id", null: false
     t.bigint "location_id", null: false
+    t.string "name", null: false
     t.bigint "resource_type_id", null: false
-    t.datetime "created_at", null: false
+    t.integer "total_units", limit: 2, default: 0, null: false
+    t.string "units_identifier"
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["icon_id"], name: "index_resources_on_icon_id"
     t.index ["institution_id"], name: "index_resources_on_institution_id"
     t.index ["location_id"], name: "index_resources_on_location_id"
@@ -372,122 +372,122 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_25_060152) do
   end
 
   create_table "schedule_entries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "creator_user_id", null: false
+    t.datetime "deleted_at"
     t.text "description"
     t.interval "duration"
     t.datetime "ends_at"
     t.datetime "estimated_ends_at"
+    t.bigint "event_id", null: false
     t.enum "priority_level", default: "unknown", null: false, enum_type: "priority_level"
     t.enum "recurrence_rule", default: "once", null: false, enum_type: "recurrence_rule"
     t.datetime "repeat_until"
     t.datetime "scheduled_at"
     t.enum "status", default: "pending", null: false, enum_type: "event_status"
     t.string "title"
-    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
-    t.bigint "creator_user_id", null: false
-    t.bigint "event_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.enum "visibility", default: "private", null: false, enum_type: "visibility"
     t.index ["creator_user_id"], name: "index_schedule_entries_on_creator_user_id"
     t.index ["event_id"], name: "index_schedule_entries_on_event_id"
   end
 
   create_table "schedule_entries_institutions", primary_key: ["schedule_entry_id", "institution_id"], force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.bigint "institution_id", null: false
     t.bigint "schedule_entry_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["institution_id"], name: "index_schedule_entries_institutions_on_institution_id"
     t.index ["schedule_entry_id"], name: "index_schedule_entries_institutions_on_schedule_entry_id"
   end
 
   create_table "specialties", force: :cascade do |t|
     t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "description"
     t.string "name", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["code", "name"], name: "index_specialties_on_code_and_name", unique: true
   end
 
   create_table "user_callsigns", force: :cascade do |t|
     t.string "callsign", limit: 50, null: false
-    t.bigint "institution_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "institution_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["callsign", "institution_id"], name: "index_user_callsigns_on_callsign_and_institution_id", unique: true
     t.index ["institution_id"], name: "index_user_callsigns_on_institution_id"
     t.index ["user_id"], name: "index_user_callsigns_on_user_id"
   end
 
   create_table "user_competencies", primary_key: ["user_id", "competency_id"], force: :cascade do |t|
-    t.date "expiry_date"
-    t.bigint "user_id", null: false
     t.bigint "competency_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.date "expiry_date"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["competency_id"], name: "index_user_competencies_on_competency_id"
     t.index ["user_id"], name: "index_user_competencies_on_user_id"
   end
 
   create_table "user_contacts", primary_key: ["user_id", "contact_id", "contact_type"], force: :cascade do |t|
-    t.enum "contact_type", default: "primary", null: false, enum_type: "contact_type"
     t.bigint "contact_id", null: false
-    t.bigint "user_id", null: false
+    t.enum "contact_type", default: "primary", null: false, enum_type: "contact_type"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["contact_id"], name: "index_user_contacts_on_contact_id"
     t.index ["user_id"], name: "index_user_contacts_on_user_id"
   end
 
   create_table "user_institutions", primary_key: ["user_id", "institution_id"], force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.bigint "institution_id", null: false
     t.string "position", limit: 50, default: "member"
     t.enum "role", default: "guest", null: false, enum_type: "role"
     t.enum "status", default: "draft", null: false, enum_type: "status_invite"
-    t.bigint "user_id", null: false
-    t.bigint "institution_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.bigint "user_id", null: false
     t.index ["institution_id"], name: "index_user_institutions_on_institution_id"
     t.index ["user_id"], name: "index_user_institutions_on_user_id"
   end
 
   create_table "user_notes", primary_key: ["user_id", "note_id"], force: :cascade do |t|
-    t.boolean "starred", default: false, null: false
-    t.bigint "user_id", null: false
-    t.bigint "note_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "note_id", null: false
+    t.boolean "starred", default: false, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["note_id"], name: "index_user_notes_on_note_id"
     t.index ["user_id"], name: "index_user_notes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.boolean "active", default: true
+    t.bigint "avatar_id"
+    t.datetime "confirmation_sent_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.string "name"
-    t.boolean "active", default: true
-    t.string "uid"
-    t.integer "provider", limit: 2
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.bigint "avatar_id"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "name"
+    t.integer "provider", limit: 2
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.string "uid"
+    t.string "unconfirmed_email"
+    t.datetime "updated_at", null: false
     t.index ["avatar_id"], name: "index_users_on_avatar_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

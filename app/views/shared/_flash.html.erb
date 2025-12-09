@@ -1,7 +1,8 @@
 <div
   id="flash-messages"
-  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4 select-none transition-opacity duration-500"
-  data-disappear-after="<%= GLOBAL_VARS[:flash_messages_disappeared_after] || 5000 %>">
+  data-controller="flash"
+  data-flash-disappear-after-value="<%= GLOBAL_VARS[:flash_messages_disappeared_after] || 5000 %>"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4 select-none transition-opacity duration-500">
   <% flash.each_with_index do |(type, message), idx| %>
     <% alert_class = case type.to_sym
     when :notice then "bg-info border-info-focus text-info-content"
@@ -12,7 +13,7 @@
       <button
         type="button"
         aria-label="<%= t("common.close") %>"
-        onclick="closeFlash(<%= idx %>)"
+        data-action="flash#close"
         class="absolute top-2 right-2 text-xl font-bold leading-none cursor-pointer hover:text-neutral-disabled focus:outline-none">
         &times;
       </button>
