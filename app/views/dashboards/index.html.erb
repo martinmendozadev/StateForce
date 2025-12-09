@@ -1,6 +1,10 @@
-<div class="p-8">
-  <div class="p-4 bg-linear-to-br from-primary-800 to-primary max-w-42 rounded-lg">
-    <p class="text-lg">Active Events</p>
-    <span class="font-semibold text-3xl"><%= @active_events_count %></span>
+<div class="m-4">
+
+  <div class="bg-background-soft p-2 flex gap-4 rounded-lg">
+    <div class="p-4 bg-linear-to-br from-primary-800 to-primary max-w-42 rounded-lg">
+      <p class="text-lg"><%= t('.active_events') %></p>
+      <span class="font-semibold text-3xl"><%= @active_events_count %></span>
+    </div>
   </div>
+
 </div>

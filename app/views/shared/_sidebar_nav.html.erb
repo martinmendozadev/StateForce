@@ -6,7 +6,7 @@
           <% active = current_page?(dashboard_path) %>
           <%= link_to dashboard_path, class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold transition #{active ? 'bg-background-soft text-success' : 'text-neutral-focus hover:bg-background-soft hover:text-info'}" do %>
             <%= svg_icon :dashboard_icon, class: "size-6 shrink-0 #{active ? 'text-success' : 'text-neutral-focus group-hover:text-info'}", title: "Dashboard" %>
-            <span><%= t("dashboard.name") %></span>
+            <span><%= t("dashboards.name") %></span>
           <% end %>
         </li>
         <li>

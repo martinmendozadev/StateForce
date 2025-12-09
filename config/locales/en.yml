@@ -77,8 +77,10 @@ en:
     state_force: "StateForce"
     share_feedback: "Share feedback"
     profile: "My profile"
-  dashboard:
+  dashboards:
     name: "Dashboard"
+    index:
+      active_events: "Active Events"
   event:
     name: "Events"
   landing:
