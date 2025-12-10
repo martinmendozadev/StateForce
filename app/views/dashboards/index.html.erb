@@ -1,10 +1,32 @@
 <div class="m-4">
 
-  <div class="bg-background-soft p-2 flex gap-4 rounded-lg">
-    <div class="p-4 bg-linear-to-br from-primary-800 to-primary max-w-42 rounded-lg">
+  <div class="bg-background-soft p-2 gap-2 flex justify-between rounded-lg">
+
+    <div class="p-4 bg-linear-to-br from-danger-800 to-danger-800/50 rounded-lg">
       <p class="text-lg"><%= t('.active_events') %></p>
       <span class="font-semibold text-3xl"><%= @active_events_count %></span>
     </div>
+
+    <div class="p-4 bg-linear-to-br from-success-800 to-success-800/50 rounded-lg">
+      <p class="text-lg"><%= t('.ambulances_vehicles') %></p>
+      <span class="font-semibold text-3xl"><%= @ambulance_resource_available %></span>
+    </div>
+
+    <div class="p-4 bg-linear-to-br from-primary-800 to-primary-800/50 rounded-lg">
+      <p class="text-lg"><%= t('.rescue_vehicles') %></p>
+      <span class="font-semibold text-3xl"><%= @rescue_resource_available %></span>
+    </div>
+
+    <div class="p-4 bg-linear-to-br from-info-950 to-info-950/50 rounded-lg">
+      <p class="text-lg"><%= t('.hospital_occupancy') %></p>
+      <span class="font-semibold text-3xl"><%= @hospital_resource_available %>%</span>
+    </div>
+
+    <div class="p-4 bg-linear-to-br from-secondary-800 to-secondary-800/50 rounded-lg">
+      <p class="text-lg"><%= t('.institutions') %></p>
+      <span class="font-semibold text-3xl"><%= @institutions_available %></span>
+    </div>
+
   </div>
 
 </div>
