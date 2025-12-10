@@ -27,6 +27,23 @@ class Resource < ApplicationRecord
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  # Scopes
+  scope :vehicles_resource_available, ->(type_name) {
+    joins(:resource_type)
+      .where(resource_types: { name: type_name })
+      .where("available_units > 0").sum(:available_units)
+  }
+
+  # Returns percentage of availability for resources with type name "Bed"
+  def self.percentage_hospitals_beds_available
+    relation = joins(:resource_type).where(resource_types: { name: "Bed" })
+    total_available = relation.sum(:available_units)
+    total_units = relation.sum(:total_units)
+
+    return 100.0 if total_units.to_i <= 0
+
+    ((total_available.to_f / total_units.to_f) * 100).round(2)
+  end
 
   private
 
