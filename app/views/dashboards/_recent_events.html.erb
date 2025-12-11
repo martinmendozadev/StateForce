@@ -1,3 +1,5 @@
-<div class="">
-  Helolo
+<div class="bg-background-soft p-2 rounded-lg">
+  <% @last_events.each do |event| %>
+    <p><%= event.event_type %> - <%= event.description %> - <%= event.updated_at %></p>
+  <% end %>
 </div>
