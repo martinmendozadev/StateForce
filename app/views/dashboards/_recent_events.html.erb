@@ -1,27 +1,29 @@
 <div class="bg-background-soft p-2 rounded-lg">
   <div class="px-4 sm:px-6 lg:px-8">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
+  <div class="flex items-center justify-between mt-4">
+    <div class="">
       <h1 class="text-xl font-semibold">Recent Events</h1>
     </div>
-    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-      <button type="button" class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold shadow-xs hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">New Event</button>
+    <div class="flex items-center gap-4">
+      <button type="button" class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold shadow-xs hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary cursor-pointer">New Event</button>
+      <%= svg_icon :refresh_icon, class: "size-6 shrink-0 text-neutral-focus hover:text-info cursor-pointer" %>
     </div>
   </div>
   <div class="mt-8">
     <div class="-mx-4 sm:-mx-6 lg:-mx-8">
       <div class="py-2 sm:px-6 lg:px-8">
         <!-- Header row for larger screens -->
-        <div class="hidden sm:grid sm:grid-cols-3 gap-4 px-4 sm:px-0 py-3.5 text-left text-sm font-semibold text-foreground">
+        <div class="hidden sm:grid sm:grid-cols-4 gap-4 px-4 sm:px-0 py-3.5 text-left text-sm font-semibold text-foreground">
           <div>Event Category</div>
           <div>Description</div>
+          <div>Location</div>
           <div>Last Update</div>
         </div>
 
         <!-- List container -->
         <div role="list" aria-label="Recent Events" class="divide-y divide-gray-300">
           <% @last_events.each do |event| %>
-            <div role="listitem" class="grid grid-cols-1 sm:grid-cols-3 gap-2 items-start px-4 sm:px-0 py-4">
+            <div role="listitem" class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-start px-4 sm:px-0 py-4">
               <!-- Event Category -->
               <div class="text-sm font-medium text-foreground">
                 <div class="flex items-center gap-x-2">
@@ -53,7 +55,7 @@
                   <% end %>
 
                   <span class="sm:hidden block text-xs text-gray-500">Event Category</span>
-                  <span class="block"><%= event.event_type %></span>
+                  <span class="block"><%= event.event_type&.humanize %></span>
                 </div>
               </div>
 
@@ -61,6 +63,12 @@
               <div class="text-sm text-gray-500">
                 <span class="sm:hidden block text-xs text-gray-500">Description</span>
                 <span class="block"><%= event.description&.truncate(20) %></span>
+              </div>
+
+              <!-- Location -->
+              <div class="text-sm text-gray-500">
+                <span class="sm:hidden block text-xs text-gray-500">Location</span>
+                <span class="block"><%= event.location&.address&.truncate(20) %></span>
               </div>
 
               <!-- Last Update -->
