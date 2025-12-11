@@ -28,23 +28,23 @@
               <div class="text-sm font-medium text-foreground">
                 <div class="flex items-center gap-x-2">
                   <% case event.status %>
-                    <% when :assigned %>
-                    <div class="flex-none rounded-full bg-info/10 p-1 text-info max-w-4">
-                      <div class="size-2 rounded-full bg-current"></div>
-                    </div>
-                    <% when :resolved %>
+                    <% when Event.statuses[:assigned] %>
+                      <div class="flex-none rounded-full bg-info/10 p-1 text-info max-w-4">
+                        <div class="size-2 rounded-full bg-current"></div>
+                      </div>
+                    <% when Event.statuses[:resolved] %>
                     <div class="flex-none rounded-full bg-success/10 p-1 text-success max-w-4">
                       <div class="size-2 rounded-full bg-current"></div>
                     </div>
-                    <% when :pending %>
+                    <% when Event.statuses[:pending] %>
                     <div class="flex-none rounded-full bg-warning/10 p-1 text-warning max-w-4">
                       <div class="size-2 rounded-full bg-current"></div>
                     </div>
-                    <% when :on_scene %>
+                    <% when Event.statuses[:on_scene] %>
                     <div class="flex-none rounded-full bg-secondary/10 p-1 text-secondary max-w-4">
                       <div class="size-2 rounded-full bg-current"></div>
                     </div>
-                    <% when :closed %>
+                    <% when Event.statuses[:closed] %>
                     <div class="flex-none rounded-full bg-primary/10 p-1 text-primary max-w-4">
                       <div class="size-2 rounded-full bg-current"></div>
                     </div>
