@@ -10,8 +10,10 @@
           <% end %>
         </li>
         <li>
-          <%= link_to "#", class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold text-neutral-focus hover:bg-background-soft hover:text-info" do %>
-            <%= svg_icon :event_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
+
+          <% active = current_page?(events_path) %>
+          <%= link_to events_path, class: "group flex items-end gap-x-3 rounded-md p-2 text-sm font-semibold transition #{active ? 'bg-background-soft text-success' : 'text-neutral-focus hover:bg-background-soft hover:text-info'}" do %>
+            <%= svg_icon :event_icon, class: "size-6 shrink-0 #{active ? 'text-success' : 'text-neutral-focus group-hover:text-info'}", title: "Event" %>
             <span><%= t("event.name") %></span>
           <% end %>
         </li>

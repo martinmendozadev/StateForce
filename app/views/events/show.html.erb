@@ -1,0 +1,42 @@
+<div class="bg-background-soft p-4 rounded-lg">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-semibold"><%= t("events.show.title", default: "Event Details") %></h1>
+    <%= link_to t("events.show.back", default: "Back to Dashboard"), "/dashboard", class: "text-sm text-primary hover:text-primary-hover" %>
+  </div>
+
+  <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div>
+      <div class="text-xs text-gray-500"><%= t("events.show.event_category", default: "Event Category") %></div>
+      <div class="text-sm font-medium text-foreground"><%= @event.event_type&.humanize %></div>
+    </div>
+
+    <div>
+      <div class="text-xs text-gray-500"><%= t("events.show.status", default: "Status") %></div>
+      <div class="text-sm font-medium text-foreground"><%= @event.status&.to_s&.humanize %></div>
+    </div>
+
+    <div>
+      <div class="text-xs text-gray-500"><%= t("events.show.description", default: "Description") %></div>
+      <div class="text-sm text-gray-700"><%= @event.description %></div>
+    </div>
+
+    <div>
+      <div class="text-xs text-gray-500"><%= t("events.show.location", default: "Location") %></div>
+      <div class="text-sm text-gray-700"><%= @event.location&.address %></div>
+    </div>
+
+    <div>
+      <div class="text-xs text-gray-500"><%= t("events.show.last_update", default: "Last Update") %></div>
+      <div class="text-sm text-gray-700">
+        <time datetime="<%= @event.updated_at&.iso8601 %>"><%= last_update(@event) %></time>
+      </div>
+    </div>
+
+    <div>
+      <div class="text-xs text-gray-500"><%= t("events.show.created_at", default: "Created") %></div>
+      <div class="text-sm text-gray-700">
+        <time datetime="<%= @event.created_at&.iso8601 %>"><%= created_at(@event) %></time>
+      </div>
+    </div>
+  </div>
+</div>

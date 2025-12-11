@@ -21,9 +21,9 @@
         </div>
 
         <!-- List container -->
-        <div role="list" aria-label="Recent Events" class="divide-y divide-gray-300">
+        <div role="list" aria-label="Recent Events" class="">
           <% @last_events.each do |event| %>
-            <div role="listitem" class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-start px-4 sm:px-0 py-4">
+            <%= link_to event_path(event), role: "listitem", class: "group grid grid-cols-1 sm:grid-cols-4 gap-2 items-start px-4 sm:px-0 py-4 odd:bg-background-emphasis hover:bg-background-soft" do %>
               <!-- Event Category -->
               <div class="text-sm font-medium text-foreground">
                 <div class="flex items-center gap-x-2">
@@ -54,29 +54,29 @@
                     </div>
                   <% end %>
 
-                  <span class="sm:hidden block text-xs text-gray-500">Event Category</span>
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.event_category') %></span>
                   <span class="block"><%= event.event_type&.humanize %></span>
                 </div>
               </div>
 
               <!-- Description -->
               <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500">Description</span>
+                <span class="sm:hidden block text-xs text-gray-500"><%= t('.description') %></span>
                 <span class="block"><%= event.description&.truncate(20) %></span>
               </div>
 
               <!-- Location -->
               <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500">Location</span>
+                <span class="sm:hidden block text-xs text-gray-500"><%= t('.location') %></span>
                 <span class="block"><%= event.location&.address&.truncate(20) %></span>
               </div>
 
               <!-- Last Update -->
               <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500">Last Update</span>
+                <span class="sm:hidden block text-xs text-gray-500"><%= t('.last_update') %></span>
                 <time datetime="<%= event.updated_at.iso8601 %>"><%= last_update(event) %></time>
               </div>
-            </div>
+            <% end %>
           <% end %>
         </div>
       </div>
