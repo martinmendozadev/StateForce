@@ -17,4 +17,20 @@ module ApplicationHelper
     controller_action = [ controller_name, action_name ]
     public_routes.include?(controller_action)
   end
+
+  def formatted_time_ago(resource_time, fallback_translation)
+    if resource_time.nil?
+      t(fallback_translation)
+    else
+      "#{time_ago_in_words(resource_time, include_seconds: true)} #{t('helpers.application.ago')}"
+    end
+  end
+
+  def last_update(resource)
+    formatted_time_ago(resource.updated_at, "helpers.application.never_updated")
+  end
+
+  def created_at(resource)
+    formatted_time_ago(resource.created_at, "helpers.application.not_available")
+  end
 end

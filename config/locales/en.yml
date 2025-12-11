@@ -93,6 +93,11 @@ en:
       subtitle: Optimize coordination and response efforts across emergency services with a unified, live dashboard.
       cta:
         primary: Sign Up
+  helpers:
+    application:
+      ago: 'ago'
+      not_available: 'Not available'
+      never_updated: 'Never updated'
   instructions:
     title: "Confirm your account"
     description: "We noticed you haven't confirmed your email address yet."
