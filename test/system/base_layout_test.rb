@@ -19,7 +19,7 @@ class BaseLayoutTest < ActionDispatch::SystemTestCase
     visit dashboard_path
     find(:xpath, "//div[contains(@class,'lg:fixed') and contains(@class,'lg:flex')]")
     within(:xpath, "//nav[@aria-label='Sidebar']") do
-      assert_selector "span", text: I18n.t("dashboard.name")
+      assert_selector "span", text: I18n.t("dashboards.name")
     end
   end
 
@@ -44,7 +44,7 @@ class BaseLayoutTest < ActionDispatch::SystemTestCase
 
     assert_selector "dialog#sidebar[open]", visible: :all
     assert_selector "button[data-action='sidebar#close']"
-    assert_text I18n.t("dashboard.name")
+    assert_text I18n.t("dashboards.name")
   end
 
   test "mobile close button closes sidebar dialog" do
@@ -64,7 +64,7 @@ class BaseLayoutTest < ActionDispatch::SystemTestCase
     resize_window_to_desktop
     visit dashboard_path
     within(:xpath, "//nav[@aria-label='Sidebar']") do
-      span = find("span", text: I18n.t("dashboard.name"))
+      span = find("span", text: I18n.t("dashboards.name"))
       link = span.find(:xpath, "ancestor::a[1]")
       classes = link[:class]
       assert_includes classes, "bg-background-soft", "Expected active dashboard link to have bg-background-soft (classes: #{classes})"
