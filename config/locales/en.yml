@@ -81,6 +81,13 @@ en:
     name: "Dashboard"
     index:
       active_events: "Active Events"
+    recent_events:
+      title: "Recent Events"
+      event_category: "Event Category"
+      description: "Description"
+      location: "Location"
+      last_update: "Last Update"
+      new_event: "New Event"
   event:
     name: "Events"
   landing:

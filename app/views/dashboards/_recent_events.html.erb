@@ -2,10 +2,10 @@
   <div class="px-4 sm:px-6 lg:px-8">
   <div class="flex items-center justify-between mt-4">
     <div class="">
-      <h1 class="text-xl font-semibold">Recent Events</h1>
+      <h1 class="text-xl font-semibold"><%= t(".title") %></h1>
     </div>
     <div class="flex items-center gap-4">
-      <button type="button" class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold shadow-xs hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary cursor-pointer">New Event</button>
+      <button type="button" class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold shadow-xs hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary cursor-pointer"><%= t(".new_event") %></button>
       <%= svg_icon :refresh_icon, class: "size-6 shrink-0 text-neutral-focus hover:text-info cursor-pointer" %>
     </div>
   </div>
@@ -14,10 +14,10 @@
       <div class="py-2 sm:px-6 lg:px-8">
         <!-- Header row for larger screens -->
         <div class="hidden sm:grid sm:grid-cols-4 gap-4 px-4 sm:px-0 py-3.5 text-left text-sm font-semibold text-foreground">
-          <div>Event Category</div>
-          <div>Description</div>
-          <div>Location</div>
-          <div>Last Update</div>
+          <div><%= t(".event_category") %></div>
+          <div><%= t(".description") %></div>
+          <div><%= t(".location") %></div>
+          <div><%= t(".last_update") %></div>
         </div>
 
         <!-- List container -->
