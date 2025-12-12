@@ -90,8 +90,7 @@ en:
       new_event: "New Event"
     events_by_status:
       title: "Events by Status"
-      events: "Status"
-      percentage: "Percent %"
+      events: "Events"
   event:
     name: "Events"
   landing:

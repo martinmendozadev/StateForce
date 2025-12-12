@@ -41,4 +41,5 @@ class Event < ApplicationRecord
   # Scopes
   scope :active_events, -> { statuses.excluding(:resolved) }
   scope :last_events, ->(limit = 5) { order(updated_at: :desc).limit(limit) }
+  scope :group_by_attribute, ->(attribute) { group(attribute).order(attribute => :asc) }
 end
