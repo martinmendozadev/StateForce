@@ -34,4 +34,5 @@ class Institution < ApplicationRecord
 
   # Scopes
   scope :active_institutions, -> { where(status: statuses[:available]) }
+  scope :last_institutions, ->(limit = 5) { order(updated_at: :desc).limit(limit) }
 end

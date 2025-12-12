@@ -93,6 +93,9 @@ en:
       events: "Events"
     institutions:
       title: "Institutions"
+      name: "Name"
+      status: "Status"
+      capacity: "Occupancy"
   event:
     name: "Events"
   landing:

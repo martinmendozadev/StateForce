@@ -15,5 +15,8 @@ class DashboardsController < ApplicationController
 
     # Events by Status
     @events_by_status = Event.group_by_attribute(:status).count
+
+    # Recent Institutions
+    @last_institutions = Institution.last_institutions
   end
 end
