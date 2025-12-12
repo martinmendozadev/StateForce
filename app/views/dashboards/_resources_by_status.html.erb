@@ -46,7 +46,7 @@
               <!-- Available units -->
               <div class="text-sm text-gray-500">
                 <span class="sm:hidden block text-xs text-gray-500"><%= t('.capacity') %></span>
-                <span class="block text-center"><%= resource.available_units %></span>
+                <span class="block text-center"><%= resource.available_units %>/<%= resource.total_units %></span>
               </div>
             <% end %>
           <% end %>
