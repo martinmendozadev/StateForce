@@ -88,6 +88,8 @@ en:
       location: "Location"
       last_update: "Last Update"
       new_event: "New Event"
+    events_by_status:
+      title: "Events by Status"
   event:
     name: "Events"
   landing:
