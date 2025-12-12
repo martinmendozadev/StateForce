@@ -88,6 +88,9 @@ en:
       location: "Location"
       last_update: "Last Update"
       new_event: "New Event"
+    resources_by_status:
+      title: "Resources by Status"
+      resources: "Resources"
     events_by_status:
       title: "Events by Status"
       events: "Events"
