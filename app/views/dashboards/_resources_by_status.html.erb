@@ -12,7 +12,7 @@
               <!-- Resource Group -->
               <div class="text-sm font-medium text-foreground">
                 <div class="flex items-center gap-x-2">
-                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.name') %></span>
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".name") %></span>
                   <span class="block"><%= resource.name.truncate(15) %></span>
                 </div>
               </div>
@@ -24,13 +24,13 @@
                 <% pct = total > 0 ? ((available.to_f / total.to_f) * 100).round : 0 %>
                 <% bar_color = if pct >= 66
                   "bg-success"
-                elsif pct >= 33
+ elsif pct >= 33
                   "bg-warning"
-                else
+ else
                   "bg-danger"
                 end %>
 
-                <div class="w-full h-3 rounded-full bg-neutral/20 overflow-hidden" aria-label="<%= t('.capacity') %>">
+                <div class="w-full h-3 rounded-full bg-neutral/20 overflow-hidden" aria-label="<%= t(".capacity") %>">
                   <div
                     class="h-3 <%= bar_color %> rounded-full transition-all duration-300"
                     role="progressbar"

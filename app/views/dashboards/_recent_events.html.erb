@@ -53,20 +53,20 @@
                     </div>
                   <% end %>
 
-                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.event_category') %></span>
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".event_category") %></span>
                   <span class="block"><%= event.event_type&.humanize %></span>
                 </div>
               </div>
 
               <!-- Description -->
               <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500"><%= t('.description') %></span>
+                <span class="sm:hidden block text-xs text-gray-500"><%= t(".description") %></span>
                 <span class="block"><%= event.description&.truncate(20) %></span>
               </div>
 
               <!-- Location -->
               <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500"><%= t('.location') %></span>
+                <span class="sm:hidden block text-xs text-gray-500"><%= t(".location") %></span>
                 <span class="block"><%= event.location&.address&.truncate(20) %></span>
               </div>
 

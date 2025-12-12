@@ -18,14 +18,14 @@
               <!-- Institution -->
               <div class="text-sm font-medium text-foreground">
                 <div class="flex items-center gap-x-2">
-                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.name') %></span>
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".name") %></span>
                   <span class="block"><%= institution.name.truncate(15) %></span>
                 </div>
               </div>
 
               <!-- Status -->
               <div class="text-sm text-gray-500">
-                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.status') %></span>
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".status") %></span>
                   <% case institution.status %>
                     <% when Institution.statuses[:available] %>
                       <span class="block text-success"><%= institution&.status.humanize %></span>
