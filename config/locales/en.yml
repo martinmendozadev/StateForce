@@ -91,6 +91,8 @@ en:
     events_by_status:
       title: "Events by Status"
       events: "Events"
+    institutions:
+      title: "Institutions"
   event:
     name: "Events"
   landing:
