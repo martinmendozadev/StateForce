@@ -89,7 +89,7 @@ en:
       last_update: "Last Update"
       new_event: "New Event"
     resources_by_status:
-      title: "Resources by Status"
+      title: "Resources"
       resources: "Resources"
       capacity: "Occupancy"
     events_by_status:
