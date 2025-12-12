@@ -174,7 +174,7 @@ resource_categories = [
   { name: "Rescue Vehicles", description: "Covers ambulances, helicopters, and other emergency response vehicles." },
   { name: "Protective Gear", description: "Personal protective equipment such as helmets, gloves, and vests." },
   { name: "Food & Water Supplies", description: "Essential provisions for emergency response and relief." },
-  { name: "Shelter Materials", description: "Tents, blankets, and construction materials for temporary housing." },
+  { name: "Shelter Materials", description: "Tents, blankets, and construction materials for temporary housing." }
 ]
 
 resource_types = [
