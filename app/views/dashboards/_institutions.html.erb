@@ -12,20 +12,20 @@
         </div>
 
         <!-- List container -->
-        <div role="list" aria-label="Recent Events" class="">
+        <div role="list" aria-label="Recent Institutions" class="">
           <% @last_institutions&.each do |institution| %>
             <%= link_to "#", role: "listitem", class: "group grid grid-cols-1 sm:grid-cols-3 gap-2 items-start px-4 sm:px-0 py-4 odd:bg-background-emphasis hover:bg-background-soft" do %>
               <!-- Institution -->
               <div class="text-sm font-medium text-foreground">
                 <div class="flex items-center gap-x-2">
-                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.status') %></span>
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.name') %></span>
                   <span class="block"><%= institution.name.truncate(15) %></span>
                 </div>
               </div>
 
               <!-- Status -->
               <div class="text-sm text-gray-500">
-                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.description') %></span>
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t('.status') %></span>
                   <% case institution.status %>
                     <% when Institution.statuses[:available] %>
                       <span class="block text-success"><%= institution&.status.humanize %></span>
@@ -41,8 +41,8 @@
 
               <!-- Occupancy -->
               <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500"><%= t('.occupancy') %></span>
-                <span class="block text-center"><%= (((Resource.where(institution: institution).first&.available_units || 1) * 100 ) / (Resource.where(institution: institution).first&.total_units || 10)) || 100 %>%</span>
+                <span class="sm:hidden block text-xs text-gray-500"><%= t('.capacity') %></span>
+                <span class="block text-center"><%= number_to_percentage(institution.occupancy_percentage, precision: 0) %></span>
               </div>
             <% end %>
           <% end %>
