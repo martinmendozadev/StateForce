@@ -94,7 +94,8 @@ en:
       capacity: "Occupancy"
     events_by_status:
       title: "Events by Status"
-      events: "Events"
+      sub_title: "in last 24h"
+      heading: "Events"
     institutions:
       title: "Institutions"
       name: "Name"

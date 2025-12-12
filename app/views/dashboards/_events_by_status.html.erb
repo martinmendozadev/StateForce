@@ -52,14 +52,14 @@
       <% end %>
     </div>
 
-    <div class="relative w-48 h-48">
-      <div class="w-full h-full rounded-full"
+    <div class="relative size-42">
+      <div class="size-full rounded-full"
         style="background: conic-gradient(<%= gradient_css %>);">
       </div>
 
       <div class="absolute inset-6 bg-background-emphasis rounded-full flex flex-col items-center justify-center">
-        <span class="text-lg font-semibold"><%= total_events.to_i %></span>
-        <span class="text-xs text-gray-400"><%= t(".events") %></span>
+        <span class="text-lg font-semibold"><%= total_events.to_i %> <%= t(".heading") %></span>
+        <span class="text-xs text-gray-400"><%= t(".sub_title") %></span>
       </div>
     </div>
   </div>
