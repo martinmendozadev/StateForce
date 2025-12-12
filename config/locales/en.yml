@@ -91,6 +91,7 @@ en:
     resources_by_status:
       title: "Resources by Status"
       resources: "Resources"
+      capacity: "Occupancy"
     events_by_status:
       title: "Events by Status"
       events: "Events"

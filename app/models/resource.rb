@@ -28,6 +28,8 @@ class Resource < ApplicationRecord
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   # Scopes
+  scope :last_resources, ->(limit = 5) { order(updated_at: :desc).limit(limit) }
+
   scope :vehicles_resource_available, ->(type_name) {
     joins(:resource_type)
       .where(resource_types: { name: type_name })

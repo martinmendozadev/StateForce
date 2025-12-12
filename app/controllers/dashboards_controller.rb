@@ -18,5 +18,8 @@ class DashboardsController < ApplicationController
 
     # Recent Institutions
     @last_institutions = Institution.last_institutions
+
+    # Resources by Status
+    @resources_by_status = Resource.last_resources
   end
 end
