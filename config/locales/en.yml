@@ -81,6 +81,8 @@ en:
     name: "Dashboard"
     index:
       active_events: "Active Events"
+    map:
+      title: "Real Time Map"
     recent_events:
       title: "Recent Events"
       event_category: "Event Category"
