@@ -12,8 +12,9 @@
     <div class="-mx-4 sm:-mx-6 lg:-mx-8">
       <div class="py-2 sm:px-6 lg:px-8">
         <!-- Header row for larger screens -->
-        <div class="hidden sm:grid sm:grid-cols-4 gap-4 px-4 sm:px-0 py-3.5 text-left text-sm font-semibold text-foreground">
+        <div class="hidden sm:grid sm:grid-cols-5 gap-4 px-4 sm:px-0 py-3.5 text-left text-sm font-semibold text-foreground">
           <div><%= t(".event_category") %></div>
+          <div><%= t(".code") %></div>
           <div><%= t(".description") %></div>
           <div><%= t(".location") %></div>
           <div><%= t(".last_update") %></div>
@@ -22,7 +23,7 @@
         <!-- List container -->
         <div role="list" aria-label="Recent Events" class="">
           <% @last_events.each do |event| %>
-            <%= link_to event_path(event), role: "listitem", class: "group grid grid-cols-1 sm:grid-cols-4 gap-2 items-start px-4 sm:px-0 py-4 odd:bg-background-emphasis hover:bg-background-soft" do %>
+            <%= link_to event_path(event), role: "listitem", class: "group grid grid-cols-1 sm:grid-cols-5 gap-2 items-start px-4 sm:px-0 py-4 odd:bg-background-emphasis hover:bg-background-soft" do %>
               <!-- Event Category -->
               <div class="text-sm font-medium text-foreground">
                 <div class="flex items-center gap-x-2">
@@ -56,6 +57,12 @@
                   <span class="sm:hidden block text-xs text-gray-500"><%= t(".event_category") %></span>
                   <span class="block"><%= event.event_type&.humanize %></span>
                 </div>
+              </div>
+
+              <!-- Event Code -->
+              <div class="text-sm text-gray-500">
+                <span class="sm:hidden block text-xs text-gray-500"><%= t(".code") %></span>
+                <span class="block"><%= event.event_code %></span>
               </div>
 
               <!-- Description -->

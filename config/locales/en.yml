@@ -86,6 +86,7 @@ en:
       event_category: "Event Category"
       description: "Description"
       location: "Location"
+      code: "Folio"
       last_update: "Last Update"
       new_event: "New Event"
     resources_by_status:
