@@ -1,0 +1,57 @@
+<div class="bg-background-emphasis p-4 rounded-xl flex flex-col gap-8">
+  <h1 class="text-xl font-semibold"><%= t(".title") %></h1>
+
+  <div class="">
+    <div class="-mx-4 sm:-mx-6 lg:-mx-8">
+      <div class="py-2 sm:px-6 lg:px-8">
+
+        <!-- List container -->
+        <div role="list" aria-label="Resources" class="">
+          <% @resources_by_status&.each do |resource| %>
+            <%= link_to "#", role: "listitem", class: "group grid grid-cols-1 sm:grid-cols-3 gap-2 items-start px-4 sm:px-0 py-4 odd:bg-background-emphasis hover:bg-background-soft" do %>
+              <!-- Resource Group -->
+              <div class="text-sm font-medium text-foreground">
+                <div class="flex items-center gap-x-2">
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".name") %></span>
+                  <span class="block"><%= resource.name.truncate(15) %></span>
+                </div>
+              </div>
+
+              <!-- Available Bar -->
+              <div class="text-sm text-gray-500">
+                <% total = resource.total_units.to_i %>
+                <% available = resource.available_units.to_i %>
+                <% pct = total > 0 ? ((available.to_f / total.to_f) * 100).round : 0 %>
+                <% bar_color = if pct >= 66
+                  "bg-success"
+ elsif pct >= 33
+                  "bg-warning"
+ else
+                  "bg-danger"
+                end %>
+
+                <div class="w-full h-3 rounded-full bg-neutral/20 overflow-hidden" aria-label="<%= t(".capacity") %>">
+                  <div
+                    class="h-3 <%= bar_color %> rounded-full transition-all duration-300"
+                    role="progressbar"
+                    aria-valuenow="<%= available %>"
+                    aria-valuemin="0"
+                    aria-valuemax="<%= total %>"
+                    style="width: <%= pct %>%">
+                  </div>
+                </div>
+                <span class="sr-only"><%= number_to_percentage(pct, precision: 0) %> (<%= available %>/<%= total %>)</span>
+              </div>
+
+              <!-- Available units -->
+              <div class="text-sm text-gray-500">
+                <span class="sm:hidden block text-xs text-gray-500"><%= t(".capacity") %></span>
+                <span class="block text-center"><%= resource.available_units %>/<%= resource.total_units %></span>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

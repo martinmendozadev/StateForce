@@ -1,0 +1,53 @@
+<div class="bg-background-emphasis p-4 rounded-xl flex flex-col gap-4">
+  <h1 class="text-xl font-semibold"><%= t(".title") %></h1>
+
+  <div class="">
+    <div class="-mx-4 sm:-mx-6 lg:-mx-8">
+      <div class="py-2 sm:px-6 lg:px-8">
+        <!-- Header row for larger screens -->
+        <div class="hidden sm:grid sm:grid-cols-3 gap-4 px-4 sm:px-0 py-3.5 text-left text-sm font-semibold text-foreground">
+          <div><%= t(".name") %></div>
+          <div><%= t(".status") %></div>
+          <div><%= t(".capacity") %></div>
+        </div>
+
+        <!-- List container -->
+        <div role="list" aria-label="Recent Institutions" class="">
+          <% @last_institutions&.each do |institution| %>
+            <%= link_to "#", role: "listitem", class: "group grid grid-cols-1 sm:grid-cols-3 gap-2 items-start px-4 sm:px-0 py-4 odd:bg-background-emphasis hover:bg-background-soft" do %>
+              <!-- Institution -->
+              <div class="text-sm font-medium text-foreground">
+                <div class="flex items-center gap-x-2">
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".name") %></span>
+                  <span class="block"><%= institution.name.truncate(15) %></span>
+                </div>
+              </div>
+
+              <!-- Status -->
+              <div class="text-sm text-gray-500">
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".status") %></span>
+                  <% case institution.status %>
+                    <% when Institution.statuses[:available] %>
+                      <span class="block text-success"><%= institution&.status.humanize %></span>
+                    <% when Institution.statuses[:maintenance] %>
+                      <span class="block text-info"><%= institution&.status.humanize %></span>
+                    <% when Institution.statuses[:out_of_service] %>
+                      <span class="block text-danger"><%= institution&.status.humanize %></span>
+                    <% else %>
+                      <span class="block text-neutral"><%= institution&.status.humanize %></span>
+                  <% end %>
+
+              </div>
+
+              <!-- Occupancy -->
+              <div class="text-sm text-gray-500">
+                <span class="sm:hidden block text-xs text-gray-500"><%= t(".capacity") %></span>
+                <span class="block text-center"><%= number_to_percentage(institution.occupancy_percentage, precision: 0) %></span>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

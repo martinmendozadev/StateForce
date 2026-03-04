@@ -1,6 +1,6 @@
-<% if current_user.present? %>
+<div>
   <div class="lg:pl-56">
-    <div class="sticky top-0 border-b border-background-overlay bg-background-surface p-3 sm:px-6 lg:px-8 flex items-center gap-4">
+    <div class="sticky top-0 border-b border-background-overlay bg-background-surface p-3 sm:px-6 lg:px-8 flex items-center gap-4 z-10">
       <button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-text lg:hidden cursor-pointer">
         <span class="sr-only">Open sidebar</span>
         <%= svg_icon :open_icon,  class: "size-6", title: "Open sidebar" %>
@@ -12,6 +12,4 @@
     <%= yield %>
   </div>
   <%= render "shared/sidebar" %>
-<% else %>
-  <%= yield %>
-<% end %>
+</div>

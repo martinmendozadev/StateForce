@@ -182,7 +182,8 @@ resource_types = [
   { name: "Fire Truck", description: "Specialized vehicles for firefighting operations.", category: "Rescue Vehicles" },
   { name: "Helicopter", description: "Airborne vehicles for rapid emergency response.", category: "Rescue Vehicles" },
   { name: "Defibrillator", description: "Medical equipment for cardiac emergencies.", category: "Medical Equipment" },
-  { name: "Ventilator", description: "Critical equipment for respiratory support.", category: "Medical Equipment" }
+  { name: "Ventilator", description: "Critical equipment for respiratory support.", category: "Medical Equipment" },
+  { name: "Bed", description: "Hospital beds and related equipment for patient care.", category: "Medical Equipment" }
 ]
 
 resource_categories.each_with_index do |attrs, i|

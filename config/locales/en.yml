@@ -77,8 +77,33 @@ en:
     state_force: "StateForce"
     share_feedback: "Share feedback"
     profile: "My profile"
-  dashboard:
+  dashboards:
     name: "Dashboard"
+    index:
+      active_events: "Active Events"
+    map:
+      title: "Real Time Map"
+    recent_events:
+      title: "Recent Events"
+      event_category: "Event Category"
+      description: "Description"
+      location: "Location"
+      code: "Folio"
+      last_update: "Last Update"
+      new_event: "New Event"
+    resources_by_status:
+      title: "Resources"
+      resources: "Resources"
+      capacity: "Occupancy"
+    events_by_status:
+      title: "Events by Status"
+      sub_title: "in last 24h"
+      heading: "Events"
+    institutions:
+      title: "Institutions"
+      name: "Name"
+      status: "Status"
+      capacity: "Occupancy"
   event:
     name: "Events"
   landing:
@@ -91,6 +116,11 @@ en:
       subtitle: Optimize coordination and response efforts across emergency services with a unified, live dashboard.
       cta:
         primary: Sign Up
+  helpers:
+    application:
+      ago: 'ago'
+      not_available: 'Not available'
+      never_updated: 'Never updated'
   instructions:
     title: "Confirm your account"
     description: "We noticed you haven't confirmed your email address yet."
