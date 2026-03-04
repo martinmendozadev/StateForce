@@ -40,9 +40,6 @@ Rails.application.configure do
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
-  # Use letter_opener gem to preview emails in the browser instead of sending them.
-  config.action_mailer.delivery_method = :letter_opener
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -57,6 +54,12 @@ Rails.application.configure do
 
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
+
+  # Highlight code that triggered redirect in logs.
+  config.action_dispatch.verbose_redirect_logs = true
+
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

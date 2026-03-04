@@ -1,11 +1,5 @@
 #!/usr/bin/env sh
 
-# Ensure foreman is installed
-if ! gem list foreman -i --silent; then
-  echo "Installing foreman..."
-  gem install foreman
-fi
-
 # Make sure RubyGems bin dir(s) are on PATH so the 'foreman' executable is discoverable
 # This covers both system and user install locations.
 GEM_BINDIR=$(ruby -e 'require "rbconfig"; puts RbConfig::CONFIG["bindir"]' 2>/dev/null)
