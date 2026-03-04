@@ -57,8 +57,8 @@ Visit [stateforce.mx](http://localhost:3000) and log in
 
 ## 🛠 Tech Stack
 
-- **Ruby 3.4** – Elegant, powerful backend language.
-- **Rails 8.0.2.1** – Framework optimized for developer productivity and performance.
+- **Ruby 4** – Elegant, powerful backend language.
+- **Rails 8** – Framework optimized for developer productivity and performance.
 - **PostgreSQL 17** – Reliable, production-grade relational database.
 - **Redis** – Used for background jobs and caching.
 - **TailwindCSS 4** – Utility-first CSS framework for rapid UI development.
