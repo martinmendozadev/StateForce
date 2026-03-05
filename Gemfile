@@ -81,6 +81,7 @@ group :development do
   gem "web-console"
   gem 'letter_opener'
   gem "foreman"
+  gem "htmlbeautifier"
 end
 
 group :test do

@@ -150,6 +150,7 @@ GEM
     herb (0.8.10-arm64-darwin)
     herb (0.8.10-x86_64-linux-gnu)
     herb (0.8.10-x86_64-linux-musl)
+    htmlbeautifier (1.4.3)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.2.3)
@@ -500,6 +501,7 @@ DEPENDENCIES
   dotenv-rails
   faker
   foreman
+  htmlbeautifier
   importmap-rails
   jbuilder
   kamal
