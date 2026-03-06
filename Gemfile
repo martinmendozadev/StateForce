@@ -7,7 +7,7 @@ gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use postgis for geospatial data in Active Record
-gem 'activerecord-postgis-adapter'
+gem "activerecord-postgis-adapter"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -45,8 +45,12 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 
-gem 'devise'
-gem 'omniauth-google-oauth2'
+# Authentication and authorization
+gem "devise"
+gem "omniauth-google-oauth2"
+
+# Authorization
+gem "pundit"
 
 # Validate date and time attributes
 gem "validates_timeliness"
@@ -63,10 +67,10 @@ group :development, :test do
   gem "rubocop-rails-omakase"
 
   # Fake data for database seeding
-  gem 'faker'
+  gem "faker"
 
   # Environment vars
-  gem 'dotenv-rails'
+  gem "dotenv-rails"
 
   # Linting and formatting
   gem "rubocop"
@@ -79,7 +83,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'letter_opener'
+  gem "letter_opener"
   gem "foreman"
   gem "htmlbeautifier"
 end
@@ -91,5 +95,3 @@ group :test do
   gem "simplecov"
   gem "simplecov-cobertura"
 end
-
-gem "pundit"
