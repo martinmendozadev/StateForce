@@ -6,7 +6,7 @@
         <div class="absolute top-0 left-full flex w-16 justify-center pt-5">
           <button type="button" data-action="sidebar#close" class="-m-2.5 p-2.5 text-text bg-background-surface cursor-pointer">
             <span class="sr-only"><%= t("common.close") %> <%= t("common.sidebar") %></span>
-              <%= svg_icon :close_icon, class: "size-6", title: "#{t('common.close')} #{t('common.sidebar')}" %>
+            <%= svg_icon :close_icon, class: "size-6", title: "#{t('common.close')} #{t('common.sidebar')}" %>
           </button>
         </div>
 
@@ -14,7 +14,7 @@
           <div class="flex h-12 items-center">
             <%= link_to dashboard_path, class: "flex items-center gap-2" do %>
               <%= cdn_image :logo_white, class: "h-10 w-auto", alt: t("landing.company_name") %>
-            <h2 class="text-lg font-semibold text-text select-none"><%= t("landing.company_name") %></h2>
+              <h2 class="text-lg font-semibold text-text select-none"><%= t("landing.company_name") %></h2>
             <% end %>
           </div>
           <%= render "shared/sidebar_nav" %>

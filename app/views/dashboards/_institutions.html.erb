@@ -25,18 +25,17 @@
 
               <!-- Status -->
               <div class="text-sm text-gray-500">
-                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".status") %></span>
-                  <% case institution.status %>
-                    <% when Institution.statuses[:available] %>
-                      <span class="block text-success"><%= institution&.status.humanize %></span>
-                    <% when Institution.statuses[:maintenance] %>
-                      <span class="block text-info"><%= institution&.status.humanize %></span>
-                    <% when Institution.statuses[:out_of_service] %>
-                      <span class="block text-danger"><%= institution&.status.humanize %></span>
-                    <% else %>
-                      <span class="block text-neutral"><%= institution&.status.humanize %></span>
-                  <% end %>
-
+                <span class="sm:hidden block text-xs text-gray-500"><%= t(".status") %></span>
+                <% case institution.status %>
+                <% when Institution.statuses[:available] %>
+                  <span class="block text-success"><%= institution&.status.humanize %></span>
+                <% when Institution.statuses[:maintenance] %>
+                  <span class="block text-info"><%= institution&.status.humanize %></span>
+                <% when Institution.statuses[:out_of_service] %>
+                  <span class="block text-danger"><%= institution&.status.humanize %></span>
+                <% else %>
+                  <span class="block text-neutral"><%= institution&.status.humanize %></span>
+                <% end %>
               </div>
 
               <!-- Occupancy -->

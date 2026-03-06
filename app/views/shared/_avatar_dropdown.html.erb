@@ -1,11 +1,11 @@
 <details class="relative inline-block" data-controller="avatar-dropdown">
   <summary aria-haspopup="menu" class="group list-none cursor-pointer flex items-center gap-3 rounded-md px-2 py-1 hover:bg-background-soft focus:outline-none focus:ring-2 focus:ring-primary/50">
     <div class="flex items-center size-10 justify-center rounded-full bg-primary">
-    <% if current_user&.avatar.blank? %>
+      <% if current_user&.avatar.blank? %>
         <%= current_user&.name&.first&.upcase || t("common.user")&.first&.upcase %>
-    <% else %>
-      <%= cdn_image current_user&.avatar&.file_url, class: "size-10 rounded-full object-cover ring-2 ring-primary", alt: current_user&.name %>
-    <% end %>
+      <% else %>
+        <%= cdn_image current_user&.avatar&.file_url, class: "size-10 rounded-full object-cover ring-2 ring-primary", alt: current_user&.name %>
+      <% end %>
     </div>
     <div class="min-w-0">
       <p class="truncate text-sm font-semibold"><%= current_user&.name || t("common.user") %></p>
@@ -16,34 +16,34 @@
   <div class="absolute right-0 mt-2 w-64 rounded-md border shadow-xl border-background-overlay bg-background-surface" data-avatar-dropdown-target="panel">
     <nav role="menu" aria-label="Account menu" class="py-2">
 
-    <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
-      <%= svg_icon :avatar, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
-      <span class="text-sm"><%= t("common.profile") %></span>
-    <% end %>
+      <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
+        <%= svg_icon :avatar, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
+        <span class="text-sm"><%= t("common.profile") %></span>
+      <% end %>
 
-    <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
-      <%= svg_icon :settings_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
-      <span class="text-sm" ><%= t("settings.name") %></span>
-    <% end %>
+      <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
+        <%= svg_icon :settings_icon, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
+        <span class="text-sm" ><%= t("settings.name") %></span>
+      <% end %>
 
-    <div class="my-2 border-t border-neutral-focus"></div>
+      <div class="my-2 border-t border-neutral-focus"></div>
 
-    <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
-      <%= svg_icon :shield, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
-      <span class="text-sm"><%= t("common.privacy_policy") %></span>
-    <% end %>
+      <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
+        <%= svg_icon :shield, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
+        <span class="text-sm"><%= t("common.privacy_policy") %></span>
+      <% end %>
 
-    <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
-      <%= svg_icon :plus, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
-      <span class="text-sm"><%= t("common.share_feedback") %></span>
-    <% end %>
+      <%= link_to "#", class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-info focus:bg-background-soft", role: "menuitem" do %>
+        <%= svg_icon :plus, class: "size-6 shrink-0 text-neutral-focus group-hover:text-info" %>
+        <span class="text-sm"><%= t("common.share_feedback") %></span>
+      <% end %>
 
-    <div class="my-2 border-t border-neutral-focus"></div>
+      <div class="my-2 border-t border-neutral-focus"></div>
 
-    <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-danger focus:bg-background-soft", role: "menuitem" do %>
-      <%= svg_icon :signout, class: "size-6 shrink-0 text-neutral-focus group-hover:text-danger" %>
-      <span class="text-sm" ><%= t("devise.sessions.logout") %></span>
-    <% end %>
+      <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "flex items-center gap-3 px-3 py-2 group rounded-md text-neutral-focus hover:bg-background-soft hover:text-danger focus:bg-background-soft", role: "menuitem" do %>
+        <%= svg_icon :signout, class: "size-6 shrink-0 text-neutral-focus group-hover:text-danger" %>
+        <span class="text-sm" ><%= t("devise.sessions.logout") %></span>
+      <% end %>
 
     </nav>
   </div>

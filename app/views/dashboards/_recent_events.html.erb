@@ -1,93 +1,96 @@
 <div class="bg-background-soft p-2 rounded-lg">
   <div class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between mt-4">
-    <div class="">
-      <h1 class="text-xl font-semibold"><%= t(".title") %></h1>
-    </div>
-    <div class="flex items-center gap-4">
-      <button type="button" class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold shadow-xs hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary cursor-pointer"><%= t(".new_event") %></button>
-    </div>
-  </div>
-  <div class="mt-8">
-    <div class="-mx-4 sm:-mx-6 lg:-mx-8">
-      <div class="py-2 sm:px-6 lg:px-8">
-        <!-- Header row for larger screens -->
-        <div class="hidden sm:grid sm:grid-cols-5 gap-4 px-4 sm:px-0 py-3.5 text-left text-sm font-semibold text-foreground">
-          <div><%= t(".event_category") %></div>
-          <div><%= t(".code") %></div>
-          <div><%= t(".description") %></div>
-          <div><%= t(".location") %></div>
-          <div><%= t(".last_update") %></div>
-        </div>
 
-        <!-- List container -->
-        <div role="list" aria-label="Recent Events" class="">
-          <% @last_events.each do |event| %>
-            <%= link_to event_path(event), role: "listitem", class: "group grid grid-cols-1 sm:grid-cols-5 gap-2 items-start px-4 sm:px-0 py-4 odd:bg-background-emphasis hover:bg-background-soft" do %>
-              <!-- Event Category -->
-              <div class="text-sm font-medium text-foreground">
-                <div class="flex items-center gap-x-2">
-                  <% case event.status %>
+    <div class="flex items-center justify-between mt-4">
+      <div class="">
+        <h1 class="text-xl font-semibold"><%= t(".title") %></h1>
+      </div>
+      <div class="flex items-center gap-4">
+        <button type="button" class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold shadow-xs hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary cursor-pointer"><%= t(".new_event") %></button>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <div class="-mx-4 sm:-mx-6 lg:-mx-8">
+        <div class="py-2 sm:px-6 lg:px-8">
+
+          <!-- Header row for larger screens -->
+          <div class="hidden sm:grid sm:grid-cols-5 gap-4 px-4 sm:px-0 py-3.5 text-left text-sm font-semibold text-foreground">
+            <div><%= t(".event_category") %></div>
+            <div><%= t(".code") %></div>
+            <div><%= t(".description") %></div>
+            <div><%= t(".location") %></div>
+            <div><%= t(".last_update") %></div>
+          </div>
+
+          <!-- List container -->
+          <div role="list" aria-label="Recent Events" class="">
+            <% @last_events.each do |event| %>
+              <%= link_to event_path(event), role: "listitem", class: "group grid grid-cols-1 sm:grid-cols-5 gap-2 items-start px-4 sm:px-0 py-4 odd:bg-background-emphasis hover:bg-background-soft" do %>
+                <!-- Event Category -->
+                <div class="text-sm font-medium text-foreground">
+                  <div class="flex items-center gap-x-2">
+                    <% case event.status %>
                     <% when Event.statuses[:assigned] %>
                       <div class="flex-none rounded-full bg-info/10 p-1 text-info max-w-4">
                         <div class="size-2 rounded-full bg-current"></div>
                       </div>
                     <% when Event.statuses[:resolved] %>
-                    <div class="flex-none rounded-full bg-success/10 p-1 text-success max-w-4">
-                      <div class="size-2 rounded-full bg-current"></div>
-                    </div>
+                      <div class="flex-none rounded-full bg-success/10 p-1 text-success max-w-4">
+                        <div class="size-2 rounded-full bg-current"></div>
+                      </div>
                     <% when Event.statuses[:pending] %>
-                    <div class="flex-none rounded-full bg-warning/10 p-1 text-warning max-w-4">
-                      <div class="size-2 rounded-full bg-current"></div>
-                    </div>
+                      <div class="flex-none rounded-full bg-warning/10 p-1 text-warning max-w-4">
+                        <div class="size-2 rounded-full bg-current"></div>
+                      </div>
                     <% when Event.statuses[:on_scene] %>
-                    <div class="flex-none rounded-full bg-secondary/10 p-1 text-secondary max-w-4">
-                      <div class="size-2 rounded-full bg-current"></div>
-                    </div>
+                      <div class="flex-none rounded-full bg-secondary/10 p-1 text-secondary max-w-4">
+                        <div class="size-2 rounded-full bg-current"></div>
+                      </div>
                     <% when Event.statuses[:closed] %>
-                    <div class="flex-none rounded-full bg-primary/10 p-1 text-primary max-w-4">
-                      <div class="size-2 rounded-full bg-current"></div>
-                    </div>
+                      <div class="flex-none rounded-full bg-primary/10 p-1 text-primary max-w-4">
+                        <div class="size-2 rounded-full bg-current"></div>
+                      </div>
                     <% else %>
-                    <div class="flex-none rounded-full bg-neutral/10 p-1 text-neutral-500 max-w-4">
-                      <div class="size-2 rounded-full bg-current"></div>
-                    </div>
-                  <% end %>
+                      <div class="flex-none rounded-full bg-neutral/10 p-1 text-neutral-500 max-w-4">
+                        <div class="size-2 rounded-full bg-current"></div>
+                      </div>
+                    <% end %>
 
-                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".event_category") %></span>
-                  <span class="block"><%= event.event_type&.humanize %></span>
+                    <span class="sm:hidden block text-xs text-gray-500"><%= t(".event_category") %></span>
+                    <span class="block"><%= event.event_type&.humanize %></span>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Event Code -->
-              <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500"><%= t(".code") %></span>
-                <span class="block"><%= event.event_code %></span>
-              </div>
+                <!-- Event Code -->
+                <div class="text-sm text-gray-500">
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".code") %></span>
+                  <span class="block"><%= event.event_code %></span>
+                </div>
 
-              <!-- Description -->
-              <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500"><%= t(".description") %></span>
-                <span class="block"><%= event.description&.truncate(20) %></span>
-              </div>
+                <!-- Description -->
+                <div class="text-sm text-gray-500">
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".description") %></span>
+                  <span class="block"><%= event.description&.truncate(20) %></span>
+                </div>
 
-              <!-- Location -->
-              <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500"><%= t(".location") %></span>
-                <span class="block"><%= event.location&.address&.truncate(20) %></span>
-              </div>
+                <!-- Location -->
+                <div class="text-sm text-gray-500">
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".location") %></span>
+                  <span class="block"><%= event.location&.address&.truncate(20) %></span>
+                </div>
 
-              <!-- Last Update -->
-              <div class="text-sm text-gray-500">
-                <span class="sm:hidden block text-xs text-gray-500"><%= t(".last_update") %></span>
-                <time datetime="<%= event.updated_at.iso8601 %>"><%= last_update(event) %></time>
-              </div>
+                <!-- Last Update -->
+                <div class="text-sm text-gray-500">
+                  <span class="sm:hidden block text-xs text-gray-500"><%= t(".last_update") %></span>
+                  <time datetime="<%= event.updated_at.iso8601 %>"><%= last_update(event) %></time>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 </div>
