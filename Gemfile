@@ -75,7 +75,7 @@ group :development, :test do
   # Linting and formatting
   gem "rubocop"
   # Pin to 0.6.0 to avoid the herb-native parser introduced in 0.7.x which segfaults on macOS ARM with Ruby 3.4
-  gem "rubocop-erb", "0.7.0"
+  gem "rubocop-erb", "0.7.1"
   gem "rubocop-rails"
   gem "rubocop-performance"
 end
